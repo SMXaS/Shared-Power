@@ -25,5 +25,5 @@ def registerUser():
     else:
         print("User Created!")
 
-logIn()
-#registerUser()
+#logIn()
+registerUser()
