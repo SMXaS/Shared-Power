@@ -1,5 +1,5 @@
-from login import Login
-from login import Register
+from Class.login import Login
+from Class.login import Register
 
 login = Login()
 register = Register()
