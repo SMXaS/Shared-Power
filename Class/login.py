@@ -1,6 +1,5 @@
 import os
 from Entities.User import User
-
 class Login:
 
     userPath = ""
@@ -25,8 +24,8 @@ class Login:
                     # Spliting every line into 3 parts
                     # Name = users_name
                     #  0   1     2
-                    # and storring last part (user profile) into list
-                    passLine.append(x.split(' ')[2])
+                    # storring last part (user profile) into list and trim CR off
+                    passLine.append(x.split(' ')[2][:-1])
                     # Passing that list to another function
                 self.user = self.__extractUserFromFile(passLine)
 
@@ -41,9 +40,7 @@ class Login:
     This Function will construct and return an Object from txtList parameter
     """
     def __extractUserFromFile(self, txtList):
-        return User(txtList[0].strip(), txtList[1].strip(),
-                    txtList[2].strip(), txtList[3].strip(),
-                    txtList[4].strip(), txtList[5].strip())
+        return User(txtList[0], txtList[1], txtList[2], txtList[3], txtList[4], txtList[5])
 
 class Register:
 
