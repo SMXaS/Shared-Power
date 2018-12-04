@@ -1,11 +1,12 @@
 import os
-from Entities.User import User
+from .Entities.user import User
+
 class Login:
 
     userPath = ""
     userName = ""
     userPassword = ""
-    user = User()
+    
     
     """
     This function will check if user enters valid information
