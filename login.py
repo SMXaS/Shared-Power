@@ -52,6 +52,7 @@ class Register:
         file.write("Password = {}{}".format(user[3], "\n"))
         file.write("Email = {}{}".format(user[4], "\n"))
         file.write("Phone = {}{}".format(user[5], "\n"))
+        file.close()
     
     def registerUser(self, user):
         if self.__checkIfExist(user):
