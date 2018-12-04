@@ -20,8 +20,6 @@ def registerUser():
     check = register.registerUser(user)
     if check:
         print("User Exist")
-    elif check == None:
-        print("user doesn't exist")
     else:
         print("User Created!")
 
