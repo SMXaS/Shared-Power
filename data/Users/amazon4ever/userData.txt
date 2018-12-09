@@ -1,6 +1,0 @@
-Name = Stefan
-LastName = Sofrone
-UserName = amazon4ever
-Password = bubble
-Email = stefan@gmail.com
-Phone = 555547

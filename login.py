@@ -1,5 +1,6 @@
 import tkinter as tk
 
+
 class SharedPower(tk.Tk):
     def __init__(self, *args, **kwargs):
         tk.Tk.__init__(self, *args, **kwargs)
@@ -18,6 +19,7 @@ class SharedPower(tk.Tk):
             self._frame.destroy()
         self._frame = new_frame
         self._frame.pack()
+
 
 class StartPage(tk.Frame):
     def __init__(self, master):
@@ -94,5 +96,5 @@ class MainMenu(tk.Frame):
         tk.Frame.__init__(self, master)
 
 
-app = SharedPower()
-app.mainloop()
+#app = SharedPower()
+#app.mainloop()

@@ -1,6 +1,7 @@
 import os
 from .Entities.user import User
 
+
 class Login:
 
     userPath = ""
