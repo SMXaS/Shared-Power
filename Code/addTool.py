@@ -1,33 +1,28 @@
 from Entities.Tool import Tool
-from Entities.User import User
 
 
 class addTool:
 
-
     def __init__(self, owner):
         self.__owner = owner
 
-
     def add(self):
-        name = self.__owner.getFirstName()
-        print(name)
+        ID = "myLovelyItemID"
+        #toolOwner = self.__owner.getFirstName()
+        toolOwner = "kvarcas91"
+        title = "ToolName1"
+        description = "Where's Stefan 1"
+        dayPrice = 9.89
+        halfDayPrice = 6.99
+        imagePath = "images/sendMeNudes.jpeg"
+        available = True
 
-    """
-    name = ["ToolName1", "ToolName2", "ToolName3"]
-    quantity = [3, 3, 3]
-    price = [1, 2, 3]
-    description = ["Where's Stefan 1", "Tool description 2", "Tools description 3"]
-    objList = []
+        tool = Tool(ID, toolOwner, title, description, dayPrice, halfDayPrice, imagePath, available)
 
-    for i in range(3):
-        object = Tool(name[i], quantity[i], price[i], description[i])
-        objList.append(object)
+        self.printTool(tool)
+        # Do something with "tool" object
 
-    for i in range(len(objList)):
-        print("Name:", objList[i].getName ())
-        print("Quantity:", str(objList[i].getQuantity()))
-        print("Price:", str(objList[i].getPrice()))
-        print("Description:", (objList[i].getDescription()))
-        print("-------------")
-        """
+    def printTool(self, tool):
+        print(tool.getOwner())
+
+
