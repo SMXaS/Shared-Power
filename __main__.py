@@ -1,4 +1,4 @@
-from login import SharedPower
+from Code.login import SharedPower
 
 loginUI = SharedPower()
 loginUI.mainloop()
