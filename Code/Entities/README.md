@@ -50,3 +50,10 @@
     myTool.getOwner()
     myTool.isAvailable()
     ...
+    
+ *change availability*
+    
+    --preCondition--
+    you must have that object already
+    ---------------------------------
+    myTool.setAvailability(True/False)
