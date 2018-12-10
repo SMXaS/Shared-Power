@@ -1,7 +1,7 @@
-User:
-  import
+User: import
   
-  it takes:
+it takes:
+
     first name
     last name
     user name
@@ -10,4 +10,4 @@ User:
     address
     email
     phone
-    g
+    
