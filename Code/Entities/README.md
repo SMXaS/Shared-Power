@@ -1,6 +1,6 @@
-User:
+## User:
   
-it takes:
+**it takes:**
 
     first name (str)
     last name (str)
@@ -10,10 +10,23 @@ it takes:
     address (str)
     email (str)
     phone (str)
+   
+**usage:**
     
-Tool:
+   *initialize*
+   
+    from Entities.User import User
+    user1 = User(arg, arg2, ...)
+    
+   *getting data*
+   
+    user1.getName()
+    user1.getLastName()
+    ...
 
-it takes:
+## Tool:
+
+**it takes:**
     
     ID (str)
     owner (user login) (str)
@@ -24,3 +37,16 @@ it takes:
     image path (str)
     availability (boolean)
     
+**usage**
+
+*initialize*
+
+    from Entities.Tool import Tool
+    myTool = Tool(arg, arg2, ...)
+    
+ *usage*
+ 
+    myTool.getID()
+    myTool.getOwner()
+    myTool.isAvailable()
+    ...
