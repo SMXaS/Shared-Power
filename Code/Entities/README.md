@@ -10,3 +10,4 @@ User:
     address
     email
     phone
+    g
