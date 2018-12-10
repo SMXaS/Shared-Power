@@ -8,8 +8,8 @@ class addTool:
 
     def add(self):
         ID = "myLovelyItemID"
-        #toolOwner = self.__owner.getFirstName()
-        toolOwner = "kvarcas91"
+        toolOwner = self.__owner.getUserName()
+        #toolOwner = "kvarcas91"
         title = "ToolName1"
         description = "Where's Stefan 1"
         dayPrice = 9.89
