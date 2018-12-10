@@ -33,3 +33,6 @@ class Tool:
 
     def isAvailable(self):
         return self.__availability
+    
+    def setAvailability(self, availability):
+        self.__availability = availability
