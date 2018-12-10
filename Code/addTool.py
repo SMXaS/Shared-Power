@@ -1,7 +1,19 @@
 from Entities.Tool import Tool
+from Entities.User import User
 
 
 class addTool:
+
+
+    def __init__(self, owner):
+        self.__owner = owner
+
+
+    def add(self):
+        name = self.__owner.getFirstName()
+        print(name)
+
+    """
     name = ["ToolName1", "ToolName2", "ToolName3"]
     quantity = [3, 3, 3]
     price = [1, 2, 3]
@@ -18,3 +30,4 @@ class addTool:
         print("Price:", str(objList[i].getPrice()))
         print("Description:", (objList[i].getDescription()))
         print("-------------")
+        """

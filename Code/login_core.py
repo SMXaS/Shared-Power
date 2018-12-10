@@ -1,5 +1,5 @@
 import os
-from .Entities.user import User
+from Entities.User import User
 
 
 class Login:
