@@ -56,6 +56,10 @@ class SharedPower(tk.Tk):
 class StartPage(tk.Frame):
     def __init__(self, master):
         tk.Frame.__init__(self, master)
+        master.title("Log in")
+        master.minsize('200','100')
+        master.geometry("200x100+%d+%d" % ((self.winfo_screenwidth()/2)-100, (self.winfo_screenheight()/2)-50))
+
 
         u_login = tk.StringVar(self)
         u_password = tk.StringVar(self)
@@ -71,7 +75,7 @@ class StartPage(tk.Frame):
 class RegisterPage(tk.Frame):
     def __init__(self, master):
         tk.Frame.__init__(self, master)
-
+        master.minsize(width=280, height=280)
         master.geometry("280x270+%d+%d" % ((self.winfo_screenwidth()/2)-100, (self.winfo_screenheight()/2)-50))
 
         """I take stuff from Adam RegisterUiGrid and modify a bit"""
@@ -99,12 +103,13 @@ class RegisterPage(tk.Frame):
         passwordEntry = tk.Entry(self, show = "*").grid(row = 8, column = 1)
         passwordConfirmationEntry = tk.Entry(self, show = "*").grid(row = 9, column = 1)
 
+        backButton = tk.Button (self, text = "Back",command=lambda : master.change_frame(StartPage)).grid(row = 10, column =1, columnspan=2)
         createAccountButton = tk.Button (self, text = "Create Account").grid(row = 10, column =0, columnspan=2)
 
         #######################################################
         """
         same as login. Will send data to login class, verify it and return something and add some code
-        
+
         """
         #######################################
        #  some code
@@ -115,8 +120,9 @@ class MainMenu(tk.Frame):
     def __init__(self, master):
         global login
         tk.Frame.__init__(self, master)
-        master.geometry("700x500+%d+%d" % ((self.winfo_screenwidth()/2)-350, (self.winfo_screenheight()/2)-250))
         master.minsize(width=500, height=500)
+        master.geometry("700x500+%d+%d" % ((self.winfo_screenwidth()/2)-350, (self.winfo_screenheight()/2)-250))
+
 
 
         root=tk.Frame(self)
@@ -142,8 +148,19 @@ class MainMenu(tk.Frame):
         left.grid_columnconfigure(0, weight=1)
         left.grid_rowconfigure(0,weight=1)
 
+        ###########################
+        # LEFT frame 1st row 'Your Tools' label
+        ###########################
+
         tlabel=tk.Label(left,text="Your Tools").grid(row=0,column=0,columnspan=5)
 
+        ###########################
+        # LEFT frame 2nd row 'Your available tools'
+        ###########################
+        table_your_tools=tk.Frame(left,bg="pink")
+        table_your_tools.grid(row=1,column=0)
+
+        tlabel=tk.Label(table_your_tools,text="Your Tools to rent").grid(row=0,column=0,columnspan=5)
         with open("Data/tools.csv", 'r') as f:
             l = list(csv.reader(f))
             my_dict = {i[0]:[x for x in i[1:]] for i in zip(*l)}
@@ -165,16 +182,20 @@ class MainMenu(tk.Frame):
 
             for x in my_dict:
 
-                tk.Label(left, text=head[list(my_dict.keys()).index(x)],borderwidth=2, relief="groove",width=6,padx=5,pady=5).grid(row=3,column=list(my_dict.keys()).index(x))
+                tk.Label(table_your_tools, text=head[list(my_dict.keys()).index(x)],borderwidth=2, relief="groove",width=6,padx=5,pady=5).grid(row=3,column=list(my_dict.keys()).index(x))
 
                 y=0
 
                 while y<len(items):
-                    tk.Label(left ,text =my_dict[x][items[y]], borderwidth=2, relief="ridge",width=6,padx=5,pady=5).grid(row=4+y,column=list(my_dict.keys()).index(x))
-                    tk.Button(left, text="more").grid(row=4+y,column=8)
+                    tk.Label(table_your_tools ,text =my_dict[x][items[y]], borderwidth=2, relief="ridge",width=6,padx=5,pady=5).grid(row=4+y,column=list(my_dict.keys()).index(x))
+                    tk.Button(table_your_tools, text="more").grid(row=4+y,column=8)
                     y=y+1
 
+        ###########################
+        # LEFT frame 3rd row 'Add tool' button
+        ###########################
 
+        tk.Button(left, text="Add tool", command=lambda : master.change_frame(AddToolPage)).grid(row=4,column=0)
 
         ###########################
         # RIGHT frame start here
@@ -212,7 +233,7 @@ class MainMenu(tk.Frame):
 
                 while y<len(items):
                     tk.Label(right ,text =my_dict[x][items[y]], borderwidth=2, relief="ridge",width=6,padx=5,pady=5).grid(row=4+y,column=list(my_dict.keys()).index(x))
-                    tk.Button(right, text="more").grid(row=4+y,column=8)
+                    tk.Button(right, text="more/manage").grid(row=4+y,column=8)
                     y=y+1
 
 
@@ -240,12 +261,131 @@ class MainMenu(tk.Frame):
 
         switch_button=tk.Button(root,text="Switch",command=switch)
         switch_button.grid(row=2,column=1)
+        tk.Button(root, text="Hire new tool", command=lambda : master.change_frame(SearchToolPage)).grid(row=2,column=2)
+
+class AddToolPage(tk.Frame):
+    def __init__(self, master):
+        tk.Frame.__init__(self, master)
+        master.minsize('300','400')
+        master.geometry("300x400+%d+%d" % ((self.winfo_screenwidth()/2)-150, (self.winfo_screenheight()/2)-200))
+        master.title('Add new Tool')
+
+        root=tk.Frame(self)
+        root.grid(row=0,column=0,sticky=tk.N+tk.E+tk.W)
+        root.grid_columnconfigure(0, weight=1)
+        root.grid_rowconfigure(0,weight=1)
+
+        ###########################
+        # HEADER frame start here
+        ###########################
+        header=tk.Frame(root,bg="red")
+        header.grid(row=0,column=0,columnspan=2,sticky=tk.N+tk.E+tk.W)
+        header.grid_columnconfigure(0, weight=1)
+        header.grid_rowconfigure(0,weight=1)
+
+        Label = tk.Label(header ,text = "Main menu for user: "+login).grid(row=0,column=0, sticky=tk.W)
+        b_logout = tk.Button(header, text="Log Out",command=lambda : master.log_out()).grid(row=0,column=5, sticky=tk.E)
+
+        ###########################
+        # MID frame start here
+        ###########################
+        mid=tk.Frame(root)
+        mid.grid(row=1,column=0)
+        mid.grid_columnconfigure(0, weight=1)
+        mid.grid_rowconfigure(0,weight=1)
+
+        tk.Label(mid ,text = "Title").grid(row = 0, column = 0, sticky="E")
+        tk.Label(mid ,text = "Description").grid(row = 1, column = 0, sticky="E")
+        tk.Label(mid ,text = "Price per Day").grid(row = 2, column = 0, sticky="E")
+        tk.Label(mid ,text = "Price per Half Day").grid(row = 3, column = 0, sticky="E")
+        tk.Label(mid ,text = "Image").grid(row = 4, column = 0, sticky="E")
+
+        titleEntry = tk.Entry(mid).grid(row = 0, column = 1)
+        descriptionEntry = tk.Entry(mid).grid(row = 1, column = 1)         #Prabobly text box instad of entry box
+        priceFullDayEntry = tk.Entry(mid).grid(row = 2, column = 1)
+        priceHalfDay = tk.Entry(mid).grid(row = 3, column = 1)
+        imgPath = tk.Entry(mid).grid(row = 4, column = 1)                  #Prabobly something else than entry box
+
+        ###########################
+        # BOTTOM frame start here
+        ###########################
+        bot=tk.Frame(root)
+        bot.grid(row=2,column=0)
+        bot.grid_columnconfigure(0, weight=1)
+        bot.grid_rowconfigure(0,weight=1)
+
+        createToolButton = tk.Button (bot, text = "Add tool").grid(row = 6, column =0)
+        backButton = tk.Button (bot, text = "Back",command=lambda : master.change_frame(MainMenu)).grid(row = 6, column =1)
 
 
-        """
-        What we need in MainMenu?
-        Your Tools and Hire tool only?
-        """
+class ToolPage(tk.Frame):
+    def __init__(self, master):
+        tk.Frame.__init__(self, master)
+        master.minsize('300','400')
+        master.geometry("300x400+%d+%d" % ((self.winfo_screenwidth()/2)-150, (self.winfo_screenheight()/2)-200))
+        master.title('Manage Tool')
+
+        ###########################
+        # Page to fill with tool details if 'more' button next to the tool will be pressed
+        ###########################
+
+class SearchToolPage(tk.Frame):
+    def __init__(self, master):
+        tk.Frame.__init__(self, master)
+        master.minsize('400','400')
+        master.geometry("400x400+%d+%d" % ((self.winfo_screenwidth()/2)-200, (self.winfo_screenheight()/2)-200))
+        master.title('Search for Tool')
+
+        root=tk.Frame(self)
+        root.grid(row=0,column=0,sticky=tk.N+tk.E+tk.W)
+        root.grid_columnconfigure(0, weight=1)
+        root.grid_rowconfigure(0,weight=1)
+
+        ###########################
+        # HEADER frame start here
+        ###########################
+        header=tk.Frame(root,bg="red")
+        header.grid(row=0,column=0,columnspan=2,sticky=tk.N+tk.E+tk.W)
+        header.grid_columnconfigure(0, weight=1)
+        header.grid_rowconfigure(0,weight=1)
+
+        Label = tk.Label(header ,text = "Main menu for user: "+login).grid(row=0,column=0, sticky=tk.W)
+        b_logout = tk.Button(header, text="Log Out",command=lambda : master.log_out()).grid(row=0,column=5, sticky=tk.E)
+
+        ###########################
+        # TABLE frame start here
+        ###########################
+        table=tk.Frame(root,)
+        table.grid(row=1,column=0)
+        table.grid_columnconfigure(0, weight=1)
+        table.grid_rowconfigure(0,weight=1)
+
+
+        with open("Data/tools.csv", 'r') as f:
+            l = list(csv.reader(f))
+            my_dict = {i[0]:[x for x in i[1:]] for i in zip(*l)}
+
+            items = [i for i, x in enumerate(my_dict['availability']) if x == 'yes']
+            print(items)
+
+            del my_dict["availability"]
+            del my_dict["imgPath"]
+            del my_dict['ID']
+
+            head = ['Owner','Name','Discr','PpD','PpHD','next1','next2']
+
+            for x in my_dict:
+
+                tk.Label(table, text=head[list(my_dict.keys()).index(x)],borderwidth=2, relief="groove",width=6,padx=5,pady=5).grid(row=3,column=list(my_dict.keys()).index(x))
+                y=0
+                while y<len(items):
+                    tk.Label(table ,text =my_dict[x][items[y]], borderwidth=2, relief="ridge",width=6,padx=5,pady=5).grid(row=4+y,column=list(my_dict.keys()).index(x))
+                    tk.Button(table, text="more/hire").grid(row=4+y,column=8)
+                    y=y+1
+
+        backButton = tk.Button (root, text = "Back",command=lambda : master.change_frame(MainMenu)).grid(row = 2, column =0)
+
+
 
 
 """Use:
