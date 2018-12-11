@@ -11,7 +11,7 @@ def check_pass(login):
         l = list(csv.reader(f))
         my_dict = {i[0]:[x for x in i[1:]] for i in zip(*l)}
         ind = my_dict['login'].index(login)
-        return my_dict['password'][ind]
+        return my_dict['user_password'][ind]
 
 
 def check_login():

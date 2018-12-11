@@ -2,7 +2,6 @@ import tkinter as tk
 import ReadFile as rf
 import csv
 
-user_path ="Data/users.csv"
 login = 'main'
 class SharedPower(tk.Tk):
 
@@ -18,7 +17,6 @@ class SharedPower(tk.Tk):
 
     def log_in(self, u_log, u_pass):
         global login
-        global user_path
         if u_log.get() in rf.check_login():
 
             if u_pass.get() == rf.check_pass(u_log.get()):

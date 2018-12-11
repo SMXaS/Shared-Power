@@ -1,4 +1,4 @@
-'login','first_name','last_name','user_password','email','user_adress','user_phone_number'
+login,first_name,last_name,user_password,email,user_adress,user_phone_number
 Adam123,Adam,Adamus,123pass,adam@adamus.com,STREET 10-POSTCODE-TOWN,01231231234
 Bart123,Bart,Bartus,Bpass123,bart.bartus@bart.com,STREET 10-POSTCODE-TOWN,none
 Cat123,City,Catus,cat123,cat@catus.com,STREET 10-POSTCODE-TOWN,01231231234
