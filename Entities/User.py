@@ -1,12 +1,10 @@
 class User:
 
-    def __init__(self, firstName, lastName, userName, userPassword, postCode, address,
-                 email, phoneNumber):
+    def __init__(self, userName, firstName, lastName, userPassword, address, email, phoneNumber):
         self.__firstName = firstName
         self.__lastName = lastName
         self.__userName = userName
         self.__userPassword = userPassword
-        self.__postCode = postCode
         self.__address = address
         self.__email = email
         self.__phoneNumber = phoneNumber
@@ -22,9 +20,6 @@ class User:
 
     def getPassword(self):
         return self.__userPassword
-
-    def getPostCode(self):
-        return self.__postCode
 
     def getAddress(self):
         return self.__address
