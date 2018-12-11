@@ -1,48 +1,34 @@
 import csv
-class Tool:
 
-    # -----------------------------------------------------------
-    # Class Constructor
-    # -----------------------------------------------------------
-    def __init__(self, toolName, toolBrand, toolPrice):
-
-        self.toolName   = toolName
-        self.toolBrand  = toolBrand
-        self.toolPrice  = toolPrice
-
-    def __str__(self):
-
-        rV = '{}$ {} {}'.format(self.toolName, self.toolBrand, self.toolPrice)
-        return rV
-
-    def __repr__(self):
-
-        rV = '{} {} {}'.format(self.toolName, self.toolBrand, self.toolPrice)
-        return rV
-
-
-t1 = Tool('t1000','Makita',99)
-t2 = Tool('n754n','Bosh',199)
-
-print(t1)
-
-f_addres = "Data/tools.csv"
-field = ['toolName','toolBrand','toolPrice']
-
-def add_record(f_addres,fn,rec):
+def add_user(user):
     """Add line to CSV file.
 
-    f_addres = file adress
-    fn = Keywords for collumns
-    rec = name of object you want to add
+    user = name of object you want to add
 
     """
+    fn_user = ['login','first_name','last_name','user_password','email','user_adress','user_phone_number']
 
-    with open(f_addres, 'a') as f:
+    with open(Data/users.csv, 'a') as f:
 
-        csv_writer = csv.DictWriter(f, fieldnames=fn, delimiter=',',lineterminator='\n')
+        csv_writer = csv.DictWriter(f, fieldnames=fn_user, delimiter=',',lineterminator='\n')
+
         #csv_writer.writeheader()                                                           #<<ONLY ONCE when making new file
+        csv_writer.writerow(vars(user))
 
-        csv_writer.writerow(vars(rec))
+def add_tool(tool):
+    """Add line to CSV file.
 
-add_record(f_addres,field,t2)
+    tool = name of object you want to add
+
+    """
+    fn_tool = ['ID','owner','title','description','priceFullDay','priceHalfDay','imgPath','availability']
+
+    with open(Data/tools.csv, 'a') as f:
+
+        csv_writer = csv.DictWriter(f, fieldnames=fn_tool, delimiter=',',lineterminator='\n')
+
+        #csv_writer.writeheader()                                                           #<<ONLY ONCE when making new file
+        csv_writer.writerow(vars(user))
+
+def add_invoice():
+    pass

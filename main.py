@@ -39,7 +39,9 @@ class SharedPower(tk.Tk):
         self.change_frame(StartPage)
 
     def change_frame(self, f_class):
-        """Destroys current frame and replaces it with a new one"""
+        ###########################
+        #Destroys current frame and replaces it with a new one
+        ###########################
         new_frame = f_class(self)
         if self._frame is not None:
             self._frame.destroy()
