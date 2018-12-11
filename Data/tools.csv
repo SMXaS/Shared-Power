@@ -1,0 +1,10 @@
+ID,owner,title,description,priceFullDay,priceHalfDay,imgPath,availability
+1,test,Saw,dada,99,40,data/img/,yes
+2,Adam123,Hammer,dada,99,40,data/img/,yes
+3,Bart123,Saw,dada,99,40,data/img/,yes
+4,test,Hammer,dfaf,99,40,data/img/,no
+5,Danny,Drill,gdfhd,99,40,data/img/,yes
+6,Elly123,Saw,hdrt,99,40,data/img/,yes
+7,Danny,Saw,hdbv,99,40,data/img/,yes
+8,test,Drill,hrdhd,99,40,data/img/,yes
+9,Cat123,Hammer,asfa,99,40,data/img/,yes
