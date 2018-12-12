@@ -1,31 +1,31 @@
 class User:
 
-    def __init__(self, userName, firstName, lastName, userPassword, address, email, phoneNumber):
-        self.__firstName = firstName
-        self.__lastName = lastName
-        self.__userName = userName
-        self.__userPassword = userPassword
-        self.__address = address
-        self.__email = email
-        self.__phoneNumber = phoneNumber
+    def __init__(self, userName, firstName, lastName, userPassword, email, address, phoneNumber):
+        self.first_name = firstName
+        self.last_name = lastName
+        self.login = userName
+        self.user_password = userPassword
+        self.user_adress = address
+        self.email = email
+        self.user_phone_number = phoneNumber
 
     def getFirstName(self):
-        return self.__firstName
+        return self.__first_name
 
     def getLastName(self):
-        return self.__lastName
+        return self.last_name
 
     def getUserName(self):
-        return self.__userName
+        return self.login
 
     def getPassword(self):
-        return self.__userPassword
+        return self.user_password
 
     def getAddress(self):
-        return self.__address
+        return self.user_adress
 
     def getEmail(self):
-        return self.__email
+        return self.email
 
     def getPhoneNumber(self):
-        return self.__phoneNumber
+        return self.user_phone_number
