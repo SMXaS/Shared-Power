@@ -7,8 +7,8 @@
     last name (str)
     password (str)
     post code (str)
-    address (str)
     email (str)
+    address (str)
     phone (str)
    
 **usage:**
