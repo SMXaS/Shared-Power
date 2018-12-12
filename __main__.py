@@ -52,7 +52,7 @@ class SharedPower(tk.Tk):
         if self._frame is not None:
             self._frame.destroy()
         self._frame = new_frame
-        self._frame.pack()
+        self._frame.grid(row=0,column=0)
 
 class StartPage(tk.Frame):
     def __init__(self, master):
@@ -60,7 +60,6 @@ class StartPage(tk.Frame):
         master.title("Log in")
         master.minsize('200','100')
         master.geometry("200x100+%d+%d" % ((self.winfo_screenwidth()/2)-100, (self.winfo_screenheight()/2)-50))
-
 
         u_login = tk.StringVar(self)
         u_password = tk.StringVar(self)
@@ -124,16 +123,10 @@ class MainMenu(tk.Frame):
         master.minsize(width=500, height=500)
         master.geometry("700x500+%d+%d" % ((self.winfo_screenwidth()/2)-350, (self.winfo_screenheight()/2)-250))
 
-
-
-        root=tk.Frame(self)
-        root.grid(row=0,column=0,sticky=tk.N+tk.E+tk.W)
-        root.grid_columnconfigure(0, weight=1)
-        root.grid_rowconfigure(0,weight=1)
         ###########################
         # TOP frame start here
         ###########################
-        header=tk.Frame(root,bg="red")
+        header=tk.Frame(self,bg="red")
         header.grid(row=0,column=0,columnspan=2,sticky=tk.N+tk.E+tk.W)
         header.grid_columnconfigure(0, weight=1)
         header.grid_rowconfigure(0,weight=1)
@@ -144,7 +137,7 @@ class MainMenu(tk.Frame):
         ###########################
         # LEFT frame start here
         ###########################
-        left=tk.Frame(root,bg="blue")
+        left=tk.Frame(self,bg="blue")
         left.grid(row=1,column=0)
         left.grid_columnconfigure(0, weight=1)
         left.grid_rowconfigure(0,weight=1)
@@ -180,7 +173,6 @@ class MainMenu(tk.Frame):
 
             head = ['Name','Discr','PpD','PpHD','next1','next2']
 
-
             for x in my_dict:
 
                 tk.Label(table_your_tools, text=head[list(my_dict.keys()).index(x)],borderwidth=2, relief="groove",width=6,padx=5,pady=5).grid(row=3,column=list(my_dict.keys()).index(x))
@@ -201,7 +193,7 @@ class MainMenu(tk.Frame):
         ###########################
         # RIGHT frame start here
         ###########################
-        right=tk.Frame(root,bg="green")
+        right=tk.Frame(self,bg="green")
         right.grid(row=1,column=1)
 
         right.isgridded=True #Dynamically add "isgridded" attribute.
@@ -225,7 +217,6 @@ class MainMenu(tk.Frame):
 
             head = ['Name','Discr','PpD','PpHD','next1','next2']
 
-
             for x in my_dict:
 
                 tk.Label(right, text=head[list(my_dict.keys()).index(x)],borderwidth=2, relief="groove",width=6,padx=5,pady=5).grid(row=3,column=list(my_dict.keys()).index(x))
@@ -237,11 +228,10 @@ class MainMenu(tk.Frame):
                     tk.Button(right, text="more/manage").grid(row=4+y,column=8)
                     y=y+1
 
-
         ###########################
         # RIGHT2 frame start here
         ###########################
-        right2=tk.Frame(root,bg="yellow")
+        right2=tk.Frame(self,bg="yellow")
         right2.isgridded=False
         right2_label=tk.Label(right2,text="text2")
         right2_label.grid(row=0,column=0)
@@ -259,10 +249,9 @@ class MainMenu(tk.Frame):
                 right.isgridded=True
                 right.grid(row=1,column=1)
 
-
-        switch_button=tk.Button(root,text="Switch",command=switch)
+        switch_button=tk.Button(self,text="Switch",command=switch)
         switch_button.grid(row=2,column=1)
-        tk.Button(root, text="Hire new tool", command=lambda : master.change_frame(SearchToolPage)).grid(row=2,column=2)
+        tk.Button(self, text="Hire new tool", command=lambda : master.change_frame(SearchToolPage)).grid(row=2,column=2)
 
 class AddToolPage(tk.Frame):
     def __init__(self, master):
@@ -271,15 +260,10 @@ class AddToolPage(tk.Frame):
         master.geometry("300x400+%d+%d" % ((self.winfo_screenwidth()/2)-150, (self.winfo_screenheight()/2)-200))
         master.title('Add new Tool')
 
-        root=tk.Frame(self)
-        root.grid(row=0,column=0,sticky=tk.N+tk.E+tk.W)
-        root.grid_columnconfigure(0, weight=1)
-        root.grid_rowconfigure(0,weight=1)
-
         ###########################
         # HEADER frame start here
         ###########################
-        header=tk.Frame(root,bg="red")
+        header=tk.Frame(self,bg="red")
         header.grid(row=0,column=0,columnspan=2,sticky=tk.N+tk.E+tk.W)
         header.grid_columnconfigure(0, weight=1)
         header.grid_rowconfigure(0,weight=1)
@@ -290,7 +274,7 @@ class AddToolPage(tk.Frame):
         ###########################
         # MID frame start here
         ###########################
-        mid=tk.Frame(root)
+        mid=tk.Frame(self)
         mid.grid(row=1,column=0)
         mid.grid_columnconfigure(0, weight=1)
         mid.grid_rowconfigure(0,weight=1)
@@ -310,14 +294,13 @@ class AddToolPage(tk.Frame):
         ###########################
         # BOTTOM frame start here
         ###########################
-        bot=tk.Frame(root)
+        bot=tk.Frame(self)
         bot.grid(row=2,column=0)
         bot.grid_columnconfigure(0, weight=1)
         bot.grid_rowconfigure(0,weight=1)
 
         createToolButton = tk.Button (bot, text = "Add tool").grid(row = 6, column =0)
         backButton = tk.Button (bot, text = "Back",command=lambda : master.change_frame(MainMenu)).grid(row = 6, column =1)
-
 
 class ToolPage(tk.Frame):
     def __init__(self, master):
@@ -368,15 +351,10 @@ class SearchToolPage(tk.Frame):
                     tk.Button(table, text="more/hire").grid(row=4+y,column=8)
                     y=y+1
 
-        root=tk.Frame(self)
-        root.grid(row=0,column=0,sticky=tk.N+tk.E+tk.W)
-        root.grid_columnconfigure(0, weight=1)
-        root.grid_rowconfigure(0,weight=1)
-
         ###########################
         # HEADER frame start here
         ###########################
-        header=tk.Frame(root,bg="red")
+        header=tk.Frame(self,bg="red")
         header.grid(row=0,column=0,columnspan=2,sticky=tk.N+tk.E+tk.W)
         header.grid_columnconfigure(0, weight=1)
         header.grid_rowconfigure(0,weight=1)
@@ -387,12 +365,12 @@ class SearchToolPage(tk.Frame):
         ###########################
         # SEARCH frame start here
         ###########################
-        search=tk.Frame(root)
+        search=tk.Frame(self)
         search.grid(row=1,column=0)
         search.grid_columnconfigure(0, weight=1)
         search.grid_rowconfigure(0,weight=1)
 
-        owner_var = tk.StringVar(root)
+        owner_var = tk.StringVar(self)
 
         # Dictionary with options
         choices = set(rf.get_allfromcolumn('owner'))
@@ -401,7 +379,6 @@ class SearchToolPage(tk.Frame):
         popupMenu = tk.OptionMenu(search, owner_var, *choices)
         tk.Label(search, text="Choose Owner").grid(row = 1, column = 1)
         popupMenu.grid(row = 2, column =1)
-
 
         def change_owner(*args):
             global owner
@@ -413,7 +390,6 @@ class SearchToolPage(tk.Frame):
             owner_var.set(owner)
             master.change_frame(SearchToolPage)
 
-
         # link function to change dropdown
         owner_var.trace('w', change_owner)
         resetB = tk.Button(search, text="Reset", command=lambda : reset()).grid(row=2,column=3, rowspan =2, sticky=tk.E)
@@ -422,18 +398,14 @@ class SearchToolPage(tk.Frame):
         ###########################
         # TABLE frame start here
         ###########################
-        table=tk.Frame(root)
+        table=tk.Frame(self)
         table.grid(row=2,column=0)
         table.grid_columnconfigure(0, weight=1)
         table.grid_rowconfigure(0,weight=1)
 
         set_table()
 
-
-        backButton = tk.Button (root, text = "Back",command=lambda : master.change_frame(MainMenu)).grid(row = 3, column =0)
-
-
-
+        backButton = tk.Button (self, text = "Back",command=lambda : master.change_frame(MainMenu)).grid(row = 3, column =0)
 
 """Use:
 class NAME OF FRAME(tk.Frame):
