@@ -2,9 +2,9 @@
   
 **it takes:**
 
+    user name (str)
     first name (str)
     last name (str)
-    user name (str)
     password (str)
     post code (str)
     address (str)
