@@ -3,6 +3,7 @@ import ReadFile as rf
 import csv
 
 login = 'main'
+owner = 'all'
 class SharedPower(tk.Tk):
 
     def __init__(self, *args, **kwargs):
@@ -330,11 +331,42 @@ class ToolPage(tk.Frame):
         ###########################
 
 class SearchToolPage(tk.Frame):
+    global owner
     def __init__(self, master):
         tk.Frame.__init__(self, master)
         master.minsize('400','400')
         master.geometry("400x400+%d+%d" % ((self.winfo_screenwidth()/2)-200, (self.winfo_screenheight()/2)-200))
         master.title('Search for Tool')
+
+        def set_table():
+            with open("Data/tools.csv", 'r') as f:
+                l = list(csv.reader(f))
+                my_dict = {i[0]:[x for x in i[1:]] for i in zip(*l)}
+
+                if owner == 'all':
+                    items = [i for i, x in enumerate(my_dict['availability']) if x == 'yes']
+                    print_table(my_dict,items)
+                else:
+                    itemsa = [i for i, x in enumerate(my_dict['owner']) if x == owner]
+                    itemsb = [i for i, x in enumerate(my_dict['availability']) if x == 'yes']
+                    items = list(set(itemsa).intersection(itemsb))
+                    print_table(my_dict,items)
+
+        def print_table(my_dict,items):
+            del my_dict["availability"]
+            del my_dict["imgPath"]
+            del my_dict['ID']
+
+            head = ['Owner','Name','Discr','PpD','PpHD','next1','next2']
+
+            for x in my_dict:
+
+                tk.Label(table, text=head[list(my_dict.keys()).index(x)],borderwidth=2, relief="groove",width=6,padx=5,pady=5).grid(row=3,column=list(my_dict.keys()).index(x))
+                y=0
+                while y<len(items):
+                    tk.Label(table ,text =my_dict[x][items[y]], borderwidth=2, relief="ridge",width=6,padx=5,pady=5).grid(row=4+y,column=list(my_dict.keys()).index(x))
+                    tk.Button(table, text="more/hire").grid(row=4+y,column=8)
+                    y=y+1
 
         root=tk.Frame(self)
         root.grid(row=0,column=0,sticky=tk.N+tk.E+tk.W)
@@ -353,37 +385,52 @@ class SearchToolPage(tk.Frame):
         b_logout = tk.Button(header, text="Log Out",command=lambda : master.log_out()).grid(row=0,column=5, sticky=tk.E)
 
         ###########################
+        # SEARCH frame start here
+        ###########################
+        search=tk.Frame(root)
+        search.grid(row=1,column=0)
+        search.grid_columnconfigure(0, weight=1)
+        search.grid_rowconfigure(0,weight=1)
+
+        owner_var = tk.StringVar(root)
+
+        # Dictionary with options
+        choices = set(rf.get_allfromcolumn('owner'))
+        owner_var.set(owner) # set the default option
+
+        popupMenu = tk.OptionMenu(search, owner_var, *choices)
+        tk.Label(search, text="Choose Owner").grid(row = 1, column = 1)
+        popupMenu.grid(row = 2, column =1)
+
+
+        def change_owner(*args):
+            global owner
+            owner = owner_var.get()
+
+        def reset():
+            global owner
+            owner = 'all'
+            owner_var.set(owner)
+            master.change_frame(SearchToolPage)
+
+
+        # link function to change dropdown
+        owner_var.trace('w', change_owner)
+        resetB = tk.Button(search, text="Reset", command=lambda : reset()).grid(row=2,column=3, rowspan =2, sticky=tk.E)
+        searchB = tk.Button(search, text="Search", command=lambda : master.change_frame(SearchToolPage)).grid(row=2,column=2, rowspan =2, sticky=tk.E)
+
+        ###########################
         # TABLE frame start here
         ###########################
-        table=tk.Frame(root,)
-        table.grid(row=1,column=0)
+        table=tk.Frame(root)
+        table.grid(row=2,column=0)
         table.grid_columnconfigure(0, weight=1)
         table.grid_rowconfigure(0,weight=1)
 
+        set_table()
 
-        with open("Data/tools.csv", 'r') as f:
-            l = list(csv.reader(f))
-            my_dict = {i[0]:[x for x in i[1:]] for i in zip(*l)}
 
-            items = [i for i, x in enumerate(my_dict['availability']) if x == 'yes']
-            print(items)
-
-            del my_dict["availability"]
-            del my_dict["imgPath"]
-            del my_dict['ID']
-
-            head = ['Owner','Name','Discr','PpD','PpHD','next1','next2']
-
-            for x in my_dict:
-
-                tk.Label(table, text=head[list(my_dict.keys()).index(x)],borderwidth=2, relief="groove",width=6,padx=5,pady=5).grid(row=3,column=list(my_dict.keys()).index(x))
-                y=0
-                while y<len(items):
-                    tk.Label(table ,text =my_dict[x][items[y]], borderwidth=2, relief="ridge",width=6,padx=5,pady=5).grid(row=4+y,column=list(my_dict.keys()).index(x))
-                    tk.Button(table, text="more/hire").grid(row=4+y,column=8)
-                    y=y+1
-
-        backButton = tk.Button (root, text = "Back",command=lambda : master.change_frame(MainMenu)).grid(row = 2, column =0)
+        backButton = tk.Button (root, text = "Back",command=lambda : master.change_frame(MainMenu)).grid(row = 3, column =0)
 
 
 
