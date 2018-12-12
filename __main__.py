@@ -1,5 +1,6 @@
 import tkinter as tk
 import ReadFile as rf
+import util
 import csv
 
 login = 'main'
@@ -18,12 +19,23 @@ class SharedPower(tk.Tk):
 
     def log_in(self, u_log, u_pass):
         global login
+        isCorrect = util.verifyLogin(u_log, u_pass)
+        if isCorrect:
+            print('Logged in')
+            login = u_log.get()
+            self.change_frame(MainMenu)
+        elif isCorrect == None:
+            print('User does not exist')
+        else:
+            print('wrong password')
+
         ####################################################
         """
-        Keep if statements so far, but this verification will be in login class. I will return something
-        and adjust this part later
+        Modification done
         """
         #####################################################
+
+        """
         if u_log.get() in rf.check_login():
 
             if u_pass.get() == rf.check_pass(u_log.get()):
@@ -37,6 +49,7 @@ class SharedPower(tk.Tk):
 
         else:
             print('user not exist')
+            """
         ########################################################
 
     def log_out(self):
@@ -92,28 +105,61 @@ class RegisterPage(tk.Frame):
         passwordLabel = tk.Label(self ,text = "Password").grid(row = 8, column = 0, sticky="E")
         passwordConfirmationLabel = tk.Label(self ,text = "Password Confirmation").grid(row = 9, column = 0)
 
-        firstNameEntry = tk.Entry(self).grid(row = 0, column = 1)
-        lastNameEntry = tk.Entry(self).grid(row = 1, column = 1)
-        userNameEntry = tk.Entry(self).grid(row = 2, column = 1)
-        postCodeEntry = tk.Entry(self).grid(row = 3, column = 1)
-        streetNameEntry = tk.Entry(self).grid(row = 4, column = 1)
-        houseNumberEntry = tk.Entry(self).grid(row = 5, column = 1)
-        emailEntry = tk.Entry(self).grid(row = 6, column = 1)
-        emailConfirmEntry = tk.Entry(self).grid(row = 7, column = 1)
-        passwordEntry = tk.Entry(self, show = "*").grid(row = 8, column = 1)
-        passwordConfirmationEntry = tk.Entry(self, show = "*").grid(row = 9, column = 1)
+        self.u_fName = tk.StringVar(self)
+        self.u_lName = tk.StringVar(self)
+        self.u_userName = tk.StringVar(self)
+        self.u_postCode = tk.StringVar(self)
+        self.u_stAddress = tk.StringVar(self)
+        self.u_houseNumber = tk.StringVar(self)
+        self.u_email = tk.StringVar(self)
+        self.u_emailVerify = tk.StringVar(self)
+        self.u_password = tk.StringVar(self)
+        self.u_passwordVerify = tk.StringVar(self)
+
+        firstNameEntry = tk.Entry(self, textvariable = self.u_fName).grid(row = 0, column = 1)
+        lastNameEntry = tk.Entry(self, textvariable = self.u_lName).grid(row = 1, column = 1)
+        userNameEntry = tk.Entry(self, textvariable = self.u_userName).grid(row = 2, column = 1)
+        postCodeEntry = tk.Entry(self, textvariable = self.u_postCode).grid(row = 3, column = 1)
+        streetNameEntry = tk.Entry(self, textvariable = self.u_stAddress).grid(row = 4, column = 1)
+        houseNumberEntry = tk.Entry(self, textvariable = self.u_houseNumber).grid(row = 5, column = 1)
+        emailEntry = tk.Entry(self, textvariable = self.u_email).grid(row = 6, column = 1)
+        emailConfirmEntry = tk.Entry(self, textvariable = self.u_emailVerify).grid(row = 7, column = 1)
+        passwordEntry = tk.Entry(self, show = "*", textvariable = self.u_password).grid(row = 8, column = 1)
+        passwordConfirmationEntry = tk.Entry(self, show = "*", textvariable = self.u_passwordVerify).grid(row = 9, column = 1)
 
         backButton = tk.Button (self, text = "Back",command=lambda : master.change_frame(StartPage)).grid(row = 10, column =1, columnspan=2)
-        createAccountButton = tk.Button (self, text = "Create Account").grid(row = 10, column =0, columnspan=2)
+        createAccountButton = tk.Button (self, text = "Create Account", command=lambda : self.checkRegistration(master)).grid(row = 10, column =0, columnspan=2)
 
         #######################################################
         """
         same as login. Will send data to login class, verify it and return something and add some code
 
         """
-        #######################################
-       #  some code
-        #######################################
+    #######################################
+    def checkRegistration(self, master):
+        global login
+        user = []
+        user.append(self.u_fName.get())
+        user.append(self.u_lName.get())
+        user.append(self.u_userName.get())
+        user.append(self.u_postCode.get())
+        user.append(self.u_stAddress.get())
+        user.append(self.u_houseNumber.get())
+        user.append(self.u_email.get())
+        user.append(self.u_emailVerify.get())
+        user.append(self.u_password.get())
+        user.append(self.u_passwordVerify.get())
+
+        isCorrect = util.verifyRegistration(user)
+        if isCorrect:
+            print()
+            login = self.u_userName.get()
+            master.change_frame(MainMenu)
+        elif isCorrect == None:
+            print('User already exist')
+        else:
+            print('Incorrect')
+    #######################################
 
 class MainMenu(tk.Frame):
 

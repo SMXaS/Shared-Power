@@ -44,6 +44,7 @@ class Login:
     def __extractUserFromFile(self, txtList):
         return User(txtList[0], txtList[1], txtList[2], txtList[3], txtList[4], txtList[5])
 
+
 class Register:
 
     """
