@@ -29,7 +29,7 @@ def add_tool(tool):
         csv_writer = csv.DictWriter(f, fieldnames=fn_tool, delimiter=',',lineterminator='\n')
 
         #csv_writer.writeheader()                                                           #<<ONLY ONCE when making new file
-        csv_writer.writerow(vars(tool))
+        csv_writer.writerow(vars(tool.__dict__))
 
 def add_invoice():
     pass
