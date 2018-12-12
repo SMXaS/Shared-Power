@@ -1,4 +1,5 @@
 import csv
+import re
 import WriteFile as wf
 from Entities.User import User
 
@@ -59,6 +60,10 @@ def verifyRegistration (user):
         print("Email does not match")
         return False
 
+    if not verifyEmail(user[6]):
+        print("Invalid email address")
+        return False
+
     if user[8] != user[9]:
         print("Password does not match")
         return False
@@ -69,6 +74,15 @@ def verifyRegistration (user):
 
     address = "{} - {}, {}".format(user[3], user[5], user[4])
     newUser = User(user[2], user[0], user[1], user[8], user[6], address, 999)
-    wf.add_user(dict(newUser))
+    wf.add_user(newUser)
 
     return True
+
+
+def verifyEmail(email):
+    if len(email) > 7:
+        return bool(re.match("^.+@(\[?)[a-zA-Z0-9-.]+.([a-zA-Z]{2,3}|[0-9]{1,3})(]?)$", email))
+
+
+def verifyTool(tool):
+    pass
