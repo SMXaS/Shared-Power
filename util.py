@@ -37,7 +37,7 @@ def verifyRegistration (user):
     user[8] = password
     user[9] = password confirmation
     """
-    
+
     # Check if entries contain spaces or empty fields
     for i in range(len(user)):
         if not user[i]:
