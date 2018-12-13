@@ -6,7 +6,7 @@ class addTool:
     def __init__(self, owner):
         self.__owner = owner
 
-    def add(self):
+    def add(self, item):
         ID = "myLovelyItemID"
         toolOwner = self.__owner.getUserName()
         #toolOwner = "kvarcas91"
