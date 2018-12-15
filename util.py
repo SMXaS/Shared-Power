@@ -2,6 +2,7 @@ import csv
 import re
 import WriteFile as wf
 from Entities.User import User
+from Entities.Tool import Tool
 
 
 def verifyLogin (userName, userPassword):
