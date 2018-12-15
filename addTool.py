@@ -1,5 +1,4 @@
 from Entities.Tool import Tool
-import util
 import WriteFile as wf
 
 
@@ -22,13 +21,7 @@ class addTool:
         available = True
 
         tool = Tool(ID, toolOwner, title, description, dayPrice, halfDayPrice, imagePath, available)
-        """
-       
-        isCorrect = util.verifyTool(item)
-        if isCorrect:
-            print("Tool has been added")
 
-        """
     def printTool(self, tool):
         print(tool.getOwner())
         """
