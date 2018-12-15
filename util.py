@@ -88,9 +88,11 @@ def verifyEmail(email):
     if len(email) > 7:
         return bool(re.match("^.+@(\[?)[a-zA-Z0-9-.]+.([a-zA-Z]{2,3}|[0-9]{1,3})(]?)$", email))
 
+
 def getImageFormat(path):
     return imghdr.what(path)
-    
+
+
 def verifyIMG(path):
     imgFormat = getImageFormat(path)
     if imgFormat is None:
@@ -101,6 +103,7 @@ def verifyIMG(path):
         return False
     else:
         return True
+
 
 def verifyTool(tool):
     """
@@ -131,12 +134,17 @@ def verifyTool(tool):
 
     return True
 
+
 def copyIMG(src, dst,  ID):
-    copy2(src, "Data/Images/")
+    copy2(src, dst)
     oldName = os.path.basename(src)
-    newname = "{}{}.{}".format("Data/Images/", ID, getImageFormat(src))
-    os.rename("Data/Images/"+oldName, newname)
+    newName = "{}{}.{}".format(dst, ID, getImageFormat(src))
+    os.rename(dst+oldName, newName)
+
 
 def generateID():
-    ID = uuid.uuid4()
-    return ID
+    return uuid.uuid4()
+
+
+def removeIMG(path):
+    pass
