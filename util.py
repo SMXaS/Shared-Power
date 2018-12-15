@@ -1,5 +1,6 @@
 import csv
 import re
+import imghdr
 import WriteFile as wf
 from Entities.User import User
 from Entities.Tool import Tool
@@ -93,6 +94,13 @@ def verifyTool(tool):
     #newTool = Tool(...)
     #wf.add_tool(newTOol)
 
+    
+def verifyIMG(path):
+    fileFormat = imghdr.what(path)
+    # check if it is valid format
+    return False
+    
+    
 def generateID():
     ID = "There will be ID"
     return ID
