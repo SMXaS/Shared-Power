@@ -39,11 +39,17 @@ class AddToolPage(tk.Frame):
         tk.Label(mid ,text = "Price per Half Day").grid(row = 3, column = 0, sticky="E")
         tk.Label(mid ,text = "Image").grid(row = 4, column = 0, sticky="E")
 
-        titleEntry = tk.Entry(mid).grid(row = 0, column = 1)
-        descriptionEntry = tk.Entry(mid).grid(row = 1, column = 1)         #Prabobly text box instad of entry box
-        priceFullDayEntry = tk.Entry(mid).grid(row = 2, column = 1)
-        priceHalfDay = tk.Entry(mid).grid(row = 3, column = 1)
-        imgPath = tk.Entry(mid).grid(row = 4, column = 1)                  #Prabobly something else than entry box
+        self.tool_title = tk.StringVar(self)
+        self.tool_description = tk.StringVar(self)
+        self.tool_priceFullDay = tk.StringVar(self)
+        self.tool_priceHalfDay = tk.StringVar(self)
+        self.tool_imgPath = tk.StringVar(self)
+        
+        titleEntry = tk.Entry(mid, textvariable = self.tool_title).grid(row = 0, column = 1)
+        descriptionEntry = tk.Entry(mid, textvariable = self.tool_description).grid(row = 1, column = 1)         #Prabobly text box instad of entry box
+        priceFullDayEntry = tk.Entry(mid, textvariable = self.tool_priceFullDay).grid(row = 2, column = 1)
+        priceHalfDay = tk.Entry(mid, textvariable = self.StringVar).grid(row = 3, column = 1)
+        imgPath = tk.Entry(mid, textvariable = self.tool_imgPath).grid(row = 4, column = 1)                  #Prabobly something else than entry box
 
         ###########################
         # BOTTOM frame start here
@@ -53,5 +59,8 @@ class AddToolPage(tk.Frame):
         bot.grid_columnconfigure(0, weight=1)
         bot.grid_rowconfigure(0,weight=1)
 
-        createToolButton = tk.Button (bot, text = "Add tool").grid(row = 6, column =0)
+        createToolButton = tk.Button (bot, text = "Add tool", command=lambda : self.addTool()).grid(row = 6, column =0)
         backButton = tk.Button (bot, text = "Back",command=lambda : master.change_frame(mm.MainMenu)).grid(row = 6, column =1)
+        
+    def addTool(self):   
+        pass
