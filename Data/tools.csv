@@ -1,10 +1,8 @@
 ID,owner,title,description,priceFullDay,priceHalfDay,imgPath,availability
-1,test,Saw,dada,99,40,data/img/,yes
-2,Adam123,Hammer,dada,99,40,data/img/,yes
-3,Bart123,Saw,dada,99,40,data/img/,yes
-4,test,Hammer,dfaf,99,40,data/img/,no
-5,Danny,Drill,gdfhd,99,40,data/img/,yes
-6,Elly123,Saw,hdrt,99,40,data/img/,yes
-7,Danny,Saw,hdbv,99,40,data/img/,yes
-8,test,Drill,hrdhd,99,40,data/img/,yes
-9,Cat123,Hammer,asfa,99,40,data/img/,yes
+8d562001-d8c9-47d1-8e7e-ce56a89ccbce,test,Pencil,very expensive pencil,299,159,Data/Images/8d562001-d8c9-47d1-8e7e-ce56a89ccbce,yes
+861a18a0-71c8-4401-bb4b-79844d8c8392,edu,Smoking pot,im so high..,0.99,0.59,Data/Images/861a18a0-71c8-4401-bb4b-79844d8c8392,yes
+d415dfba-54a7-41c1-afa6-aa34729be254,mr_Smith,shoe,smelly shoe,5.9,4.9,Data/Images/d415dfba-54a7-41c1-afa6-aa34729be254,yes
+81513d82-e7ca-423d-8c56-c35a2ca13137,mr_Smith,shoe,smelly shoe,5.9,4.9,Data/Images/81513d82-e7ca-423d-8c56-c35a2ca13137,yes
+c5edc19d-90d8-43cb-af34-40018e5b3b42,kvarcas91,amazon locker,huge one,88,89,Data/Images/c5edc19d-90d8-43cb-af34-40018e5b3b42,yes
+ce234c21-d1b1-4ac1-b41b-ff32f2fa8a60,test,focus,entry,2,2,Data/Images/ce234c21-d1b1-4ac1-b41b-ff32f2fa8a60,yes
+1006842e-318b-4da9-b39c-6adbbfca4eca,test,test,focus,3,3,Data/Images/1006842e-318b-4da9-b39c-6adbbfca4eca,yes

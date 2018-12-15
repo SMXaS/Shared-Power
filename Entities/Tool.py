@@ -1,38 +1,38 @@
 class Tool:
 
-    def __init__(self, ID, owner, title, description, priceFullDay, priceHalfDay, imagePath, availability):
-        self.__ID = ID
-        self.__owner = owner
-        self.__title = title
-        self.__description = description
-        self.__priceFullDay = priceFullDay
-        self.__priceHalfDay = priceHalfDay
-        self.__imagePath = imagePath
-        self.__availability = availability
+    def __init__(self, ID, owner, title, description, priceFullDay, priceHalfDay, imgPath, availability):
+        self.ID = ID
+        self.owner = owner
+        self.title = title
+        self.description = description
+        self.priceFullDay = priceFullDay
+        self.priceHalfDay = priceHalfDay
+        self.imgPath = imgPath
+        self.availability = availability
 
     def getID(self):
-        return self.__ID
+        return self.ID
 
     def getOwner(self):
-        return self.__owner
+        return self.owner
 
     def getTitle(self):
-        return self.__title
+        return self.title
 
     def getDescription(self):
-        return self.__description
+        return self.description
 
     def getPriceFullDay(self):
-        return self.__priceFullDay
+        return self.priceFullDay
 
     def getPriceHalfDay(self):
-        return self.__priceHalfDay
+        return self.priceHalfDay
 
     def getImagePath(self):
-        return self.__imagePath
+        return self.imagePath
 
     def isAvailable(self):
-        return self.__availability
+        return self.availability
     
     def setAvailability(self, availability):
-        self.__availability = availability
+        self.availability = availability

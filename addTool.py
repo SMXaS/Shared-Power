@@ -1,5 +1,7 @@
 from Entities.Tool import Tool
 import WriteFile as wf
+import util
+import imghdr
 
 
 class addTool:
@@ -8,21 +10,10 @@ class addTool:
         self.__owner = owner
 
     def add(self, item):
+        destination = "Data/Images/"
         ID = util.generateID()
-        toolOwner = self.__owner.getUserName()
-        #toolOwner = "kvarcas91"
-        
-        """
-        title = "ToolName1"
-        description = "Where's Stefan 1"
-        dayPrice = 9.89
-        halfDayPrice = 6.99
-        imagePath = "images/sendMeNudes.jpeg"
-        available = True
-
-        tool = Tool(ID, toolOwner, title, description, dayPrice, halfDayPrice, imagePath, available)
-
-    def printTool(self, tool):
-        print(tool.getOwner())
-        """
-
+        util.copyIMG(item[4], destination, ID)
+        newPath = "Data/Images/{}".format(ID)
+        myTool = Tool(ID, self.__owner, item[0], item[1], item[2], item[3], newPath, "yes")
+        wf.add_tool(myTool)
+        print("Tool has been added")

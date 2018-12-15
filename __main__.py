@@ -1,7 +1,5 @@
 import StartPage as sp
 import MainMenu as mm
-
-
 import tkinter as tk
 import ReadFile as rf
 import util
@@ -35,29 +33,6 @@ class SharedPower(tk.Tk):
             print('User does not exist')
         else:
             print('wrong password')
-
-        ####################################################
-        """
-        Modification done
-        """
-        #####################################################
-
-        """
-        if u_log.get() in rf.check_login():
-
-            if u_pass.get() == rf.check_pass(u_log.get()):
-                print('Logged in')
-
-                login = u_log.get()
-                self.change_frame(MainMenu)
-
-            else:
-                print('wrong password')
-
-        else:
-            print('user not exist')
-            """
-        ########################################################
 
     def log_out(self):
         self.login = 'main'

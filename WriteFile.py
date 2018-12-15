@@ -24,7 +24,7 @@ def add_tool(tool):
     """
     fn_tool = ['ID','owner','title','description','priceFullDay','priceHalfDay','imgPath','availability']
 
-    with open(Data/tools.csv, 'a') as f:
+    with open("Data/tools.csv", 'a') as f:
 
         csv_writer = csv.DictWriter(f, fieldnames=fn_tool, delimiter=',',lineterminator='\n')
 

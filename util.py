@@ -1,5 +1,9 @@
 import csv
 import re
+import uuid
+import imghdr
+import os
+from shutil import copy2
 import WriteFile as wf
 from Entities.User import User
 from Entities.Tool import Tool
@@ -84,9 +88,19 @@ def verifyEmail(email):
     if len(email) > 7:
         return bool(re.match("^.+@(\[?)[a-zA-Z0-9-.]+.([a-zA-Z]{2,3}|[0-9]{1,3})(]?)$", email))
 
+def getImageFormat(path):
+    return imghdr.what(path)
     
 def verifyIMG(path):
-    return False
+    imgFormat = getImageFormat(path)
+    if imgFormat is None:
+        print("Wrong image format")
+        return False
+    elif imgFormat == "gif":
+        print("Wrong image format")
+        return False
+    else:
+        return True
 
 def verifyTool(tool):
     """
@@ -100,7 +114,7 @@ def verifyTool(tool):
         if not tool[i]:
             print("Empty fields")
             return False
-        if i = 2 or i = 3:
+        if i == 2 or i == 3:
             if " " in tool[i]:
                 print("empty space in field")
                 return False
@@ -111,11 +125,18 @@ def verifyTool(tool):
     except ValueError:
         print("Incorrect Price format")
         return False
-   
+
     if not verifyIMG(tool[4]):
         return False
-        
+
+    return True
+
+def copyIMG(src, dst,  ID):
+    copy2(src, "Data/Images/")
+    oldName = os.path.basename(src)
+    newname = "{}{}.{}".format("Data/Images/", ID, getImageFormat(src))
+    os.rename("Data/Images/"+oldName, newname)
 
 def generateID():
-    ID = "There will be ID"
+    ID = uuid.uuid4()
     return ID
