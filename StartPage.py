@@ -1,5 +1,5 @@
 import RegisterPage as r
-
+import MainMenu as mm
 import tkinter as tk
 import ReadFile as rf
 import util
@@ -20,5 +20,16 @@ class StartPage(tk.Frame):
         lab_pass = tk.Label(self ,text="password").grid(row=4,column=0)
         ent_pass = tk.Entry(self,show="*",textvariable = u_password).grid(row=4,column=1)
 
-        b_login = tk.Button(self, text="Login",command=lambda : master.log_in(u_login, u_password)).grid(row=5,column=0)
+        b_login = tk.Button(self, text="Login",command=lambda : self.log_in(u_login, u_password)).grid(row=5,column=0)
         b_reg = tk.Button(self, text="Register",command=lambda : master.change_frame(r.RegisterPage)).grid(row=5,column=1)
+
+    def log_in(self, u_log, u_pass):
+        isCorrect = util.verifyLogin(u_log, u_pass)
+        if isCorrect:
+            print('Logged in')
+            self.master.login = u_log.get()
+            self.master.change_frame(mm.MainMenu)
+        elif isCorrect == None:
+            print('User does not exist')
+        else:
+            print('wrong password')
