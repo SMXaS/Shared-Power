@@ -1,6 +1,5 @@
 import csv
 import re
-import util
 import WriteFile as wf
 from Entities.User import User
 from Entities.Tool import Tool
@@ -85,6 +84,9 @@ def verifyEmail(email):
     if len(email) > 7:
         return bool(re.match("^.+@(\[?)[a-zA-Z0-9-.]+.([a-zA-Z]{2,3}|[0-9]{1,3})(]?)$", email))
 
+    
+def verifyIMG(path):
+    return False
 
 def verifyTool(tool):
     """
@@ -110,7 +112,7 @@ def verifyTool(tool):
         print("Incorrect Price format")
         return False
    
-    if not util.verifyIMG(tool[4]):
+    if not verifyIMG(tool[4]):
         return False
         
 
