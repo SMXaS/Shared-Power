@@ -85,4 +85,13 @@ def verifyEmail(email):
 
 
 def verifyTool(tool):
-    pass
+    """
+    some verification
+    """
+    
+    #newTool = Tool(...)
+    #wf.add_tool(newTOol)
+
+def generateID():
+    ID = "There will be ID"
+    return ID
