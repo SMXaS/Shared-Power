@@ -1,6 +1,6 @@
 import csv
 import re
-import imghdr
+import util
 import WriteFile as wf
 from Entities.User import User
 from Entities.Tool import Tool
@@ -88,19 +88,32 @@ def verifyEmail(email):
 
 def verifyTool(tool):
     """
-    some verification
+    tool[0] = title
+    tool[1] = description
+    tool[2] = price full day
+    tool[3] = price half day
+    tool[4] = img path
     """
+    for i in range(len(tool)):
+        if not tool[i]:
+            print("Empty fields")
+            return False
+        if i = 2 or i = 3:
+            if " " in tool[i]:
+                print("empty space in field")
+                return False
     
-    #newTool = Tool(...)
-    #wf.add_tool(newTOol)
+    try:
+        val = float(tool[2])
+        val = float(tool[3])
+    except ValueError:
+        print("Incorrect Price format")
+        return False
+   
+    if not util.verifyIMG(tool[4]):
+        return False
+        
 
-    
-def verifyIMG(path):
-    fileFormat = imghdr.what(path)
-    # check if it is valid format
-    return False
-    
-    
 def generateID():
     ID = "There will be ID"
     return ID
