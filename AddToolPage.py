@@ -1,5 +1,5 @@
 import MainMenu as mm
-
+from addTool import addTool
 import tkinter as tk
 import ReadFile as rf
 import util
@@ -48,7 +48,7 @@ class AddToolPage(tk.Frame):
         titleEntry = tk.Entry(mid, textvariable = self.tool_title).grid(row = 0, column = 1)
         descriptionEntry = tk.Entry(mid, textvariable = self.tool_description).grid(row = 1, column = 1)         #Prabobly text box instad of entry box
         priceFullDayEntry = tk.Entry(mid, textvariable = self.tool_priceFullDay).grid(row = 2, column = 1)
-        priceHalfDay = tk.Entry(mid, textvariable = self.StringVar).grid(row = 3, column = 1)
+        priceHalfDay = tk.Entry(mid, textvariable = self.tool_priceHalfDay).grid(row = 3, column = 1)
         imgPath = tk.Entry(mid, textvariable = self.tool_imgPath).grid(row = 4, column = 1)                  #Prabobly something else than entry box
 
         ###########################
@@ -59,8 +59,20 @@ class AddToolPage(tk.Frame):
         bot.grid_columnconfigure(0, weight=1)
         bot.grid_rowconfigure(0,weight=1)
 
-        createToolButton = tk.Button (bot, text = "Add tool", command=lambda : self.addTool()).grid(row = 6, column =0)
+        createToolButton = tk.Button (bot, text = "Add tool", command=lambda : self.checkTool()).grid(row = 6, column =0)
         backButton = tk.Button (bot, text = "Back",command=lambda : master.change_frame(mm.MainMenu)).grid(row = 6, column =1)
         
-    def addTool(self):   
+    def checkTool(self): 
+        """
+        tool = []
+        tool.append(self.tool_title.get())
+        tool.append(self.tool_description.get())
+        tool.append(self.tool_priceFullDay.get())
+        tool.append(self.tool_priceHalfDay.get())
+        tool.append(self.tool_imgPath())
+        isCorrect = util.verifyTool(tool)
+        if isCorrect:
+            add = addTool(login)
+            add.add(tool)
+        """
         pass
