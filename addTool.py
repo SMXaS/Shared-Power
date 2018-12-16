@@ -1,7 +1,6 @@
 from Entities.Tool import Tool
 import WriteFile as wf
 import util
-import imghdr
 
 
 class addTool:
