@@ -23,7 +23,7 @@ class RegisterPage(tk.Frame):
 
     def initUI(self):
         self.errorLabel = tk.Label(self, text="", bg=self.bgColor, fg=self.errorColor)
-        self.errorLabel.grid(row=0, column=1, padx=10, sticky=tk.W)
+        self.errorLabel.grid(row=0, column=0, columnspan=2, padx=10)
 
         firstNameLabel = tk.Label(self, text="*First Name", bg=self.bgColor, fg=self.fgColor)
         firstNameLabel.grid(row=1, column=0, padx=5, pady=2, sticky="E")

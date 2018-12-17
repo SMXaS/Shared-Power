@@ -1,90 +1,93 @@
 import MainMenu as mm
 from addTool import addTool
 import tkinter as tk
-import ReadFile as rf
+from tkinter import END
 import util
-import csv
+import Values.values as values
 from tkinter.filedialog import askopenfilename
 
+
 class AddToolPage(tk.Frame):
+
+    bgColor = values.bgColor
+    fgColor = values.fgColor
+    errorColor = values.errorColor
+
     def __init__(self, master):
         tk.Frame.__init__(self, master)
         self.login = master.login
-
-        master.minsize('300','400')
-        master.geometry("300x400+%d+%d" % ((self.winfo_screenwidth()/2)-150, (self.winfo_screenheight()/2)-200))
+        self.filename = ""
+        master.minsize('380','260')
+        master.geometry("380x260+%d+%d" % ((self.winfo_screenwidth()/2)-150, (self.winfo_screenheight()/2)-200))
         master.title('Add new Tool')
 
-        ###########################
-        # HEADER frame start here
-        ###########################
-        header=tk.Frame(self,bg="red")
-        header.grid(row=0,column=0,columnspan=2,sticky=tk.N+tk.E+tk.W)
-        header.grid_columnconfigure(0, weight=1)
-        header.grid_rowconfigure(0,weight=1)
+        self.initUI()
 
-        Label = tk.Label(header ,text = "Main menu for user: "+self.login).grid(row=0,column=0, sticky=tk.W)
-        b_logout = tk.Button(header, text="Log Out",command=lambda : master.log_out()).grid(row=0,column=5, sticky=tk.E)
+    def initUI(self):
 
-        ###########################
-        # MID frame start here
-        ###########################
-        mid=tk.Frame(self)
-        mid.grid(row=1,column=0)
-        mid.grid_columnconfigure(0, weight=1)
-        mid.grid_rowconfigure(0,weight=1)
+        self.errorLabel = tk.Label(self, bg=self.bgColor, fg=self.errorColor)
+        self.errorLabel.grid(row=0, column=1, padx=5, pady=2, sticky="WN")
 
-        tk.Label(mid ,text = "Title").grid(row = 0, column = 0, sticky="E")
-        tk.Label(mid ,text = "Description").grid(row = 1, column = 0, sticky="E")
-        tk.Label(mid ,text = "Price per Day").grid(row = 2, column = 0, sticky="E")
-        tk.Label(mid ,text = "Price per Half Day").grid(row = 3, column = 0, sticky="E")
-        #k.Label(mid ,text = "Image").grid(row = 4, column = 0, sticky="E")
+        titleLabel = tk.Label(self, text="*Title", bg=self.bgColor, fg=self.fgColor)
+        titleLabel.grid(row=1, column=0, padx=5, pady=2, sticky="E")
 
-        self.tool_title = tk.StringVar(self)
-        self.tool_description = tk.StringVar(self)
-        self.tool_priceFullDay = tk.StringVar(self)
-        self.tool_priceHalfDay = tk.StringVar(self)
-        self.tool_imgPath = tk.StringVar(self)
-        
-        self.titleEntry = tk.Entry(mid, textvariable = self.tool_title)
-        self.titleEntry.grid(row = 0, column = 1)
-        self.descriptionEntry = tk.Entry(mid, textvariable = self.tool_description).grid(row = 1, column = 1)         #Prabobly text box instad of entry box
-        self.priceFullDayEntry = tk.Entry(mid, textvariable = self.tool_priceFullDay).grid(row = 2, column = 1)
-        self.priceHalfDay = tk.Entry(mid, textvariable = self.tool_priceHalfDay).grid(row = 3, column = 1)
-        self.imgPath = tk.Entry(mid, textvariable = self.tool_imgPath, state = 'disabled').grid(row = 4, column = 1)                  #Prabobly something else than entry box
+        DescriptionLabel = tk.Label(self, text="*Description", bg=self.bgColor, fg=self.fgColor)
+        DescriptionLabel.grid(row=2, column=0, padx=5, pady=2, sticky="EN")
 
-        ###########################
-        # BOTTOM frame start here
-        ###########################
-        bot=tk.Frame(self)
-        bot.grid(row=2,column=0)
-        bot.grid_columnconfigure(0, weight=1)
-        bot.grid_rowconfigure(0,weight=1)
+        PriceDayLabel = tk.Label(self, text="*Price per Day", bg=self.bgColor, fg=self.fgColor)
+        PriceDayLabel.grid(row=3, column=0, padx=5, pady=2, sticky="E")
 
-        createToolButton = tk.Button (bot, text = "Add tool", command=lambda : self.checkTool()).grid(row = 6, column =0)
-        backButton = tk.Button (bot, text = "Back",command=lambda : master.change_frame(mm.MainMenu)).grid(row = 6, column =1)
-        img_btn = tk.Button(mid, text="Image", command=lambda: self.setImagePath()).grid(row=4, column=0, sticky="E")
+        PriceHalfDayLabel = tk.Label(self, text="*Price per Half Day",  bg=self.bgColor, fg=self.fgColor)
+        PriceHalfDayLabel.grid(row=4, column=0, sticky="E")
 
+        self.imgPath = tk.Label(self, text="...", bg=self.bgColor, fg=self.fgColor)
+        self.imgPath.grid(row=5, column=1, padx=5, pady=2, sticky="W")
+
+        self.titleEntry = tk.Entry(self, width=40)
+        self.titleEntry.grid(row=1, column=1, padx=5)
+
+        self.descriptionEntry = tk.Text(self, heigh=5, width=30)
+        self.descriptionEntry.grid(row=2, column=1)
+
+        self.priceFullDayEntry = tk.Entry(self, width=40)
+        self.priceFullDayEntry.grid(row=3, column=1)
+
+        self.priceHalfDay = tk.Entry(self, width=40)
+        self.priceHalfDay.grid(row=4, column=1)
+
+        img_btn = tk.Label(self, text="Image", bg=self.bgColor, fg=self.fgColor,
+                           font='Helvetica 10 underline bold')
+        img_btn.grid(row=5, column=0, sticky="E")
+        img_btn.bind("<Button-1>", lambda event: self.setImagePath())
+
+        addToolButton = tk.Label(self, text="Add tool", bg=self.bgColor, fg=self.fgColor,
+                                 font='Helvetica 12')
+        addToolButton.grid(row=6, column=1, sticky="E")
+        addToolButton.bind("<Button-1>", lambda event: self.checkTool())
+
+        backIMG = tk.PhotoImage(file="Assets/btn_back.png")
+        backButton = tk.Label(self, image=backIMG, bg=self.bgColor)
+        backButton.image = backIMG
+        backButton.grid(row=6, column=0, pady=20)
+        backButton.bind("<Button-1>", lambda event: self.master.change_frame(mm.MainMenu))
+       
     def setImagePath(self):
-        filename = askopenfilename()
-        self.tool_imgPath.set(filename)
+        self.filename = askopenfilename()
+        self.imgPath.config(text=util.getFileName(self.filename))
 
     def checkTool(self):
         tool = []
-        tool.append(self.tool_title.get())
-        tool.append(self.tool_description.get())
-        tool.append(self.tool_priceFullDay.get())
-        tool.append(self.tool_priceHalfDay.get())
-        tool.append(self.tool_imgPath.get())
+        tool.append(self.titleEntry.get())
+        tool.append(self.descriptionEntry.get("1.0", END))
+        tool.append(self.priceFullDayEntry.get())
+        tool.append(self.priceHalfDay.get())
+        tool.append(self.filename)
 
         isCorrect = util.verifyTool(tool)
-        if isCorrect:
-            add = addTool(self.login)
-            add.add(tool)
-            self.tool_title.set("")
-            self.tool_description.set("")
-            self.tool_priceFullDay.set("")
-            self.tool_priceHalfDay.set("")
-            self.tool_imgPath.set("")
-            self.titleEntry.focus()
-
+        if isinstance(isCorrect, str):
+            self.errorLabel.config(text=isCorrect)
+        else:
+            if isCorrect:
+                add = addTool(self.login)
+                add.add(tool)
+                self.master.change_frame(mm.MainMenu)

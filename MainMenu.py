@@ -1,21 +1,25 @@
-import StartPage as sp
-import __main__ as m
 import AddToolPage as at
 import SearchToolPage as st
-
 import tkinter as tk
-import ReadFile as rf
-import util
 import csv
+import Values.values as values
 
 class MainMenu(tk.Frame):
+
+    bgColor = values.bgColor
+    fgColor = values.fgColor
+
     def __init__(self, master):
         tk.Frame.__init__(self, master)
         self.login = master.login
 
-        master.title("Main Menu")
         master.minsize(width=500, height=500)
-        master.geometry("700x500+%d+%d" % ((self.winfo_screenwidth()/2)-350, (self.winfo_screenheight()/2)-250))
+        master.geometry("700x500+%d+%d" % ((self.winfo_screenwidth()/2)-250, (self.winfo_screenheight()/2)-150))
+        master.title("Main Menu")
+        #################################################
+        # menu
+        #################################################
+
 
         ###########################
         # TOP frame start here
@@ -32,7 +36,7 @@ class MainMenu(tk.Frame):
         # LEFT frame start here
         ###########################
         left=tk.Frame(self,bg="blue")
-        left.grid(row=1,column=0)
+        left.grid(row=2,column=0)
         left.grid_columnconfigure(0, weight=1)
         left.grid_rowconfigure(0,weight=1)
 

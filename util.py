@@ -109,32 +109,30 @@ def verifyTool(tool):
     """
     for i in range(len(tool)):
         if not tool[i]:
-            print("Empty fields")
-            return False
+            return "Empty fields"
         if i == 2 or i == 3:
             if " " in tool[i]:
-                print("empty space in field")
-                return False
-    
+                return "Incorrect Price format"
     try:
         val = float(tool[2])
         val = float(tool[3])
     except ValueError:
-        print("Incorrect Price format")
-        return False
+        return "Incorrect Price format"
 
     if not verifyIMG(tool[4]):
-        return False
+        return "Incorrect image format"
 
     return True
 
 
 def copyIMG(src, dst,  ID):
     copy2(src, dst)
-    oldName = os.path.basename(src)
+    oldName = getFileName(src)
     newName = "{}{}.{}".format(dst, ID, getImageFormat(src))
     os.rename(dst+oldName, newName)
 
+def getFileName(path):
+    return os.path.basename(path)
 
 def generateID():
     return uuid.uuid4()
