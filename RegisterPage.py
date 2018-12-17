@@ -115,8 +115,7 @@ class RegisterPage(tk.Frame):
             self.errorLabel.config(text=isCorrect)
         else:
             if isCorrect:
-                print()
                 login = self.userNameEntry.get()
-                master.change_frame(mm.MainMenu)
+                master.change_frame(mm.MainMenu, login)
             else:
                 self.errorLabel.config(text=isCorrect)

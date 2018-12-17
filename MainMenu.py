@@ -5,6 +5,7 @@ import tkinter as tk
 import csv
 import Resources.Values.values as values
 
+
 class MainMenu(tk.Frame):
 
     bgColor = values.bgColor
@@ -12,7 +13,7 @@ class MainMenu(tk.Frame):
 
     def __init__(self, master, arg):
         tk.Frame.__init__(self, master)
-        self.login = master.login
+        self.login = arg
 
         master.geometry("700x500+%d+%d" % ((self.winfo_screenwidth()/2)-350, (self.winfo_screenheight()/2)-250))
         master.title("Main Menu")
