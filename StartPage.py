@@ -11,7 +11,7 @@ class StartPage(tk.Frame):
     fgColor = values.fgColor
     errorColor = values.errorColor
 
-    def __init__(self, master):
+    def __init__(self, master, arg):
         tk.Frame.__init__(self, master)
 
         master.title("Log in")

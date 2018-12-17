@@ -131,8 +131,10 @@ def copyIMG(src, dst,  ID):
     newName = "{}{}.{}".format(dst, ID, getImageFormat(src))
     os.rename(dst+oldName, newName)
 
+
 def getFileName(path):
     return os.path.basename(path)
+
 
 def generateID():
     return uuid.uuid4()
@@ -140,3 +142,9 @@ def generateID():
 
 def removeIMG(path):
     pass
+
+def convertToObj(dict, index):
+    tool = Tool(dict["ID"][index], dict["owner"][index], dict["title"][index],dict["description"][index],
+                dict["priceFullDay"][index], dict["priceHalfDay"][index],
+                dict["imgPath"][index], dict["availability"][index])
+    return tool

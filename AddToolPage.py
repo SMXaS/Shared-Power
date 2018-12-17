@@ -13,7 +13,7 @@ class AddToolPage(tk.Frame):
     fgColor = values.fgColor
     errorColor = values.errorColor
 
-    def __init__(self, master):
+    def __init__(self, master, arg):
         tk.Frame.__init__(self, master)
         self.login = master.login
         self.filename = ""
@@ -61,9 +61,12 @@ class AddToolPage(tk.Frame):
         img_btn.grid(row=5, column=0, sticky="E")
         img_btn.bind("<Button-1>", lambda event: self.setImagePath())
 
-        addToolButton = tk.Label(self, text="Add tool", bg=self.bgColor, fg=self.fgColor,
-                                 font='Helvetica 12')
-        addToolButton.grid(row=6, column=1, sticky="E")
+        addIMG = tk.PhotoImage(file="Resources/Drawable/btn_add.png")
+        #addToolButton = tk.Label(self, text="Add tool", bg=self.bgColor, fg=self.fgColor,
+        #                         font='Helvetica 12')
+        addToolButton = tk.Label(self, image=addIMG, bg=self.bgColor)
+        addToolButton.image=addIMG
+        addToolButton.grid(row=6, column=1)
         addToolButton.bind("<Button-1>", lambda event: self.checkTool())
 
         backIMG = tk.PhotoImage(file="Resources/Drawable/btn_back.png")

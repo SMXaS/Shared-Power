@@ -9,12 +9,11 @@ class MainMenu(tk.Frame):
     bgColor = values.bgColor
     fgColor = values.fgColor
 
-    def __init__(self, master):
+    def __init__(self, master, arg):
         tk.Frame.__init__(self, master)
         self.login = master.login
 
-        master.minsize(width=500, height=500)
-        master.geometry("700x500+%d+%d" % ((self.winfo_screenwidth()/2)-250, (self.winfo_screenheight()/2)-150))
+        master.geometry("700x500+%d+%d" % ((self.winfo_screenwidth()/2)-350, (self.winfo_screenheight()/2)-250))
         master.title("Main Menu")
 
         master.unbind("<Return>")

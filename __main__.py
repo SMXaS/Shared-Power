@@ -27,11 +27,11 @@ class SharedPower(tk.Tk):
         self.login = 'main'
         self.change_frame(sp.StartPage)
 
-    def change_frame(self, f_class):
+    def change_frame(self, f_class, arg=[]):
         ###########################
         # Destroys current frame and replaces it with a new one
         ###########################
-        new_frame = f_class(self)
+        new_frame = f_class(self, arg)
         if self._frame is not None:
             self._frame.destroy()
         self._frame = new_frame

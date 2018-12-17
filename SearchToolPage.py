@@ -1,19 +1,93 @@
 import MainMenu as mm
-
 import tkinter as tk
-import ReadFile as rf
-import util
+from tkinter import ttk
 import csv
+import BookToolPage as bk
+import Resources.Values.values as values
+import util
+
 
 class SearchToolPage(tk.Frame):
-    def __init__(self, master):
+    placeHolder = []
+    bgColor = values.bgColor
+    fgColor = values.fgColor
+
+    def __init__(self, master, arg):
         tk.Frame.__init__(self, master)
         self.login = master.login
         self.owner = master.owner
-        master.minsize('400','400')
-        master.geometry("400x400+%d+%d" % ((self.winfo_screenwidth()/2)-200, (self.winfo_screenheight()/2)-200))
+        master.geometry("700x500+%d+%d" % ((self.winfo_screenwidth() / 2) - 350, (self.winfo_screenheight() / 2) - 250))
         master.title('Search for Tool')
 
+        self.initUI()
+
+    def initUI(self):
+        self.master.columnconfigure(0, weight=1)
+
+        backIMG = tk.PhotoImage(file="Resources/Drawable/btn_back.png")
+        backButton = tk.Label(self, image=backIMG, bg=self.bgColor)
+        backButton.image = backIMG
+        backButton.bind("<Button-1>", lambda event: self.master.change_frame(mm.MainMenu))
+        backButton.grid(row=0, column=0, sticky=tk.W)
+
+        self.searchEntry = tk.Entry(self, width=80)
+        self.searchEntry.grid(row=0, column=1, padx=5, pady=20, sticky="N")
+
+        # TODO add fonts
+        searchButton = tk.Label(self, text="Search", bg=self.bgColor, fg=self.fgColor)
+        searchButton.grid(row=0, column=2)
+        searchButton.bind("<Button-1>", lambda event: self.retriveData())
+
+        self.tree = ttk.Treeview(self, columns=("Full day price", "Half day price"))
+        self.tree.heading('#0', text='Title')
+        self.tree.heading('#1', text='Full day price')
+        self.tree.heading('#2', text='Half day price')
+        self.tree.column('#1', stretch=tk.YES)
+        self.tree.column('#2', stretch=tk.YES)
+        self.tree.column('#0', stretch=tk.YES)
+        self.tree.grid(row=1, column=0, columnspan=3, padx=10, pady=20, sticky="N")
+
+        hireIMG = tk.PhotoImage(file="Resources/Drawable/btn_hire.png")
+        hireButton = tk.Label(self, image=hireIMG, bg=self.bgColor)
+        hireButton.image = hireIMG
+        hireButton.bind("<Button-1>", lambda event: self.selectItem())
+        hireButton.grid(row=2, column=0, columnspan=3, padx=10, pady=40)
+
+    def selectItem(self):
+        curItem = self.tree.focus()
+        index = int(curItem[-1:])
+        if curItem:
+            index -= 1
+        self.master.change_frame(bk.BookToolPage, self.placeHolder[index])
+
+
+    def retriveData(self):
+        self.placeHolder.clear()
+        with open("Data/tools.csv", 'r') as f:
+            l = list(csv.reader(f))
+            my_dict = {i[0]: [x for x in i[1:]] for i in zip(*l)}
+            if not self.searchEntry.get():
+                items = [i for i, x in enumerate(my_dict['availability']) if x == 'yes']
+            else:
+                itemsa = [i for i, x in enumerate(my_dict['title']) if self.searchEntry.get().lower() in x]
+                itemsb = [i for i, x in enumerate(my_dict['availability']) if x == 'yes']
+                items = list(set(itemsa).intersection(itemsb))
+            for i in range(len(items)):
+                self.placeHolder.append(util.convertToObj(my_dict, items[i]))
+            self.populateData()
+
+    def populateData(self):
+
+        self.tree.delete(*self.tree.get_children())
+
+        if self.placeHolder:
+            for i in range(len(self.placeHolder)):
+                self.tree.insert('', 'end', text=self.placeHolder[i].getTitle(),
+                                 values=(self.placeHolder[i].getPriceFullDay(),
+                                         self.placeHolder[i].getPriceHalfDay()),
+                                 tags=self.placeHolder[i].getID())
+
+        """
         def set_table():
             with open("Data/tools.csv", 'r') as f:
                 l = list(csv.reader(f))
@@ -97,3 +171,5 @@ class SearchToolPage(tk.Frame):
         set_table()
 
         backButton = tk.Button (self, text = "Back",command=lambda : master.change_frame(mm.MainMenu)).grid(row = 3, column =0)
+
+        """
