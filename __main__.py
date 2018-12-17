@@ -1,10 +1,11 @@
 import StartPage as sp
 import tkinter as tk
+import Values.values as values
 
 
 class SharedPower(tk.Tk):
     login = 'master'
-
+    bgColor = values.bgColor
     # Search atributes:
     owner = 'all'
 
@@ -12,8 +13,9 @@ class SharedPower(tk.Tk):
         tk.Tk.__init__(self, *args, **kwargs)
 
         self.title("Shared Power")
-        self.geometry("200x100+%d+%d" % ((self.winfo_screenwidth()/2)-100, (self.winfo_screenheight()/2)-50))
-        self.minsize('200','100')
+        self.configure(background='#0D47A1')
+        self.geometry("200x100+%d+%d" % ((self.winfo_screenwidth()/2)-100, (self.winfo_screenheight()/2)-20))
+        self.minsize('200', '100')
 
         self.login = self.login
 
@@ -33,6 +35,7 @@ class SharedPower(tk.Tk):
         if self._frame is not None:
             self._frame.destroy()
         self._frame = new_frame
+        self._frame.configure(background=self.bgColor)
         self._frame.grid(row=0,column=0)
 
 """Use:

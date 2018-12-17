@@ -25,9 +25,9 @@ def verifyLogin (userName, userPassword):
                 if userPassword.get() == my_dict['user_password'][ind]:
                     return True
                 else:
-                    return False
+                    return "Incorrect password"
         else:
-            return None
+            return "User does not exist!"
 
 
 def verifyRegistration (user):
@@ -47,35 +47,29 @@ def verifyRegistration (user):
     # Check if entries contain spaces or empty fields
     for i in range(len(user)):
         if not user[i]:
-            print("empty fields")
-            return False
+            return "empty fields"
         elif " " in user[i]:
             if i != 4:
-                print("Contain spaces")
-                return False
+                return "Contain spaces"
 
     # check if user exist
     with open("Data/users.csv", 'r') as f:
         l = list(csv.reader(f))
         my_dict = {i[0]: [x for x in i[1:]] for i in zip(*l)}
         if user[2] in my_dict.get('login'):
-            return None
+            return "User already exist"
 
     if user[6] != user[7]:
-        print("Email does not match")
-        return False
+        return "Email does not match"
 
     if not verifyEmail(user[6]):
-        print("Invalid email address")
-        return False
+        return "Invalid email address"
 
     if user[8] != user[9]:
-        print("Password does not match")
-        return False
+        return "Password does not match"
     else:
-        if len(user[8]) <4:
-            print("Password too short")
-            return False
+        if len(user[8]) < 4:
+            return "Password is too short"
 
     address = "{} - {}, {}".format(user[3], user[5], user[4])
     newUser = User(user[2], user[0], user[1], user[8], user[6], address, 999)
