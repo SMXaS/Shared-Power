@@ -3,7 +3,7 @@ from addTool import addTool
 import tkinter as tk
 from tkinter import END
 import util
-import Values.values as values
+import Resources.Values.values as values
 from tkinter.filedialog import askopenfilename
 
 
@@ -65,12 +65,12 @@ class AddToolPage(tk.Frame):
         addToolButton.grid(row=6, column=1, sticky="E")
         addToolButton.bind("<Button-1>", lambda event: self.checkTool())
 
-        backIMG = tk.PhotoImage(file="Assets/btn_back.png")
+        backIMG = tk.PhotoImage(file="Resources/Drawable/btn_back.png")
         backButton = tk.Label(self, image=backIMG, bg=self.bgColor)
         backButton.image = backIMG
         backButton.grid(row=6, column=0, pady=20)
         backButton.bind("<Button-1>", lambda event: self.master.change_frame(mm.MainMenu))
-       
+
     def setImagePath(self):
         self.filename = askopenfilename()
         self.imgPath.config(text=util.getFileName(self.filename))

@@ -2,7 +2,7 @@ import AddToolPage as at
 import SearchToolPage as st
 import tkinter as tk
 import csv
-import Values.values as values
+import Resources.Values.values as values
 
 class MainMenu(tk.Frame):
 

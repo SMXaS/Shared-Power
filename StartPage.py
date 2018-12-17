@@ -1,7 +1,7 @@
 import RegisterPage as r
 import MainMenu as mm
 import tkinter as tk
-import Values.values as values
+import Resources.Values.values as values
 import util
 
 

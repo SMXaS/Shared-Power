@@ -1,6 +1,6 @@
 import StartPage as sp
 import tkinter as tk
-import Values.values as values
+import Resources.Values.values as values
 
 
 class SharedPower(tk.Tk):

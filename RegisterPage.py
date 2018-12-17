@@ -1,6 +1,6 @@
 import StartPage as sp
 import MainMenu as mm
-import Values.values as values
+import Resources.Values.values as values
 import tkinter as tk
 import util
 
@@ -78,7 +78,7 @@ class RegisterPage(tk.Frame):
         passwordConfirmationEntry = tk.Entry(self, show="*", textvariable=self.u_passwordVerify)
         passwordConfirmationEntry.grid(row=10, column=1)
 
-        backIMG = tk.PhotoImage(file="Assets/btn_back.png")
+        backIMG = tk.PhotoImage(file="Resources/Drawable/btn_back.png")
         backButton = tk.Label(self, image=backIMG, bg=self.bgColor)
         backButton.image = backIMG
         backButton.grid(row=11, column=0, pady=10)
