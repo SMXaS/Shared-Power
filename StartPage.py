@@ -58,8 +58,7 @@ class StartPage(tk.Frame):
             self.error_label.config(text=isCorrect)
         else:
             if isCorrect:
-                self.master.login = self.ent_user.get()
-                self.master.change_frame(mm.MainMenu)
+                self.master.change_frame(mm.MainMenu, self.ent_user.get())
             else:
                 self.error_label.config(text="User does not exist")
                 self.error_label.config(text="Something went wrong")
