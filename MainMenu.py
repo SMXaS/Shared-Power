@@ -1,5 +1,6 @@
 import AddToolPage as at
 import SearchToolPage as st
+import MyToolPage as mt
 import tkinter as tk
 import csv
 import Resources.Values.values as values
@@ -151,3 +152,5 @@ class MainMenu(tk.Frame):
         switch_button=tk.Button(self,text="Switch",command=switch)
         switch_button.grid(row=2,column=1)
         tk.Button(self, text="Hire new tool", command=lambda : master.change_frame(st.SearchToolPage)).grid(row=2,column=2)
+        tk.Button(self, text="My Tools", command=lambda : master.change_frame(mt.MyToolPage)).grid(row=2, column=3)
+        tk.Button(self, text="Return Tool", command=lambda: master.change_frame(mt.MyToolPage)).grid(row=2, column=4)
