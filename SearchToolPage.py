@@ -34,7 +34,8 @@ class SearchToolPage(tk.Frame):
         self.searchEntry.grid(row=0, column=1, padx=5, pady=20, sticky="N")
 
         # TODO add fonts
-        searchButton = tk.Label(self, text="Search", bg=self.bgColor, fg=self.fgColor)
+        searchButton = tk.Label(self, text="Search", bg=self.bgColor, fg=self.fgColor,
+                                font='Helvetica 10 bold')
         searchButton.grid(row=0, column=2)
         searchButton.bind("<Button-1>", lambda event: self.retriveData())
 
@@ -55,10 +56,18 @@ class SearchToolPage(tk.Frame):
 
     def selectItem(self):
         curItem = self.tree.focus()
-        index = int(curItem[-1:])
         if curItem:
-            index -= 1
-        self.master.change_frame(bk.BookToolPage, self.placeHolder[index])
+            index = None
+            itemID = None
+
+            for item in self.tree.selection():
+                itemID = self.tree.item(item, "tag")
+
+            for i in range(len(self.placeHolder)):
+                if self.placeHolder[i].getID() in itemID:
+                    index = i
+
+            self.master.change_frame(bk.BookToolPage, self.placeHolder[index])
 
 
     def retriveData(self):
@@ -69,17 +78,28 @@ class SearchToolPage(tk.Frame):
             if not self.searchEntry.get():
                 items = [i for i, x in enumerate(my_dict['availability']) if x == 'yes']
             else:
-                itemsa = [i for i, x in enumerate(my_dict['title']) if self.searchEntry.get().lower() in x]
-                itemsb = [i for i, x in enumerate(my_dict['availability']) if x == 'yes']
-                items = list(set(itemsa).intersection(itemsb))
+                titleList = [i for i, x in enumerate(my_dict['title']) if self.searchEntry.get().lower() in x]
+                availableList = [i for i, x in enumerate(my_dict['availability']) if x == 'yes']
+                sellerList = [i for i, x in enumerate(my_dict['owner']) if self.searchEntry.get().lower() in x]
+                descriptionList = [i for i, x in enumerate(my_dict['description']) if self.searchEntry.get().lower() in x]
+                items = list(set(titleList).intersection(availableList))
+
+                for i in range(len(sellerList)):
+                    if not sellerList[i] in items:
+                        items.append(sellerList[i])
+
+                for i in range(len(descriptionList)):
+                    if not descriptionList[i] in items:
+                        items.append(descriptionList[i])
+
             for i in range(len(items)):
                 self.placeHolder.append(util.convertToObj(my_dict, items[i]))
             self.populateData()
 
     def populateData(self):
 
-        self.tree.delete(*self.tree.get_children())
-
+        for i in self.tree.get_children():
+            self.tree.delete(i)
         if self.placeHolder:
             for i in range(len(self.placeHolder)):
                 self.tree.insert('', 'end', text=self.placeHolder[i].getTitle(),
