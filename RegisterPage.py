@@ -55,37 +55,41 @@ class RegisterPage(tk.Frame):
         passwordConfirmationLabel = tk.Label(self, text="*Password Confirmation", bg=self.bgColor, fg=self.fgColor)
         passwordConfirmationLabel.grid(row=10, column=0, padx=5, pady=2)
 
-        self.u_fName = tk.StringVar(self)
-        self.u_lName = tk.StringVar(self)
-        self.u_userName = tk.StringVar(self)
-        self.u_postCode = tk.StringVar(self)
-        self.u_stAddress = tk.StringVar(self)
-        self.u_houseNumber = tk.StringVar(self)
-        self.u_email = tk.StringVar(self)
-        self.u_emailVerify = tk.StringVar(self)
-        self.u_password = tk.StringVar(self)
-        self.u_passwordVerify = tk.StringVar(self)
+        self.firstNameEntry = tk.Entry(self)
+        self.firstNameEntry.grid(row=1, column=1)
 
-        firstNameEntry = tk.Entry(self, textvariable=self.u_fName).grid(row=1, column=1)
-        lastNameEntry = tk.Entry(self, textvariable=self.u_lName).grid(row=2, column=1)
-        userNameEntry = tk.Entry(self, textvariable=self.u_userName).grid(row=3, column=1)
-        postCodeEntry = tk.Entry(self, textvariable=self.u_postCode).grid(row=4, column=1)
-        streetNameEntry = tk.Entry(self, textvariable=self.u_stAddress).grid(row=5, column=1)
-        houseNumberEntry = tk.Entry(self, textvariable=self.u_houseNumber).grid(row=6, column=1)
-        emailEntry = tk.Entry(self, textvariable=self.u_email).grid(row=7, column=1)
-        emailConfirmEntry = tk.Entry(self, textvariable=self.u_emailVerify).grid(row=8, column=1)
-        passwordEntry = tk.Entry(self, show="*", textvariable=self.u_password).grid(row=9, column=1)
-        passwordConfirmationEntry = tk.Entry(self, show="*", textvariable=self.u_passwordVerify)
-        passwordConfirmationEntry.grid(row=10, column=1)
+        self.lastNameEntry = tk.Entry(self)
+        self.lastNameEntry.grid(row=2, column=1)
+
+        self.userNameEntry = tk.Entry(self)
+        self.userNameEntry.grid(row=3, column=1)
+
+        self.postCodeEntry = tk.Entry(self)
+        self.postCodeEntry.grid(row=4, column=1)
+
+        self.streetNameEntry = tk.Entry(self)
+        self.streetNameEntry.grid(row=5, column=1)
+
+        self.houseNumberEntry = tk.Entry(self)
+        self.houseNumberEntry.grid(row=6, column=1)
+
+        self.emailEntry = tk.Entry(self)
+        self.emailEntry.grid(row=7, column=1)
+
+        self.emailConfirmEntry = tk.Entry(self)
+        self.emailConfirmEntry.grid(row=8, column=1)
+
+        self.passwordEntry = tk.Entry(self, show="*")
+        self.passwordEntry.grid(row=9, column=1)
+
+        self.passwordConfirmationEntry = tk.Entry(self, show="*")
+        self.passwordConfirmationEntry.grid(row=10, column=1)
 
         backIMG = tk.PhotoImage(file="Resources/Drawable/btn_back.png")
         backButton = tk.Label(self, image=backIMG, bg=self.bgColor)
         backButton.image = backIMG
         backButton.grid(row=11, column=0, pady=10)
         backButton.bind("<Button-1>", lambda event: self.master.change_frame(sp.StartPage))
-
-        #backButton = tk.Button(self, text="Back", command=lambda: self.master.change_frame(sp.StartPage))
-        #backButton.grid(row=11, column=0, pady=10)
 
         createAccountButton = tk.Label(self, text="Create Account", bg=self.bgColor, fg=self.fgColor,
                                        font='Helvetica 10 bold')
@@ -95,16 +99,16 @@ class RegisterPage(tk.Frame):
     def checkRegistration(self, master):
         global login
         user = []
-        user.append(self.u_fName.get())
-        user.append(self.u_lName.get())
-        user.append(self.u_userName.get())
-        user.append(self.u_postCode.get())
-        user.append(self.u_stAddress.get())
-        user.append(self.u_houseNumber.get())
-        user.append(self.u_email.get())
-        user.append(self.u_emailVerify.get())
-        user.append(self.u_password.get())
-        user.append(self.u_passwordVerify.get())
+        user.append(self.firstNameEntry.get())
+        user.append(self.lastNameEntry.get())
+        user.append(self.userNameEntry.get())
+        user.append(self.postCodeEntry.get())
+        user.append(self.streetNameEntry.get())
+        user.append(self.houseNumberEntry.get())
+        user.append(self.emailEntry.get())
+        user.append(self.emailConfirmEntry.get())
+        user.append(self.passwordEntry.get())
+        user.append(self.passwordConfirmationEntry.get())
 
         isCorrect = util.verifyRegistration(user)
         if isinstance(isCorrect, str):
@@ -112,7 +116,7 @@ class RegisterPage(tk.Frame):
         else:
             if isCorrect:
                 print()
-                login = self.u_userName.get()
+                login = self.userNameEntry.get()
                 master.change_frame(mm.MainMenu)
             else:
                 self.errorLabel.config(text=isCorrect)
