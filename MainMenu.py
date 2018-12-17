@@ -16,6 +16,8 @@ class MainMenu(tk.Frame):
         master.minsize(width=500, height=500)
         master.geometry("700x500+%d+%d" % ((self.winfo_screenwidth()/2)-250, (self.winfo_screenheight()/2)-150))
         master.title("Main Menu")
+
+        master.unbind("<Return>")
         #################################################
         # menu
         #################################################

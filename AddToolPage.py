@@ -22,6 +22,7 @@ class AddToolPage(tk.Frame):
         master.title('Add new Tool')
 
         self.initUI()
+        master.bind("<Return>", lambda event: self.checkTool())
 
     def initUI(self):
 

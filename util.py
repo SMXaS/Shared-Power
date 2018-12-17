@@ -16,13 +16,13 @@ def verifyLogin (userName, userPassword):
     with open("Data/users.csv", 'r') as f:
         l = list(csv.reader(f))
         my_dict = {i[0]: [x for x in i[1:]] for i in zip(*l)}
-        if userName.get() in my_dict.get('login'):
+        if userName in my_dict.get('login'):
             with open("Data/users.csv", 'r') as f:
                 l = list(csv.reader(f))
                 my_dict = {i[0]: [x for x in i[1:]] for i in zip(*l)}
-                ind = my_dict['login'].index(userName.get())
+                ind = my_dict['login'].index(userName)
 
-                if userPassword.get() == my_dict['user_password'][ind]:
+                if userPassword == my_dict['user_password'][ind]:
                     return True
                 else:
                     return "Incorrect password"
