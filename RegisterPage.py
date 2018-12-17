@@ -92,7 +92,6 @@ class RegisterPage(tk.Frame):
         createAccountButton.grid(row=11, column=1, columnspan=2, sticky="E")
         createAccountButton.bind("<Button-1>", lambda event: self.checkRegistration(self.master))
 
-
     def checkRegistration(self, master):
         global login
         user = []
@@ -117,5 +116,3 @@ class RegisterPage(tk.Frame):
                 master.change_frame(mm.MainMenu)
             else:
                 self.errorLabel.config(text=isCorrect)
-    #######################################
-
