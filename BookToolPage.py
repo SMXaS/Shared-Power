@@ -1,4 +1,5 @@
 import tkinter as tk
+import SearchToolPage as sp
 import Resources.Values.values as values
 
 class BookToolPage(tk.Frame):
@@ -7,10 +8,11 @@ class BookToolPage(tk.Frame):
     fgColor = values.fgColor
 
     def __init__(self, master, tool):
+        self.login = tool[0]
         tk.Frame.__init__(self, master)
-        self.tool = tool
+
+        self.tool = tool[1]
         self.master=master
-        self.login = master.login
         self.owner = master.owner
         master.geometry("700x500+%d+%d" % ((self.winfo_screenwidth() / 2) - 350, (self.winfo_screenheight() / 2) - 250))
         master.title('Search for Tool')
@@ -18,5 +20,6 @@ class BookToolPage(tk.Frame):
         self.initUI()
 
     def initUI(self):
-        pass
+        backButton = tk.Button(self, text="back", command=lambda: self.master.change_frame(sp.SearchToolPage, self.login))
+        backButton.grid(row=0, column=0)
         print(self.tool.getTitle())

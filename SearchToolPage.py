@@ -14,7 +14,8 @@ class SearchToolPage(tk.Frame):
 
     def __init__(self, master, arg):
         tk.Frame.__init__(self, master)
-        self.login = master.login
+        self.login = arg
+
         self.owner = master.owner
         master.geometry("700x500+%d+%d" % ((self.winfo_screenwidth() / 2) - 350, (self.winfo_screenheight() / 2) - 250))
         master.title('Search for Tool')
@@ -22,12 +23,13 @@ class SearchToolPage(tk.Frame):
         self.initUI()
 
     def initUI(self):
+        print(self.login)
         self.master.columnconfigure(0, weight=1)
 
         backIMG = tk.PhotoImage(file="Resources/Drawable/btn_back.png")
         backButton = tk.Label(self, image=backIMG, bg=self.bgColor)
         backButton.image = backIMG
-        backButton.bind("<Button-1>", lambda event: self.master.change_frame(mm.MainMenu))
+        backButton.bind("<Button-1>", lambda event: self.master.change_frame(mm.MainMenu, self.login))
         backButton.grid(row=0, column=0, sticky=tk.W)
 
         self.searchEntry = tk.Entry(self, width=80)
@@ -65,8 +67,10 @@ class SearchToolPage(tk.Frame):
             for i in range(len(self.placeHolder)):
                 if self.placeHolder[i].getID() in itemID:
                     index = i
-
-            self.master.change_frame(bk.BookToolPage, self.placeHolder[index])
+            tool = []
+            tool.append(self.login)
+            tool.append(self.placeHolder[index])
+            self.master.change_frame(bk.BookToolPage, tool)
 
 
     def retriveData(self):

@@ -15,7 +15,7 @@ class AddToolPage(tk.Frame):
 
     def __init__(self, master, arg):
         tk.Frame.__init__(self, master)
-        self.login = master.login
+        self.login = arg
         self.filename = ""
         master.minsize('380','260')
         master.geometry("380x260+%d+%d" % ((self.winfo_screenwidth()/2)-150, (self.winfo_screenheight()/2)-200))
@@ -62,8 +62,6 @@ class AddToolPage(tk.Frame):
         img_btn.bind("<Button-1>", lambda event: self.setImagePath())
 
         addIMG = tk.PhotoImage(file="Resources/Drawable/btn_add.png")
-        #addToolButton = tk.Label(self, text="Add tool", bg=self.bgColor, fg=self.fgColor,
-        #                         font='Helvetica 12')
         addToolButton = tk.Label(self, image=addIMG, bg=self.bgColor)
         addToolButton.image=addIMG
         addToolButton.grid(row=6, column=1)
@@ -73,7 +71,7 @@ class AddToolPage(tk.Frame):
         backButton = tk.Label(self, image=backIMG, bg=self.bgColor)
         backButton.image = backIMG
         backButton.grid(row=6, column=0, pady=20)
-        backButton.bind("<Button-1>", lambda event: self.master.change_frame(mm.MainMenu))
+        backButton.bind("<Button-1>", lambda event: self.master.change_frame(mm.MainMenu, self.login))
 
     def setImagePath(self):
         self.filename = askopenfilename()

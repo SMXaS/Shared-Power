@@ -1,6 +1,7 @@
 import AddToolPage as at
 import SearchToolPage as st
 import MyToolPage as mt
+import ReturnToolPage as rt
 import tkinter as tk
 import csv
 import Resources.Values.values as values
@@ -13,7 +14,10 @@ class MainMenu(tk.Frame):
 
     def __init__(self, master, arg):
         tk.Frame.__init__(self, master)
-        self.login = arg
+        if arg:
+            self.login = arg
+        else:
+            self.login = master.login
 
         master.geometry("700x500+%d+%d" % ((self.winfo_screenwidth()/2)-350, (self.winfo_screenheight()/2)-250))
         master.title("Main Menu")
@@ -89,7 +93,7 @@ class MainMenu(tk.Frame):
         # LEFT frame 3rd row 'Add tool' button
         ###########################
 
-        tk.Button(left, text="Add tool", command=lambda : master.change_frame(at.AddToolPage)).grid(row=4,column=0)
+        tk.Button(left, text="Add tool", command=lambda : master.change_frame(at.AddToolPage, self.login)).grid(row=4,column=0)
 
         ###########################
         # RIGHT frame start here
@@ -152,6 +156,10 @@ class MainMenu(tk.Frame):
 
         switch_button=tk.Button(self,text="Switch",command=switch)
         switch_button.grid(row=2,column=1)
-        tk.Button(self, text="Hire new tool", command=lambda : master.change_frame(st.SearchToolPage)).grid(row=2,column=2)
-        tk.Button(self, text="My Tools", command=lambda : master.change_frame(mt.MyToolPage)).grid(row=2, column=3)
-        tk.Button(self, text="Return Tool", command=lambda: master.change_frame(mt.MyToolPage)).grid(row=2, column=4)
+        ######################
+        # Temporary
+        ######################
+        tempList = [self.login, "Fake Tool"]
+        tk.Button(self, text="Hire new tool", command=lambda : master.change_frame(st.SearchToolPage, self.login)).grid(row=2,column=2)
+        tk.Button(self, text="My Tools", command=lambda : master.change_frame(mt.MyToolPage, self.login)).grid(row=2, column=3)
+        tk.Button(self, text="Return Tool", command=lambda: master.change_frame(rt.ReturnToolPage, tempList)).grid(row=2, column=4)
