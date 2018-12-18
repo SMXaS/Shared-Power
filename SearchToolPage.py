@@ -88,10 +88,10 @@ class SearchToolPage(tk.Frame):
             if not self.searchEntry.get():
                 items = [i for i, x in enumerate(my_dict['availability']) if x == 'yes']
             else:
-                titleList = [i for i, x in enumerate(my_dict['title']) if self.searchEntry.get().lower() in x]
+                titleList = [i for i, x in enumerate(my_dict['title']) if self.searchEntry.get().lower() in x.lower()]
                 availableList = [i for i, x in enumerate(my_dict['availability']) if x == 'yes']
-                sellerList = [i for i, x in enumerate(my_dict['owner']) if self.searchEntry.get().lower() in x]
-                descriptionList = [i for i, x in enumerate(my_dict['description']) if self.searchEntry.get().lower() in x]
+                sellerList = [i for i, x in enumerate(my_dict['owner']) if self.searchEntry.get().lower() in x.lower()]
+                descriptionList = [i for i, x in enumerate(my_dict['description']) if self.searchEntry.get().lower() in x.lower()]
                 items = list(set(titleList).intersection(availableList))
 
                 for i in range(len(sellerList)):
