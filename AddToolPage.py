@@ -92,4 +92,4 @@ class AddToolPage(tk.Frame):
             if isCorrect:
                 add = addTool(self.login)
                 add.add(tool)
-                self.master.change_frame(mm.MainMenu)
+                self.master.change_frame(mm.MainMenu, self.login)

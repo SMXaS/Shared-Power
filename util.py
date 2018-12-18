@@ -93,14 +93,17 @@ def getImageFormat(path):
 
 def verifyIMG(path):
     imgFormat = getImageFormat(path)
+    print(imgFormat)
     if imgFormat is None:
         print("Wrong image format")
         return False
-    elif imgFormat == "gif":
-        print("Wrong image format")
-        return False
     else:
-        return True
+        if imgFormat != "png":
+            print("not png")
+            return "Only .png format supported"
+        else:
+            print("png")
+            return True
 
 
 def verifyTool(tool):
@@ -125,6 +128,8 @@ def verifyTool(tool):
 
     if not verifyIMG(tool[4]):
         return "Incorrect image format"
+    if isinstance(verifyIMG(tool[4]), str):
+        return "Only .png format supported"
 
     return True
 
@@ -132,7 +137,7 @@ def verifyTool(tool):
 def copyIMG(src, dst,  ID):
     copy2(src, dst)
     oldName = getFileName(src)
-    newName = "{}{}.{}".format(dst, ID, getImageFormat(src))
+    newName = "{}{}.{}".format(dst, ID, "png")
     os.rename(dst+oldName, newName)
 
 

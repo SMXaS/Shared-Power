@@ -1,7 +1,9 @@
 ID,owner,title,description,priceFullDay,priceHalfDay,imgPath,availability
-861a18a0-71c8-4401-bb4b-79844d8c8392,edu,Smoking pot,im so high..,0.99,0.59,Data/Images/861a18a0-71c8-4401-bb4b-79844d8c8392,yes
-d415dfba-54a7-41c1-afa6-aa34729be254,mr_Smith,shoe,smelly shoe,5.9,4.9,Data/Images/d415dfba-54a7-41c1-afa6-aa34729be254,yes
-81513d82-e7ca-423d-8c56-c35a2ca13137,mr_Smith,shoe,smelly shoe,5.9,4.9,Data/Images/81513d82-e7ca-423d-8c56-c35a2ca13137,yes
-c5edc19d-90d8-43cb-af34-40018e5b3b42,kvarcas91,amazon locker,huge one,88,89,Data/Images/c5edc19d-90d8-43cb-af34-40018e5b3b42,yes
-ce234c21-d1b1-4ac1-b41b-ff32f2fa8a60,test,focus,entry,2,2,Data/Images/ce234c21-d1b1-4ac1-b41b-ff32f2fa8a60,yes
-1006842e-318b-4da9-b39c-6adbbfca4eca,test,test,focus,3,3,Data/Images/1006842e-318b-4da9-b39c-6adbbfca4eca,yes
+27a335d0-5d1c-42ab-b750-a8266fbeece5,test,Shoe,"Nice, brown, long varanty, leather
+",9.99,6.99,Data/Images/27a335d0-5d1c-42ab-b750-a8266fbeece5,yes
+03d94ef0-02f4-4b30-a044-23fba54860f9,test,amazon locker,"big, yellow.. What else do you need?
+",299,199,Data/Images/03d94ef0-02f4-4b30-a044-23fba54860f9,yes
+f68757ff-3d0e-4085-b231-70afec3c25a6,test,Smoking pot,"im high..
+",3,2,Data/Images/f68757ff-3d0e-4085-b231-70afec3c25a6,yes
+8a3b6765-9094-4ea8-a5c3-c603d77f3243,test,Smoking Pot,"wwwwwasdasda
+",22,12,Data/Images/8a3b6765-9094-4ea8-a5c3-c603d77f3243,yes

@@ -29,7 +29,7 @@ class Tool:
         return self.priceHalfDay
 
     def getImagePath(self):
-        return self.imagePath
+        return self.imgPath
 
     def isAvailable(self):
         return self.availability

@@ -41,13 +41,20 @@ class SearchToolPage(tk.Frame):
         searchButton.bind("<Button-1>", lambda event: self.retriveData())
 
         self.tree = ttk.Treeview(self, columns=("Full day price", "Half day price"))
+
+        self.yscrollbar = ttk.Scrollbar(self, orient='vertical', command=self.tree.yview)
+        self.tree.configure(yscrollcommand=self.yscrollbar.set)
+
         self.tree.heading('#0', text='Title')
         self.tree.heading('#1', text='Full day price')
         self.tree.heading('#2', text='Half day price')
         self.tree.column('#1', stretch=tk.YES)
         self.tree.column('#2', stretch=tk.YES)
         self.tree.column('#0', stretch=tk.YES)
-        self.tree.grid(row=1, column=0, columnspan=3, padx=10, pady=20, sticky="N")
+        self.tree.grid(row=1, column=0, columnspan=3, pady=20, sticky="N")
+
+        self.yscrollbar.grid(row=1, column=4, pady=20, sticky='WNS')
+        self.yscrollbar.configure(command=self.tree.yview)
 
         hireIMG = tk.PhotoImage(file="Resources/Drawable/btn_hire.png")
         hireButton = tk.Label(self, image=hireIMG, bg=self.bgColor)
