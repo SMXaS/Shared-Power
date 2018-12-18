@@ -74,9 +74,13 @@ def verifyRegistration (user):
     address = "{} - {}, {}".format(user[3], user[5], user[4])
     newUser = User(user[2], user[0], user[1], user[8], user[6], address, 999)
     wf.add_user(newUser)
+    createUserFolder(user[2])
 
     return True
 
+def createUserFolder(userName):
+    path = "Data/Invoices/{}".format(userName)
+    os.mkdir(path)
 
 def verifyEmail(email):
     if len(email) > 7:

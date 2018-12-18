@@ -26,27 +26,30 @@ class StartPage(tk.Frame):
     def initUI(self):
 
         self.error_label = tk.Label(self, text="", bg=self.bgColor, fg=self.errorColor)
-        self.error_label.grid(row=3, column=1, sticky=tk.W)
+        self.error_label.grid(row=3, column=1, columnspan=2, sticky=tk.W)
 
         lab_user = tk.Label(self, text="username", bg=self.bgColor, fg=self.fgColor)
         lab_user.grid(row=4, column=0, pady=2, padx=10)
 
         self.ent_user = tk.Entry(self)
-        self.ent_user.grid(row=4, column=1)
+        self.ent_user.grid(row=4, column=1, columnspan=2)
 
         lab_pass = tk.Label(self, text="password", bg=self.bgColor, fg=self.fgColor)
         lab_pass.grid(row=5, column=0)
 
         self.ent_pass = tk.Entry(self, show="*")
-        self.ent_pass.grid(row=5, column=1)
+        self.ent_pass.grid(row=5, column=1, columnspan=2)
 
         b_login = tk.Label(self, text="Login", bg=self.bgColor, fg=self.fgColor, font='Helvetica 9 bold')
-        b_login.grid(row=7, column=1, pady=10, sticky=tk.E)
+        b_login.grid(row=7, column=1,columnspan=2, pady=10, sticky=tk.E)
         b_login.bind("<Button-1>", lambda event: self.log_in())
 
-        sign_up = tk.Label(self, text="Don't have Account? Sign up", bg=self.bgColor, fg=self.fgColor,
-                           font='Helvetica 7 italic')
-        sign_up.grid(row=6, columnspan=2, sticky=tk.E)
+        sign_upInfo = tk.Label(self, text="Don't have Account?", bg=self.bgColor, fg=self.fgColor,
+                               font='Helvetica 7 italic')
+        sign_upInfo.grid(row=6, column=0, columnspan=2, sticky=tk.E)
+        sign_up = tk.Label(self, text="Sign up", bg=self.bgColor, fg=self.fgColor,
+                           font='Helvetica 7 bold underline')
+        sign_up.grid(row=6, column=2, sticky=tk.E)
         sign_up.bind("<Button-1>", lambda event: self.master.change_frame(r.RegisterPage))
 
     def log_in(self):
@@ -55,8 +58,7 @@ class StartPage(tk.Frame):
             self.error_label.config(text=isCorrect)
         else:
             if isCorrect:
-                self.master.login = self.ent_user.get()
-                self.master.change_frame(mm.MainMenu)
+                self.master.change_frame(mm.MainMenu, self.ent_user.get())
             else:
                 self.error_label.config(text="User does not exist")
                 self.error_label.config(text="Something went wrong")
