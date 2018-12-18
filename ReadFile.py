@@ -6,12 +6,12 @@ import csv
 ###########################################
 """
 def check_pass(login):
-    
+
     #Use to get password for specific login
 
     #You need to pass:
     #login = login value as string
-    
+
     with open("Data/users.csv", 'r') as f:
         l = list(csv.reader(f))
         my_dict = {i[0]:[x for x in i[1:]] for i in zip(*l)}
@@ -20,9 +20,9 @@ def check_pass(login):
 
 
 def check_login():
-    
+
     #Use to check if login is in file
-   
+
     with open("Data/users.csv", 'r') as f:
         l = list(csv.reader(f))
         my_dict = {i[0]:[x for x in i[1:]] for i in zip(*l)}
@@ -54,11 +54,13 @@ def get_tool(key,value):
 
     """
     with open("Data/tools.csv", 'r') as f:
+        tool = []
         l = list(csv.reader(f))
         my_dict = {i[0]:[x for x in i[1:]] for i in zip(*l)}
         ind = my_dict[key].index(value)
         for x in my_dict:
-            print(my_dict[x][ind])
+            tool.append(my_dict[x][ind])
+        return tool
 
 def get_alltools():
     """

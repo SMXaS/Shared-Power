@@ -9,7 +9,7 @@ def add_user(user):
     """
     fn_user = ['login','first_name','last_name','user_password','email','user_adress','user_phone_number']
 
-    with open("Data/users.csv", 'a') as f:
+    with open("Data/users.csv", "a") as f:
 
         csv_writer = csv.DictWriter(f, fieldnames=fn_user, delimiter=',',lineterminator='\n')
 
@@ -24,12 +24,32 @@ def add_tool(tool):
     """
     fn_tool = ['ID','owner','title','description','priceFullDay','priceHalfDay','imgPath','availability']
 
-    with open("Data/tools.csv", 'a') as f:
+    with open("Data/tools.csv", "a") as f:
 
         csv_writer = csv.DictWriter(f, fieldnames=fn_tool, delimiter=',',lineterminator='\n')
 
         #csv_writer.writeheader()                                                           #<<ONLY ONCE when making new file
         csv_writer.writerow(tool.__dict__)
+
+def change_tool(my_dict):
+    with open("Data/tools.csv", "w") as f:
+        csv_writer = csv.DictWriter(f, my_dict.keys())
+        csv_writer.writeheader()
+        csv_writer.writerow(my_dict)
+
+def change_user(my_dict):
+    with open("Data/users.csv", "w") as f:
+        csv_writer = csv.DictWriter(f, my_dict.keys())
+        csv_writer.writeheader()
+        csv_writer.writerow(my_dict)
+
+def add_booking(id):
+
+    fn_book = ['HireBy','startDate','endDate','confirmedEndDate']
+
+    with open("Data/Booking/"+id+".csv", "w") as f:
+        csv_writer = csv.DictWriter(f, fieldnames=fn_book, delimiter=',',lineterminator='\n')
+        csv_writer.writerow(book.__dict__)
 
 def add_invoice():
     pass

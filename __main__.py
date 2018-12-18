@@ -3,6 +3,7 @@ import tkinter as tk
 import Resources.Values.values as values
 
 
+
 class SharedPower(tk.Tk):
     login = 'master'
     bgColor = values.bgColor
