@@ -2,20 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9476d951-1298-4a38-b52b-5632fdff5d7f" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AddToolPage.py" beforeDir="false" afterPath="$PROJECT_DIR$/AddToolPage.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BookToolPage.py" beforeDir="false" afterPath="$PROJECT_DIR$/BookToolPage.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/Images/28b11101-7ca1-4984-8daa-43698ba09a8a.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/Images/81513d82-e7ca-423d-8c56-c35a2ca13137.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/Images/861a18a0-71c8-4401-bb4b-79844d8c8392.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/Images/8d562001-d8c9-47d1-8e7e-ce56a89ccbce.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/Images/c5edc19d-90d8-43cb-af34-40018e5b3b42.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/Images/ce234c21-d1b1-4ac1-b41b-ff32f2fa8a60.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/Images/d415dfba-54a7-41c1-afa6-aa34729be254.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/tools.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Data/tools.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Entities/Tool.py" beforeDir="false" afterPath="$PROJECT_DIR$/Entities/Tool.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SearchToolPage.py" beforeDir="false" afterPath="$PROJECT_DIR$/SearchToolPage.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/util.py" beforeDir="false" afterPath="$PROJECT_DIR$/util.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/Images/91d0a842-b16d-4ed3-8d4c-48fb8a1f7b15..png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/Images/d82b2f4f-8b41-48a5-90bb-ca37b138ca47..png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/Images/da6421ce-4128-42e5-9b80-c366d93c88ba..png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/Images/dab5870e-8922-45af-a804-7f65ae8859cf..png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test.jpg" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -262,7 +253,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1295" height="695" extended-state="7" />
+    <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.26153848" />
