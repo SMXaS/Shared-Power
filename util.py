@@ -152,8 +152,11 @@ def generateID():
 def removeIMG(path):
     pass
 
-def convertToObj(dict, index):
-    tool = Tool(dict["ID"][index], dict["owner"][index], dict["title"][index],dict["description"][index],
-                dict["priceFullDay"][index], dict["priceHalfDay"][index],
-                dict["imgPath"][index], dict["availability"][index])
+def convertToObj(index):
+    with open("Data/tools.csv", 'r') as f:
+        l = list(csv.reader(f))
+        dict = {i[0]: [x for x in i[1:]] for i in zip(*l)}
+        tool = Tool(dict["ID"][index], dict["owner"][index], dict["title"][index],dict["description"][index],
+                    dict["priceFullDay"][index], dict["priceHalfDay"][index],
+                    dict["imgPath"][index], dict["availability"][index])
     return tool

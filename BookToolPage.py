@@ -7,8 +7,8 @@ import csv
 import ReadFile as rf
 # Do not use PIL. This is external library
 
+
 class BookToolPage(tk.Frame):
-    placeHolder = []
     bgColor = values.bgColor
     fgColor = values.fgColor
 

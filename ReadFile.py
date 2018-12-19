@@ -1,35 +1,20 @@
 import csv
+import util
 
-###########################################
-# log/reg verification moved to util.class.
-# remove these functions when its safe
-###########################################
-"""
-def check_pass(login):
 
-    #Use to get password for specific login
-
-    #You need to pass:
-    #login = login value as string
-
-    with open("Data/users.csv", 'r') as f:
+def getTool(returnObj, column, value):
+    with open("Data/tools.csv", 'r') as f:
         l = list(csv.reader(f))
-        my_dict = {i[0]:[x for x in i[1:]] for i in zip(*l)}
-        ind = my_dict['login'].index(login)
-        return my_dict['user_password'][ind]
+        my_dict = {i[0]: [x for x in i[1:]] for i in zip(*l)}
+        item = [i for i, x in enumerate(my_dict[column]) if value.lower() in x.lower()]
 
-
-def check_login():
-
-    #Use to check if login is in file
-
-    with open("Data/users.csv", 'r') as f:
-        l = list(csv.reader(f))
-        my_dict = {i[0]:[x for x in i[1:]] for i in zip(*l)}
-        return my_dict.get('login')
-
-"""
-
+    if returnObj:
+        itemList = []
+        for i in range(len(item)):
+            itemList.append(util.convertToObj(item[i]))
+        return itemList
+    else:
+        return item
 
 def get_allfromcolumn(key):
     """

@@ -1,10 +1,10 @@
 import MainMenu as mm
 import tkinter as tk
 from tkinter import ttk
-import csv
 import BookToolPage as bk
 import Resources.Values.values as values
 import util
+import ReadFile as rf
 
 
 class SearchToolPage(tk.Frame):
@@ -21,6 +21,7 @@ class SearchToolPage(tk.Frame):
         master.title('Search for Tool')
 
         self.initUI()
+        self.retriveData()
 
     def initUI(self):
         print(self.login)
@@ -82,29 +83,27 @@ class SearchToolPage(tk.Frame):
 
     def retriveData(self):
         self.placeHolder.clear()
-        with open("Data/tools.csv", 'r') as f:
-            l = list(csv.reader(f))
-            my_dict = {i[0]: [x for x in i[1:]] for i in zip(*l)}
-            if not self.searchEntry.get():
-                items = [i for i, x in enumerate(my_dict['availability']) if x == 'yes']
-            else:
-                titleList = [i for i, x in enumerate(my_dict['title']) if self.searchEntry.get().lower() in x.lower()]
-                availableList = [i for i, x in enumerate(my_dict['availability']) if x == 'yes']
-                sellerList = [i for i, x in enumerate(my_dict['owner']) if self.searchEntry.get().lower() in x.lower()]
-                descriptionList = [i for i, x in enumerate(my_dict['description']) if self.searchEntry.get().lower() in x.lower()]
-                items = list(set(titleList).intersection(availableList))
 
-                for i in range(len(sellerList)):
-                    if not sellerList[i] in items:
-                        items.append(sellerList[i])
+        if not self.searchEntry.get():
+            items = rf.getTool(False, "availability", "yes")
+        else:
+            titleList = rf.getTool(False, "title", self.searchEntry.get().lower())
+            availableList = rf.getTool(False, "availability", "yes")
+            sellerList = rf.getTool(False, "owner", self.searchEntry.get().lower())
+            descriptionList = rf.getTool(False, "description", self.searchEntry.get().lower())
+            items = list(set(titleList).intersection(availableList))
 
-                for i in range(len(descriptionList)):
-                    if not descriptionList[i] in items:
-                        items.append(descriptionList[i])
+            for i in range(len(sellerList)):
+                if not sellerList[i] in items:
+                    items.append(sellerList[i])
 
-            for i in range(len(items)):
-                self.placeHolder.append(util.convertToObj(my_dict, items[i]))
-            self.populateData()
+            for i in range(len(descriptionList)):
+                if not descriptionList[i] in items:
+                    items.append(descriptionList[i])
+
+        for i in range(len(items)):
+            self.placeHolder.append(util.convertToObj(items[i]))
+        self.populateData()
 
     def populateData(self):
 
