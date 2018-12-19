@@ -1,7 +1,6 @@
-import StartPage as sp
+from Code.UI import StartPage as sp
 import tkinter as tk
 import Resources.Values.values as values
-
 
 
 class SharedPower(tk.Tk):
@@ -48,6 +47,6 @@ to create new frames
 
 """
 
-
-app = SharedPower()
-app.mainloop()
+if __name__ == '__main__':
+    app = SharedPower()
+    app.mainloop()
