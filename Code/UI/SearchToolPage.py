@@ -23,16 +23,16 @@ class SearchToolPage(tk.Frame):
 
     def initUI(self):
         print(self.login)
-        self.master.columnconfigure(0, weight=1)
+        #self.master.columnconfigure(0, weight=1)
 
         backIMG = tk.PhotoImage(file="Resources/Drawable/btn_back.png")
         backButton = tk.Label(self, image=backIMG, bg=self.bgColor)
         backButton.image = backIMG
         backButton.bind("<Button-1>", lambda event: self.master.change_frame(mm.MainMenu, self.login))
-        backButton.grid(row=0, column=0, sticky=tk.W)
+        backButton.grid(row=0, column=0, padx=10, sticky=tk.W)
 
         self.searchEntry = tk.Entry(self, width=80)
-        self.searchEntry.grid(row=0, column=1, padx=5, pady=20, sticky="N")
+        self.searchEntry.grid(row=0, column=1, padx=25, pady=20, sticky="N")
 
         searchButton = tk.Label(self, text="Search", bg=self.bgColor, fg=self.fgColor,
                                 font='Helvetica 10 bold')
@@ -50,35 +50,28 @@ class SearchToolPage(tk.Frame):
         self.tree.column('#1', stretch=tk.YES)
         self.tree.column('#2', stretch=tk.YES)
         self.tree.column('#0', stretch=tk.YES)
-        self.tree.grid(row=1, column=0, columnspan=3, pady=20, sticky="N")
+        self.tree.grid(row=1, column=1, columnspan=2, pady=20, sticky="N")
 
         self.yscrollbar.grid(row=1, column=4, pady=20, sticky='WNS')
         self.yscrollbar.configure(command=self.tree.yview)
-
-        self.descriptionLabel = tk.Label(self, bg=self.bgColor, fg=self.fgColor)
-        self.descriptionLabel.grid(row=2, column=0, padx=10, pady=10)
 
 
         hireIMG = tk.PhotoImage(file="Resources/Drawable/btn_hire.png")
         hireButton = tk.Label(self, image=hireIMG, bg=self.bgColor)
         hireButton.image = hireIMG
         hireButton.bind("<Button-1>", lambda event: self.selectItem())
-        hireButton.grid(row=3, column=0, columnspan=3, padx=10, pady=40)
+        hireButton.grid(row=2, column=0, columnspan=3, padx=10, pady=40)
 
     def getItemIDIndex(self):
-        print("getItemID")
         curItem = self.tree.focus()
         if curItem:
-            print("first IF")
             index = None
             itemID = None
 
             for item in self.tree.selection():
-                print("first loop")
                 itemID = self.tree.item(item, "tag")
 
             for i in range(len(self.placeHolder)):
-                print("Second foor loop")
                 if self.placeHolder[i].getID() in itemID:
                     index = i
                     break

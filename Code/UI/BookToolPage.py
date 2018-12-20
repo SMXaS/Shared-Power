@@ -1,6 +1,8 @@
 import tkinter as tk
+from tkinter import END
 from Code.UI import SearchToolPage as sp
 import Resources.Values.values as values
+import Code.Utilities.util as util
 
 
 # Do not use PIL. This is external library
@@ -64,11 +66,16 @@ class BookToolPage(tk.Frame):
         HireDayEntry = tk.StringVar(self)
         HireDayEntry = tk.Entry(self, textvariable=HireDayEntry).grid(row=7, column=1)
 
-        HireTimeLabel = tk.Label(self, text="Time(halfDays?): ", bg=self.bgColor, fg=self.fgColor)
-        HireTimeLabel.grid(row=8, column=0, padx=5, pady=2, sticky="E")
+        DateLabel = tk.Label(self, text="Available days", bg=self.bgColor, fg=self.fgColor)
+        DateLabel.grid(row=8, column=0, padx=5, pady=2, sticky="WNE")
 
-        HireTimeLabel = tk.StringVar(self)
-        HireTimeLabel = tk.Entry(self, textvariable=HireTimeLabel).grid(row=8, column=1)
+        availableDate = tk.Listbox(self)
+
+        availableDateList = util.getBookingDates()
+        for i in range(len(availableDateList)):
+            availableDate.insert(END, availableDateList[i])
+
+        availableDate.grid(row=9, column=0, sticky="WNE")
 
 
         #TODO
