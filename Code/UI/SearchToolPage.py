@@ -55,24 +55,39 @@ class SearchToolPage(tk.Frame):
         self.yscrollbar.grid(row=1, column=4, pady=20, sticky='WNS')
         self.yscrollbar.configure(command=self.tree.yview)
 
+        self.descriptionLabel = tk.Label(self, bg=self.bgColor, fg=self.fgColor)
+        self.descriptionLabel.grid(row=2, column=0, padx=10, pady=10)
+
+
         hireIMG = tk.PhotoImage(file="Resources/Drawable/btn_hire.png")
         hireButton = tk.Label(self, image=hireIMG, bg=self.bgColor)
         hireButton.image = hireIMG
         hireButton.bind("<Button-1>", lambda event: self.selectItem())
-        hireButton.grid(row=2, column=0, columnspan=3, padx=10, pady=40)
+        hireButton.grid(row=3, column=0, columnspan=3, padx=10, pady=40)
 
-    def selectItem(self):
+    def getItemIDIndex(self):
+        print("getItemID")
         curItem = self.tree.focus()
         if curItem:
+            print("first IF")
             index = None
             itemID = None
 
             for item in self.tree.selection():
+                print("first loop")
                 itemID = self.tree.item(item, "tag")
 
             for i in range(len(self.placeHolder)):
+                print("Second foor loop")
                 if self.placeHolder[i].getID() in itemID:
                     index = i
+                    break
+            return index
+
+    def selectItem(self):
+        curItem = self.tree.focus()
+        if curItem:
+            index = self.getItemIDIndex()
             tool = []
             tool.append(self.login)
             tool.append(self.placeHolder[index])

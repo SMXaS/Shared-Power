@@ -4,6 +4,8 @@ import uuid
 import imghdr
 import os
 from shutil import copy2
+from datetime import datetime
+from datetime import timedelta
 from Code.Utilities import WriteFile as wf
 from Entities.User import User
 from Entities.Tool import Tool
@@ -160,3 +162,14 @@ def convertToObj(index):
                     dict["priceFullDay"][index], dict["priceHalfDay"][index],
                     dict["imgPath"][index], dict["availability"][index])
     return tool
+
+def getBookingDates():
+    firstAvailableDate = datetime.now()
+    dateList = []
+    for i in range(43):
+        firstAvailableDate+= timedelta(days=1)
+        # check if date is available
+        # if not = pass
+        dateList.append(firstAvailableDate.strftime("%d/%m/%Y"))
+
+    return dateList

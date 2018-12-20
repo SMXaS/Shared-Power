@@ -44,9 +44,9 @@ welcomeLabel.grid(row=0,column=1)
 #Menu Frame Widget Population
 
 profileNameLabel = Label(menuFrame, text="Profile Name", bg='cyan',width=12)
-profilePhoto = PhotoImage(file="profile.png")
-profilePhoto = profilePhoto.subsample(10)
-profilePhotoLabel = Label(menuFrame, image=profilePhoto)
+#profilePhoto = PhotoImage(file="profile.png")
+#profilePhoto = profilePhoto.subsample(10)
+#profilePhotoLabel = Label(menuFrame, image=profilePhoto)
 deviderLabel = Label(menuFrame, text = "______________________________",bg="cyan")
 MyToolsButton = Button(menuFrame, text = "My Tools",command=f1show)
 MyBookingsButton = Button(menuFrame, text = "My Bookings",command=f2show)
@@ -59,7 +59,7 @@ logoutLabel = Label(menuFrame, text = "Logout",bg="cyan", height= 58)
 
 
 profileNameLabel.grid(row=0, column=0)
-profilePhotoLabel.grid(row=0, column=1)
+#profilePhotoLabel.grid(row=0, column=1)
 deviderLabel.grid(row=1, column = 0, columnspan=2)
 MyToolsButton.grid(row=2, column = 0, columnspan=2)
 MyBookingsButton.grid(row=3,column = 0, columnspan=2)
