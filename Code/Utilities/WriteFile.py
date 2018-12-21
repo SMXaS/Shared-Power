@@ -43,12 +43,14 @@ def change_user(my_dict):
         csv_writer.writeheader()
         csv_writer.writerow(my_dict)
 
-def add_booking(id):
+def add_booking(book):
 
-    fn_book = ['HireBy','startDate','endDate','confirmedEndDate']
+    fn_book = ['toolID','HireBy','startDate','endDate','confirmedEndDate']
 
-    with open("Data/Booking/"+id+".csv", "w") as f:
+    with open("Data/Booking/bookings.csv", "w") as f:
         csv_writer = csv.DictWriter(f, fieldnames=fn_book, delimiter=',',lineterminator='\n')
+        
+        #csv_writer.writeheader()                                                           #<<ONLY ONCE when making new file
         csv_writer.writerow(book.__dict__)
 
 def add_invoice():
