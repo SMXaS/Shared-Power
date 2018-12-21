@@ -47,10 +47,11 @@ def add_booking(book):
 
     fn_book = ['toolID','HireBy','startDate','endDate','confirmedEndDate']
 
-    with open("Data/Booking/bookings.csv", "w") as f:
+    # TODO check if file exist. If not - create
+    
+    with open("Data/Booking/"+book.getID()+".csv", "w") as f:
         csv_writer = csv.DictWriter(f, fieldnames=fn_book, delimiter=',',lineterminator='\n')
         
-        #csv_writer.writeheader()                                                           #<<ONLY ONCE when making new file
         csv_writer.writerow(book.__dict__)
 
 def add_invoice():
