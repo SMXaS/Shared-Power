@@ -1,6 +1,7 @@
 import csv
 from Code.Utilities import util
 
+# TODO add new paramater - filePath, so we will merge more functions into one
 
 def getTool(returnObj, column, value):
     with open("Data/tools.csv", 'r') as f:
