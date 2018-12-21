@@ -45,7 +45,7 @@ def change_user(my_dict):
 
 def add_booking(book):
 
-    fn_book = ['toolID','HireBy','startDate','endDate','confirmedEndDate']
+    fn_book = ['toolID','userName','startDate','expectedReturnDate','returnDate']
 
     # TODO check if file exist. If not - create
     
