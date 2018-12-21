@@ -163,7 +163,7 @@ def convertToObj(index):
                     dict["imgPath"][index], dict["availability"][index])
     return tool
 
-def getBookingDates():
+def getBookingDates(bookings):
     firstAvailableDate = datetime.now()
     dateList = []
     for i in range(43):
@@ -171,5 +171,12 @@ def getBookingDates():
         # check if date is available
         # if not = pass
         dateList.append(firstAvailableDate.strftime("%d/%m/%Y"))
-
+    for i in range(len(bookings)):
+        if bookings[i].getStartDate() in dateList:
+            startDate = date(bookings[i].getStartDate())
+            endDate = date(bookings[i].getExpectedReturnDate())
+            diff = endDate-startDate
+            for k in range(diff.days+1):
+                dateList.remove(startDate + timedelta(k))
+            
     return dateList
