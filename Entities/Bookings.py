@@ -19,7 +19,7 @@ class Bookings:
     def getExpectedReturnDate(self):
         return self.expectedReturnDate
       
-    def get returnDate(self):
+    def getReturnDate(self):
         return self.returnDate
       
     def setReturnDate(self, returnDate):

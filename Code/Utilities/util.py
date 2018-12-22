@@ -4,8 +4,7 @@ import uuid
 import imghdr
 import os
 from shutil import copy2
-from datetime import datetime
-from datetime import timedelta
+from datetime import datetime, timedelta, date
 from Code.Utilities import WriteFile as wf
 from Entities.User import User
 from Entities.Tool import Tool
@@ -14,7 +13,12 @@ from Entities.Tool import Tool
 def verifyLogin (userName, userPassword):
     """
     Use to check if login is in file
+
+    :param str(userName)
+    :param str(userPassword
+    :return True or error code
     """
+
     with open("Data/users.csv", 'r') as f:
         l = list(csv.reader(f))
         my_dict = {i[0]: [x for x in i[1:]] for i in zip(*l)}
@@ -34,6 +38,12 @@ def verifyLogin (userName, userPassword):
 
 def verifyRegistration (user):
     """
+    Verify registration
+    if its True - add user to db
+
+    :param obj(user)
+    :return True or error code
+
     user[0] = firstName
     user[1] = lastName
     user[2] = userName
@@ -110,12 +120,16 @@ def verifyIMG(path):
 
 def verifyTool(tool):
     """
+    :param obj(tool)
+    :return True or error code
+
     tool[0] = title
     tool[1] = description
     tool[2] = price full day
     tool[3] = price half day
     tool[4] = img path
     """
+
     for i in range(len(tool)):
         if not tool[i]:
             return "Empty fields"
@@ -155,6 +169,11 @@ def removeIMG(path):
     pass
 
 def convertToObj(index):
+    """
+    :param index (in db)
+    :return obj(tool)
+    """
+
     with open("Data/tools.csv", 'r') as f:
         l = list(csv.reader(f))
         dict = {i[0]: [x for x in i[1:]] for i in zip(*l)}
@@ -163,20 +182,71 @@ def convertToObj(index):
                     dict["imgPath"][index], dict["availability"][index])
     return tool
 
+
 def getBookingDates(bookings):
+    """
+    will check for ongoing bookings
+
+    :param obj(bookings)
+    :return list(str(available dates))
+    """
+
     firstAvailableDate = datetime.now()
-    dateList = []
-    for i in range(43):
+    allDateList = []
+    date_format = "%d/%m/%Y"
+    for i in range(42):
         firstAvailableDate+= timedelta(days=1)
         # check if date is available
         # if not = pass
-        dateList.append(firstAvailableDate.strftime("%d/%m/%Y"))
-    for i in range(len(bookings)):
-        if bookings[i].getStartDate() in dateList:
-            startDate = date(bookings[i].getStartDate())
-            endDate = date(bookings[i].getExpectedReturnDate())
-            diff = endDate-startDate
-            for k in range(diff.days+1):
-                dateList.remove(startDate + timedelta(k))
-            
-    return dateList
+        allDateList.append(firstAvailableDate.strftime(date_format))
+
+    if bookings:
+        for i in range(len(bookings)):
+            if bookings[i].getStartDate() in allDateList:
+                startDate = datetime.strptime(bookings[i].getStartDate(), date_format)
+                endDate = datetime.strptime(bookings[i].getExpectedReturnDate(), date_format)
+                diff = endDate-startDate
+                for k in range(diff.days+1):
+                    nextDate = (startDate+timedelta(days=k)).strftime(date_format)
+                    allDateList.remove(nextDate)
+
+
+
+    return allDateList
+
+
+def getNextAvailableDates(startDate, dayList):
+    """
+    will check available days based on startDate
+    :param startDate: str(start booking date)
+    :param obj(bookings)
+    :return: list(str(available days))
+    """
+
+    date_format = "%d/%m/%Y"
+    allDateList = []
+    date = datetime.strptime(startDate, date_format)
+    firstNextDate = date
+    allDateList.append(firstNextDate.strftime(date_format))
+    for i in range(2):
+        firstNextDate += timedelta(days=1)
+        allDateList.append(firstNextDate.strftime(date_format))
+
+    finalList = []
+
+    for i in range(len(allDateList)):
+        if allDateList[i] in dayList:
+            print(allDateList[i], "is in the list")
+            nextDay = allDateList[i]
+            finalList.append(nextDay)
+
+    return finalList
+
+
+def getDayDifference(startDate, endDate):
+    date_format = "%d/%m/%Y"
+    date1 = datetime.strptime(startDate, date_format)
+    date2 = datetime.strptime(endDate, date_format)
+    diff = date2-date1
+    return diff.days
+
