@@ -4,9 +4,7 @@ from Code.UI import SearchToolPage as sp
 import Resources.Values.values as values
 import Code.Utilities.util as util
 from Entities.Bookings import Bookings
-
-
-# Do not use PIL. This is external library
+import Code.Utilities.WriteFile as wf
 
 
 class BookToolPage(tk.Frame):
@@ -116,12 +114,12 @@ class BookToolPage(tk.Frame):
 
         self.endDateLabel.grid_remove()
         self.availableEndDate.grid_remove()
-        self.halfDateVar = tk.IntVar()
-        self.halfDateVar.set(1)
-        self.startHalfDateRadio = tk.Radiobutton(self, text="Full day", variable=self.halfDateVar,
+        self.endDateVar = tk.IntVar()
+        self.endDateVar.set(1)
+        self.startHalfDateRadio = tk.Radiobutton(self, text="Full day", variable=self.endDateVar,
                                                  indicatoron=False, value=1, width=8, borderwidth=0,
                                                  bg="grey")
-        self.endHalfDateRadio = tk.Radiobutton(self, text="Half day", variable=self.halfDateVar,
+        self.endHalfDateRadio = tk.Radiobutton(self, text="Half day", variable=self.endDateVar,
                                                indicatoron=False, value=0, width=8, borderwidth=0,
                                                bg="grey")
 
@@ -136,6 +134,7 @@ class BookToolPage(tk.Frame):
         hireButton.image = hireIMG
         hireButton.bind("<Button-1>", lambda event: self.hireTool())
         self.grid_rowconfigure(11, weight=1)
+        hireButton.bind("<Button-1>", lambda event: self.hireTool())
         hireButton.grid(row=11, column=0, columnspan=2, pady=40, sticky="WE")
 
         # TODO
@@ -150,8 +149,8 @@ class BookToolPage(tk.Frame):
         #######################################################
         # PlaceHolder
         #######################################################
-        testBook = Bookings(self.tool.getID(), self.login, "24/12/2018", "26/12/2018")
-        testBook2 = Bookings(self.tool.getID(), self.login, "30/12/2018", "1/1/2019")
+        testBook = Bookings(self.tool.getID(), self.login, "24/12/2018", "f", "26/12/2018", "h")
+        testBook2 = Bookings(self.tool.getID(), self.login, "30/12/2018", "f", "1/1/2019", "h")
         self.testList = []
         self.testList.append(testBook)
         self.testList.append(testBook2)
@@ -181,4 +180,17 @@ class BookToolPage(tk.Frame):
             self.availableEndDate.insert(END, self.nextDays[i])
 
     def hireTool(self):
-        pass
+        if self.startDateVar.get()==1:
+            startTerm = "f"
+        else:
+            startTerm = "h"
+
+        if self.endDateVar.get()==1:
+            expectedTerm = "f"
+        else:
+            expectedTerm = "h"
+
+        print("sT: {}; eT: {}".format(startTerm, expectedTerm))
+        hiredTool = Bookings(self.tool.getID(), self.login, self.start_date, startTerm, self.end_date,
+                             expectedTerm)
+        wf.add_booking(hiredTool)

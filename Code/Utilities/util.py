@@ -90,9 +90,11 @@ def verifyRegistration (user):
 
     return True
 
+
 def createUserFolder(userName):
     path = "Data/Invoices/{}".format(userName)
     os.mkdir(path)
+
 
 def verifyEmail(email):
     if len(email) > 7:
@@ -167,6 +169,7 @@ def generateID():
 
 def removeIMG(path):
     pass
+
 
 def convertToObj(index):
     """

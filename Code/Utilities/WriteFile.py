@@ -1,5 +1,5 @@
 import csv
-
+import os
 
 def add_user(user):
     """Add line to CSV file.
@@ -45,13 +45,16 @@ def change_user(my_dict):
 
 def add_booking(book):
 
-    fn_book = ['toolID','userName','startDate','expectedReturnDate','returnDate']
+    fn_book = ['toolID','userName','startDate', 'startTerm','expectedReturnDate','expectedTerm','returnDate']
 
-    # TODO check if file exist. If not - create
-    
-    with open("Data/Booking/"+book.getID()+".csv", "w") as f:
+    filePath = "Data/Bookings/"+book.getToolID()+".csv"
+    exist = os.path.isfile(filePath)
+    with open(filePath, "a") as f:
         csv_writer = csv.DictWriter(f, fieldnames=fn_book, delimiter=',',lineterminator='\n')
-        
+
+        if not exist:
+            csv_writer.writeheader()
+
         csv_writer.writerow(book.__dict__)
 
 def add_invoice():
