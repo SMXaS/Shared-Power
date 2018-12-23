@@ -115,7 +115,7 @@ class BookToolPage(tk.Frame):
         self.endDateLabel.grid_remove()
         self.availableEndDate.grid_remove()
         self.endDateVar = tk.StringVar()
-        self.endDateVar.set("h")
+        self.endDateVar.set("f")
         self.startHalfDateRadio = tk.Radiobutton(self, text="Full day", variable=self.endDateVar,
                                                  indicatoron=False, value="f", width=8, borderwidth=0,
                                                  bg="grey")
