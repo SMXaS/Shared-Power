@@ -68,14 +68,14 @@ class BookToolPage(tk.Frame):
         priceFullDayLabel = tk.Label(self, text="priceFullDay: ", bg=self.bgColor, fg=self.fgColor)
         priceFullDayLabel.grid(row=4, column=0, padx=5, pady=2, sticky="E")
 
-        priceFullDayTxt = tk.Label(self, text=self.tool.getPriceFullDay() + " $", bg=self.bgColor,
+        priceFullDayTxt = tk.Label(self, text=self.tool.getPriceFullDay() + " £", bg=self.bgColor,
                                    fg=self.fgColor)
         priceFullDayTxt.grid(row=4, column=1, columnspan=3, padx=5, pady=2, sticky="W")
 
         priceHalfDayLabel = tk.Label(self, text="priceHalfDay: ", bg=self.bgColor, fg=self.fgColor)
         priceHalfDayLabel.grid(row=5, column=0, padx=5, pady=2, sticky="E")
 
-        priceHalfDayTxt = tk.Label(self, text=self.tool.getPriceHalfDay()+" $", bg=self.bgColor,
+        priceHalfDayTxt = tk.Label(self, text=self.tool.getPriceHalfDay()+" £", bg=self.bgColor,
                                    fg=self.fgColor)
         priceHalfDayTxt.grid(row=5, column=1, columnspan=3, padx=5, pady=2, sticky="W")
         ###########################################################################
@@ -93,15 +93,15 @@ class BookToolPage(tk.Frame):
         self.availableDate.bind("<<ListboxSelect>>", lambda event: self.getEndDays())
         self.availableDate.grid(row=7, column=0, rowspan=3, padx=5, sticky="WNE")
 
-        self.startDateVar = tk.IntVar()
+        self.startDateVar = tk.StringVar()
         startFullDateRadio = tk.Radiobutton(self, text="Full day", variable=self.startDateVar,
-                                            indicatoron=False, value=1, width=8, borderwidth=0,
+                                            indicatoron=False, value="f", width=8, borderwidth=0,
                                             bg="grey")
         endFullDateRadio = tk.Radiobutton(self, text="Half day", variable=self.startDateVar,
-                                          indicatoron=False, value=0, width=8, borderwidth=0,
+                                          indicatoron=False, value="h", width=8, borderwidth=0,
                                           bg="grey")
 
-        self.startDateVar.set(1)
+        self.startDateVar.set("f")
 
         startFullDateRadio.grid(row=10, column=0, padx=5, sticky="W")
         endFullDateRadio.grid(row=10, column=0, padx=5, sticky="E")
@@ -114,13 +114,13 @@ class BookToolPage(tk.Frame):
 
         self.endDateLabel.grid_remove()
         self.availableEndDate.grid_remove()
-        self.endDateVar = tk.IntVar()
-        self.endDateVar.set(1)
+        self.endDateVar = tk.StringVar()
+        self.endDateVar.set("h")
         self.startHalfDateRadio = tk.Radiobutton(self, text="Full day", variable=self.endDateVar,
-                                                 indicatoron=False, value=1, width=8, borderwidth=0,
+                                                 indicatoron=False, value="f", width=8, borderwidth=0,
                                                  bg="grey")
         self.endHalfDateRadio = tk.Radiobutton(self, text="Half day", variable=self.endDateVar,
-                                               indicatoron=False, value=0, width=8, borderwidth=0,
+                                               indicatoron=False, value="h", width=8, borderwidth=0,
                                                bg="grey")
 
         self.startHalfDateRadio.grid(row=10, column=1, padx=5, sticky="W")
@@ -180,17 +180,10 @@ class BookToolPage(tk.Frame):
             self.availableEndDate.insert(END, self.nextDays[i])
 
     def hireTool(self):
-        if self.startDateVar.get()==1:
-            startTerm = "f"
-        else:
-            startTerm = "h"
-
-        if self.endDateVar.get()==1:
-            expectedTerm = "f"
-        else:
-            expectedTerm = "h"
-
+        
+        # TODO hire rider
+        
         print("sT: {}; eT: {}".format(startTerm, expectedTerm))
-        hiredTool = Bookings(self.tool.getID(), self.login, self.start_date, startTerm, self.end_date,
-                             expectedTerm)
+        hiredTool = Bookings(self.tool.getID(), self.login, self.start_date, self.startDateVar.get(), self.end_date,
+                             self.endDateVar.get())
         wf.add_booking(hiredTool)
