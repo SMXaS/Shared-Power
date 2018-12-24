@@ -92,36 +92,60 @@ def verifyRegistration (user):
 
 
 def createUserFolder(userName):
+    """
+    Creates folder for users based on their userName (for invoices)
+
+    :param userName: str (userName)
+    :return: None
+    """
     path = "Data/Invoices/{}".format(userName)
     os.mkdir(path)
 
 
 def verifyEmail(email):
+    """
+    Verifies email
+
+    :param email: str
+    :return: True (correct email) or False (incorrect email)
+    """
+
     if len(email) > 7:
         return bool(re.match("^.+@(\[?)[a-zA-Z0-9-.]+.([a-zA-Z]{2,3}|[0-9]{1,3})(]?)$", email))
 
 
 def getImageFormat(path):
+    """
+    Gets image format
+
+    :param path: str (image location + extension)
+    :return: str (image format. i.e. 'png', 'jpeg' etc.)
+    """
+
     return imghdr.what(path)
 
 
 def verifyIMG(path):
+    """
+    Verifies if IMG format is usable for our project
+
+    :param path: str (image location)
+    :return: True or error code
+    """
     imgFormat = getImageFormat(path)
     print(imgFormat)
     if imgFormat is None:
-        print("Wrong image format")
-        return False
+        return "Wrong image format"
     else:
         if imgFormat != "png":
-            print("not png")
             return "Only .png format supported"
         else:
-            print("png")
             return True
 
 
 def verifyTool(tool):
     """
+
     :param obj(tool)
     :return True or error code
 
@@ -154,6 +178,13 @@ def verifyTool(tool):
 
 
 def copyIMG(src, dst,  ID):
+    """
+    :param src: str (file's source location)
+    :param dst: str (file's destination)
+    :param ID: str (tool ID)
+    :return: None
+    """
+
     copy2(src, dst)
     oldName = getFileName(src)
     newName = "{}{}.{}".format(dst, ID, "png")
@@ -161,10 +192,20 @@ def copyIMG(src, dst,  ID):
 
 
 def getFileName(path):
+    """
+
+    :param path: str (file path)
+    :return: str (file name)
+    """
     return os.path.basename(path)
 
 
 def generateID():
+    """
+    generates unique ID
+
+    :return: ID (for tool)
+    """
     return uuid.uuid4()
 
 
@@ -174,6 +215,8 @@ def removeIMG(path):
 
 def convertToObj(index):
     """
+    Converts dict(tool) to obj(tool)
+
     :param index (in db)
     :return obj(tool)
     """
@@ -192,7 +235,7 @@ def getBookingDates(bookings):
     """
     will check for ongoing bookings
 
-    :param obj(bookings)
+    :param list(obj(bookings))
     :return list(str(available dates))
     """
 
@@ -214,8 +257,17 @@ def getBookingDates(bookings):
                 for k in range(diff.days+1):
                     nextDate = (startDate+timedelta(days=k)).strftime(date_format)
                     allDateList.remove(nextDate)
-
-
+            else:
+                if bookings[i].getExpectedReturnDate() in allDateList:
+                    startDate = datetime.strptime(bookings[i].getStartDate(), date_format)
+                    endDate = datetime.strptime(bookings[i].getExpectedReturnDate(), date_format)
+                    diff = endDate - startDate
+                    for k in range(diff.days + 1):
+                        try:
+                            nextDate = (startDate + timedelta(days=k)).strftime(date_format)
+                            allDateList.remove(nextDate)
+                        except ValueError:
+                            continue
 
     return allDateList
 
@@ -223,6 +275,7 @@ def getBookingDates(bookings):
 def getNextAvailableDates(startDate, dayList):
     """
     will check available days based on startDate
+
     :param startDate: str(start booking date)
     :param obj(bookings)
     :return: list(str(available days))
@@ -249,6 +302,14 @@ def getNextAvailableDates(startDate, dayList):
 
 
 def getDayDifference(startDate, endDate):
+    """
+    checks the difference between two days
+
+    :param startDate: str (date)
+    :param endDate: str (second date)
+    :return: int(difference)
+    """
+
     date_format = "%d/%m/%Y"
     date1 = datetime.strptime(startDate, date_format)
     date2 = datetime.strptime(endDate, date_format)

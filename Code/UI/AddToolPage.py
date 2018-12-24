@@ -14,6 +14,11 @@ class AddToolPage(tk.Frame):
     errorColor = values.errorColor
 
     def __init__(self, master, arg):
+        """
+        :param master: master
+        :param arg: user login
+        """
+
         tk.Frame.__init__(self, master)
         self.login = arg
         self.filename = ""

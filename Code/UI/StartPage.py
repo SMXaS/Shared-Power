@@ -14,7 +14,6 @@ class StartPage(tk.Frame):
         tk.Frame.__init__(self, master)
 
         master.title("Log in")
-        master.minsize('220', '140')
         master.geometry("220x140+%d+%d" % ((self.winfo_screenwidth()/2)-100, (self.winfo_screenheight()/2)-50))
         master.resizable(False, False)
 
@@ -52,6 +51,13 @@ class StartPage(tk.Frame):
         sign_up.bind("<Button-1>", lambda event: self.master.change_frame(r.RegisterPage))
 
     def log_in(self):
+        """
+        Checks if user entries ar valid
+        if yes - will open MainMenu
+
+        :return: None
+        """
+
         isCorrect = util.verifyLogin(self.ent_user.get(), self.ent_pass.get())
         if isinstance(isCorrect, str):
             self.error_label.config(text=isCorrect)

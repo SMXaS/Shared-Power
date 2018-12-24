@@ -10,6 +10,11 @@ class MyToolPage(tk.Frame):
     fgColor = values.fgColor
 
     def __init__(self, master, arg):
+        """
+        :param master: master
+        :param arg: login
+        """
+
         tk.Frame.__init__(self, master)
         self.login = arg
         self.master = master
@@ -28,6 +33,25 @@ class MyToolPage(tk.Frame):
         backButton = tk.Button(self, text="back", command= lambda: self.master.change_frame(mm.MainMenu, self.login))
         backButton.grid(row=0, column=0)
         ####################################################################################################
+
+        """
+        Store all your widgets here
+        i.e.:
+            self.myLabel = tk.Label(self, text="my first label")
+            self.myLabel.grid(row=1, column=0)
+
+            self.myButton = tk.Button(self, text="my first button")
+            self.myButton.grid(row=1, column=1)
+
+
+        add functionality to your buttons:
+            when you define a button, add this text:
+                ###  command=lambda: 'your function' ### (check how backButton is made)
+
+        add functionality to your labels:
+            self.myLabel.bind("<Button-1>", lambda event: '/your function/' )
+
+        """
 
     # Rename this function according to what you want to do
     def ThereWillBeYourLogic(self):

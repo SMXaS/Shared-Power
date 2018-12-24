@@ -11,6 +11,11 @@ class SearchToolPage(tk.Frame):
     fgColor = values.fgColor
 
     def __init__(self, master, arg):
+        """
+        :param master: master
+        :param arg: login
+        """
+
         tk.Frame.__init__(self, master)
         self.login = arg
 
@@ -19,11 +24,9 @@ class SearchToolPage(tk.Frame):
         master.title('Search for Tool')
 
         self.initUI()
-        self.retriveData()
+        self.retrieveData()
 
     def initUI(self):
-        print(self.login)
-        #self.master.columnconfigure(0, weight=1)
 
         backIMG = tk.PhotoImage(file="Resources/Drawable/btn_back.png")
         backButton = tk.Label(self, image=backIMG, bg=self.bgColor)
@@ -37,7 +40,7 @@ class SearchToolPage(tk.Frame):
         searchButton = tk.Label(self, text="Search", bg=self.bgColor, fg=self.fgColor,
                                 font='Helvetica 10 bold')
         searchButton.grid(row=0, column=2)
-        searchButton.bind("<Button-1>", lambda event: self.retriveData())
+        searchButton.bind("<Button-1>", lambda event: self.retrieveData())
 
         self.tree = ttk.Treeview(self, columns=("Full day price", "Half day price"))
 
@@ -55,7 +58,6 @@ class SearchToolPage(tk.Frame):
         self.yscrollbar.grid(row=1, column=4, pady=20, sticky='WNS')
         self.yscrollbar.configure(command=self.tree.yview)
 
-
         hireIMG = tk.PhotoImage(file="Resources/Drawable/btn_hire.png")
         hireButton = tk.Label(self, image=hireIMG, bg=self.bgColor)
         hireButton.image = hireIMG
@@ -63,6 +65,10 @@ class SearchToolPage(tk.Frame):
         hireButton.grid(row=2, column=0, columnspan=3, padx=10, pady=40)
 
     def getItemIDIndex(self):
+        """
+        :return: int(index of selected item)
+        """
+
         curItem = self.tree.focus()
         if curItem:
             index = None
@@ -78,6 +84,12 @@ class SearchToolPage(tk.Frame):
             return index
 
     def selectItem(self):
+        """
+        Select item and go to BookToolPage
+
+        :return: None
+        """
+
         curItem = self.tree.focus()
         if curItem:
             index = self.getItemIDIndex()
@@ -86,8 +98,13 @@ class SearchToolPage(tk.Frame):
             tool.append(self.placeHolder[index])
             self.master.change_frame(bk.BookToolPage, tool)
 
+    def retrieveData(self):
+        """
+        Retrieve all data from DB and populate it in the list
 
-    def retriveData(self):
+        :return: None
+        """
+
         self.placeHolder.clear()
 
         if not self.searchEntry.get():
@@ -112,6 +129,10 @@ class SearchToolPage(tk.Frame):
         self.populateData()
 
     def populateData(self):
+        """
+        Populates all data in the list
+        :return: None
+        """
 
         for i in self.tree.get_children():
             self.tree.delete(i)

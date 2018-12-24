@@ -11,10 +11,13 @@ class RegisterPage(tk.Frame):
     errorColor = values.errorColor
 
     def __init__(self, master, arg):
+        """
+        :param master: master
+        :param arg: None
+        """
+
         tk.Frame.__init__(self, master)
-        master.title("Register")
         master.minsize(width=280, height=280)
-        master.minsize('280', '330')
         master.geometry("280x320+%d+%d" % ((self.winfo_screenwidth()/2)-100, (self.winfo_screenheight()/2)-150))
         master.title('Register')
 
@@ -93,10 +96,15 @@ class RegisterPage(tk.Frame):
         createAccountButton = tk.Label(self, text="Create Account", bg=self.bgColor, fg=self.fgColor,
                                        font='Helvetica 10 bold')
         createAccountButton.grid(row=11, column=1, columnspan=2, sticky="E")
-        createAccountButton.bind("<Button-1>", lambda event: self.checkRegistration(self.master))
+        createAccountButton.bind("<Button-1>", lambda event: self.checkRegistration())
 
-    def checkRegistration(self, master):
-        global login
+    def checkRegistration(self):
+        """
+        Checks registration
+        if Correct - will go to main page
+        :return: None
+        """
+
         user = []
         user.append(self.firstNameEntry.get())
         user.append(self.lastNameEntry.get())
@@ -115,7 +123,6 @@ class RegisterPage(tk.Frame):
         else:
             if isCorrect:
                 login = self.userNameEntry.get()
-                master.login = login
-                master.change_frame(mm.MainMenu, login)
+                self.master.change_frame(mm.MainMenu, login)
             else:
                 self.errorLabel.config(text=isCorrect)

@@ -11,39 +11,54 @@ class BookToolPage(tk.Frame):
     bgColor = values.bgColor
     fgColor = values.fgColor
     start_date = ""
-    end_date=""
+    end_date = ""
 
     def __init__(self, master, tool):
-        self.login = tool[0]
+        """
+        :param master: master
+        :param tool[0]: login
+        :param tool[1]: obj(tool)
+        """
         tk.Frame.__init__(self, master)
-
-        self.tool = tool[1]
-        self.master=master
-        self.owner = master.owner
         master.geometry("700x500+%d+%d" % ((self.winfo_screenwidth() / 2) - 350, (self.winfo_screenheight() / 2) - 250))
         master.title('Hire Tool')
+
+        self.login = tool[0]
+        self.tool = tool[1]
+        self.master = master
+        self.owner = master.owner
 
         self.initUI()
         self.setPlaceholder()
         self.populateStartList()
 
-    def getEndDays(self):
+    def getStartDate(self):
+        """
+        Getting start booking date.
+        based on selection from start date (bookings) list will generate end date list
+
+        :return: None
+        """
+
         index = int(self.availableDate.curselection()[0])
         self.start_date = self.availableDate.get(index)
         print(self.start_date)
         self.nextDays = util.getNextAvailableDates(self.start_date, self.availableDateList)
 
-        self.showSecondList()
+        self.showReturnDateList()
         self.populateEndList()
 
+    def getEndDate(self):
+        """
+        Getting end booking date. Calls "show arrange rider" function
+        :return: None
+        """
 
-    def getNextDaysTest(self):
         index = int(self.availableEndDate.curselection()[0])
         self.end_date = self.availableEndDate.get(index)
         self.showArrangeRider()
 
     def initUI(self):
-
 
         #############################################################################
         # Info widgets
@@ -85,6 +100,7 @@ class BookToolPage(tk.Frame):
         priceHalfDayTxt = tk.Label(self, text=self.tool.getPriceHalfDay()+" $", bg=self.bgColor,
                                    fg=self.fgColor)
         priceHalfDayTxt.grid(row=6, column=1, columnspan=3, padx=5, pady=2, sticky="W")
+
         ###########################################################################
 
         ###########################################################################
@@ -97,7 +113,7 @@ class BookToolPage(tk.Frame):
         self.endDateLabel = tk.Label(self, text="End date", bg=self.bgColor, fg=self.fgColor)
 
         self.availableDate = tk.Listbox(self, exportselection=0)
-        self.availableDate.bind("<<ListboxSelect>>", lambda event: self.getEndDays())
+        self.availableDate.bind("<<ListboxSelect>>", lambda event: self.getStartDate())
         self.availableDate.grid(row=8, column=0, rowspan=8, padx=5, sticky="WNE")
 
         self.startDateVar = tk.StringVar()
@@ -114,7 +130,7 @@ class BookToolPage(tk.Frame):
         endFullDateRadio.grid(row=16, column=0, padx=5, sticky="E")
 
         self.availableEndDate = tk.Listbox(self, exportselection=0)
-        self.availableEndDate.bind("<<ListboxSelect>>", lambda event: self.getNextDaysTest())
+        self.availableEndDate.bind("<<ListboxSelect>>", lambda event: self.getEndDate())
 
         self.endDateLabel.grid(row=7, column=1, padx=5, pady=2, sticky="WNE")
         self.availableEndDate.grid(row=8, column=1, rowspan=8, padx=5, sticky="WNE")
@@ -186,8 +202,12 @@ class BookToolPage(tk.Frame):
         self.testList.append(testBook2)
         #######################################################
 
+    def showReturnDateList(self):
+        """
+        Makes Return Date list visible
+        :return:
+        """
 
-    def showSecondList(self):
         self.availableEndDate.grid()
         self.endDateLabel.grid()
 
@@ -199,17 +219,32 @@ class BookToolPage(tk.Frame):
             self.endHalfDateRadio.grid_remove()
 
     def populateStartList(self):
+        """
+        Fills Start booking list with available dates
+        :return: None
+        """
+
         self.availableDateList = util.getBookingDates(self.testList)
         for i in range(len(self.availableDateList)):
             self.availableDate.insert(END, self.availableDateList[i])
 
     def populateEndList(self):
+        """
+          Fills Return booking list with available dates
+          :return: None
+          """
+
         self.availableEndDate.delete(0, tk.END)
         for i in range(len(self.nextDays)):
             print(self.nextDays[i])
             self.availableEndDate.insert(END, self.nextDays[i])
 
     def showArrangeRider(self):
+        """
+        Makes rider option visible
+        :return: None
+        """
+
         self.riderRadio.grid()
         self.pickUpLabel.grid()
         self.dropOffLabel.grid()
@@ -228,8 +263,12 @@ class BookToolPage(tk.Frame):
             self.pickUpEntry.config(bg="grey", state="disabled")
             self.dropOffEntry.config(bg="grey", state="disabled")
 
-
     def hireTool(self):
+        """
+        Create booking object and pass it to WriteFile
+        Will return to SearchToolPage
+        :return: None
+        """
 
         if self.start_date and self.end_date:
             print("sT: {}; eT: {}".format(self.startDateVar.get(), self.endDateVar.get()))

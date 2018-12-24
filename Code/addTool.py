@@ -5,6 +5,10 @@ from Code.Utilities import util, WriteFile as wf
 class addTool:
 
     def __init__(self, owner):
+        """
+        :param owner: user's login
+        """
+
         self.__owner = owner
 
     def add(self, item):
