@@ -4,7 +4,7 @@ import uuid
 import imghdr
 import os
 from shutil import copy2
-from datetime import datetime, timedelta, date
+from datetime import datetime, timedelta
 from Code.Utilities import WriteFile as wf
 from Entities.User import User
 from Entities.Tool import Tool
@@ -20,6 +20,8 @@ def verifyLogin (userName, userPassword):
     :return True or error code
     """
 
+
+
     with open("Data/users.csv", 'r') as f:
         l = list(csv.reader(f))
         my_dict = {i[0]: [x for x in i[1:]] for i in zip(*l)}
@@ -28,7 +30,6 @@ def verifyLogin (userName, userPassword):
                 l = list(csv.reader(f))
                 my_dict = {i[0]: [x for x in i[1:]] for i in zip(*l)}
                 ind = my_dict['login'].index(userName)
-
                 if userPassword == my_dict['user_password'][ind]:
                     return True
                 else:

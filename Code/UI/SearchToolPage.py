@@ -56,7 +56,6 @@ class SearchToolPage(tk.Frame):
         self.tree.grid(row=1, column=1, columnspan=2, pady=20, sticky="N")
 
         self.yscrollbar.grid(row=1, column=4, pady=20, sticky='WNS')
-        self.yscrollbar.configure(command=self.tree.yview)
 
         hireIMG = tk.PhotoImage(file="Resources/Drawable/btn_hire.png")
         hireButton = tk.Label(self, image=hireIMG, bg=self.bgColor)

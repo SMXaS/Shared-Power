@@ -1,0 +1,2 @@
+toolID,userName,bookInCondition,startDate,startTerm,expectedReturnDate,expectedTerm,returnDate,bookOutCondition,pickUpLocation,dropOffLocation
+92a5f682-892e-4237-b041-00db879194a3,test,"used, but still good",25/12/2018,f,27/12/2018,f,,,,

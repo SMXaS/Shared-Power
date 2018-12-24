@@ -30,7 +30,6 @@ class BookToolPage(tk.Frame):
         self.owner = master.owner
 
         self.initUI()
-        self.setPlaceholder()
         self.populateStartList()
 
     def getStartDate(self):
@@ -115,7 +114,11 @@ class BookToolPage(tk.Frame):
 
         self.availableDate = tk.Listbox(self, exportselection=0)
         self.availableDate.bind("<<ListboxSelect>>", lambda event: self.getStartDate())
-        self.availableDate.grid(row=8, column=0, rowspan=8, padx=5, sticky="WNE")
+        self.availableDate.grid(row=8, column=0, rowspan=8, sticky="WNE")
+
+        scrollAvailableDate = tk.Scrollbar(self, orient="vertical")
+        scrollAvailableDate.config(command=self.availableDate.yview)
+        scrollAvailableDate.grid(row=8, column=1, rowspan=8, sticky="WNS")
 
         self.startDateVar = tk.StringVar()
         startFullDateRadio = tk.Radiobutton(self, text="Full day", variable=self.startDateVar,
@@ -127,15 +130,20 @@ class BookToolPage(tk.Frame):
 
         self.startDateVar.set("f")
 
-        startFullDateRadio.grid(row=16, column=0, padx=5, sticky="W")
-        endFullDateRadio.grid(row=16, column=0, padx=5, sticky="E")
+        startFullDateRadio.grid(row=16, column=0, sticky="W")
+        endFullDateRadio.grid(row=16, column=0, sticky="E")
 
         self.availableEndDate = tk.Listbox(self, exportselection=0)
         self.availableEndDate.bind("<<ListboxSelect>>", lambda event: self.getEndDate())
 
-        self.endDateLabel.grid(row=7, column=1, padx=5, pady=2, sticky="WNE")
-        self.availableEndDate.grid(row=8, column=1, rowspan=8, padx=5, sticky="WNE")
+        self.endDateLabel.grid(row=7, column=2, padx=5, pady=2, sticky="WNE")
+        self.availableEndDate.grid(row=8, column=2, rowspan=8, sticky="WNE")
 
+        self.scrollNextAvailableDate = tk.Scrollbar(self, orient="vertical")
+        self.scrollNextAvailableDate.config(command=self.availableEndDate.yview)
+        self.scrollNextAvailableDate.grid(row=8, column=3, rowspan=8, sticky="WNS")
+
+        self.scrollNextAvailableDate.grid_remove()
         self.endDateLabel.grid_remove()
         self.availableEndDate.grid_remove()
         self.endDateVar = tk.StringVar()
@@ -147,8 +155,8 @@ class BookToolPage(tk.Frame):
                                                indicatoron=False, value="h", width=8, borderwidth=0,
                                                bg="grey")
 
-        self.startHalfDateRadio.grid(row=16, column=1, padx=5, sticky="W")
-        self.endHalfDateRadio.grid(row=16, column=1, padx=5, sticky="E")
+        self.startHalfDateRadio.grid(row=16, column=2, sticky="W")
+        self.endHalfDateRadio.grid(row=16, column=2, sticky="E")
 
         self.startHalfDateRadio.grid_remove()
         self.endHalfDateRadio.grid_remove()
@@ -166,18 +174,18 @@ class BookToolPage(tk.Frame):
                                          bg=self.bgColor, fg=self.fgColor,activebackground=self.bgColor,
                                          activeforeground=self.fgColor, selectcolor=self.bgColor,
                                          command= lambda : self.showArrangeRider())
-        self.riderRadio.grid(row=7, column=2)
+        self.riderRadio.grid(row=7, column=4)
         self.riderRadio.grid_remove()
 
         self.pickUpLabel = tk.Label(self, text="Pick up location ", bg=self.bgColor, fg=self.fgColor)
-        self.pickUpLabel.grid(row=8, column=2)
+        self.pickUpLabel.grid(row=8, column=4)
         self.pickUpEntry = tk.Entry(self, width=20)
-        self.pickUpEntry.grid(row=8, column=3, padx=5)
+        self.pickUpEntry.grid(row=8, column=5, padx=5)
 
         self.dropOffLabel = tk.Label(self, text="Drop off location ", bg=self.bgColor, fg=self.fgColor)
-        self.dropOffLabel.grid(row=9, column=2)
+        self.dropOffLabel.grid(row=9, column=4)
         self.dropOffEntry = tk.Entry(self, width=20)
-        self.dropOffEntry.grid(row=9, column=3, padx=5)
+        self.dropOffEntry.grid(row=9, column=5, padx=5)
 
         self.pickUpLabel.grid_remove()
         self.pickUpEntry.grid_remove()
@@ -190,19 +198,6 @@ class BookToolPage(tk.Frame):
         backButton = tk.Button(self, text="back", command=lambda: self.master.change_frame(sp.SearchToolPage, self.login))
         backButton.grid(row=0, column=0)
 
-    def setPlaceholder(self):
-        #######################################################
-        # PlaceHolder
-        #######################################################
-        testBook = Bookings(self.tool.getID(), self.login, "Best tool ever", "24/12/2018", "f",
-                            "26/12/2018", "h")
-        testBook2 = Bookings(self.tool.getID(), self.login, "best tool ever", "30/12/2018", "f",
-                             "1/1/2019", "h")
-        self.testList = []
-        self.testList.append(testBook)
-        self.testList.append(testBook2)
-        #######################################################
-
     def showReturnDateList(self):
         """
         Makes Return Date list visible
@@ -211,6 +206,7 @@ class BookToolPage(tk.Frame):
 
         self.availableEndDate.grid()
         self.endDateLabel.grid()
+        self.scrollNextAvailableDate.grid()
 
         if len(self.nextDays)>1:
             self.startHalfDateRadio.grid()

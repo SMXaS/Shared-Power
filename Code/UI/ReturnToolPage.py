@@ -1,4 +1,5 @@
 import tkinter as tk
+from tkinter import ttk
 import Resources.Values.values as values
 from Code.UI import MainMenu as mm
 import Code.Utilities.ReadFile as rf
@@ -23,10 +24,17 @@ class ReturnToolPage(tk.Frame):
         master.geometry("700x500+%d+%d" % ((self.winfo_screenwidth() / 2) - 350, (self.winfo_screenheight() / 2) - 250))
         master.title('Return Tool')
 
+        self.getData()
         self.initUI()
+        self.populateData()
         self.ThereWillBeYourLogic()
 
     def getData(self):
+        """
+        Gets data from DB
+        :return: None
+        """
+
         for i in range(len(self.bookingList)):
             self.toolIDList.append(self.bookingList[i].getToolID())
 
@@ -41,6 +49,21 @@ class ReturnToolPage(tk.Frame):
         backButton = tk.Button(self, text="back", command= lambda: self.master.change_frame(mm.MainMenu, self.login))
         backButton.grid(row=0, column=0)
         ####################################################################################################
+
+        self.tree = ttk.Treeview(self, columns=("Full day price", "Half day price"))
+
+        self.yscrollbar = ttk.Scrollbar(self, orient='vertical', command=self.tree.yview)
+        self.tree.configure(yscrollcommand=self.yscrollbar.set)
+
+        self.tree.heading('#0', text='Tool')
+        self.tree.heading('#1', text='Hired date')
+        self.tree.heading('#2', text='Return date')
+        self.tree.column('#1', stretch=tk.YES)
+        self.tree.column('#2', stretch=tk.YES)
+        self.tree.column('#0', stretch=tk.YES)
+        self.tree.grid(row=1, column=1, columnspan=2, pady=20, sticky="N")
+
+        self.yscrollbar.grid(row=1, column=4, pady=20, sticky='WNS')
 
         """
         Store all your widgets here
@@ -60,6 +83,23 @@ class ReturnToolPage(tk.Frame):
             self.myLabel.bind("<Button-1>", lambda event: '/your function/' )
         
         """
+
+    def populateData(self):
+        """
+        Populates all data in the list
+        :return: None
+        """
+
+        for i in self.tree.get_children():
+            self.tree.delete(i)
+        if self.bookingList:
+            for i in range(len(self.bookingList)):
+                toolDict = rf.get_tool("ID", self.toolIDList[i])
+                tool = util.convertFromListToObj(toolDict)
+                self.tree.insert('', 'end', text=tool.getTitle(),
+                                 values=(self.bookingList[i].getStartDate(),
+                                         self.bookingList[i].getExpectedReturnDate()),
+                                 tags=self.bookingList[i].getToolID())
 
     # Rename this function according to what you want to do
     def ThereWillBeYourLogic(self):
