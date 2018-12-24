@@ -65,19 +65,25 @@ class BookToolPage(tk.Frame):
         descriptionTxt = tk.Label(self, text=self.tool.getDescription(), bg=self.bgColor, fg=self.fgColor)
         descriptionTxt.grid(row=3, column=1, columnspan=3, padx=5, sticky="W")
 
+        conditionLabel = tk.Label(self, text="Condition: ", bg=self.bgColor, fg=self.fgColor)
+        conditionLabel.grid(row=4, column=0, padx=5, pady=2, sticky="E")
+
+        conditionTxt = tk.Label(self, text=self.tool.getCondition(), bg=self.bgColor, fg=self.fgColor)
+        conditionTxt.grid(row=4, column=1, columnspan=3, padx=5, sticky="W")
+
         priceFullDayLabel = tk.Label(self, text="priceFullDay: ", bg=self.bgColor, fg=self.fgColor)
-        priceFullDayLabel.grid(row=4, column=0, padx=5, pady=2, sticky="E")
+        priceFullDayLabel.grid(row=5, column=0, padx=5, pady=2, sticky="E")
 
         priceFullDayTxt = tk.Label(self, text=self.tool.getPriceFullDay() + " $", bg=self.bgColor,
                                    fg=self.fgColor)
-        priceFullDayTxt.grid(row=4, column=1, columnspan=3, padx=5, pady=2, sticky="W")
+        priceFullDayTxt.grid(row=5, column=1, columnspan=3, padx=5, pady=2, sticky="W")
 
         priceHalfDayLabel = tk.Label(self, text="priceHalfDay: ", bg=self.bgColor, fg=self.fgColor)
-        priceHalfDayLabel.grid(row=5, column=0, padx=5, pady=2, sticky="E")
+        priceHalfDayLabel.grid(row=6, column=0, padx=5, pady=2, sticky="E")
 
         priceHalfDayTxt = tk.Label(self, text=self.tool.getPriceHalfDay()+" $", bg=self.bgColor,
                                    fg=self.fgColor)
-        priceHalfDayTxt.grid(row=5, column=1, columnspan=3, padx=5, pady=2, sticky="W")
+        priceHalfDayTxt.grid(row=6, column=1, columnspan=3, padx=5, pady=2, sticky="W")
         ###########################################################################
 
         ###########################################################################
@@ -85,46 +91,46 @@ class BookToolPage(tk.Frame):
         ###########################################################################
 
         DateLabel = tk.Label(self, text="Hire date", bg=self.bgColor, fg=self.fgColor)
-        DateLabel.grid(row=6, column=0, padx=5, pady=2, sticky="WNE")
+        DateLabel.grid(row=7, column=0, padx=5, pady=2, sticky="WNE")
 
         self.endDateLabel = tk.Label(self, text="End date", bg=self.bgColor, fg=self.fgColor)
 
         self.availableDate = tk.Listbox(self, exportselection=0)
         self.availableDate.bind("<<ListboxSelect>>", lambda event: self.getEndDays())
-        self.availableDate.grid(row=7, column=0, rowspan=3, padx=5, sticky="WNE")
+        self.availableDate.grid(row=8, column=0, rowspan=3, padx=5, sticky="WNE")
 
-        self.startDateVar = tk.IntVar()
+        self.startDateVar = tk.StringVar()
         startFullDateRadio = tk.Radiobutton(self, text="Full day", variable=self.startDateVar,
-                                            indicatoron=False, value=1, width=8, borderwidth=0,
+                                            indicatoron=False, value="f", width=8, borderwidth=0,
                                             bg="grey")
         endFullDateRadio = tk.Radiobutton(self, text="Half day", variable=self.startDateVar,
-                                          indicatoron=False, value=0, width=8, borderwidth=0,
+                                          indicatoron=False, value="h", width=8, borderwidth=0,
                                           bg="grey")
 
-        self.startDateVar.set(1)
+        self.startDateVar.set("f")
 
-        startFullDateRadio.grid(row=10, column=0, padx=5, sticky="W")
-        endFullDateRadio.grid(row=10, column=0, padx=5, sticky="E")
+        startFullDateRadio.grid(row=11, column=0, padx=5, sticky="W")
+        endFullDateRadio.grid(row=11, column=0, padx=5, sticky="E")
 
         self.availableEndDate = tk.Listbox(self, exportselection=0)
         self.availableEndDate.bind("<<ListboxSelect>>", lambda event: self.getNextDaysTest())
 
-        self.endDateLabel.grid(row=6, column=1, padx=5, pady=2, sticky="WNE")
-        self.availableEndDate.grid(row=7, column=1, rowspan=3, padx=5, sticky="WNE")
+        self.endDateLabel.grid(row=7, column=1, padx=5, pady=2, sticky="WNE")
+        self.availableEndDate.grid(row=8, column=1, rowspan=3, padx=5, sticky="WNE")
 
         self.endDateLabel.grid_remove()
         self.availableEndDate.grid_remove()
-        self.endDateVar = tk.IntVar()
-        self.endDateVar.set(1)
+        self.endDateVar = tk.StringVar()
+        self.endDateVar.set("f")
         self.startHalfDateRadio = tk.Radiobutton(self, text="Full day", variable=self.endDateVar,
-                                                 indicatoron=False, value=1, width=8, borderwidth=0,
+                                                 indicatoron=False, value="f", width=8, borderwidth=0,
                                                  bg="grey")
         self.endHalfDateRadio = tk.Radiobutton(self, text="Half day", variable=self.endDateVar,
-                                               indicatoron=False, value=0, width=8, borderwidth=0,
+                                               indicatoron=False, value="h", width=8, borderwidth=0,
                                                bg="grey")
 
-        self.startHalfDateRadio.grid(row=10, column=1, padx=5, sticky="W")
-        self.endHalfDateRadio.grid(row=10, column=1, padx=5, sticky="E")
+        self.startHalfDateRadio.grid(row=11, column=1, padx=5, sticky="W")
+        self.endHalfDateRadio.grid(row=11, column=1, padx=5, sticky="E")
 
         self.startHalfDateRadio.grid_remove()
         self.endHalfDateRadio.grid_remove()
@@ -133,13 +139,10 @@ class BookToolPage(tk.Frame):
         hireButton = tk.Label(self, image=hireIMG, bg=self.bgColor)
         hireButton.image = hireIMG
         hireButton.bind("<Button-1>", lambda event: self.hireTool())
-        self.grid_rowconfigure(11, weight=1)
-        hireButton.bind("<Button-1>", lambda event: self.hireTool())
-        hireButton.grid(row=11, column=0, columnspan=2, pady=40, sticky="WE")
+        self.grid_rowconfigure(12, weight=1)
+        hireButton.grid(row=12, column=0, columnspan=2, pady=40, sticky="WE")
 
         # TODO
-        # If file name == "ID" not exist make one
-        # If exist compere date //in util?
         # Keys: HireBy,startDate,endDate,confirmedEndDate anything else? Owner(or find by tool ID)
 
         backButton = tk.Button(self, text="back", command=lambda: self.master.change_frame(sp.SearchToolPage, self.login))
@@ -149,8 +152,10 @@ class BookToolPage(tk.Frame):
         #######################################################
         # PlaceHolder
         #######################################################
-        testBook = Bookings(self.tool.getID(), self.login, "24/12/2018", "f", "26/12/2018", "h")
-        testBook2 = Bookings(self.tool.getID(), self.login, "30/12/2018", "f", "1/1/2019", "h")
+        testBook = Bookings(self.tool.getID(), self.login, "Best tool ever", "24/12/2018", "f",
+                            "26/12/2018", "h")
+        testBook2 = Bookings(self.tool.getID(), self.login, "best tool ever", "30/12/2018", "f",
+                             "1/1/2019", "h")
         self.testList = []
         self.testList.append(testBook)
         self.testList.append(testBook2)
@@ -180,17 +185,8 @@ class BookToolPage(tk.Frame):
             self.availableEndDate.insert(END, self.nextDays[i])
 
     def hireTool(self):
-        if self.startDateVar.get()==1:
-            startTerm = "f"
-        else:
-            startTerm = "h"
 
-        if self.endDateVar.get()==1:
-            expectedTerm = "f"
-        else:
-            expectedTerm = "h"
-
-        print("sT: {}; eT: {}".format(startTerm, expectedTerm))
-        hiredTool = Bookings(self.tool.getID(), self.login, self.start_date, startTerm, self.end_date,
-                             expectedTerm)
+        print("sT: {}; eT: {}".format(self.startDateVar.get(), self.endDateVar.get()))
+        hiredTool = Bookings(self.tool.getID(), self.login, self.tool.getCondition(), self.start_date, self.startDateVar.get(),
+                             self.end_date, self.endDateVar.get())
         wf.add_booking(hiredTool)

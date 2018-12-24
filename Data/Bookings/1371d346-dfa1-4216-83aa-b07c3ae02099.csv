@@ -1,5 +1,0 @@
-toolID,userName,startDate,startTerm,expectedReturnDate,expectedTerm,returnDate
-1371d346-dfa1-4216-83aa-b07c3ae02099,test,23/12/2018,h,23/12/2018,h,
-1371d346-dfa1-4216-83aa-b07c3ae02099,test,27/12/2018,h,29/12/2018,h,
-1371d346-dfa1-4216-83aa-b07c3ae02099,test,03/01/2019,h,03/01/2019,h,
-1371d346-dfa1-4216-83aa-b07c3ae02099,mr_Smith,30/01/2019,h,31/01/2019,f,

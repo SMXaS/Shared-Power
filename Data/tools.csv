@@ -1,11 +1,3 @@
-ID,owner,title,description,priceFullDay,priceHalfDay,imgPath,availability
-27a335d0-5d1c-42ab-b750-a8266fbeece5,test,Shoe,"Nice, brown, long varanty, leather
-",9.99,6.99,Data/Images/27a335d0-5d1c-42ab-b750-a8266fbeece5,yes
-03d94ef0-02f4-4b30-a044-23fba54860f9,test,amazon locker,"big, yellow.. What else do you need?
-",299,199,Data/Images/03d94ef0-02f4-4b30-a044-23fba54860f9,yes
-f68757ff-3d0e-4085-b231-70afec3c25a6,test,Smoking pot,"im high..
-",3,2,Data/Images/f68757ff-3d0e-4085-b231-70afec3c25a6,yes
-8a3b6765-9094-4ea8-a5c3-c603d77f3243,test,Smoking Pot,"wwwwwasdasda
-",22,12,Data/Images/8a3b6765-9094-4ea8-a5c3-c603d77f3243,yes
-1371d346-dfa1-4216-83aa-b07c3ae02099,test,Locker,"amazon4ever	
-",47,8,Data/Images/1371d346-dfa1-4216-83aa-b07c3ae02099,yes
+ID,owner,title,description,condition,priceFullDay,priceHalfDay,imgPath,availability
+c70aa2fe-7f69-48e2-b181-cb149c13c88c,test,Shoe,"smells like Nirvana
+","Some scratches on sides, but its good ",29.9,19.9,Data/Images/c70aa2fe-7f69-48e2-b181-cb149c13c88c,yes

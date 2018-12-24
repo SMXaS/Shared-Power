@@ -1,10 +1,11 @@
 class Tool:
 
-    def __init__(self, ID, owner, title, description, priceFullDay, priceHalfDay, imgPath, availability):
+    def __init__(self, ID, owner, title, description, condition, priceFullDay, priceHalfDay, imgPath, availability):
         self.ID = ID
         self.owner = owner
         self.title = title
         self.description = description
+        self.condition = condition
         self.priceFullDay = priceFullDay
         self.priceHalfDay = priceHalfDay
         self.imgPath = imgPath
@@ -22,6 +23,9 @@ class Tool:
     def getDescription(self):
         return self.description
 
+    def getCondition(self):
+        return self.condition
+
     def getPriceFullDay(self):
         return self.priceFullDay
 
@@ -36,3 +40,6 @@ class Tool:
     
     def setAvailability(self, availability):
         self.availability = availability
+
+    def setCondition(self, condition):
+        self.condition = condition

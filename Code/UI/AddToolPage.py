@@ -17,8 +17,7 @@ class AddToolPage(tk.Frame):
         tk.Frame.__init__(self, master)
         self.login = arg
         self.filename = ""
-        master.minsize('380','260')
-        master.geometry("380x260+%d+%d" % ((self.winfo_screenwidth()/2)-150, (self.winfo_screenheight()/2)-200))
+        master.geometry("380x300+%d+%d" % ((self.winfo_screenwidth()/2)-150, (self.winfo_screenheight()/2)-200))
         master.title('Add new Tool')
 
         self.initUI()
@@ -41,8 +40,11 @@ class AddToolPage(tk.Frame):
         PriceHalfDayLabel = tk.Label(self, text="*Price per Half Day",  bg=self.bgColor, fg=self.fgColor)
         PriceHalfDayLabel.grid(row=4, column=0, sticky="E")
 
+        toolConditionLabel = tk.Label(self, text="*Tool condition", bg=self.bgColor, fg=self.fgColor)
+        toolConditionLabel.grid(row=5, column=0, sticky="E")
+
         self.imgPath = tk.Label(self, text="...", bg=self.bgColor, fg=self.fgColor)
-        self.imgPath.grid(row=5, column=1, padx=5, pady=2, sticky="W")
+        self.imgPath.grid(row=6, column=1, padx=5, pady=2, sticky="W")
 
         self.titleEntry = tk.Entry(self, width=40)
         self.titleEntry.grid(row=1, column=1, padx=5)
@@ -56,21 +58,24 @@ class AddToolPage(tk.Frame):
         self.priceHalfDay = tk.Entry(self, width=40)
         self.priceHalfDay.grid(row=4, column=1)
 
+        self.toolConditionEntry = tk.Entry(self, width=40)
+        self.toolConditionEntry.grid(row=5, column=1)
+
         img_btn = tk.Label(self, text="Image", bg=self.bgColor, fg=self.fgColor,
                            font='Helvetica 10 underline bold')
-        img_btn.grid(row=5, column=0, sticky="E")
+        img_btn.grid(row=6, column=0, sticky="E")
         img_btn.bind("<Button-1>", lambda event: self.setImagePath())
 
         addIMG = tk.PhotoImage(file="Resources/Drawable/btn_add.png")
         addToolButton = tk.Label(self, image=addIMG, bg=self.bgColor)
         addToolButton.image=addIMG
-        addToolButton.grid(row=6, column=1)
+        addToolButton.grid(row=7, column=1)
         addToolButton.bind("<Button-1>", lambda event: self.checkTool())
 
         backIMG = tk.PhotoImage(file="Resources/Drawable/btn_back.png")
         backButton = tk.Label(self, image=backIMG, bg=self.bgColor)
         backButton.image = backIMG
-        backButton.grid(row=6, column=0, pady=20)
+        backButton.grid(row=7, column=0, pady=20)
         backButton.bind("<Button-1>", lambda event: self.master.change_frame(mm.MainMenu, self.login))
 
     def setImagePath(self):
@@ -81,6 +86,7 @@ class AddToolPage(tk.Frame):
         tool = []
         tool.append(self.titleEntry.get())
         tool.append(self.descriptionEntry.get("1.0", END))
+        tool.append(self.toolConditionEntry.get())
         tool.append(self.priceFullDayEntry.get())
         tool.append(self.priceHalfDay.get())
         tool.append(self.filename)

@@ -9,11 +9,16 @@ def add_user(user):
     """
     fn_user = ['login','first_name','last_name','user_password','email','user_adress','user_phone_number']
 
-    with open("Data/users.csv", "a") as f:
+    filePath = "Data/users.csv"
+    exist = os.path.isfile(filePath)
+
+    with open(filePath, "a") as f:
 
         csv_writer = csv.DictWriter(f, fieldnames=fn_user, delimiter=',',lineterminator='\n')
 
-        #csv_writer.writeheader()                                                           #<<ONLY ONCE when making new file
+        if not exist:
+            csv_writer.writeheader()
+
         csv_writer.writerow(user.__dict__)
 
 def add_tool(tool):
@@ -22,13 +27,18 @@ def add_tool(tool):
     tool = name of object you want to add
 
     """
-    fn_tool = ['ID','owner','title','description','priceFullDay','priceHalfDay','imgPath','availability']
+    fn_tool = ['ID','owner','title','description','condition','priceFullDay','priceHalfDay','imgPath','availability']
 
-    with open("Data/tools.csv", "a") as f:
+    filePath = "Data/tools.csv"
+    exist = os.path.isfile(filePath)
+
+    with open(filePath, "a") as f:
 
         csv_writer = csv.DictWriter(f, fieldnames=fn_tool, delimiter=',',lineterminator='\n')
 
-        #csv_writer.writeheader()                                                           #<<ONLY ONCE when making new file
+        if not exist:
+            csv_writer.writeheader()
+
         csv_writer.writerow(tool.__dict__)
 
 def change_tool(my_dict):
@@ -45,7 +55,8 @@ def change_user(my_dict):
 
 def add_booking(book):
 
-    fn_book = ['toolID','userName','startDate', 'startTerm','expectedReturnDate','expectedTerm','returnDate']
+    fn_book = ['toolID','userName','bookInCondition','startDate', 'startTerm','expectedReturnDate',
+               'expectedTerm','returnDate','bookOutCondition']
 
     filePath = "Data/Bookings/"+book.getToolID()+".csv"
     exist = os.path.isfile(filePath)

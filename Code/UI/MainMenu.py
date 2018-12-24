@@ -55,7 +55,7 @@ class MainMenu(tk.Frame):
         ###########################
         table_your_tools=tk.Frame(left,bg="pink")
         table_your_tools.grid(row=1,column=0)
-
+        """
         tlabel=tk.Label(table_your_tools,text="Your Tools to rent").grid(row=0,column=0,columnspan=5)
         with open("Data/tools.csv", 'r') as f:
             l = list(csv.reader(f))
@@ -85,7 +85,7 @@ class MainMenu(tk.Frame):
                     tk.Label(table_your_tools ,text =my_dict[x][items[y]], borderwidth=2, relief="ridge",width=6,padx=5,pady=5).grid(row=4+y,column=list(my_dict.keys()).index(x))
                     tk.Button(table_your_tools, text="more").grid(row=4+y,column=8)
                     y=y+1
-
+        """
         ###########################
         # LEFT frame 3rd row 'Add tool' button
         ###########################
@@ -100,7 +100,7 @@ class MainMenu(tk.Frame):
 
         right.isgridded=True #Dynamically add "isgridded" attribute.
         tlabel=tk.Label(right,text="Your booked Tools will be here... maybe").grid(row=0,column=0,columnspan=5)
-
+        """
         with open("Data/tools.csv", 'r') as f:
             l = list(csv.reader(f))
             my_dict = {i[0]:[x for x in i[1:]] for i in zip(*l)}
@@ -129,7 +129,7 @@ class MainMenu(tk.Frame):
                     tk.Label(right ,text =my_dict[x][items[y]], borderwidth=2, relief="ridge",width=6,padx=5,pady=5).grid(row=4+y,column=list(my_dict.keys()).index(x))
                     tk.Button(right, text="more/manage").grid(row=4+y,column=8)
                     y=y+1
-
+        """
         ###########################
         # RIGHT2 frame start here
         ###########################

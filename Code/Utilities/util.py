@@ -127,26 +127,27 @@ def verifyTool(tool):
 
     tool[0] = title
     tool[1] = description
-    tool[2] = price full day
-    tool[3] = price half day
-    tool[4] = img path
+    tool[2] = tool condition
+    tool[3] = price full day
+    tool[4] = price half day
+    tool[5] = img path
     """
 
     for i in range(len(tool)):
         if not tool[i]:
             return "Empty fields"
-        if i == 2 or i == 3:
+        if i == 3 or i == 4:
             if " " in tool[i]:
                 return "Incorrect Price format"
     try:
-        val = float(tool[2])
         val = float(tool[3])
+        val = float(tool[4])
     except ValueError:
         return "Incorrect Price format"
 
-    if not verifyIMG(tool[4]):
+    if not verifyIMG(tool[5]):
         return "Incorrect image format"
-    if isinstance(verifyIMG(tool[4]), str):
+    if isinstance(verifyIMG(tool[5]), str):
         return "Only .png format supported"
 
     return True
@@ -180,7 +181,8 @@ def convertToObj(index):
     with open("Data/tools.csv", 'r') as f:
         l = list(csv.reader(f))
         dict = {i[0]: [x for x in i[1:]] for i in zip(*l)}
-        tool = Tool(dict["ID"][index], dict["owner"][index], dict["title"][index],dict["description"][index],
+        tool = Tool(dict["ID"][index], dict["owner"][index], dict["title"][index],
+                    dict["description"][index], dict["condition"][index],
                     dict["priceFullDay"][index], dict["priceHalfDay"][index],
                     dict["imgPath"][index], dict["availability"][index])
     return tool
