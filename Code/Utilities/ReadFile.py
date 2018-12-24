@@ -1,9 +1,16 @@
 import csv
+import glob
 from Code.Utilities import util
 
-# TODO add new paramater - filePath, so we will merge more functions into one
 
 def getTool(returnObj, column, value):
+    """
+    :param returnObj: boolean value. True - want to return object. False - want to return list
+    :param column: str(witch column)
+    :param value: str(value)
+    :return: object or list
+    """
+
     with open("Data/tools.csv", 'r') as f:
         l = list(csv.reader(f))
         my_dict = {i[0]: [x for x in i[1:]] for i in zip(*l)}
@@ -57,6 +64,20 @@ def get_alltools():
         l = list(csv.reader(f))
         my_dict = {i[0]:[x for x in i[1:]] for i in zip(*l)}
         return my_dict
+
+def getAllBookings(column, arg):
+    pathList = glob.glob("Data\Bookings\*.csv")
+
+    itemList = []
+    for i in range(len(pathList)):
+        with open(pathList[i], 'r') as f:
+            l = list(csv.reader(f))
+            my_dict = {i[0]: [x for x in i[1:]] for i in zip(*l)}
+            item = [i for i, x in enumerate(my_dict[column]) if arg == x]
+            for k in range(len(item)):
+                itemList.append(util.convertBookingToObject(item[k], pathList[i]))
+
+    return itemList
 
 def search_tools(key,value):
     """

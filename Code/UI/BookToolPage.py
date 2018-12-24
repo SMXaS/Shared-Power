@@ -5,6 +5,7 @@ import Resources.Values.values as values
 import Code.Utilities.util as util
 from Entities.Bookings import Bookings
 import Code.Utilities.WriteFile as wf
+import Code.Utilities.ReadFile as rf
 
 
 class BookToolPage(tk.Frame):
@@ -223,8 +224,8 @@ class BookToolPage(tk.Frame):
         Fills Start booking list with available dates
         :return: None
         """
-
-        self.availableDateList = util.getBookingDates(self.testList)
+        bookingList = rf.getAllBookings("toolID", self.tool.getID())
+        self.availableDateList = util.getBookingDates(bookingList)
         for i in range(len(self.availableDateList)):
             self.availableDate.insert(END, self.availableDateList[i])
 

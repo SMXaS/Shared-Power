@@ -1,20 +1,23 @@
 import tkinter as tk
 import Resources.Values.values as values
 from Code.UI import MainMenu as mm
+import Code.Utilities.ReadFile as rf
+import Code.Utilities.util as util
 
 
 class ReturnToolPage(tk.Frame):
-    placeHolder = []
     bgColor = values.bgColor
     fgColor = values.fgColor
+    toolIDList = []
+    toolObjList = []
 
-    def __init__(self, master, tool):
+    def __init__(self, master, arg):
         tk.Frame.__init__(self, master)
         ###################################
         # DO not change!
         ###################################
-        self.login = tool[0]
-        self.tool = tool[1]
+        self.login = arg
+        self.bookingList = rf.getAllBookings("userName", self.login)
         ###################################
         self.master = master
         master.geometry("700x500+%d+%d" % ((self.winfo_screenwidth() / 2) - 350, (self.winfo_screenheight() / 2) - 250))
@@ -22,6 +25,14 @@ class ReturnToolPage(tk.Frame):
 
         self.initUI()
         self.ThereWillBeYourLogic()
+
+    def getData(self):
+        for i in range(len(self.bookingList)):
+            self.toolIDList.append(self.bookingList[i].getToolID())
+
+        for i in range(len(self.toolIDList)):
+            tool = rf.get_tool("ID", self.toolIDList[i])
+            self.toolObjList.append(util.convertFromListToObj(tool))
 
     def initUI(self):
         ####################################################################################################
@@ -52,13 +63,32 @@ class ReturnToolPage(tk.Frame):
 
     # Rename this function according to what you want to do
     def ThereWillBeYourLogic(self):
-
         """
-        ###self.tool### = this is your main variable. It holds an object (booking)
+        ###self.bookingList### = this is your main variable. It holds an list of objects (booking)
 
-        get items:
-            self.tool.getToolID()
-            self.tool.getExpectedReturnDate()
-            ...
+        # get bookings:
+            for i in range(len(self.bookingList):
+                self.bookingList[i].getToolID()
+                self.bookingList[i].getExpectedReturnDate()
+                ...
             for more information check documentation on github
+
+        # get tool by ID:
+            toolDict = rf.get_tool("ID", self.toolIDList[i])  // "i" indicates index in the list from where
+                                                                     you will take tool ID
+
+            tool = util.convertFromListToObj(toolDict)
+
+
+        # Extract tool information:
+            title = tool.getTitle()
+            owner = tool.getOwner()
+            description = tool.getDescription()
+            ...
         """
+
+
+
+
+
+

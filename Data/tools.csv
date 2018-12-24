@@ -1,3 +1,5 @@
 ID,owner,title,description,condition,priceFullDay,priceHalfDay,imgPath,availability
 c70aa2fe-7f69-48e2-b181-cb149c13c88c,test,Shoe,"smells like Nirvana
 ","Some scratches on sides, but its good ",29.9,19.9,Data/Images/c70aa2fe-7f69-48e2-b181-cb149c13c88c,yes
+e5193b09-a578-4b2f-b653-f0cc3a4bbb31,mr_Smith,Locker,"amazon locker
+",brand new,299,199,Data/Images/e5193b09-a578-4b2f-b653-f0cc3a4bbb31,yes

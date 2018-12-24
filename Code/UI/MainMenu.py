@@ -156,7 +156,6 @@ class MainMenu(tk.Frame):
         ######################
         # Temporary
         ######################
-        tempList = [self.login, "Fake Tool"]
         tk.Button(self, text="Hire new tool", command=lambda : master.change_frame(st.SearchToolPage, self.login)).grid(row=2,column=2)
         tk.Button(self, text="My Tools", command=lambda : master.change_frame(mt.MyToolPage, self.login)).grid(row=2, column=3)
-        tk.Button(self, text="Return Tool", command=lambda: master.change_frame(rt.ReturnToolPage, tempList)).grid(row=2, column=4)
+        tk.Button(self, text="Return Tool", command=lambda: master.change_frame(rt.ReturnToolPage, self.login)).grid(row=2, column=4)

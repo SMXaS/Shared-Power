@@ -8,6 +8,7 @@ from datetime import datetime, timedelta, date
 from Code.Utilities import WriteFile as wf
 from Entities.User import User
 from Entities.Tool import Tool
+from Entities.Bookings import Bookings
 
 
 def verifyLogin (userName, userPassword):
@@ -213,6 +214,15 @@ def removeIMG(path):
     pass
 
 
+def convertFromListToObj(list):
+    """
+    Convert tool list to Tool object
+    :param list:
+    :return: obj(Tool)
+    """
+
+    return Tool(list[0], list[1], list[2], list[3], list[4], list[5], list[6], list[7], list[8])
+
 def convertToObj(index):
     """
     Converts dict(tool) to obj(tool)
@@ -230,6 +240,23 @@ def convertToObj(index):
                     dict["imgPath"][index], dict["availability"][index])
     return tool
 
+def convertBookingToObject(index, path):
+    """
+        Converts dict(tool) to obj(tool)
+
+        :param index (in db)
+        :return obj(tool)
+        """
+
+    with open(path, 'r') as f:
+        l = list(csv.reader(f))
+        myDict = {i[0]: [x for x in i[1:]] for i in zip(*l)}
+        booking = Bookings(myDict["toolID"][index], myDict["userName"][index], myDict["bookInCondition"][index],
+                           myDict["startDate"][index], myDict["startTerm"][index],
+                           myDict["expectedReturnDate"][index], myDict["expectedTerm"][index],
+                           myDict["returnDate"][index], myDict["bookOutCondition"][index],
+                           myDict["pickUpLocation"][index], myDict["dropOffLocation"][index])
+    return booking
 
 def getBookingDates(bookings):
     """
