@@ -224,10 +224,23 @@ class BookToolPage(tk.Frame):
         Fills Start booking list with available dates
         :return: None
         """
-        bookingList = rf.getAllBookings("toolID", self.tool.getID())
-        self.availableDateList = util.getBookingDates(bookingList)
+        bookingList = self.getBookingList()
+        self.availableDateList = self.getAvailableList(bookingList)
         for i in range(len(self.availableDateList)):
             self.availableDate.insert(END, self.availableDateList[i])
+
+    def getBookingList(self):
+        """
+        :return: list(obj(all bookings for particular item))
+        """
+        return rf.getAllBookings("toolID", self.tool.getID())
+
+    def getAvailableList(self, bookingList):
+        """
+        :param bookingList: list(obj(bookings))
+        :return: list(available dates)
+        """
+        return util.getBookingDates(bookingList)
 
     def populateEndList(self):
         """
@@ -264,10 +277,25 @@ class BookToolPage(tk.Frame):
             self.pickUpEntry.config(bg="grey", state="disabled")
             self.dropOffEntry.config(bg="grey", state="disabled")
 
+    def verifyHiring(self):
+        """
+        Verifies booking
+        :return: boolean (True - approved, False - not)
+        """
+
+        booking = self.getBookingList()
+        availabeList = self.getAvailableList(booking)
+        dayDiff = util.getDayDifference(self.start_date, self.end_date)
+        if util.verifyBooking(self.start_date, availabeList, dayDiff):
+            return True
+        else:
+            return False
+
     def hireTool(self):
         """
-        Create booking object and pass it to WriteFile
-        Will return to SearchToolPage
+        Verify booking. If True:
+            Create booking object and pass it to WriteFile
+            Will return to SearchToolPage
         :return: None
         """
 
@@ -279,8 +307,12 @@ class BookToolPage(tk.Frame):
             hiredTool.setPickUpLocation(self.pickUpEntry.get())
             hiredTool.setDropOffLocation(self.dropOffEntry.get())
 
-            wf.add_booking(hiredTool)
-            self.master.change_frame(sp.SearchToolPage, self.login)
+            if self.verifyHiring():
+                wf.add_booking(hiredTool)
+                self.master.change_frame(sp.SearchToolPage, self.login)
+            else:
+                print("too late.. item is booked")
+
 
         else:
             print("Error")

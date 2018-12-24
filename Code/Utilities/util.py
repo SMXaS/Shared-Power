@@ -343,3 +343,28 @@ def getDayDifference(startDate, endDate):
     diff = date2-date1
     return diff.days
 
+
+def verifyBooking(startDate, availableDays, diff):
+    """
+    Verifies booking.
+
+    :param startDate: str
+    :param availableDays: list(all available days)
+    :param diff: int(difference between start and end days)
+    :return: boolean (True - approved, False - not)
+    """
+
+    date_format = "%d/%m/%Y"
+    date = datetime.strptime(startDate, date_format)
+    allDateList = []
+    for i in range(diff):
+        date += timedelta(days=1)
+        allDateList.append(date.strftime(date_format))
+
+    for i in range(len(allDateList)):
+        if allDateList[i] in availableDays:
+            continue
+        else:
+            return False
+
+    return True
