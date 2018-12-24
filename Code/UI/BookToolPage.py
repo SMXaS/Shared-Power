@@ -10,6 +10,8 @@ import Code.Utilities.WriteFile as wf
 class BookToolPage(tk.Frame):
     bgColor = values.bgColor
     fgColor = values.fgColor
+    start_date = ""
+    end_date=""
 
     def __init__(self, master, tool):
         self.login = tool[0]
@@ -38,11 +40,10 @@ class BookToolPage(tk.Frame):
     def getNextDaysTest(self):
         index = int(self.availableEndDate.curselection()[0])
         self.end_date = self.availableEndDate.get(index)
-
+        self.showArrangeRider()
 
     def initUI(self):
 
-        self.master.columnconfigure(0, weight=1)
 
         #############################################################################
         # Info widgets
@@ -97,7 +98,7 @@ class BookToolPage(tk.Frame):
 
         self.availableDate = tk.Listbox(self, exportselection=0)
         self.availableDate.bind("<<ListboxSelect>>", lambda event: self.getEndDays())
-        self.availableDate.grid(row=8, column=0, rowspan=3, padx=5, sticky="WNE")
+        self.availableDate.grid(row=8, column=0, rowspan=8, padx=5, sticky="WNE")
 
         self.startDateVar = tk.StringVar()
         startFullDateRadio = tk.Radiobutton(self, text="Full day", variable=self.startDateVar,
@@ -109,14 +110,14 @@ class BookToolPage(tk.Frame):
 
         self.startDateVar.set("f")
 
-        startFullDateRadio.grid(row=11, column=0, padx=5, sticky="W")
-        endFullDateRadio.grid(row=11, column=0, padx=5, sticky="E")
+        startFullDateRadio.grid(row=16, column=0, padx=5, sticky="W")
+        endFullDateRadio.grid(row=16, column=0, padx=5, sticky="E")
 
         self.availableEndDate = tk.Listbox(self, exportselection=0)
         self.availableEndDate.bind("<<ListboxSelect>>", lambda event: self.getNextDaysTest())
 
         self.endDateLabel.grid(row=7, column=1, padx=5, pady=2, sticky="WNE")
-        self.availableEndDate.grid(row=8, column=1, rowspan=3, padx=5, sticky="WNE")
+        self.availableEndDate.grid(row=8, column=1, rowspan=8, padx=5, sticky="WNE")
 
         self.endDateLabel.grid_remove()
         self.availableEndDate.grid_remove()
@@ -129,8 +130,8 @@ class BookToolPage(tk.Frame):
                                                indicatoron=False, value="h", width=8, borderwidth=0,
                                                bg="grey")
 
-        self.startHalfDateRadio.grid(row=11, column=1, padx=5, sticky="W")
-        self.endHalfDateRadio.grid(row=11, column=1, padx=5, sticky="E")
+        self.startHalfDateRadio.grid(row=16, column=1, padx=5, sticky="W")
+        self.endHalfDateRadio.grid(row=16, column=1, padx=5, sticky="E")
 
         self.startHalfDateRadio.grid_remove()
         self.endHalfDateRadio.grid_remove()
@@ -139,8 +140,32 @@ class BookToolPage(tk.Frame):
         hireButton = tk.Label(self, image=hireIMG, bg=self.bgColor)
         hireButton.image = hireIMG
         hireButton.bind("<Button-1>", lambda event: self.hireTool())
-        self.grid_rowconfigure(12, weight=1)
-        hireButton.grid(row=12, column=0, columnspan=2, pady=40, sticky="WE")
+        hireButton.grid(row=17, column=0, columnspan=2, pady=40, sticky="WE")
+
+        self.riderValue = tk.IntVar()
+        self.riderValue.set(0)
+
+        self.riderRadio = tk.Radiobutton(self, text="Arrange rider", variable=self.riderValue, value=1,
+                                         bg=self.bgColor, fg=self.fgColor,activebackground=self.bgColor,
+                                         activeforeground=self.fgColor, selectcolor=self.bgColor,
+                                         command= lambda : self.showArrangeRider())
+        self.riderRadio.grid(row=7, column=2)
+        self.riderRadio.grid_remove()
+
+        self.pickUpLabel = tk.Label(self, text="Pick up location ", bg=self.bgColor, fg=self.fgColor)
+        self.pickUpLabel.grid(row=8, column=2)
+        self.pickUpEntry = tk.Entry(self, width=20)
+        self.pickUpEntry.grid(row=8, column=3, padx=5)
+
+        self.dropOffLabel = tk.Label(self, text="Drop off location ", bg=self.bgColor, fg=self.fgColor)
+        self.dropOffLabel.grid(row=9, column=2)
+        self.dropOffEntry = tk.Entry(self, width=20)
+        self.dropOffEntry.grid(row=9, column=3, padx=5)
+
+        self.pickUpLabel.grid_remove()
+        self.pickUpEntry.grid_remove()
+        self.dropOffLabel.grid_remove()
+        self.dropOffEntry.grid_remove()
 
         # TODO
         # Keys: HireBy,startDate,endDate,confirmedEndDate anything else? Owner(or find by tool ID)
@@ -184,9 +209,38 @@ class BookToolPage(tk.Frame):
             print(self.nextDays[i])
             self.availableEndDate.insert(END, self.nextDays[i])
 
+    def showArrangeRider(self):
+        self.riderRadio.grid()
+        self.pickUpLabel.grid()
+        self.dropOffLabel.grid()
+        self.pickUpEntry.grid()
+        self.dropOffEntry.grid()
+
+        if self.riderValue.get()==1:
+            self.pickUpLabel.config(fg=self.fgColor)
+            self.dropOffLabel.config(fg=self.fgColor)
+            self.pickUpEntry.config(bg=self.fgColor, state="normal")
+            self.dropOffEntry.config(bg=self.fgColor, state="normal")
+
+        else:
+            self.pickUpLabel.config(fg="grey")
+            self.dropOffLabel.config(fg="grey")
+            self.pickUpEntry.config(bg="grey", state="disabled")
+            self.dropOffEntry.config(bg="grey", state="disabled")
+
+
     def hireTool(self):
 
-        print("sT: {}; eT: {}".format(self.startDateVar.get(), self.endDateVar.get()))
-        hiredTool = Bookings(self.tool.getID(), self.login, self.tool.getCondition(), self.start_date, self.startDateVar.get(),
-                             self.end_date, self.endDateVar.get())
-        wf.add_booking(hiredTool)
+        if self.start_date and self.end_date:
+            print("sT: {}; eT: {}".format(self.startDateVar.get(), self.endDateVar.get()))
+            hiredTool = Bookings(self.tool.getID(), self.login, self.tool.getCondition(), self.start_date,
+                                 self.startDateVar.get(), self.end_date, self.endDateVar.get())
+
+            hiredTool.setPickUpLocation(self.pickUpEntry.get())
+            hiredTool.setDropOffLocation(self.dropOffEntry.get())
+
+            wf.add_booking(hiredTool)
+            self.master.change_frame(sp.SearchToolPage, self.login)
+
+        else:
+            print("Error")

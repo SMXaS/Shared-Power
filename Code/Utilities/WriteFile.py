@@ -56,7 +56,7 @@ def change_user(my_dict):
 def add_booking(book):
 
     fn_book = ['toolID','userName','bookInCondition','startDate', 'startTerm','expectedReturnDate',
-               'expectedTerm','returnDate','bookOutCondition']
+               'expectedTerm','returnDate','bookOutCondition','pickUpLocation','dropOffLocation']
 
     filePath = "Data/Bookings/"+book.getToolID()+".csv"
     exist = os.path.isfile(filePath)
