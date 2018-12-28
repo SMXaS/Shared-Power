@@ -12,6 +12,8 @@ class AddToolPage(tk.Frame):
     bgColor = values.bgColor
     fgColor = values.fgColor
     errorColor = values.errorColor
+    width = values.mainWindowWidth
+    heigh = values.mainWindowHeigh
 
     def __init__(self, master, arg):
         """
@@ -22,8 +24,9 @@ class AddToolPage(tk.Frame):
         tk.Frame.__init__(self, master)
         self.login = arg
         self.filename = ""
-        master.geometry("380x300+%d+%d" % ((self.winfo_screenwidth()/2)-150, (self.winfo_screenheight()/2)-200))
-        master.title('Add new Tool')
+        master.geometry("{}x{}+%d+%d".format(self.width, self.heigh) % ((self.winfo_screenwidth()/2)-350,
+                                                                        (self.winfo_screenheight()/2)-250))
+        master.title(values.addToolTitle)
 
         self.initUI()
         master.bind("<Return>", lambda event: self.checkTool())
@@ -33,22 +36,22 @@ class AddToolPage(tk.Frame):
         self.errorLabel = tk.Label(self, bg=self.bgColor, fg=self.errorColor)
         self.errorLabel.grid(row=0, column=1, padx=5, pady=2, sticky="WN")
 
-        titleLabel = tk.Label(self, text="*Title", bg=self.bgColor, fg=self.fgColor)
+        titleLabel = tk.Label(self, text="{}{}".format(values.asterix, values.toolTitle), bg=self.bgColor, fg=self.fgColor)
         titleLabel.grid(row=1, column=0, padx=5, pady=2, sticky="E")
 
-        DescriptionLabel = tk.Label(self, text="*Description", bg=self.bgColor, fg=self.fgColor)
+        DescriptionLabel = tk.Label(self, text="{}{}".format(values.asterix, values.toolDescription), bg=self.bgColor, fg=self.fgColor)
         DescriptionLabel.grid(row=2, column=0, padx=5, pady=2, sticky="EN")
 
-        PriceDayLabel = tk.Label(self, text="*Price per Day", bg=self.bgColor, fg=self.fgColor)
+        PriceDayLabel = tk.Label(self, text="{}{}".format(values.asterix, values.priceDay), bg=self.bgColor, fg=self.fgColor)
         PriceDayLabel.grid(row=3, column=0, padx=5, pady=2, sticky="E")
 
-        PriceHalfDayLabel = tk.Label(self, text="*Price per Half Day",  bg=self.bgColor, fg=self.fgColor)
+        PriceHalfDayLabel = tk.Label(self, text="{}{}".format(values.asterix, values.priceHalfDay),  bg=self.bgColor, fg=self.fgColor)
         PriceHalfDayLabel.grid(row=4, column=0, sticky="E")
 
-        toolConditionLabel = tk.Label(self, text="*Tool condition", bg=self.bgColor, fg=self.fgColor)
+        toolConditionLabel = tk.Label(self, text="{}{}".format(values.asterix, values.toolCondition), bg=self.bgColor, fg=self.fgColor)
         toolConditionLabel.grid(row=5, column=0, sticky="E")
 
-        self.imgPath = tk.Label(self, text="...", bg=self.bgColor, fg=self.fgColor)
+        self.imgPath = tk.Label(self, text=values.emptyIMGPath, bg=self.bgColor, fg=self.fgColor)
         self.imgPath.grid(row=6, column=1, padx=5, pady=2, sticky="W")
 
         self.titleEntry = tk.Entry(self, width=40)
@@ -66,18 +69,18 @@ class AddToolPage(tk.Frame):
         self.toolConditionEntry = tk.Entry(self, width=40)
         self.toolConditionEntry.grid(row=5, column=1)
 
-        img_btn = tk.Label(self, text="Image", bg=self.bgColor, fg=self.fgColor,
-                           font='Helvetica 10 underline bold')
+        img_btn = tk.Label(self, text="{}{}".format(values.asterix, values.image), bg=self.bgColor, fg=self.fgColor,
+                           font=values.addImageFont)
         img_btn.grid(row=6, column=0, sticky="E")
         img_btn.bind("<Button-1>", lambda event: self.setImagePath())
 
-        addIMG = tk.PhotoImage(file="Resources/Drawable/btn_add.png")
+        addIMG = tk.PhotoImage(file=values.buttonAdd)
         addToolButton = tk.Label(self, image=addIMG, bg=self.bgColor)
         addToolButton.image=addIMG
         addToolButton.grid(row=7, column=1)
         addToolButton.bind("<Button-1>", lambda event: self.checkTool())
 
-        backIMG = tk.PhotoImage(file="Resources/Drawable/btn_back.png")
+        backIMG = tk.PhotoImage(file=values.buttonBack)
         backButton = tk.Label(self, image=backIMG, bg=self.bgColor)
         backButton.image = backIMG
         backButton.grid(row=7, column=0, pady=20)

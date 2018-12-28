@@ -9,6 +9,7 @@ from Code.Utilities import WriteFile as wf
 from Entities.User import User
 from Entities.Tool import Tool
 from Entities.Bookings import Bookings
+import Resources.Values.values as values
 
 
 def verifyLogin (userName, userPassword):
@@ -19,8 +20,6 @@ def verifyLogin (userName, userPassword):
     :param str(userPassword
     :return True or error code
     """
-
-
 
     with open("Data/users.csv", 'r') as f:
         l = list(csv.reader(f))
@@ -33,9 +32,9 @@ def verifyLogin (userName, userPassword):
                 if userPassword == my_dict['user_password'][ind]:
                     return True
                 else:
-                    return "Incorrect password"
+                    return values.incorrectPassword
         else:
-            return "User does not exist!"
+            return values.userDoesntExist
 
 
 def verifyRegistration (user):
@@ -56,34 +55,37 @@ def verifyRegistration (user):
     user[7] = email confirmation
     user[8] = password
     user[9] = password confirmation
+    user[10] = phone number
     """
 
     # Check if entries contain spaces or empty fields
     for i in range(len(user)):
         if not user[i]:
-            return "empty fields"
+            return values.emptyFields
         elif " " in user[i]:
             if i != 4:
-                return "Contain spaces"
+                return values.spaces
 
-    # check if user exist
     with open("Data/users.csv", 'r') as f:
         l = list(csv.reader(f))
         my_dict = {i[0]: [x for x in i[1:]] for i in zip(*l)}
         if user[2] in my_dict.get('login'):
-            return "User already exist"
+            return values.userAlreadyExist
 
     if user[6] != user[7]:
-        return "Email does not match"
+        return values.emailMismatch
 
     if not verifyEmail(user[6]):
-        return "Invalid email address"
+        return values.invalidEmail
 
     if user[8] != user[9]:
-        return "Password does not match"
+        return values.passwordMismatch
     else:
         if len(user[8]) < 4:
-            return "Password is too short"
+            return values.shortPassword
+
+    if not str(user[10]).isdigit():
+        return values.invalidEmail
 
     address = "{} - {}, {}".format(user[3], user[5], user[4])
     newUser = User(user[2], user[0], user[1], user[8], user[6], address, 999)
@@ -137,10 +139,10 @@ def verifyIMG(path):
     imgFormat = getImageFormat(path)
     print(imgFormat)
     if imgFormat is None:
-        return "Wrong image format"
+        return False
     else:
         if imgFormat != "png":
-            return "Only .png format supported"
+            return False
         else:
             return True
 
@@ -161,20 +163,20 @@ def verifyTool(tool):
 
     for i in range(len(tool)):
         if not tool[i]:
-            return "Empty fields"
+            return values.emptyFields
         if i == 3 or i == 4:
             if " " in tool[i]:
-                return "Incorrect Price format"
+                return values.incorrectPriceFormat
     try:
         val = float(tool[3])
         val = float(tool[4])
     except ValueError:
-        return "Incorrect Price format"
+        return values.incorrectPriceFormat
 
     if not verifyIMG(tool[5]):
-        return "Incorrect image format"
+        return values.wrongImageFormat
     if isinstance(verifyIMG(tool[5]), str):
-        return "Only .png format supported"
+        return values.unsupportedImageFormat
 
     return True
 
@@ -269,30 +271,30 @@ def getBookingDates(bookings):
 
     firstAvailableDate = datetime.now()
     allDateList = []
-    date_format = "%d/%m/%Y"
+    dateFormat = values.dateFormat
     for i in range(42):
         firstAvailableDate+= timedelta(days=1)
         # check if date is available
         # if not = pass
-        allDateList.append(firstAvailableDate.strftime(date_format))
+        allDateList.append(firstAvailableDate.strftime(dateFormat))
 
     if bookings:
         for i in range(len(bookings)):
             if bookings[i].getStartDate() in allDateList:
-                startDate = datetime.strptime(bookings[i].getStartDate(), date_format)
-                endDate = datetime.strptime(bookings[i].getExpectedReturnDate(), date_format)
+                startDate = datetime.strptime(bookings[i].getStartDate(), dateFormat)
+                endDate = datetime.strptime(bookings[i].getExpectedReturnDate(), dateFormat)
                 diff = endDate-startDate
                 for k in range(diff.days+1):
-                    nextDate = (startDate+timedelta(days=k)).strftime(date_format)
+                    nextDate = (startDate+timedelta(days=k)).strftime(dateFormat)
                     allDateList.remove(nextDate)
             else:
                 if bookings[i].getExpectedReturnDate() in allDateList:
-                    startDate = datetime.strptime(bookings[i].getStartDate(), date_format)
-                    endDate = datetime.strptime(bookings[i].getExpectedReturnDate(), date_format)
+                    startDate = datetime.strptime(bookings[i].getStartDate(), dateFormat)
+                    endDate = datetime.strptime(bookings[i].getExpectedReturnDate(), dateFormat)
                     diff = endDate - startDate
                     for k in range(diff.days + 1):
                         try:
-                            nextDate = (startDate + timedelta(days=k)).strftime(date_format)
+                            nextDate = (startDate + timedelta(days=k)).strftime(dateFormat)
                             allDateList.remove(nextDate)
                         except ValueError:
                             continue
@@ -309,14 +311,14 @@ def getNextAvailableDates(startDate, dayList):
     :return: list(str(available days))
     """
 
-    date_format = "%d/%m/%Y"
+    dateFormat = values.dateFormat
     allDateList = []
-    date = datetime.strptime(startDate, date_format)
+    date = datetime.strptime(startDate, dateFormat)
     firstNextDate = date
-    allDateList.append(firstNextDate.strftime(date_format))
+    allDateList.append(firstNextDate.strftime(dateFormat))
     for i in range(2):
         firstNextDate += timedelta(days=1)
-        allDateList.append(firstNextDate.strftime(date_format))
+        allDateList.append(firstNextDate.strftime(dateFormat))
 
     finalList = []
 
@@ -338,9 +340,9 @@ def getDayDifference(startDate, endDate):
     :return: int(difference)
     """
 
-    date_format = "%d/%m/%Y"
-    date1 = datetime.strptime(startDate, date_format)
-    date2 = datetime.strptime(endDate, date_format)
+    dateFormat = values.dateFormat
+    date1 = datetime.strptime(startDate, dateFormat)
+    date2 = datetime.strptime(endDate, dateFormat)
     diff = date2-date1
     return diff.days
 
@@ -355,12 +357,12 @@ def verifyBooking(startDate, availableDays, diff):
     :return: boolean (True - approved, False - not)
     """
 
-    date_format = "%d/%m/%Y"
-    date = datetime.strptime(startDate, date_format)
+    dateFormat = values.dateFormat
+    date = datetime.strptime(startDate, dateFormat)
     allDateList = []
     for i in range(diff):
         date += timedelta(days=1)
-        allDateList.append(date.strftime(date_format))
+        allDateList.append(date.strftime(dateFormat))
 
     for i in range(len(allDateList)):
         if allDateList[i] in availableDays:

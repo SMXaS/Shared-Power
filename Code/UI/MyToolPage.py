@@ -8,6 +8,8 @@ class MyToolPage(tk.Frame):
     placeHolder = []
     bgColor = values.bgColor
     fgColor = values.fgColor
+    width = values.mainWindowWidth
+    heigh = values.mainWindowHeigh
 
     def __init__(self, master, arg):
         """
@@ -19,8 +21,8 @@ class MyToolPage(tk.Frame):
         self.login = arg
         self.master = master
         self.owner = master.owner
-        master.geometry("700x500+%d+%d" % ((self.winfo_screenwidth() / 2) - 350, (self.winfo_screenheight() / 2) - 250))
-        master.title('My Tools')
+        master.geometry("{}x{}+%d+%d".format(self.width, self.heigh) % ((self.winfo_screenwidth() / 2) - 350, (self.winfo_screenheight() / 2) - 250))
+        master.title(values.myToolTitle)
         self.toolList = rf.getTool(True, "owner", self.login)
 
         self.initUI()
@@ -30,7 +32,7 @@ class MyToolPage(tk.Frame):
         ####################################################################################################
         # !!!Leave this button as an option to go back
         ####################################################################################################
-        backButton = tk.Button(self, text="back", command= lambda: self.master.change_frame(mm.MainMenu, self.login))
+        backButton = tk.Button(self, text=values.back, command= lambda: self.master.change_frame(mm.MainMenu, self.login))
         backButton.grid(row=0, column=0)
         ####################################################################################################
 

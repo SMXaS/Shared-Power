@@ -9,6 +9,8 @@ class SearchToolPage(tk.Frame):
     placeHolder = []
     bgColor = values.bgColor
     fgColor = values.fgColor
+    width = values.mainWindowWidth
+    heigh = values.mainWindowHeigh
 
     def __init__(self, master, arg):
         """
@@ -20,15 +22,15 @@ class SearchToolPage(tk.Frame):
         self.login = arg
 
         self.owner = master.owner
-        master.geometry("700x500+%d+%d" % ((self.winfo_screenwidth() / 2) - 350, (self.winfo_screenheight() / 2) - 250))
-        master.title('Search for Tool')
+        master.geometry("{}x{}+%d+%d".format(self.width, self.heigh) % ((self.winfo_screenwidth() / 2) - 350, (self.winfo_screenheight() / 2) - 250))
+        master.title(values.searchToolTitle)
 
         self.initUI()
         self.retrieveData()
 
     def initUI(self):
 
-        backIMG = tk.PhotoImage(file="Resources/Drawable/btn_back.png")
+        backIMG = tk.PhotoImage(file=values.buttonBack)
         backButton = tk.Label(self, image=backIMG, bg=self.bgColor)
         backButton.image = backIMG
         backButton.bind("<Button-1>", lambda event: self.master.change_frame(mm.MainMenu, self.login))
@@ -37,19 +39,19 @@ class SearchToolPage(tk.Frame):
         self.searchEntry = tk.Entry(self, width=80)
         self.searchEntry.grid(row=0, column=1, padx=25, pady=20, sticky="N")
 
-        searchButton = tk.Label(self, text="Search", bg=self.bgColor, fg=self.fgColor,
-                                font='Helvetica 10 bold')
+        searchButton = tk.Label(self, text=values.search, bg=self.bgColor, fg=self.fgColor,
+                                font=values.buttonFont)
         searchButton.grid(row=0, column=2)
         searchButton.bind("<Button-1>", lambda event: self.retrieveData())
 
-        self.tree = ttk.Treeview(self, columns=("Full day price", "Half day price"))
+        self.tree = ttk.Treeview(self, columns=(values.priceDay, values.priceHalfDay))
 
         self.yscrollbar = ttk.Scrollbar(self, orient='vertical', command=self.tree.yview)
         self.tree.configure(yscrollcommand=self.yscrollbar.set)
 
-        self.tree.heading('#0', text='Title')
-        self.tree.heading('#1', text='Full day price')
-        self.tree.heading('#2', text='Half day price')
+        self.tree.heading('#0', text=values.tool)
+        self.tree.heading('#1', text=values.priceDay)
+        self.tree.heading('#2', text=values.priceHalfDay)
         self.tree.column('#1', stretch=tk.YES)
         self.tree.column('#2', stretch=tk.YES)
         self.tree.column('#0', stretch=tk.YES)
@@ -57,7 +59,7 @@ class SearchToolPage(tk.Frame):
 
         self.yscrollbar.grid(row=1, column=4, pady=20, sticky='WNS')
 
-        hireIMG = tk.PhotoImage(file="Resources/Drawable/btn_hire.png")
+        hireIMG = tk.PhotoImage(file=values.buttonHire)
         hireButton = tk.Label(self, image=hireIMG, bg=self.bgColor)
         hireButton.image = hireIMG
         hireButton.bind("<Button-1>", lambda event: self.selectItem())

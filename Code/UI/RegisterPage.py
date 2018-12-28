@@ -1,7 +1,8 @@
 from Code.UI import StartPage as sp, MainMenu as mm
 import Resources.Values.values as values
-import tkinter as tk
 from Code.Utilities import util
+import tkinter as tk
+
 
 
 class RegisterPage(tk.Frame):
@@ -9,6 +10,8 @@ class RegisterPage(tk.Frame):
     bgColor = values.bgColor
     fgColor = values.fgColor
     errorColor = values.errorColor
+    width = values.registerWindowWidth
+    heigh = values.registerWindowHeigh
 
     def __init__(self, master, arg):
         """
@@ -18,8 +21,8 @@ class RegisterPage(tk.Frame):
 
         tk.Frame.__init__(self, master)
         master.minsize(width=280, height=280)
-        master.geometry("280x320+%d+%d" % ((self.winfo_screenwidth()/2)-100, (self.winfo_screenheight()/2)-150))
-        master.title('Register')
+        master.geometry("{}x{}+%d+%d".format(self.width, self.heigh) % ((self.winfo_screenwidth()/2)-100, (self.winfo_screenheight()/2)-150))
+        master.title(values.registerTitle)
 
         self.initUI()
 
@@ -27,35 +30,49 @@ class RegisterPage(tk.Frame):
         self.errorLabel = tk.Label(self, text="", bg=self.bgColor, fg=self.errorColor)
         self.errorLabel.grid(row=0, column=0, columnspan=2, padx=10)
 
-        firstNameLabel = tk.Label(self, text="*First Name", bg=self.bgColor, fg=self.fgColor)
+        firstNameLabel = tk.Label(self, text="{}{}".format(values.asterix, values.firstName),
+                                  bg=self.bgColor, fg=self.fgColor)
         firstNameLabel.grid(row=1, column=0, padx=5, pady=2, sticky="E")
 
-        lastNameLabel = tk.Label(self, text="*Last Name", bg=self.bgColor, fg=self.fgColor)
+        lastNameLabel = tk.Label(self, text="{}{}".format(values.asterix, values.lastName),
+                                 bg=self.bgColor, fg=self.fgColor)
         lastNameLabel.grid(row=2, column=0, padx=5, pady=2, sticky="E")
 
-        userNameLabel = tk.Label(self, text="*User Name", bg=self.bgColor, fg=self.fgColor)
+        userNameLabel = tk.Label(self, text="{}{}".format(values.asterix, values.userName),
+                                 bg=self.bgColor, fg=self.fgColor)
         userNameLabel.grid(row=3, column=0, padx=5, pady=2, sticky="E")
 
-        postCodeLabel = tk.Label(self, text="*Post Code", bg=self.bgColor, fg=self.fgColor)
+        postCodeLabel = tk.Label(self, text="{}{}".format(values.asterix, values.postCode),
+                                 bg=self.bgColor, fg=self.fgColor)
         postCodeLabel.grid(row=4, column=0, padx=5, pady=2, sticky="E")
 
-        streetNameLabel = tk.Label(self, text="*Street Name", bg=self.bgColor, fg=self.fgColor)
+        streetNameLabel = tk.Label(self, text="{}{}".format(values.asterix, values.streetName),
+                                   bg=self.bgColor, fg=self.fgColor)
         streetNameLabel.grid(row=5, column=0, padx=5, pady=2, sticky="E")
 
-        houseNumberLabel = tk.Label(self, text="*House Number", bg=self.bgColor, fg=self.fgColor)
+        houseNumberLabel = tk.Label(self, text="{}{}".format(values.asterix, values.houseNumber),
+                                    bg=self.bgColor, fg=self.fgColor)
         houseNumberLabel.grid(row=6, column=0, padx=5, pady=2, sticky="E")
 
-        emailLabel = tk.Label(self, text="*Email", bg=self.bgColor, fg=self.fgColor)
+        emailLabel = tk.Label(self, text="{}{}".format(values.asterix, values.email), bg=self.bgColor,
+                              fg=self.fgColor)
         emailLabel.grid(row=7, column=0, padx=5, pady=2, sticky="E")
 
-        emailConfirmLabel = tk.Label(self, text="*Email Confirmation", bg=self.bgColor, fg=self.fgColor)
+        emailConfirmLabel = tk.Label(self, text="{}{}".format(values.asterix, values.emailConfirmation),
+                                     bg=self.bgColor, fg=self.fgColor)
         emailConfirmLabel.grid(row=8, column=0, padx=5, pady=2, sticky="E")
 
-        passwordLabel = tk.Label(self, text="*Password", bg=self.bgColor, fg=self.fgColor)
+        passwordLabel = tk.Label(self, text="{}{}".format(values.asterix, values.password),
+                                 bg=self.bgColor, fg=self.fgColor)
         passwordLabel.grid(row=9, column=0, padx=5, pady=2, sticky="E")
 
-        passwordConfirmationLabel = tk.Label(self, text="*Password Confirmation", bg=self.bgColor, fg=self.fgColor)
+        passwordConfirmationLabel = tk.Label(self, text="{}{}".format(values.asterix, values.passwordConfirmation),
+                                             bg=self.bgColor, fg=self.fgColor)
         passwordConfirmationLabel.grid(row=10, column=0, padx=5, pady=2)
+
+        phoneNumberLabel = tk.Label(self, text="{}{}".format(values.asterix, values.phoneNumber),
+                                    bg=self.bgColor, fg=self.fgColor)
+        phoneNumberLabel.grid(row=11, column=0, padx=5, pady=2, sticky="E")
 
         self.firstNameEntry = tk.Entry(self)
         self.firstNameEntry.grid(row=1, column=1)
@@ -87,15 +104,18 @@ class RegisterPage(tk.Frame):
         self.passwordConfirmationEntry = tk.Entry(self, show="*")
         self.passwordConfirmationEntry.grid(row=10, column=1)
 
-        backIMG = tk.PhotoImage(file="Resources/Drawable/btn_back.png")
+        self.phoneNumberEntry = tk.Entry(self)
+        self.phoneNumberEntry.grid(row=11, column=1)
+
+        backIMG = tk.PhotoImage(file=values.buttonBack)
         backButton = tk.Label(self, image=backIMG, bg=self.bgColor)
         backButton.image = backIMG
-        backButton.grid(row=11, column=0, pady=10)
+        backButton.grid(row=12, column=0, pady=10)
         backButton.bind("<Button-1>", lambda event: self.master.change_frame(sp.StartPage))
 
-        createAccountButton = tk.Label(self, text="Create Account", bg=self.bgColor, fg=self.fgColor,
-                                       font='Helvetica 10 bold')
-        createAccountButton.grid(row=11, column=1, columnspan=2, sticky="E")
+        createAccountButton = tk.Label(self, text=values.createAccount, bg=self.bgColor, fg=self.fgColor,
+                                       font=values.buttonFont)
+        createAccountButton.grid(row=12, column=1, columnspan=2, sticky="E")
         createAccountButton.bind("<Button-1>", lambda event: self.checkRegistration())
 
     def checkRegistration(self):
@@ -116,6 +136,7 @@ class RegisterPage(tk.Frame):
         user.append(self.emailConfirmEntry.get())
         user.append(self.passwordEntry.get())
         user.append(self.passwordConfirmationEntry.get())
+        user.append(self.phoneNumberEntry.get())
 
         isCorrect = util.verifyRegistration(user)
         if isinstance(isCorrect, str):

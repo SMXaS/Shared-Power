@@ -9,6 +9,8 @@ import Code.Utilities.util as util
 class ReturnToolPage(tk.Frame):
     bgColor = values.bgColor
     fgColor = values.fgColor
+    width = values.mainWindowWidth
+    heigh = values.mainWindowHeigh
     toolIDList = []
     toolObjList = []
 
@@ -21,7 +23,7 @@ class ReturnToolPage(tk.Frame):
         self.bookingList = rf.getAllBookings("userName", self.login)
         ###################################
         self.master = master
-        master.geometry("700x500+%d+%d" % ((self.winfo_screenwidth() / 2) - 350, (self.winfo_screenheight() / 2) - 250))
+        master.geometry("{}x{}+%d+%d".format(self.width, self.heigh) % ((self.winfo_screenwidth() / 2) - 350, (self.winfo_screenheight() / 2) - 250))
         master.title('Return Tool')
 
         self.getData()
@@ -46,18 +48,18 @@ class ReturnToolPage(tk.Frame):
         ####################################################################################################
         # !!!Leave this button as an option to go back
         ####################################################################################################
-        backButton = tk.Button(self, text="back", command= lambda: self.master.change_frame(mm.MainMenu, self.login))
+        backButton = tk.Button(self, text=values.back, command= lambda: self.master.change_frame(mm.MainMenu, self.login))
         backButton.grid(row=0, column=0)
         ####################################################################################################
 
-        self.tree = ttk.Treeview(self, columns=("Full day price", "Half day price"))
+        self.tree = ttk.Treeview(self, columns=(values.priceDay, values.priceHalfDay))
 
         self.yscrollbar = ttk.Scrollbar(self, orient='vertical', command=self.tree.yview)
         self.tree.configure(yscrollcommand=self.yscrollbar.set)
 
-        self.tree.heading('#0', text='Tool')
-        self.tree.heading('#1', text='Hired date')
-        self.tree.heading('#2', text='Return date')
+        self.tree.heading('#0', text=values.tool)
+        self.tree.heading('#1', text=values.hireDate)
+        self.tree.heading('#2', text=values.returnDate)
         self.tree.column('#1', stretch=tk.YES)
         self.tree.column('#2', stretch=tk.YES)
         self.tree.column('#0', stretch=tk.YES)
