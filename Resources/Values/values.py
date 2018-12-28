@@ -22,6 +22,19 @@ buttonBack = "Resources/Drawable/btn_back.png"
 buttonHire = "Resources/Drawable/btn_hire.png"
 
 # --------------
+# Database
+# --------------
+fieldNames_user = ['login', 'first_name', 'last_name', 'user_password', 'email', 'user_adress', 'user_phone_number']
+fieldNames_tool = ['ID', 'owner', 'title', 'description', 'condition', 'priceFullDay', 'priceHalfDay', 'imgPath',
+                   'availability']
+fieldNames_booking = ['toolID', 'userName', 'bookInCondition', 'startDate', 'startTerm', 'expectedReturnDate',
+                      'expectedTerm', 'returnDate', 'bookOutCondition', 'pickUpLocation', 'dropOffLocation']
+filePath_user = "Data/users.csv"
+filePath_tool = "Data/tools.csv"
+filePath_booking = "Data/Bookings/"
+filePath_invoiceFolder = "Data/Invoices/{}"
+filePath_images = "Data/Images/"
+# --------------
 # Register Page
 # --------------
 registerTitle = "Register"
@@ -89,20 +102,20 @@ signUp = "Sign up"
 # --------------
 # Error messages
 # --------------
-somethingWrong = "Something went wrong"
-userDoesntExist = "User does not exist"
-userAlreadyExist = "User already exist"
-incorrectPassword = "Incorrect password"
-emptyFields = "Some fields are empty"
-spaces = "some fields contain spaces"
-emailMismatch = "Email does not match"
-invalidEmail = "Invalid email address"
-passwordMismatch = "Password does not match"
-shortPassword = "Password is too short"
-invalidPhoneNumber = "Invalid phone number"
-wrongImageFormat = "Wrong image format"
-unsupportedImageFormat = "Only .png format supported"
-incorrectPriceFormat = "Incorrect Price format"
+errorSomethingWrong = "Something went wrong"
+errorUserDoesntExist = "User does not exist"
+errorUserAlreadyExist = "User already exist"
+errorIncorrectPassword = "Incorrect password"
+errorEmptyFields = "Some fields are empty"
+errorSpaces = "some fields contain spaces"
+errorEmailMismatch = "Email does not match"
+errorInvalidEmail = "Invalid email address"
+errorPasswordMismatch = "Password does not match"
+errorShortPassword = "Password is too short"
+errorInvalidPhoneNumber = "Invalid phone number"
+errorWrongImageFormat = "Wrong image format"
+errorUnsupportedImageFormat = "Only .png format supported"
+errorIncorrectPriceFormat = "Incorrect Price format"
 
 ############################
 # Dimens

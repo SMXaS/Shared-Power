@@ -66,5 +66,5 @@ class StartPage(tk.Frame):
             if isCorrect:
                 self.master.change_frame(mm.MainMenu, self.ent_user.get())
             else:
-                self.error_label.config(text=values.userDoesntExist)
-                self.error_label.config(text=values.somethingWrong)
+                self.error_label.config(text=values.errorUserDoesntExist)
+                self.error_label.config(text=values.errorSomethingWrong)

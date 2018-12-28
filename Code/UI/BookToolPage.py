@@ -306,7 +306,8 @@ class BookToolPage(tk.Frame):
             hiredTool.setDropOffLocation(self.dropOffEntry.get())
 
             if self.verifyHiring():
-                wf.add_booking(hiredTool)
+                #         obj,     simplePath,     fieldNames,           complex path
+                wf.write(hiredTool, None, values.fieldNames_booking, values.filePath_booking)
                 self.master.change_frame(sp.SearchToolPage, self.login)
             else:
                 print("too late.. item is booked")

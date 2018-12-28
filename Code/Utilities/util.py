@@ -21,20 +21,24 @@ def verifyLogin (userName, userPassword):
     :return True or error code
     """
 
-    with open("Data/users.csv", 'r') as f:
-        l = list(csv.reader(f))
-        my_dict = {i[0]: [x for x in i[1:]] for i in zip(*l)}
-        if userName in my_dict.get('login'):
-            with open("Data/users.csv", 'r') as f:
-                l = list(csv.reader(f))
-                my_dict = {i[0]: [x for x in i[1:]] for i in zip(*l)}
-                ind = my_dict['login'].index(userName)
-                if userPassword == my_dict['user_password'][ind]:
-                    return True
-                else:
-                    return values.incorrectPassword
-        else:
-            return values.userDoesntExist
+    exist = os.path.isfile(values.filePath_user)
+    if exist:
+        with open(values.filePath_user, 'r') as f:
+            l = list(csv.reader(f))
+            my_dict = {i[0]: [x for x in i[1:]] for i in zip(*l)}
+            if userName in my_dict.get('login'):
+                with open(values.filePath_user, 'r') as f:
+                    l = list(csv.reader(f))
+                    my_dict = {i[0]: [x for x in i[1:]] for i in zip(*l)}
+                    ind = my_dict['login'].index(userName)
+                    if userPassword == my_dict['user_password'][ind]:
+                        return True
+                    else:
+                        return values.errorIncorrectPassword
+            else:
+                return values.errorUserDoesntExist
+    else:
+        return values.errorUserDoesntExist
 
 
 def verifyRegistration (user):
@@ -61,35 +65,36 @@ def verifyRegistration (user):
     # Check if entries contain spaces or empty fields
     for i in range(len(user)):
         if not user[i]:
-            return values.emptyFields
+            return values.errorEmptyFields
         elif " " in user[i]:
             if i != 4:
-                return values.spaces
-
-    with open("Data/users.csv", 'r') as f:
-        l = list(csv.reader(f))
-        my_dict = {i[0]: [x for x in i[1:]] for i in zip(*l)}
-        if user[2] in my_dict.get('login'):
-            return values.userAlreadyExist
+                return values.errorSpaces
+    exist = os.path.isfile(values.filePath_user)
+    if exist:
+        with open(values.filePath_user, 'r') as f:
+            l = list(csv.reader(f))
+            my_dict = {i[0]: [x for x in i[1:]] for i in zip(*l)}
+            if user[2] in my_dict.get('login'):
+                return values.errorUserAlreadyExist
 
     if user[6] != user[7]:
-        return values.emailMismatch
+        return values.errorEmailMismatch
 
     if not verifyEmail(user[6]):
-        return values.invalidEmail
+        return values.errorInvalidEmail
 
     if user[8] != user[9]:
-        return values.passwordMismatch
+        return values.errorPasswordMismatch
     else:
         if len(user[8]) < 4:
-            return values.shortPassword
+            return values.errorShortPassword
 
     if not str(user[10]).isdigit():
-        return values.invalidEmail
+        return values.errorInvalidEmail
 
     address = "{} - {}, {}".format(user[3], user[5], user[4])
-    newUser = User(user[2], user[0], user[1], user[8], user[6], address, 999)
-    wf.add_user(newUser)
+    newUser = User(user[2], user[0], user[1], user[8], user[6], address, user[10])
+    wf.write(newUser, values.filePath_user, values.fieldNames_user)
     createUserFolder(user[2])
 
     return True
@@ -102,7 +107,7 @@ def createUserFolder(userName):
     :param userName: str (userName)
     :return: None
     """
-    path = "Data/Invoices/{}".format(userName)
+    path = values.filePath_invoiceFolder.format(userName)
     os.mkdir(path)
 
 
@@ -137,7 +142,6 @@ def verifyIMG(path):
     :return: True or error code
     """
     imgFormat = getImageFormat(path)
-    print(imgFormat)
     if imgFormat is None:
         return False
     else:
@@ -163,20 +167,20 @@ def verifyTool(tool):
 
     for i in range(len(tool)):
         if not tool[i]:
-            return values.emptyFields
+            return values.errorEmptyFields
         if i == 3 or i == 4:
             if " " in tool[i]:
-                return values.incorrectPriceFormat
+                return values.errorIncorrectPriceFormat
     try:
         val = float(tool[3])
         val = float(tool[4])
     except ValueError:
-        return values.incorrectPriceFormat
+        return values.errorIncorrectPriceFormat
 
     if not verifyIMG(tool[5]):
-        return values.wrongImageFormat
+        return values.errorWrongImageFormat
     if isinstance(verifyIMG(tool[5]), str):
-        return values.unsupportedImageFormat
+        return values.errorUnsupportedImageFormat
 
     return True
 
@@ -234,7 +238,7 @@ def convertToObj(index):
     :return obj(tool)
     """
 
-    with open("Data/tools.csv", 'r') as f:
+    with open(values.filePath_tool, 'r') as f:
         l = list(csv.reader(f))
         dict = {i[0]: [x for x in i[1:]] for i in zip(*l)}
         tool = Tool(dict["ID"][index], dict["owner"][index], dict["title"][index],

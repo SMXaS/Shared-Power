@@ -3,6 +3,7 @@ import glob
 from Code.Utilities import util
 
 
+# TODO work in progress to clean this part as I presume there is some boilerplate code
 def getTool(returnObj, column, value):
     """
     :param returnObj: boolean value. True - want to return object. False - want to return list
