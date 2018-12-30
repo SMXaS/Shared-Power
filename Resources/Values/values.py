@@ -10,10 +10,12 @@ bgInactive = "grey"
 ############################
 # Strings
 ############################
+appTitle = "Shared Power"
 asterix = "*"
 currency = "$"
 back = "Back"
 dateFormat = "%d/%m/%Y"
+welcomeText = "Welcome to Shared Power!!!"
 # --------------
 # Image Paths
 # --------------
@@ -34,6 +36,14 @@ filePath_tool = "Data/tools.csv"
 filePath_booking = "Data/Bookings/"
 filePath_invoiceFolder = "Data/Invoices/{}"
 filePath_images = "Data/Images/"
+
+# --------------
+# Main Menu
+# --------------
+menuMyTools = "My Tools"
+menuMyBookings = "My Bookings"
+menuAddTool = "Add Tool"
+menuSearchTool = "Search Tool"
 # --------------
 # Register Page
 # --------------
@@ -122,7 +132,7 @@ errorIncorrectPriceFormat = "Incorrect Price format"
 ############################
 registerWindowWidth = 280
 registerWindowHeigh = 340
-mainWindowWidth = 700
+mainWindowWidth = 800
 mainWindowHeigh = 500
 
 
@@ -133,3 +143,4 @@ addImageFont = "Helvetica 10 underline bold"
 dontHaveAccountFont = "Helvetica 7 italic"
 signUpFont = "Helvetica 7 bold underline"
 buttonFont = "Helvetica 10 bold"
+welcomeFont = "Helvetica 16"

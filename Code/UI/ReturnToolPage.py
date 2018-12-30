@@ -14,22 +14,25 @@ class ReturnToolPage(tk.Frame):
     toolIDList = []
     toolObjList = []
 
-    def __init__(self, master, arg):
-        tk.Frame.__init__(self, master)
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self, parent)
         ###################################
         # DO not change!
         ###################################
-        self.login = arg
+        self.login = controller.login
         self.bookingList = rf.getAllBookings("userName", self.login)
         ###################################
-        self.master = master
-        master.geometry("{}x{}+%d+%d".format(self.width, self.heigh) % ((self.winfo_screenwidth() / 2) - 350, (self.winfo_screenheight() / 2) - 250))
-        master.title('Return Tool')
+
+        self.config(bg=values.bgColor)
+        self.columnconfigure(0, weight=1)
 
         self.getData()
         self.initUI()
         self.populateData()
         self.ThereWillBeYourLogic()
+
+    def start(self, args):
+        pass
 
     def getData(self):
         """
@@ -45,16 +48,13 @@ class ReturnToolPage(tk.Frame):
             self.toolObjList.append(util.convertFromListToObj(tool))
 
     def initUI(self):
-        ####################################################################################################
-        # !!!Leave this button as an option to go back
-        ####################################################################################################
-        backButton = tk.Button(self, text=values.back, command= lambda: self.master.change_frame(mm.MainMenu, self.login))
-        backButton.grid(row=0, column=0)
-        ####################################################################################################
 
-        self.tree = ttk.Treeview(self, columns=(values.priceDay, values.priceHalfDay))
+        frame = tk.Frame(self, bg=self.bgColor)
+        frame.grid(row=0, column=0, sticky="", pady=40)
 
-        self.yscrollbar = ttk.Scrollbar(self, orient='vertical', command=self.tree.yview)
+        self.tree = ttk.Treeview(frame, columns=(values.priceDay, values.priceHalfDay))
+
+        self.yscrollbar = ttk.Scrollbar(frame, orient='vertical', command=self.tree.yview)
         self.tree.configure(yscrollcommand=self.yscrollbar.set)
 
         self.tree.heading('#0', text=values.tool)
@@ -63,9 +63,9 @@ class ReturnToolPage(tk.Frame):
         self.tree.column('#1', stretch=tk.YES)
         self.tree.column('#2', stretch=tk.YES)
         self.tree.column('#0', stretch=tk.YES)
-        self.tree.grid(row=1, column=1, columnspan=2, pady=20, sticky="N")
+        self.tree.grid(row=0, column=0, columnspan=2, pady=20, sticky="N")
 
-        self.yscrollbar.grid(row=1, column=4, pady=20, sticky='WNS')
+        self.yscrollbar.grid(row=0, column=3, pady=20, sticky='WNS')
 
         """
         Store all your widgets here

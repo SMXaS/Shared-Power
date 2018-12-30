@@ -11,30 +11,25 @@ class MyToolPage(tk.Frame):
     width = values.mainWindowWidth
     heigh = values.mainWindowHeigh
 
-    def __init__(self, master, arg):
+    def __init__(self, parent, controller):
         """
         :param master: master
         :param arg: login
         """
 
-        tk.Frame.__init__(self, master)
-        self.login = arg
-        self.master = master
-        self.owner = master.owner
-        master.geometry("{}x{}+%d+%d".format(self.width, self.heigh) % ((self.winfo_screenwidth() / 2) - 350, (self.winfo_screenheight() / 2) - 250))
-        master.title(values.myToolTitle)
-        self.toolList = rf.getTool(True, "owner", self.login)
+        tk.Frame.__init__(self, parent)
+        self.config(bg=values.bgColor)
+        self.columnconfigure(0, weight=1)
+
+        self.toolList = rf.getTool(True, "owner", "test")
 
         self.initUI()
         self.ThereWillBeYourLogic()
 
+    def start(self, args):
+        pass
+
     def initUI(self):
-        ####################################################################################################
-        # !!!Leave this button as an option to go back
-        ####################################################################################################
-        backButton = tk.Button(self, text=values.back, command= lambda: self.master.change_frame(mm.MainMenu, self.login))
-        backButton.grid(row=0, column=0)
-        ####################################################################################################
 
         """
         Store all your widgets here

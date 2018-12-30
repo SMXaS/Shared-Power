@@ -12,41 +12,39 @@ class SearchToolPage(tk.Frame):
     width = values.mainWindowWidth
     heigh = values.mainWindowHeigh
 
-    def __init__(self, master, arg):
+    def __init__(self, parent, controller):
         """
         :param master: master
         :param arg: login
         """
-
-        tk.Frame.__init__(self, master)
-        self.login = arg
-
-        self.owner = master.owner
-        master.geometry("{}x{}+%d+%d".format(self.width, self.heigh) % ((self.winfo_screenwidth() / 2) - 350, (self.winfo_screenheight() / 2) - 250))
-        master.title(values.searchToolTitle)
+        self.login = controller.login
+        self.controller = controller
+        tk.Frame.__init__(self, parent)
+        self.config(bg=values.bgColor)
+        self.columnconfigure(0, weight=1)
 
         self.initUI()
         self.retrieveData()
 
+    def start(self, args):
+        pass
+
     def initUI(self):
 
-        backIMG = tk.PhotoImage(file=values.buttonBack)
-        backButton = tk.Label(self, image=backIMG, bg=self.bgColor)
-        backButton.image = backIMG
-        backButton.bind("<Button-1>", lambda event: self.master.change_frame(mm.MainMenu, self.login))
-        backButton.grid(row=0, column=0, padx=10, sticky=tk.W)
+        frame = tk.Frame(self, bg=self.bgColor)
+        frame.grid(row=0, column=0, sticky="", pady=40)
 
-        self.searchEntry = tk.Entry(self, width=80)
+        self.searchEntry = tk.Entry(frame, width=80)
         self.searchEntry.grid(row=0, column=1, padx=25, pady=20, sticky="N")
 
-        searchButton = tk.Label(self, text=values.search, bg=self.bgColor, fg=self.fgColor,
+        searchButton = tk.Label(frame, text=values.search, bg=self.bgColor, fg=self.fgColor,
                                 font=values.buttonFont)
         searchButton.grid(row=0, column=2)
         searchButton.bind("<Button-1>", lambda event: self.retrieveData())
 
-        self.tree = ttk.Treeview(self, columns=(values.priceDay, values.priceHalfDay))
+        self.tree = ttk.Treeview(frame, columns=(values.priceDay, values.priceHalfDay))
 
-        self.yscrollbar = ttk.Scrollbar(self, orient='vertical', command=self.tree.yview)
+        self.yscrollbar = ttk.Scrollbar(frame, orient='vertical', command=self.tree.yview)
         self.tree.configure(yscrollcommand=self.yscrollbar.set)
 
         self.tree.heading('#0', text=values.tool)
@@ -60,7 +58,7 @@ class SearchToolPage(tk.Frame):
         self.yscrollbar.grid(row=1, column=4, pady=20, sticky='WNS')
 
         hireIMG = tk.PhotoImage(file=values.buttonHire)
-        hireButton = tk.Label(self, image=hireIMG, bg=self.bgColor)
+        hireButton = tk.Label(frame, image=hireIMG, bg=self.bgColor)
         hireButton.image = hireIMG
         hireButton.bind("<Button-1>", lambda event: self.selectItem())
         hireButton.grid(row=2, column=0, columnspan=3, padx=10, pady=40)
@@ -94,10 +92,7 @@ class SearchToolPage(tk.Frame):
         curItem = self.tree.focus()
         if curItem:
             index = self.getItemIDIndex()
-            tool = []
-            tool.append(self.login)
-            tool.append(self.placeHolder[index])
-            self.master.change_frame(bk.BookToolPage, tool)
+            self.controller.show_frame("BookToolPage", self.placeHolder[index])
 
     def retrieveData(self):
         """

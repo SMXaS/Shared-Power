@@ -20,14 +20,14 @@ class SharedPower(tk.Tk):
         self.login = self.login
 
         self._frame = None
-        self.change_frame(sp.StartPage)
+        self.change_frame(sp.StartPage, None)
 
 
     def log_out(self):
         self.login = 'main'
-        self.change_frame(sp.StartPage)
+        self.change_frame(sp.StartPage, None)
 
-    def change_frame(self, f_class, arg=[]):
+    def change_frame(self, f_class, arg):
         ###########################
         # Destroys current frame and replaces it with a new one
         ###########################

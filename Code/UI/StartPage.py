@@ -2,6 +2,7 @@ from Code.UI import MainMenu as mm, RegisterPage as r
 import tkinter as tk
 import Resources.Values.values as values
 from Code.Utilities import util
+from mainMenu import mainMenu
 
 
 class StartPage(tk.Frame):
@@ -10,7 +11,7 @@ class StartPage(tk.Frame):
     fgColor = values.fgColor
     errorColor = values.errorColor
 
-    def __init__(self, master, arg):
+    def __init__(self, master, args):
         tk.Frame.__init__(self, master)
 
         master.title(values.loginTitle)
@@ -64,7 +65,7 @@ class StartPage(tk.Frame):
             self.error_label.config(text=isCorrect)
         else:
             if isCorrect:
-                self.master.change_frame(mm.MainMenu, self.ent_user.get())
+                mainMenu()
             else:
                 self.error_label.config(text=values.errorUserDoesntExist)
                 self.error_label.config(text=values.errorSomethingWrong)
