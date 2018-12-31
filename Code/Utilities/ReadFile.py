@@ -1,6 +1,7 @@
 import csv
 import glob
 from Code.Utilities import util
+from Resources.Values import strings
 
 
 # TODO work in progress to clean this part as I presume there is some boilerplate code
@@ -76,7 +77,8 @@ def getAllBookings(column, arg):
             my_dict = {i[0]: [x for x in i[1:]] for i in zip(*l)}
             item = [i for i, x in enumerate(my_dict[column]) if arg == x]
             for k in range(len(item)):
-                itemList.append(util.convertBookingToObject(item[k], pathList[i]))
+                if my_dict["status"][item[k]] == (strings.toolStatus[0] or strings.toolStatus[1]):
+                    itemList.append(util.convertBookingToObject(item[k], pathList[i]))
 
     return itemList
 

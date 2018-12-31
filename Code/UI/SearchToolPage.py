@@ -1,16 +1,15 @@
-from Code.UI import MainMenu as mm, BookToolPage as bk
 import tkinter as tk
 from tkinter import ttk
-import Resources.Values.values as values
+from Resources.Values import strings, colors, dimens, fonts
 from Code.Utilities import util, ReadFile as rf
 
 
 class SearchToolPage(tk.Frame):
     placeHolder = []
-    bgColor = values.bgColor
-    fgColor = values.fgColor
-    width = values.mainWindowWidth
-    heigh = values.mainWindowHeigh
+    bgColor = colors.bgColor
+    fgColor = colors.fgColor
+    width = dimens.mainWindowWidth
+    heigh = dimens.mainWindowHeigh
 
     def __init__(self, parent, controller):
         """
@@ -20,14 +19,16 @@ class SearchToolPage(tk.Frame):
         self.login = controller.login
         self.controller = controller
         tk.Frame.__init__(self, parent)
-        self.config(bg=values.bgColor)
+        self.config(bg=colors.bgColor)
         self.columnconfigure(0, weight=1)
 
         self.initUI()
         self.retrieveData()
 
     def start(self, args):
-        pass
+        if not args:
+            for item in self.tree.selection():
+                self.tree.selection_remove(item)
 
     def initUI(self):
 
@@ -37,19 +38,19 @@ class SearchToolPage(tk.Frame):
         self.searchEntry = tk.Entry(frame, width=80)
         self.searchEntry.grid(row=0, column=1, padx=25, pady=20, sticky="N")
 
-        searchButton = tk.Label(frame, text=values.search, bg=self.bgColor, fg=self.fgColor,
-                                font=values.buttonFont)
+        searchButton = tk.Label(frame, text=strings.search, bg=self.bgColor, fg=self.fgColor,
+                                font=fonts.buttonFont)
         searchButton.grid(row=0, column=2)
         searchButton.bind("<Button-1>", lambda event: self.retrieveData())
 
-        self.tree = ttk.Treeview(frame, columns=(values.priceDay, values.priceHalfDay))
+        self.tree = ttk.Treeview(frame, columns=(strings.priceDay, strings.priceHalfDay))
 
         self.yscrollbar = ttk.Scrollbar(frame, orient='vertical', command=self.tree.yview)
         self.tree.configure(yscrollcommand=self.yscrollbar.set)
 
-        self.tree.heading('#0', text=values.tool)
-        self.tree.heading('#1', text=values.priceDay)
-        self.tree.heading('#2', text=values.priceHalfDay)
+        self.tree.heading('#0', text=strings.tool)
+        self.tree.heading('#1', text=strings.priceDay)
+        self.tree.heading('#2', text=strings.priceHalfDay)
         self.tree.column('#1', stretch=tk.YES)
         self.tree.column('#2', stretch=tk.YES)
         self.tree.column('#0', stretch=tk.YES)
@@ -57,7 +58,7 @@ class SearchToolPage(tk.Frame):
 
         self.yscrollbar.grid(row=1, column=4, pady=20, sticky='WNS')
 
-        hireIMG = tk.PhotoImage(file=values.buttonHire)
+        hireIMG = tk.PhotoImage(file=strings.buttonHire)
         hireButton = tk.Label(frame, image=hireIMG, bg=self.bgColor)
         hireButton.image = hireIMG
         hireButton.bind("<Button-1>", lambda event: self.selectItem())
@@ -92,7 +93,7 @@ class SearchToolPage(tk.Frame):
         curItem = self.tree.focus()
         if curItem:
             index = self.getItemIDIndex()
-            self.controller.show_frame("BookToolPage", self.placeHolder[index])
+            self.controller.show_frame(strings.bookToolClass, self.placeHolder[index])
 
     def retrieveData(self):
         """
@@ -137,4 +138,4 @@ class SearchToolPage(tk.Frame):
                 self.tree.insert('', 'end', text=self.placeHolder[i].getTitle(),
                                  values=(self.placeHolder[i].getPriceFullDay(),
                                          self.placeHolder[i].getPriceHalfDay()),
-                                 tags=self.placeHolder[i].getID())
+                                 tag=self.placeHolder[i].getID())

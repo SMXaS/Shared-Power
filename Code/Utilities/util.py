@@ -9,7 +9,7 @@ from Code.Utilities import WriteFile as wf
 from Entities.User import User
 from Entities.Tool import Tool
 from Entities.Bookings import Bookings
-import Resources.Values.values as values
+import Resources.Values.strings as values
 
 
 def verifyLogin (userName, userPassword):
@@ -258,9 +258,10 @@ def convertBookingToObject(index, path):
     with open(path, 'r') as f:
         l = list(csv.reader(f))
         myDict = {i[0]: [x for x in i[1:]] for i in zip(*l)}
-        booking = Bookings(myDict["toolID"][index], myDict["userName"][index], myDict["bookInCondition"][index],
+        booking = Bookings(myDict["bookingID"][index], myDict["toolID"][index], myDict["userName"][index],
+                           myDict["bookInCondition"][index],
                            myDict["startDate"][index], myDict["startTerm"][index],
-                           myDict["expectedReturnDate"][index], myDict["expectedTerm"][index],
+                           myDict["expectedReturnDate"][index], myDict["expectedTerm"][index], myDict["status"][index],
                            myDict["returnDate"][index], myDict["bookOutCondition"][index],
                            myDict["pickUpLocation"][index], myDict["dropOffLocation"][index])
     return booking

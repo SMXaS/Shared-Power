@@ -1,7 +1,8 @@
 class Bookings:
   
-    def __init__ (self, toolID, userName, bookInCondition, startDate, startTerm, expectedReturnDate, expectedTerm,
-                  returnDate = "", bookOutCondition = "", pickUpLocation = "", dropOffLocation = ""):
+    def __init__ (self, bookingID, toolID, userName, bookInCondition, startDate, startTerm, expectedReturnDate,
+                  expectedTerm, status, returnDate = "", bookOutCondition = "", pickUpLocation = "", dropOffLocation = ""):
+        self.bookingID = bookingID
         self.toolID = toolID
         self.userName = userName
         self.bookInCondition = bookInCondition
@@ -9,11 +10,15 @@ class Bookings:
         self.startTerm = startTerm
         self.expectedReturnDate = expectedReturnDate
         self.expectedTerm = expectedTerm
+        self.status = status
         self.returnDate = returnDate
         self.bookOutCondition = bookOutCondition
         self.pickUpLocation = pickUpLocation
         self.dropOffLocation = dropOffLocation
-    
+
+    def getBookingID(self):
+        return self.bookingID
+
     def getToolID(self):
         return self.toolID
     
@@ -35,6 +40,9 @@ class Bookings:
     def getExpectedTerm(self):
         return self.expectedTerm
 
+    def getStatus(self):
+        return self.status
+
     def getReturnDate(self):
         return self.returnDate
       
@@ -55,3 +63,6 @@ class Bookings:
 
     def setDropOffLocation(self, location):
         self.dropOffLocation = location
+
+    def setStatus(self, status):
+        self.status = status

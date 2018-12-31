@@ -1,76 +1,89 @@
-from Code.UI import StartPage as sp, MainMenu as mm
-import Resources.Values.values as values
+from Resources.Values import strings, colors, dimens, fonts
 from Code.Utilities import util
 import tkinter as tk
 
 
-
 class RegisterPage(tk.Frame):
 
-    bgColor = values.bgColor
-    fgColor = values.fgColor
-    errorColor = values.errorColor
-    width = values.registerWindowWidth
-    heigh = values.registerWindowHeigh
+    bgColor = colors.bgColor
+    fgColor = colors.fgColor
+    errorColor = colors.errorColor
 
-    def __init__(self, master, arg):
+    def __init__(self, parent, controller):
         """
         :param master: master
         :param arg: None
         """
-
-        tk.Frame.__init__(self, master)
-        master.minsize(width=280, height=280)
-        master.geometry("{}x{}+%d+%d".format(self.width, self.heigh) % ((self.winfo_screenwidth()/2)-100, (self.winfo_screenheight()/2)-150))
-        master.title(values.registerTitle)
-
+        tk.Frame.__init__(self, parent)
+        self.controller = controller
+        self.config(bg=colors.bgColor)
         self.initUI()
+
+    def start(self, args):
+        self.controller.geometry("{}x{}+%d+%d".format(dimens.registerWindowWidth, dimens.registerWindowHeigh) %
+                                 ((self.winfo_screenwidth() / 2) - 100, (self.winfo_screenheight() / 2) - 150))
+
+        # resetting views
+        self.firstNameEntry.delete(0, "end")
+        self.lastNameEntry.delete(0, "end")
+        self.userNameEntry.delete(0, "end")
+        self.postCodeEntry.delete(0, "end")
+        self.streetNameEntry.delete(0, "end")
+        self.houseNumberEntry.delete(0, "end")
+        self.emailEntry.delete(0, "end")
+        self.emailConfirmEntry.delete(0, "end")
+        self.passwordEntry.delete(0, "end")
+        self.passwordConfirmationEntry.delete(0, "end")
+        self.phoneNumberEntry.delete(0, "end")
+
+        # set focus
+        self.firstNameEntry.focus()
 
     def initUI(self):
         self.errorLabel = tk.Label(self, text="", bg=self.bgColor, fg=self.errorColor)
         self.errorLabel.grid(row=0, column=0, columnspan=2, padx=10)
 
-        firstNameLabel = tk.Label(self, text="{}{}".format(values.asterix, values.firstName),
+        firstNameLabel = tk.Label(self, text="{}{}".format(strings.asterix, strings.firstName),
                                   bg=self.bgColor, fg=self.fgColor)
         firstNameLabel.grid(row=1, column=0, padx=5, pady=2, sticky="E")
 
-        lastNameLabel = tk.Label(self, text="{}{}".format(values.asterix, values.lastName),
+        lastNameLabel = tk.Label(self, text="{}{}".format(strings.asterix, strings.lastName),
                                  bg=self.bgColor, fg=self.fgColor)
         lastNameLabel.grid(row=2, column=0, padx=5, pady=2, sticky="E")
 
-        userNameLabel = tk.Label(self, text="{}{}".format(values.asterix, values.userName),
+        userNameLabel = tk.Label(self, text="{}{}".format(strings.asterix, strings.userName),
                                  bg=self.bgColor, fg=self.fgColor)
         userNameLabel.grid(row=3, column=0, padx=5, pady=2, sticky="E")
 
-        postCodeLabel = tk.Label(self, text="{}{}".format(values.asterix, values.postCode),
+        postCodeLabel = tk.Label(self, text="{}{}".format(strings.asterix, strings.postCode),
                                  bg=self.bgColor, fg=self.fgColor)
         postCodeLabel.grid(row=4, column=0, padx=5, pady=2, sticky="E")
 
-        streetNameLabel = tk.Label(self, text="{}{}".format(values.asterix, values.streetName),
+        streetNameLabel = tk.Label(self, text="{}{}".format(strings.asterix, strings.streetName),
                                    bg=self.bgColor, fg=self.fgColor)
         streetNameLabel.grid(row=5, column=0, padx=5, pady=2, sticky="E")
 
-        houseNumberLabel = tk.Label(self, text="{}{}".format(values.asterix, values.houseNumber),
+        houseNumberLabel = tk.Label(self, text="{}{}".format(strings.asterix, strings.houseNumber),
                                     bg=self.bgColor, fg=self.fgColor)
         houseNumberLabel.grid(row=6, column=0, padx=5, pady=2, sticky="E")
 
-        emailLabel = tk.Label(self, text="{}{}".format(values.asterix, values.email), bg=self.bgColor,
+        emailLabel = tk.Label(self, text="{}{}".format(strings.asterix, strings.email), bg=self.bgColor,
                               fg=self.fgColor)
         emailLabel.grid(row=7, column=0, padx=5, pady=2, sticky="E")
 
-        emailConfirmLabel = tk.Label(self, text="{}{}".format(values.asterix, values.emailConfirmation),
+        emailConfirmLabel = tk.Label(self, text="{}{}".format(strings.asterix, strings.emailConfirmation),
                                      bg=self.bgColor, fg=self.fgColor)
         emailConfirmLabel.grid(row=8, column=0, padx=5, pady=2, sticky="E")
 
-        passwordLabel = tk.Label(self, text="{}{}".format(values.asterix, values.password),
+        passwordLabel = tk.Label(self, text="{}{}".format(strings.asterix, strings.password),
                                  bg=self.bgColor, fg=self.fgColor)
         passwordLabel.grid(row=9, column=0, padx=5, pady=2, sticky="E")
 
-        passwordConfirmationLabel = tk.Label(self, text="{}{}".format(values.asterix, values.passwordConfirmation),
+        passwordConfirmationLabel = tk.Label(self, text="{}{}".format(strings.asterix, strings.passwordConfirmation),
                                              bg=self.bgColor, fg=self.fgColor)
         passwordConfirmationLabel.grid(row=10, column=0, padx=5, pady=2)
 
-        phoneNumberLabel = tk.Label(self, text="{}{}".format(values.asterix, values.phoneNumber),
+        phoneNumberLabel = tk.Label(self, text="{}{}".format(strings.asterix, strings.phoneNumber),
                                     bg=self.bgColor, fg=self.fgColor)
         phoneNumberLabel.grid(row=11, column=0, padx=5, pady=2, sticky="E")
 
@@ -107,14 +120,14 @@ class RegisterPage(tk.Frame):
         self.phoneNumberEntry = tk.Entry(self)
         self.phoneNumberEntry.grid(row=11, column=1)
 
-        backIMG = tk.PhotoImage(file=values.buttonBack)
+        backIMG = tk.PhotoImage(file=strings.buttonBack)
         backButton = tk.Label(self, image=backIMG, bg=self.bgColor)
         backButton.image = backIMG
         backButton.grid(row=12, column=0, pady=10)
-        backButton.bind("<Button-1>", lambda event: self.master.change_frame(sp.StartPage))
+        backButton.bind("<Button-1>", lambda event: self.controller.show_frame(strings.loginClass))
 
-        createAccountButton = tk.Label(self, text=values.createAccount, bg=self.bgColor, fg=self.fgColor,
-                                       font=values.buttonFont)
+        createAccountButton = tk.Label(self, text=strings.createAccount, bg=self.bgColor, fg=self.fgColor,
+                                       font=fonts.buttonFont)
         createAccountButton.grid(row=12, column=1, columnspan=2, sticky="E")
         createAccountButton.bind("<Button-1>", lambda event: self.checkRegistration())
 
@@ -143,7 +156,7 @@ class RegisterPage(tk.Frame):
             self.errorLabel.config(text=isCorrect)
         else:
             if isCorrect:
-                login = self.userNameEntry.get()
-                self.master.change_frame(mm.MainMenu, login)
+                self.controller.init(self.userNameEntry.get())
+                self.controller.show_frame(strings.welcomeClass)
             else:
                 self.errorLabel.config(text=isCorrect)

@@ -1,71 +1,61 @@
 import tkinter as tk
 from tkinter import ttk
-import Resources.Values.values as values
-from Code.UI import MainMenu as mm
+from Resources.Values import strings, colors, dimens, fonts
 import Code.Utilities.ReadFile as rf
 import Code.Utilities.util as util
 
 
 class ReturnToolPage(tk.Frame):
-    bgColor = values.bgColor
-    fgColor = values.fgColor
-    width = values.mainWindowWidth
-    heigh = values.mainWindowHeigh
+    bgColor = colors.bgColor
+    fgColor = colors.fgColor
     toolIDList = []
     toolObjList = []
 
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
+        self.controller = controller
         ###################################
         # DO not change!
         ###################################
-        self.login = controller.login
-        self.bookingList = rf.getAllBookings("userName", self.login)
+
         ###################################
 
-        self.config(bg=values.bgColor)
+        self.config(bg=colors.bgColor)
         self.columnconfigure(0, weight=1)
 
-        self.getData()
         self.initUI()
-        self.populateData()
-        self.ThereWillBeYourLogic()
 
     def start(self, args):
-        pass
-
-    def getData(self):
-        """
-        Gets data from DB
-        :return: None
-        """
-
-        for i in range(len(self.bookingList)):
-            self.toolIDList.append(self.bookingList[i].getToolID())
-
-        for i in range(len(self.toolIDList)):
-            tool = rf.get_tool("ID", self.toolIDList[i])
-            self.toolObjList.append(util.convertFromListToObj(tool))
+        self.login = self.controller.login
+        self.bookingList = rf.getAllBookings("userName", self.login)
+        self.populateData()
+        self.ThereWillBeYourLogic()
 
     def initUI(self):
 
         frame = tk.Frame(self, bg=self.bgColor)
         frame.grid(row=0, column=0, sticky="", pady=40)
 
-        self.tree = ttk.Treeview(frame, columns=(values.priceDay, values.priceHalfDay))
+        self.tree = ttk.Treeview(frame, columns=(strings.priceDay, strings.priceHalfDay))
 
         self.yscrollbar = ttk.Scrollbar(frame, orient='vertical', command=self.tree.yview)
         self.tree.configure(yscrollcommand=self.yscrollbar.set)
 
-        self.tree.heading('#0', text=values.tool)
-        self.tree.heading('#1', text=values.hireDate)
-        self.tree.heading('#2', text=values.returnDate)
+        self.tree.heading('#0', text=strings.tool)
+        self.tree.heading('#1', text=strings.hireDate)
+        self.tree.heading('#2', text=strings.returnDate)
         self.tree.column('#1', stretch=tk.YES)
         self.tree.column('#2', stretch=tk.YES)
         self.tree.column('#0', stretch=tk.YES)
         self.tree.grid(row=0, column=0, columnspan=2, pady=20, sticky="N")
 
         self.yscrollbar.grid(row=0, column=3, pady=20, sticky='WNS')
+
+        self.returnButton = tk.Label(frame, text=strings.returnItem, bg=colors.bgColor, fg=colors.fgColor,
+                                     font=fonts.buttonFont)
+        self.returnButton.rowconfigure(0, weight=1)
+        self.returnButton.grid(row=1, column=0, columnspan=2)
+        self.returnButton.bind("<Button-1>", lambda event: self.returnItem())
 
         """
         Store all your widgets here
@@ -88,9 +78,16 @@ class ReturnToolPage(tk.Frame):
 
     def populateData(self):
         """
-        Populates all data in the list
+        Gets data and populates all data in the list
         :return: None
         """
+
+        for i in range(len(self.bookingList)):
+            self.toolIDList.append(self.bookingList[i].getToolID())
+
+        for i in range(len(self.toolIDList)):
+            tool = rf.get_tool("ID", self.toolIDList[i])
+            self.toolObjList.append(util.convertFromListToObj(tool))
 
         for i in self.tree.get_children():
             self.tree.delete(i)
@@ -101,7 +98,27 @@ class ReturnToolPage(tk.Frame):
                 self.tree.insert('', 'end', text=tool.getTitle(),
                                  values=(self.bookingList[i].getStartDate(),
                                          self.bookingList[i].getExpectedReturnDate()),
-                                 tags=self.bookingList[i].getToolID())
+                                 tags=self.bookingList[i].getBookingID())
+
+    def returnItem(self):
+        curItem = self.tree.focus()
+        index = None
+        if curItem:
+            itemID = None
+            for item in self.tree.selection():
+                itemID = self.tree.item(item, "tag")
+
+            for i in range(len(self.bookingList)):
+                if self.bookingList[i].getBookingID() in itemID:
+                    index = i
+                    break
+
+            returnItemObj = self.bookingList[index]
+
+            # toolStatus[1] = "pending_receive"
+            returnItemObj.setStatus(strings.toolStatus[1])
+
+            print("new status:", returnItemObj.getStatus())
 
     # Rename this function according to what you want to do
     def ThereWillBeYourLogic(self):

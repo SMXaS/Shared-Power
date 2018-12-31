@@ -1,19 +1,18 @@
-from Code.UI import MainMenu as mm
 from Code.addTool import addTool
 import tkinter as tk
 from tkinter import END
 from Code.Utilities import util
-import Resources.Values.values as values
+from Resources.Values import strings, colors, dimens, fonts
 from tkinter.filedialog import askopenfilename
 
-
+# TODO optimize, split and merge with util/addTool
 class AddToolPage(tk.Frame):
 
-    bgColor = values.bgColor
-    fgColor = values.fgColor
-    errorColor = values.errorColor
-    width = values.mainWindowWidth
-    heigh = values.mainWindowHeigh
+    bgColor = colors.bgColor
+    fgColor = colors.fgColor
+    errorColor = colors.errorColor
+    width = dimens.mainWindowWidth
+    heigh = dimens.mainWindowHeigh
 
     def __init__(self, parent, controller):
         """
@@ -24,7 +23,7 @@ class AddToolPage(tk.Frame):
         tk.Frame.__init__(self, parent)
         self.controller = controller
         self.filename = ""
-        self.config(bg=values.bgColor)
+        self.config(bg=colors.bgColor)
         self.columnconfigure(0, weight=1)
 
         self.initUI()
@@ -40,22 +39,22 @@ class AddToolPage(tk.Frame):
         self.errorLabel = tk.Label(self, bg=self.bgColor, fg=self.errorColor)
         self.errorLabel.grid(row=0, column=1, padx=5, pady=2, sticky="WN")
 
-        titleLabel = tk.Label(frame, text="{}{}".format(values.asterix, values.toolTitle), bg=self.bgColor, fg=self.fgColor)
+        titleLabel = tk.Label(frame, text="{}{}".format(strings.asterix, strings.toolTitle), bg=self.bgColor, fg=self.fgColor)
         titleLabel.grid(row=1, column=0, padx=5, pady=2, sticky="E")
 
-        DescriptionLabel = tk.Label(frame, text="{}{}".format(values.asterix, values.toolDescription), bg=self.bgColor, fg=self.fgColor)
+        DescriptionLabel = tk.Label(frame, text="{}{}".format(strings.asterix, strings.toolDescription), bg=self.bgColor, fg=self.fgColor)
         DescriptionLabel.grid(row=2, column=0, padx=5, pady=2, sticky="EN")
 
-        PriceDayLabel = tk.Label(frame, text="{}{}".format(values.asterix, values.priceDay), bg=self.bgColor, fg=self.fgColor)
+        PriceDayLabel = tk.Label(frame, text="{}{}".format(strings.asterix, strings.priceDay), bg=self.bgColor, fg=self.fgColor)
         PriceDayLabel.grid(row=3, column=0, padx=5, pady=2, sticky="E")
 
-        PriceHalfDayLabel = tk.Label(frame, text="{}{}".format(values.asterix, values.priceHalfDay),  bg=self.bgColor, fg=self.fgColor)
+        PriceHalfDayLabel = tk.Label(frame, text="{}{}".format(strings.asterix, strings.priceHalfDay), bg=self.bgColor, fg=self.fgColor)
         PriceHalfDayLabel.grid(row=4, column=0, sticky="E")
 
-        toolConditionLabel = tk.Label(frame, text="{}{}".format(values.asterix, values.toolCondition), bg=self.bgColor, fg=self.fgColor)
+        toolConditionLabel = tk.Label(frame, text="{}{}".format(strings.asterix, strings.toolCondition), bg=self.bgColor, fg=self.fgColor)
         toolConditionLabel.grid(row=5, column=0, sticky="E")
 
-        self.imgPath = tk.Label(frame, text=values.emptyIMGPath, bg=self.bgColor, fg=self.fgColor)
+        self.imgPath = tk.Label(frame, text=strings.emptyIMGPath, bg=self.bgColor, fg=self.fgColor)
         self.imgPath.grid(row=6, column=1, padx=5, pady=2, sticky="W")
 
         self.titleEntry = tk.Entry(frame, width=40)
@@ -73,12 +72,12 @@ class AddToolPage(tk.Frame):
         self.toolConditionEntry = tk.Entry(frame, width=40)
         self.toolConditionEntry.grid(row=5, column=1)
 
-        img_btn = tk.Label(frame, text="{}{}".format(values.asterix, values.image), bg=self.bgColor, fg=self.fgColor,
-                           font=values.addImageFont)
+        img_btn = tk.Label(frame, text="{}{}".format(strings.asterix, strings.image), bg=self.bgColor, fg=self.fgColor,
+                           font=fonts.addImageFont)
         img_btn.grid(row=6, column=0, sticky="E")
         img_btn.bind("<Button-1>", lambda event: self.setImagePath())
 
-        addIMG = tk.PhotoImage(file=values.buttonAdd)
+        addIMG = tk.PhotoImage(file=strings.buttonAdd)
         addToolButton = tk.Label(frame, image=addIMG, bg=self.bgColor)
         addToolButton.image=addIMG
         addToolButton.grid(row=7, column=1)
@@ -102,6 +101,6 @@ class AddToolPage(tk.Frame):
             self.errorLabel.config(text=isCorrect)
         else:
             if isCorrect:
-                add = addTool(self.login)
+                add = addTool(self.controller.login)
                 add.add(tool)
-                self.master.change_frame(mm.MainMenu, self.login)
+                # TODO clear entries

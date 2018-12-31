@@ -1,18 +1,18 @@
 import tkinter as tk
 from tkinter import END
-from Code.UI import SearchToolPage as sp
-import Resources.Values.values as values
+from Resources.Values import strings, colors, dimens, fonts
 import Code.Utilities.util as util
 from Entities.Bookings import Bookings
 import Code.Utilities.WriteFile as wf
 import Code.Utilities.ReadFile as rf
 
+# TODO unbind radio buttons
 
 class BookToolPage(tk.Frame):
-    bgColor = values.bgColor
-    fgColor = values.fgColor
-    width = values.mainWindowWidth
-    heigh = values.mainWindowHeigh
+    bgColor = colors.bgColor
+    fgColor = colors.fgColor
+    width = dimens.mainWindowWidth
+    heigh = dimens.mainWindowHeigh
     start_date = ""
     end_date = ""
 
@@ -25,19 +25,42 @@ class BookToolPage(tk.Frame):
         tk.Frame.__init__(self, parent)
         self.controller = controller
         self.login = controller.login
-        self.config(bg=values.bgColor)
+        self.config(bg=colors.bgColor)
         self.columnconfigure(0, weight=1)
         self.initUI()
 
     def start(self, args):
         self.tool = args
 
+        # initializing txt
         self.ownerTxt.config(text=self.tool.getOwner())
         self.titleTxt.config(text=self.tool.getTitle())
         self.descriptionTxt.config(text=self.tool.getDescription())
         self.conditionTxt.config(text=self.tool.getCondition())
-        self.priceFullDayTxt.config(text="{}{}".format(self.tool.getPriceFullDay(), values.currency))
-        self.priceHalfDayTxt.config( text="{}{}".format(self.tool.getPriceHalfDay(), values.currency))
+        self.priceFullDayTxt.config(text="{}{}".format(self.tool.getPriceFullDay(), strings.currency))
+        self.priceHalfDayTxt.config(text="{}{}".format(self.tool.getPriceHalfDay(), strings.currency))
+
+        # resetting views
+        self.availableEndDate.bind('<FocusOut>', lambda e: self.availableEndDate.selection_clear(0, END))
+        self.availableDate.bind('<FocusOut>', lambda e:  self.availableDate.selection_clear(0, END))
+
+        self.availableEndDate.unbind("<FocusOut>")
+        self.availableDate.unbind("<FocusOut>")
+        self.scrollNextAvailableDate.grid_remove()
+        self.endDateLabel.grid_remove()
+        self.availableEndDate.grid_remove()
+        self.pickUpLabel.grid_remove()
+        self.pickUpEntry.grid_remove()
+        self.dropOffLabel.grid_remove()
+        self.dropOffEntry.grid_remove()
+        self.riderRadio.grid_remove()
+        self.startHalfDateRadio.grid_remove()
+        self.endHalfDateRadio.grid_remove()
+        self.riderValue.set(0)
+        self.endDateVar.set("f")
+        self.startDateVar.set("f")
+        self.pickUpEntry.delete(0, "end")
+        self.dropOffEntry.delete(0, "end")
 
         self.populateStartList()
 
@@ -75,37 +98,37 @@ class BookToolPage(tk.Frame):
         #############################################################################
         # Info widgets
         #############################################################################
-        ownerLabel = tk.Label(frame, text=values.owner, bg=self.bgColor, fg=self.fgColor)
+        ownerLabel = tk.Label(frame, text=strings.owner, bg=self.bgColor, fg=self.fgColor)
         ownerLabel.grid(row=1, column=0, padx=5, pady=2, sticky="E")
 
         self.ownerTxt = tk.Label(frame, bg=self.bgColor, fg=self.fgColor)
         self.ownerTxt.grid(row=1, column=1, columnspan=3, padx=5, sticky="W")
 
-        titleLabel = tk.Label(frame, text=values.toolTitle, bg=self.bgColor, fg=self.fgColor)
+        titleLabel = tk.Label(frame, text=strings.toolTitle, bg=self.bgColor, fg=self.fgColor)
         titleLabel.grid(row=2, column=0, padx=5, pady=2, sticky="E")
 
         self.titleTxt = tk.Label(frame, bg=self.bgColor, fg=self.fgColor)
         self.titleTxt.grid(row=2, column=1, columnspan=3, padx=5, sticky="W")
 
-        descriptionLabel = tk.Label(frame, text=values.toolDescription, bg=self.bgColor, fg=self.fgColor)
+        descriptionLabel = tk.Label(frame, text=strings.toolDescription, bg=self.bgColor, fg=self.fgColor)
         descriptionLabel.grid(row=3, column=0, padx=5, pady=2, sticky="E")
 
         self.descriptionTxt = tk.Label(frame, bg=self.bgColor, fg=self.fgColor)
         self.descriptionTxt.grid(row=3, column=1, columnspan=3, padx=5, sticky="W")
 
-        conditionLabel = tk.Label(frame, text=values.toolCondition, bg=self.bgColor, fg=self.fgColor)
+        conditionLabel = tk.Label(frame, text=strings.toolCondition, bg=self.bgColor, fg=self.fgColor)
         conditionLabel.grid(row=4, column=0, padx=5, pady=2, sticky="E")
 
         self.conditionTxt = tk.Label(frame, bg=self.bgColor, fg=self.fgColor)
         self.conditionTxt.grid(row=4, column=1, columnspan=3, padx=5, sticky="W")
 
-        priceFullDayLabel = tk.Label(frame, text=values.priceDay, bg=self.bgColor, fg=self.fgColor)
+        priceFullDayLabel = tk.Label(frame, text=strings.priceDay, bg=self.bgColor, fg=self.fgColor)
         priceFullDayLabel.grid(row=5, column=0, padx=5, pady=2, sticky="E")
 
         self.priceFullDayTxt = tk.Label(frame, bg=self.bgColor, fg=self.fgColor)
         self.priceFullDayTxt.grid(row=5, column=1, columnspan=3, padx=5, pady=2, sticky="W")
 
-        priceHalfDayLabel = tk.Label(frame, text=values.priceHalfDay, bg=self.bgColor, fg=self.fgColor)
+        priceHalfDayLabel = tk.Label(frame, text=strings.priceHalfDay, bg=self.bgColor, fg=self.fgColor)
         priceHalfDayLabel.grid(row=6, column=0, padx=5, pady=2, sticky="E")
 
         self.priceHalfDayTxt = tk.Label(frame, bg=self.bgColor, fg=self.fgColor)
@@ -117,10 +140,10 @@ class BookToolPage(tk.Frame):
         # Selection widgets
         ###########################################################################
 
-        DateLabel = tk.Label(frame, text=values.hireDate, bg=self.bgColor, fg=self.fgColor)
+        DateLabel = tk.Label(frame, text=strings.hireDate, bg=self.bgColor, fg=self.fgColor)
         DateLabel.grid(row=7, column=0, padx=5, pady=2, sticky="WNE")
 
-        self.endDateLabel = tk.Label(frame, text=values.returnDate, bg=self.bgColor, fg=self.fgColor)
+        self.endDateLabel = tk.Label(frame, text=strings.returnDate, bg=self.bgColor, fg=self.fgColor)
 
         self.availableDate = tk.Listbox(frame, exportselection=0)
         self.availableDate.bind("<<ListboxSelect>>", lambda event: self.getStartDate())
@@ -131,12 +154,12 @@ class BookToolPage(tk.Frame):
         scrollAvailableDate.grid(row=8, column=1, rowspan=8, sticky="WNS")
 
         self.startDateVar = tk.StringVar()
-        startFullDateRadio = tk.Radiobutton(frame, text=values.fullDay, variable=self.startDateVar,
+        startFullDateRadio = tk.Radiobutton(frame, text=strings.fullDay, variable=self.startDateVar,
                                             indicatoron=False, value="f", width=8, borderwidth=0,
-                                            bg=values.bgInactive)
-        endFullDateRadio = tk.Radiobutton(frame, text=values.halfDay, variable=self.startDateVar,
+                                            bg=colors.bgInactive)
+        endFullDateRadio = tk.Radiobutton(frame, text=strings.halfDay, variable=self.startDateVar,
                                           indicatoron=False, value="h", width=8, borderwidth=0,
-                                          bg=values.bgInactive)
+                                          bg=colors.bgInactive)
 
         self.startDateVar.set("f")
 
@@ -158,12 +181,13 @@ class BookToolPage(tk.Frame):
         self.availableEndDate.grid_remove()
         self.endDateVar = tk.StringVar()
         self.endDateVar.set("f")
-        self.startHalfDateRadio = tk.Radiobutton(frame, text=values.fullDay, variable=self.endDateVar,
+
+        self.startHalfDateRadio = tk.Radiobutton(frame, text=strings.fullDay, variable=self.endDateVar,
                                                  indicatoron=False, value="f", width=8, borderwidth=0,
-                                                 bg=values.bgInactive)
-        self.endHalfDateRadio = tk.Radiobutton(frame, text=values.halfDay, variable=self.endDateVar,
+                                                 bg=colors.bgInactive)
+        self.endHalfDateRadio = tk.Radiobutton(frame, text=strings.halfDay, variable=self.endDateVar,
                                                indicatoron=False, value="h", width=8, borderwidth=0,
-                                               bg=values.bgInactive)
+                                               bg=colors.bgInactive)
 
         self.startHalfDateRadio.grid(row=16, column=2, sticky="W")
         self.endHalfDateRadio.grid(row=16, column=2, sticky="E")
@@ -171,7 +195,7 @@ class BookToolPage(tk.Frame):
         self.startHalfDateRadio.grid_remove()
         self.endHalfDateRadio.grid_remove()
 
-        hireIMG = tk.PhotoImage(file=values.buttonHire)
+        hireIMG = tk.PhotoImage(file=strings.buttonHire)
         hireButton = tk.Label(frame, image=hireIMG, bg=self.bgColor)
         hireButton.image = hireIMG
         hireButton.bind("<Button-1>", lambda event: self.hireTool())
@@ -180,19 +204,19 @@ class BookToolPage(tk.Frame):
         self.riderValue = tk.IntVar()
         self.riderValue.set(0)
 
-        self.riderRadio = tk.Radiobutton(frame, text=values.arrangeRider, variable=self.riderValue, value=1,
-                                         bg=self.bgColor, fg=self.fgColor,activebackground=self.bgColor,
+        self.riderRadio = tk.Radiobutton(frame, text=strings.arrangeRider, variable=self.riderValue, value=1,
+                                         bg=self.bgColor, fg=self.fgColor, activebackground=self.bgColor,
                                          activeforeground=self.fgColor, selectcolor=self.bgColor,
                                          command=lambda: self.showArrangeRider())
         self.riderRadio.grid(row=7, column=4)
         self.riderRadio.grid_remove()
 
-        self.pickUpLabel = tk.Label(frame, text=values.pickUpLocation, bg=self.bgColor, fg=self.fgColor)
+        self.pickUpLabel = tk.Label(frame, text=strings.pickUpLocation, bg=self.bgColor, fg=self.fgColor)
         self.pickUpLabel.grid(row=8, column=4)
         self.pickUpEntry = tk.Entry(frame, width=20)
         self.pickUpEntry.grid(row=8, column=5, padx=5)
 
-        self.dropOffLabel = tk.Label(frame, text=values.dropOffLocation, bg=self.bgColor, fg=self.fgColor)
+        self.dropOffLabel = tk.Label(frame, text=strings.dropOffLocation, bg=self.bgColor, fg=self.fgColor)
         self.dropOffLabel.grid(row=9, column=4)
         self.dropOffEntry = tk.Entry(frame, width=20)
         self.dropOffEntry.grid(row=9, column=5, padx=5)
@@ -202,10 +226,7 @@ class BookToolPage(tk.Frame):
         self.dropOffLabel.grid_remove()
         self.dropOffEntry.grid_remove()
 
-        # TODO
-        # Keys: HireBy,startDate,endDate,confirmedEndDate anything else? Owner(or find by tool ID)
-
-        backButton = tk.Button(self, text=values.back, command=lambda: self.controller.show_frame("SearchToolPage"))
+        backButton = tk.Button(self, text=strings.back, command=lambda: self.controller.show_frame(strings.searchToolClass, "temp"))
         backButton.grid(row=0, column=0, sticky="NW")
 
     def showReturnDateList(self):
@@ -278,10 +299,10 @@ class BookToolPage(tk.Frame):
             self.dropOffEntry.config(bg=self.fgColor, state="normal")
 
         else:
-            self.pickUpLabel.config(fg=values.bgInactive)
-            self.dropOffLabel.config(fg=values.bgInactive)
-            self.pickUpEntry.config(bg=values.bgInactive, state="disabled")
-            self.dropOffEntry.config(bg=values.bgInactive, state="disabled")
+            self.pickUpLabel.config(fg=colors.bgInactive)
+            self.dropOffLabel.config(fg=colors.bgInactive)
+            self.pickUpEntry.config(bg=colors.bgInactive, state="disabled")
+            self.dropOffEntry.config(bg=colors.bgInactive, state="disabled")
 
     def verifyHiring(self):
         """
@@ -307,16 +328,17 @@ class BookToolPage(tk.Frame):
 
         if self.start_date and self.end_date:
             print("sT: {}; eT: {}".format(self.startDateVar.get(), self.endDateVar.get()))
-            hiredTool = Bookings(self.tool.getID(), self.login, self.tool.getCondition(), self.start_date,
-                                 self.startDateVar.get(), self.end_date, self.endDateVar.get())
+            hiredTool = Bookings(util.generateID(), self.tool.getID(), self.controller.login, self.tool.getCondition(),
+                                 self.start_date, self.startDateVar.get(), self.end_date, self.endDateVar.get(),
+                                 strings.toolStatus[0])
 
             hiredTool.setPickUpLocation(self.pickUpEntry.get())
             hiredTool.setDropOffLocation(self.dropOffEntry.get())
 
             if self.verifyHiring():
                 #         obj,     simplePath,     fieldNames,           complex path
-                wf.write(hiredTool, None, values.fieldNames_booking, values.filePath_booking)
-                self.controller.show_frame("SearchToolPage")
+                wf.write(hiredTool, None, strings.fieldNames_booking, strings.filePath_booking)
+                self.controller.show_frame(strings.searchToolClass)
             else:
                 print("too late.. item is booked")
         else:

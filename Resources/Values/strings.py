@@ -1,36 +1,42 @@
-############################
-# Colors
-############################
-bgColor = "#0D47A1"
-fgColor = "white"
-errorColor = "#FA8072"
-bgInactive = "grey"
-
-
-############################
-# Strings
-############################
 appTitle = "Shared Power"
 asterix = "*"
-currency = "$"
+currency = "£"
 back = "Back"
 dateFormat = "%d/%m/%Y"
 welcomeText = "Welcome to Shared Power!!!"
+# --------------
+# Classes
+# --------------
+myToolClass = "MyToolPage"
+addToolClass = "AddToolPage"
+bookToolClass = "BookToolPage"
+loginClass = "LoginPage"
+registerClass = "RegisterPage"
+returnToolClass = "ReturnToolPage"
+searchToolClass = "SearchToolPage"
+welcomeClass = "WelcomePage"
 # --------------
 # Image Paths
 # --------------
 buttonAdd = "Resources/Drawable/btn_add.png"
 buttonBack = "Resources/Drawable/btn_back.png"
 buttonHire = "Resources/Drawable/btn_hire.png"
+account = "Resources/Drawable/account.png"
+
+# --------------
+# Tool
+# --------------
+toolStatus = ["hired", "pending_receive", "returned", "inventory"]
 
 # --------------
 # Database
 # --------------
 fieldNames_user = ['login', 'first_name', 'last_name', 'user_password', 'email', 'user_adress', 'user_phone_number']
 fieldNames_tool = ['ID', 'owner', 'title', 'description', 'condition', 'priceFullDay', 'priceHalfDay', 'imgPath',
-                   'availability']
-fieldNames_booking = ['toolID', 'userName', 'bookInCondition', 'startDate', 'startTerm', 'expectedReturnDate',
-                      'expectedTerm', 'returnDate', 'bookOutCondition', 'pickUpLocation', 'dropOffLocation']
+                   'status', 'availability']
+fieldNames_booking = ['bookingID', 'toolID', 'userName', 'bookInCondition', 'startDate', 'startTerm',
+                      'expectedReturnDate', 'expectedTerm', 'status', 'returnDate', 'bookOutCondition',
+                      'pickUpLocation', 'dropOffLocation']
 filePath_user = "Data/users.csv"
 filePath_tool = "Data/tools.csv"
 filePath_booking = "Data/Bookings/"
@@ -44,6 +50,7 @@ menuMyTools = "My Tools"
 menuMyBookings = "My Bookings"
 menuAddTool = "Add Tool"
 menuSearchTool = "Search Tool"
+menuLogOut = "Log Out"
 # --------------
 # Register Page
 # --------------
@@ -95,6 +102,7 @@ myToolTitle = "My Tools"
 # Return Tool Page
 # --------------
 tool = "Tool"
+returnItem = "Return item"
 
 # --------------
 # Search Tool Page
@@ -127,20 +135,3 @@ errorWrongImageFormat = "Wrong image format"
 errorUnsupportedImageFormat = "Only .png format supported"
 errorIncorrectPriceFormat = "Incorrect Price format"
 
-############################
-# Dimens
-############################
-registerWindowWidth = 280
-registerWindowHeigh = 340
-mainWindowWidth = 800
-mainWindowHeigh = 500
-
-
-############################
-# Fonts
-############################
-addImageFont = "Helvetica 10 underline bold"
-dontHaveAccountFont = "Helvetica 7 italic"
-signUpFont = "Helvetica 7 bold underline"
-buttonFont = "Helvetica 10 bold"
-welcomeFont = "Helvetica 16"
