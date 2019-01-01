@@ -33,7 +33,7 @@ toolStatus = ["hired", "pending_receive", "returned", "inventory"]
 # --------------
 fieldNames_user = ['login', 'first_name', 'last_name', 'user_password', 'email', 'user_adress', 'user_phone_number']
 fieldNames_tool = ['ID', 'owner', 'title', 'description', 'condition', 'priceFullDay', 'priceHalfDay', 'imgPath',
-                   'status', 'availability']
+                   'availability']
 fieldNames_booking = ['bookingID', 'toolID', 'userName', 'bookInCondition', 'startDate', 'startTerm',
                       'expectedReturnDate', 'expectedTerm', 'status', 'returnDate', 'bookOutCondition',
                       'pickUpLocation', 'dropOffLocation']
@@ -103,6 +103,8 @@ myToolTitle = "My Tools"
 # --------------
 tool = "Tool"
 returnItem = "Return item"
+cancelBooking = "Cancel booking"
+cancelErrorMessage = "Sorry, its too late to cancel"
 
 # --------------
 # Search Tool Page

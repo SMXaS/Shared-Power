@@ -6,17 +6,12 @@ import Code.Utilities.util as util
 
 
 class MyToolPage(tk.Frame):
-    placeHolder = []
     bgColor = colors.bgColor
     fgColor = colors.fgColor
     width = dimens.mainWindowWidth
     heigh = dimens.mainWindowHeigh
 
     def __init__(self, parent, controller):
-        """
-        :param master: master
-        :param arg: login
-        """
 
         tk.Frame.__init__(self, parent)
         self.config(bg=colors.bgColor)
@@ -50,14 +45,18 @@ class MyToolPage(tk.Frame):
             self.myLabel.bind("<Button-1>", lambda event: '/your function/' )
 
         """
-
+        frame = tk.Frame(self, bg=self.bgColor)
+        frame.grid(row=0, column=0, sticky="", pady=40)
 
         ####################################################################################################
         #                                            DISPLAY
         ####################################################################################################
-        self.tree = ttk.Treeview(self, columns=("Full day price", "Half day price"))
+        self.__errorLabel = tk.Label(frame, bg=colors.bgColor, fg=colors.fgColor)
+        self.__errorLabel.grid(row=0, column=0, sticky="WN")
 
-        self.yscrollbar = ttk.Scrollbar(self, orient='vertical', command=self.tree.yview)
+        self.tree = ttk.Treeview(frame, columns=("Full day price", "Half day price"))
+
+        self.yscrollbar = ttk.Scrollbar(frame, orient='vertical', command=self.tree.yview)
         self.tree.configure(yscrollcommand=self.yscrollbar.set)
 
         self.tree.heading('#0', text='')
@@ -74,16 +73,16 @@ class MyToolPage(tk.Frame):
         #                                           WIDGETS
         ####################################################################################################
 
-        editButton = tk.Label(self, text="Edit Tool", bg=self.bgColor, fg=self.fgColor,
+        editButton = tk.Label(frame, text="Edit Tool", bg=self.bgColor, fg=self.fgColor,
                               font='Helvetica 10 bold')
-        editButton.grid(row=0, column=2, padx=1, pady=20, sticky="N")
-        #editButton.bind("<Button-1>", lambda event: self.selectItem())
+        editButton.grid(row=2, column=1, padx=1, pady=20, sticky="N")
 
-        deleteButton = tk.Label(self, text="Delete Tool", bg=self.bgColor, fg=self.fgColor,
+        # editButton.bind("<Button-1>", lambda event: self.selectItem())
+        deleteButton = tk.Label(frame, text="Delete Tool", bg=self.bgColor, fg=self.fgColor,
                                 font='Helvetica 10 bold')
         deleteButton.grid(row=2, column=2, padx=0, pady=10, sticky="N")
 
-        #deleteButton.bind("<Button-2>", lambda event: self.selectItem())
+        # deleteButton.bind("<Button-2>", lambda event: self.selectItem())
 
     # Rename this function according to what you want to do
     def ThereWillBeYourLogic(self):
@@ -95,8 +94,8 @@ class MyToolPage(tk.Frame):
         
         get items:
             for i in range(len(self.toolList)):
-                self.toolList[i].getTitle()
-                self.toolList[i].getDescription()
+                title = self.toolList[i].getTitle()
+                description = self.toolList[i].getDescription()
                 ...
                 for more information check documentation on github
         """
@@ -109,6 +108,7 @@ class MyToolPage(tk.Frame):
 
         for i in self.tree.get_children():
             self.tree.delete(i)
+
         if self.toolList:
             for i in range(len(self.toolList)):
                 self.tree.insert('', 'end', text=self.toolList[i].getTitle(),

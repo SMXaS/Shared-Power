@@ -9,7 +9,7 @@ from Code.Utilities import WriteFile as wf
 from Entities.User import User
 from Entities.Tool import Tool
 from Entities.Bookings import Bookings
-import Resources.Values.strings as values
+import Resources.Values.strings as strings
 
 
 def verifyLogin (userName, userPassword):
@@ -21,24 +21,24 @@ def verifyLogin (userName, userPassword):
     :return True or error code
     """
 
-    exist = os.path.isfile(values.filePath_user)
+    exist = os.path.isfile(strings.filePath_user)
     if exist:
-        with open(values.filePath_user, 'r') as f:
+        with open(strings.filePath_user, 'r') as f:
             l = list(csv.reader(f))
             my_dict = {i[0]: [x for x in i[1:]] for i in zip(*l)}
             if userName in my_dict.get('login'):
-                with open(values.filePath_user, 'r') as f:
+                with open(strings.filePath_user, 'r') as f:
                     l = list(csv.reader(f))
                     my_dict = {i[0]: [x for x in i[1:]] for i in zip(*l)}
                     ind = my_dict['login'].index(userName)
                     if userPassword == my_dict['user_password'][ind]:
                         return True
                     else:
-                        return values.errorIncorrectPassword
+                        return strings.errorIncorrectPassword
             else:
-                return values.errorUserDoesntExist
+                return strings.errorUserDoesntExist
     else:
-        return values.errorUserDoesntExist
+        return strings.errorUserDoesntExist
 
 
 def verifyRegistration (user):
@@ -65,36 +65,36 @@ def verifyRegistration (user):
     # Check if entries contain spaces or empty fields
     for i in range(len(user)):
         if not user[i]:
-            return values.errorEmptyFields
+            return strings.errorEmptyFields
         elif " " in user[i]:
             if i != 4:
-                return values.errorSpaces
-    exist = os.path.isfile(values.filePath_user)
+                return strings.errorSpaces
+    exist = os.path.isfile(strings.filePath_user)
     if exist:
-        with open(values.filePath_user, 'r') as f:
+        with open(strings.filePath_user, 'r') as f:
             l = list(csv.reader(f))
             my_dict = {i[0]: [x for x in i[1:]] for i in zip(*l)}
             if user[2] in my_dict.get('login'):
-                return values.errorUserAlreadyExist
+                return strings.errorUserAlreadyExist
 
     if user[6] != user[7]:
-        return values.errorEmailMismatch
+        return strings.errorEmailMismatch
 
     if not verifyEmail(user[6]):
-        return values.errorInvalidEmail
+        return strings.errorInvalidEmail
 
     if user[8] != user[9]:
-        return values.errorPasswordMismatch
+        return strings.errorPasswordMismatch
     else:
         if len(user[8]) < 4:
-            return values.errorShortPassword
+            return strings.errorShortPassword
 
     if not str(user[10]).isdigit():
-        return values.errorInvalidEmail
+        return strings.errorInvalidEmail
 
     address = "{} - {}, {}".format(user[3], user[5], user[4])
     newUser = User(user[2], user[0], user[1], user[8], user[6], address, user[10])
-    wf.write(newUser, values.filePath_user, values.fieldNames_user)
+    wf.write(newUser, strings.filePath_user, strings.fieldNames_user)
     createUserFolder(user[2])
 
     return True
@@ -107,7 +107,7 @@ def createUserFolder(userName):
     :param userName: str (userName)
     :return: None
     """
-    path = values.filePath_invoiceFolder.format(userName)
+    path = strings.filePath_invoiceFolder.format(userName)
     os.mkdir(path)
 
 
@@ -151,38 +151,7 @@ def verifyIMG(path):
             return True
 
 
-def verifyTool(tool):
-    """
 
-    :param obj(tool)
-    :return True or error code
-
-    tool[0] = title
-    tool[1] = description
-    tool[2] = tool condition
-    tool[3] = price full day
-    tool[4] = price half day
-    tool[5] = img path
-    """
-
-    for i in range(len(tool)):
-        if not tool[i]:
-            return values.errorEmptyFields
-        if i == 3 or i == 4:
-            if " " in tool[i]:
-                return values.errorIncorrectPriceFormat
-    try:
-        val = float(tool[3])
-        val = float(tool[4])
-    except ValueError:
-        return values.errorIncorrectPriceFormat
-
-    if not verifyIMG(tool[5]):
-        return values.errorWrongImageFormat
-    if isinstance(verifyIMG(tool[5]), str):
-        return values.errorUnsupportedImageFormat
-
-    return True
 
 
 def copyIMG(src, dst,  ID):
@@ -208,17 +177,8 @@ def getFileName(path):
     return os.path.basename(path)
 
 
-def generateID():
-    """
-    generates unique ID
-
-    :return: ID (for tool)
-    """
-    return uuid.uuid4()
-
-
 def removeIMG(path):
-    pass
+    os.remove(path)
 
 
 def convertFromListToObj(list):
@@ -230,6 +190,7 @@ def convertFromListToObj(list):
 
     return Tool(list[0], list[1], list[2], list[3], list[4], list[5], list[6], list[7], list[8])
 
+
 def convertToObj(index):
     """
     Converts dict(tool) to obj(tool)
@@ -238,7 +199,7 @@ def convertToObj(index):
     :return obj(tool)
     """
 
-    with open(values.filePath_tool, 'r') as f:
+    with open(strings.filePath_tool, 'r') as f:
         l = list(csv.reader(f))
         dict = {i[0]: [x for x in i[1:]] for i in zip(*l)}
         tool = Tool(dict["ID"][index], dict["owner"][index], dict["title"][index],
@@ -246,6 +207,7 @@ def convertToObj(index):
                     dict["priceFullDay"][index], dict["priceHalfDay"][index],
                     dict["imgPath"][index], dict["availability"][index])
     return tool
+
 
 def convertBookingToObject(index, path):
     """
@@ -266,6 +228,7 @@ def convertBookingToObject(index, path):
                            myDict["pickUpLocation"][index], myDict["dropOffLocation"][index])
     return booking
 
+
 def getBookingDates(bookings):
     """
     will check for ongoing bookings
@@ -276,7 +239,7 @@ def getBookingDates(bookings):
 
     firstAvailableDate = datetime.now()
     allDateList = []
-    dateFormat = values.dateFormat
+    dateFormat = strings.dateFormat
     for i in range(42):
         firstAvailableDate+= timedelta(days=1)
         # check if date is available
@@ -316,7 +279,7 @@ def getNextAvailableDates(startDate, dayList):
     :return: list(str(available days))
     """
 
-    dateFormat = values.dateFormat
+    dateFormat = strings.dateFormat
     allDateList = []
     date = datetime.strptime(startDate, dateFormat)
     firstNextDate = date
@@ -345,7 +308,7 @@ def getDayDifference(startDate, endDate):
     :return: int(difference)
     """
 
-    dateFormat = values.dateFormat
+    dateFormat = strings.dateFormat
     date1 = datetime.strptime(startDate, dateFormat)
     date2 = datetime.strptime(endDate, dateFormat)
     diff = date2-date1
@@ -362,7 +325,7 @@ def verifyBooking(startDate, availableDays, diff):
     :return: boolean (True - approved, False - not)
     """
 
-    dateFormat = values.dateFormat
+    dateFormat = strings.dateFormat
     date = datetime.strptime(startDate, dateFormat)
     allDateList = []
     for i in range(diff):

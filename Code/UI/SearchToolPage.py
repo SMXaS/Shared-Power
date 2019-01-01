@@ -5,7 +5,7 @@ from Code.Utilities import util, ReadFile as rf
 
 
 class SearchToolPage(tk.Frame):
-    placeHolder = []
+    toolList = []
     bgColor = colors.bgColor
     fgColor = colors.fgColor
     width = dimens.mainWindowWidth
@@ -23,12 +23,14 @@ class SearchToolPage(tk.Frame):
         self.columnconfigure(0, weight=1)
 
         self.initUI()
-        self.retrieveData()
+
 
     def start(self, args):
         if not args:
             for item in self.tree.selection():
                 self.tree.selection_remove(item)
+
+        self.retrieveData()
 
     def initUI(self):
 
@@ -77,8 +79,8 @@ class SearchToolPage(tk.Frame):
             for item in self.tree.selection():
                 itemID = self.tree.item(item, "tag")
 
-            for i in range(len(self.placeHolder)):
-                if self.placeHolder[i].getID() in itemID:
+            for i in range(len(self.toolList)):
+                if self.toolList[i].getID() in itemID:
                     index = i
                     break
             return index
@@ -93,7 +95,7 @@ class SearchToolPage(tk.Frame):
         curItem = self.tree.focus()
         if curItem:
             index = self.getItemIDIndex()
-            self.controller.show_frame(strings.bookToolClass, self.placeHolder[index])
+            self.controller.show_frame(strings.bookToolClass, self.toolList[index])
 
     def retrieveData(self):
         """
@@ -102,9 +104,9 @@ class SearchToolPage(tk.Frame):
         :return: None
         """
 
-        self.placeHolder.clear()
+        self.toolList.clear()
 
-        if not self.searchEntry.get():
+        if not self.searchEntry.get().lower():
             items = rf.getTool(False, "availability", "yes")
         else:
             titleList = rf.getTool(False, "title", self.searchEntry.get().lower())
@@ -122,7 +124,7 @@ class SearchToolPage(tk.Frame):
                     items.append(descriptionList[i])
 
         for i in range(len(items)):
-            self.placeHolder.append(util.convertToObj(items[i]))
+            self.toolList.append(util.convertToObj(items[i]))
         self.populateData()
 
     def populateData(self):
@@ -133,9 +135,9 @@ class SearchToolPage(tk.Frame):
 
         for i in self.tree.get_children():
             self.tree.delete(i)
-        if self.placeHolder:
-            for i in range(len(self.placeHolder)):
-                self.tree.insert('', 'end', text=self.placeHolder[i].getTitle(),
-                                 values=(self.placeHolder[i].getPriceFullDay(),
-                                         self.placeHolder[i].getPriceHalfDay()),
-                                 tag=self.placeHolder[i].getID())
+        if self.toolList:
+            for i in range(len(self.toolList)):
+                self.tree.insert('', 'end', text=self.toolList[i].getTitle(),
+                                 values=(self.toolList[i].getPriceFullDay(),
+                                         self.toolList[i].getPriceHalfDay()),
+                                 tag=self.toolList[i].getID())
