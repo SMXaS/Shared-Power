@@ -1,4 +1,5 @@
 from Resources.Values import strings
+from Code.MyInvoice import MyInvoice
 import Code.Utilities.util as util
 import Code.Utilities.ReadFile as rf
 import datetime
@@ -26,12 +27,13 @@ class ReturnTool:
         return datetime.datetime.now().strftime(strings.dateFormat)
 
     def returnItem(self):
-            returnItemObj = self.__bookingList[self.__getBookingIndex()]
-            # toolStatus[1] = "pending_receive"
-            returnItemObj.setStatus(strings.toolStatus[1])
-            returnItemObj.setReturnDate(self.__getCurrentDate())
-            # TODO edit booking #returnItemObj#
-            print("new status:", returnItemObj.getStatus())
+        returnItemObj = self.__bookingList[self.__getBookingIndex()]
+        # toolStatus[1] = "pending_receive"
+        returnItemObj.setStatus(strings.toolStatus[1])
+        returnItemObj.setReturnDate(self.__getCurrentDate())
+        # TODO edit booking db #returnItemObj#
+        print("new status:", returnItemObj.getStatus())
+        MyInvoice(self.__login).generateInvoice(returnItemObj)
 
     def __getBookingIndex(self):
         curItem = self.__tree.focus()

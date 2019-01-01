@@ -1,0 +1,7 @@
+bookingID,toolID,userName,bookInCondition,startDate,startTerm,expectedReturnDate,expectedTerm,status,returnDate,bookOutCondition,pickUpLocation,dropOffLocation
+999aaf84-d546-48de-8be4-3a2833d164bd,27f5c5a9-0c0b-4559-bd24-2a4e50f58c58,test,used,04/01/2019,h,04/01/2019,f,hired,,,,
+0df81366-ac2f-441f-a970-a05541de5a3d,27f5c5a9-0c0b-4559-bd24-2a4e50f58c58,test,used,04/01/2019,f,05/01/2019,f,hired,,,,
+48da8e87-fba1-41e4-9af7-1f4d31e4681b,27f5c5a9-0c0b-4559-bd24-2a4e50f58c58,test,used,03/01/2019,f,03/01/2019,f,hired,,,,
+1eb7d4c1-0ddc-458b-8018-657d1da0b917,27f5c5a9-0c0b-4559-bd24-2a4e50f58c58,test,used,01/02/2019,h,01/02/2019,f,hired,,,uni,
+3207f85b-8a1a-4c26-b10e-e1d7722cdddf,27f5c5a9-0c0b-4559-bd24-2a4e50f58c58,test,used,02/02/2019,f,02/02/2019,f,hired,,,,uni
+e9f8658b-4e92-4d62-bce5-65fa69244ebf,27f5c5a9-0c0b-4559-bd24-2a4e50f58c58,test,used,03/02/2019,f,03/02/2019,f,hired,,,uni,uni

@@ -2,7 +2,7 @@ import csv
 import os
 
 
-def write(obj, filePath, fieldNames, bookingFilePath=""):
+def write(obj, filePath, fieldNames, complexFilePath="", filePathParam=""):
     """
     This function writes an object into a file
 
@@ -12,10 +12,11 @@ def write(obj, filePath, fieldNames, bookingFilePath=""):
     :param bookingFilePath: location where to write (complex path)
     :return: None
     """
-    if bookingFilePath:
-        path = "{}{}.csv".format(bookingFilePath, obj.getToolID())
+    if complexFilePath:
+        path = "{}{}.csv".format(complexFilePath, filePathParam)
     else:
         path = filePath
+
     exist = os.path.isfile(path)
     with open(path, "a") as f:
         csv_writer = csv.DictWriter(f, fieldnames=fieldNames, delimiter=',', lineterminator='\n')

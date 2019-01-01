@@ -9,6 +9,7 @@ from Code.Utilities import WriteFile as wf
 from Entities.User import User
 from Entities.Tool import Tool
 from Entities.Bookings import Bookings
+from Entities.Invoice import Invoice
 import Resources.Values.strings as strings
 
 
@@ -107,7 +108,7 @@ def createUserFolder(userName):
     :param userName: str (userName)
     :return: None
     """
-    path = strings.filePath_invoiceFolder.format(userName)
+    path = "{}{}".format(strings.filePath_invoiceFolder, userName)
     os.mkdir(path)
 
 
@@ -188,7 +189,7 @@ def convertFromListToObj(list):
     :return: obj(Tool)
     """
 
-    return Tool(list[0], list[1], list[2], list[3], list[4], list[5], list[6], list[7], list[8])
+    return Tool(list[0], list[1], list[2], list[3], list[4], list[5], list[6], list[7], list[8], list[9])
 
 
 def convertToObj(index):
@@ -205,16 +206,16 @@ def convertToObj(index):
         tool = Tool(dict["ID"][index], dict["owner"][index], dict["title"][index],
                     dict["description"][index], dict["condition"][index],
                     dict["priceFullDay"][index], dict["priceHalfDay"][index],
-                    dict["imgPath"][index], dict["availability"][index])
+                    dict["riderCharge"][index], dict["imgPath"][index], dict["availability"][index])
     return tool
 
 
 def convertBookingToObject(index, path):
     """
-        Converts dict(tool) to obj(tool)
+        Converts dict(booking) to obj(booking)
 
         :param index (in db)
-        :return obj(tool)
+        :return obj(booking)
         """
 
     with open(path, 'r') as f:
@@ -227,6 +228,22 @@ def convertBookingToObject(index, path):
                            myDict["returnDate"][index], myDict["bookOutCondition"][index],
                            myDict["pickUpLocation"][index], myDict["dropOffLocation"][index])
     return booking
+
+
+def convertInvoiceToObj(index, path):
+    """
+        Converts dict(invoice) to obj(invoice)
+
+        :param index (in db)
+        :return obj(invoice)
+        """
+
+    with open(path, 'r') as f:
+        l = list(csv.reader(f))
+        myDict = {i[0]: [x for x in i[1:]] for i in zip(*l)}
+        invoice = Invoice(myDict["user"][index], myDict["toolTitle"][index], myDict["hirePrice"][index],
+                           myDict["riderPrice"][index], myDict["fine"][index])
+    return invoice
 
 
 def getBookingDates(bookings):

@@ -1,11 +1,3 @@
-ID,owner,title,description,condition,priceFullDay,priceHalfDay,imgPath,availability
-c70aa2fe-7f69-48e2-b181-cb149c13c88c,test,Shoe,"smells like Nirvana
-","Some scratches on sides, but its good ",29.9,19.9,Data/Images/c70aa2fe-7f69-48e2-b181-cb149c13c88c,yes
-e5193b09-a578-4b2f-b653-f0cc3a4bbb31,mr_Smith,Locker,"amazon locker
-",brand new,299,199,Data/Images/e5193b09-a578-4b2f-b653-f0cc3a4bbb31,yes
-92a5f682-892e-4237-b041-00db879194a3,edu,smoking pot,"niom niom
-","used, but still good",4,3,Data/Images/92a5f682-892e-4237-b041-00db879194a3,yes
-335a33f1-7a21-4b3a-b15b-f9aa514a4a31,test,pipe,"smoking hot
-",good,40,35,Data/Images/335a33f1-7a21-4b3a-b15b-f9aa514a4a31,yes
-f51e2bd1-4d6e-40ab-852b-10af75d91850,test,second pipe,"lovely pipe
-",used,50,40,Data/Images/f51e2bd1-4d6e-40ab-852b-10af75d91850,yes
+ID,owner,title,description,condition,priceFullDay,priceHalfDay,riderCharge,imgPath,availability
+aac889e8-23c4-4ddf-824c-821bc9756d25,test,shoe,smelly one,used,29.9,19.9,5,Data/Images/aac889e8-23c4-4ddf-824c-821bc9756d25,yes
+27f5c5a9-0c0b-4559-bd24-2a4e50f58c58,test,smoking pot,i'm so high..,used,10,6,8,Data/Images/27f5c5a9-0c0b-4559-bd24-2a4e50f58c58,yes

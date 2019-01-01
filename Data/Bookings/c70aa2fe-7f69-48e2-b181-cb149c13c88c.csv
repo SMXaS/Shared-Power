@@ -1,3 +1,0 @@
-bookingID,toolID,userName,bookInCondition,startDate,startTerm,expectedReturnDate,expectedTerm,status,returnDate,bookOutCondition,pickUpLocation,dropOffLocation
-4f3994ab-d7f5-478e-bf45-5e4124fadc84,c70aa2fe-7f69-48e2-b181-cb149c13c88c,test,"Some scratches on sides, but its good ",01/01/2019,f,03/01/2019,f,hired,,,,
-6c0ced7c-5ffa-4847-911f-e5deb088a0af,c70aa2fe-7f69-48e2-b181-cb149c13c88c,test,"Some scratches on sides, but its good ",04/01/2019,f,05/01/2019,h,hired,,,uni,uni

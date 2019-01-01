@@ -1,5 +1,6 @@
 import csv
 import glob
+import os
 from Code.Utilities import util
 from Resources.Values import strings
 
@@ -12,19 +13,20 @@ def getTool(returnObj, column, value):
     :param value: str(value)
     :return: object or list
     """
+    exist = os.path.isfile("Data/tools.csv")
+    if exist:
+        with open("Data/tools.csv", 'r') as f:
+            l = list(csv.reader(f))
+            my_dict = {i[0]: [x for x in i[1:]] for i in zip(*l)}
+            item = [i for i, x in enumerate(my_dict[column]) if value in x.lower()]
 
-    with open("Data/tools.csv", 'r') as f:
-        l = list(csv.reader(f))
-        my_dict = {i[0]: [x for x in i[1:]] for i in zip(*l)}
-        item = [i for i, x in enumerate(my_dict[column]) if value in x.lower()]
-
-    if returnObj:
-        itemList = []
-        for i in range(len(item)):
-            itemList.append(util.convertToObj(item[i]))
-        return itemList
-    else:
-        return item
+        if returnObj:
+            itemList = []
+            for i in range(len(item)):
+                itemList.append(util.convertToObj(item[i]))
+            return itemList
+        else:
+            return item
 
 def get_allfromcolumn(key):
     """
@@ -79,6 +81,18 @@ def getAllBookings(column, arg):
             for k in range(len(item)):
                 if my_dict["status"][item[k]] == (strings.toolStatus[0] or strings.toolStatus[1]):
                     itemList.append(util.convertBookingToObject(item[k], pathList[i]))
+
+    return itemList
+
+
+def getAllInvoices(column, arg, path):
+    itemList = []
+    with open(path, 'r') as f:
+        l = list(csv.reader(f))
+        my_dict = {i[0]: [x for x in i[1:]] for i in zip(*l)}
+        item = [i for i, x in enumerate(my_dict[column]) if arg == x]
+        for k in range(len(item)):
+            itemList.append(util.convertInvoiceToObj(item[k], path))
 
     return itemList
 

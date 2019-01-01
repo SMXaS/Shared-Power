@@ -3,15 +3,32 @@
   <component name="ChangeListManager">
     <list default="true" id="9476d951-1298-4a38-b52b-5632fdff5d7f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/AddTool.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/AddTool.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/Invoice.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/MyInvoice.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/ReturnTool.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/ReturnTool.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Code/UI/AddToolPage.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/UI/AddToolPage.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Code/UI/BookToolPage.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/UI/BookToolPage.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/UI/MyToolPage.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/UI/MyToolPage.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/UI/ReturnToolPage.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/UI/ReturnToolPage.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/UI/SearchToolPage.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/UI/SearchToolPage.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/Utilities/ReadFile.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/Utilities/ReadFile.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/Utilities/WriteFile.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/Utilities/WriteFile.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Code/Utilities/util.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/Utilities/util.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/addTool.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/AddTool.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/Bookings/c70aa2fe-7f69-48e2-b181-cb149c13c88c.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/Images/335a33f1-7a21-4b3a-b15b-f9aa514a4a31.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/Images/8fbb5e5f-4597-40de-80c1-df00c7c8e95c.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/Images/c70aa2fe-7f69-48e2-b181-cb149c13c88c.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/Images/e5193b09-a578-4b2f-b653-f0cc3a4bbb31.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/Images/f51e2bd1-4d6e-40ab-852b-10af75d91850.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/Invoices/agent/test.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/Invoices/bembi/test.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/Invoices/bravo/test.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/Invoices/edu/test.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/Invoices/kvarcas91/test.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/Invoices/mr_Smith/test.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/Invoices/test/test.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Data/tools.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Data/tools.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/users.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Data/users.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Entities/Tool.py" beforeDir="false" afterPath="$PROJECT_DIR$/Entities/Tool.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Resources/Values/strings.py" beforeDir="false" afterPath="$PROJECT_DIR$/Resources/Values/strings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/__main__.py" beforeDir="false" afterPath="$PROJECT_DIR$/__main__.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -23,7 +40,7 @@
     <session id="1032535298">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="13" />
+          <entry key="project.closed" value="14" />
           <entry key="project.open.time.1" value="1" />
           <entry key="project.open.time.13" value="1" />
           <entry key="project.open.time.19" value="1" />
@@ -43,52 +60,90 @@
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="csv" value="16" />
-          <entry key="py" value="320" />
+          <entry key="py" value="375" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="CSV" value="15" />
           <entry key="PLAIN_TEXT" value="1" />
-          <entry key="Python" value="320" />
+          <entry key="Python" value="375" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="csv" value="7" />
-          <entry key="dummy" value="330" />
-          <entry key="py" value="42291" />
+          <entry key="dummy" value="373" />
+          <entry key="py" value="48155" />
           <entry key="txt" value="15" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="CSV" value="7" />
-          <entry key="PLAIN_TEXT" value="345" />
-          <entry key="Python" value="42291" />
+          <entry key="PLAIN_TEXT" value="388" />
+          <entry key="Python" value="48155" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Code/UI/MyToolPage.py">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Code/Utilities/ReadFile.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="982">
-              <caret line="104" lean-forward="true" selection-start-line="104" selection-end-line="104" />
+            <state relative-caret-position="-20">
+              <caret line="95" lean-forward="true" selection-start-line="95" selection-end-line="95" />
               <folding>
-                <element signature="e#0#20#0" expanded="true" />
+                <element signature="e#0#10#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Resources/Values/fonts.py">
+        <entry file="file://$PROJECT_DIR$/Code/Utilities/util.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
+            <state relative-caret-position="559">
+              <caret line="232" column="35" lean-forward="true" selection-start-line="232" selection-start-column="35" selection-end-line="232" selection-end-column="35" />
+              <folding>
+                <element signature="e#0#10#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Code/MyInvoice.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1496">
+              <caret line="126" lean-forward="true" selection-start-line="126" selection-end-line="126" />
+              <folding>
+                <element signature="e#0#24#0" expanded="true" />
+                <element signature="e#998#2455#0" />
+                <element signature="e#2651#3057#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Resources/Values/strings.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2210">
+              <caret line="130" column="25" selection-start-line="130" selection-start-column="25" selection-end-line="130" selection-end-column="25" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Code/UI/InvoicePage.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="191">
+              <caret line="27" column="45" selection-start-line="27" selection-start-column="45" selection-end-line="27" selection-end-column="45" />
+              <folding>
+                <element signature="e#0#20#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -134,8 +189,6 @@
         <option value="$PROJECT_DIR$/MyToolPage.py" />
         <option value="$PROJECT_DIR$/MainMenuUI.py" />
         <option value="$PROJECT_DIR$/Code/UI/MainMenu.py" />
-        <option value="$PROJECT_DIR$/Code/Invoice.py" />
-        <option value="$PROJECT_DIR$/Code/Utilities/WriteFile.py" />
         <option value="$PROJECT_DIR$/Code/UI/StartPage.py" />
         <option value="$PROJECT_DIR$/Resources/Values/values.py" />
         <option value="$PROJECT_DIR$/Resources/Values/colors.py" />
@@ -145,21 +198,26 @@
         <option value="$PROJECT_DIR$/Resources/Values/dimens.py" />
         <option value="$PROJECT_DIR$/Code/UI/LoginPage.py" />
         <option value="$PROJECT_DIR$/Resources/Values/fonts.py" />
-        <option value="$PROJECT_DIR$/__main__.py" />
         <option value="$PROJECT_DIR$/Data/tools.csv" />
-        <option value="$PROJECT_DIR$/Entities/Tool.py" />
-        <option value="$PROJECT_DIR$/Code/Utilities/ReadFile.py" />
         <option value="$PROJECT_DIR$/Entities/Bookings.py" />
-        <option value="$PROJECT_DIR$/Resources/Values/strings.py" />
         <option value="$PROJECT_DIR$/Code/UI/ReturnToolPage.py" />
         <option value="$PROJECT_DIR$/Code/UI/SearchToolPage.py" />
-        <option value="$PROJECT_DIR$/Code/ReturnTool.py" />
         <option value="$PROJECT_DIR$/Code/addTool.py" />
-        <option value="$PROJECT_DIR$/Code/UI/AddToolPage.py" />
-        <option value="$PROJECT_DIR$/Code/UI/BookToolPage.py" />
-        <option value="$PROJECT_DIR$/Code/Utilities/util.py" />
-        <option value="$PROJECT_DIR$/Code/AddTool.py" />
         <option value="$PROJECT_DIR$/Code/UI/MyToolPage.py" />
+        <option value="$PROJECT_DIR$/Code/Invoice.py" />
+        <option value="$PROJECT_DIR$/Entities/Tool.py" />
+        <option value="$PROJECT_DIR$/Code/Utilities/WriteFile.py" />
+        <option value="$PROJECT_DIR$/Code/AddTool.py" />
+        <option value="$PROJECT_DIR$/Entities/Invoice.py" />
+        <option value="$PROJECT_DIR$/Code/UI/BookToolPage.py" />
+        <option value="$PROJECT_DIR$/__main__.py" />
+        <option value="$PROJECT_DIR$/Code/UI/AddToolPage.py" />
+        <option value="$PROJECT_DIR$/Code/Utilities/util.py" />
+        <option value="$PROJECT_DIR$/Code/ReturnTool.py" />
+        <option value="$PROJECT_DIR$/Code/Utilities/ReadFile.py" />
+        <option value="$PROJECT_DIR$/Resources/Values/strings.py" />
+        <option value="$PROJECT_DIR$/Code/UI/InvoicePage.py" />
+        <option value="$PROJECT_DIR$/Code/MyInvoice.py" />
       </list>
     </option>
   </component>
@@ -192,6 +250,12 @@
               <item name="Shared-Power" type="462c0819:PsiDirectoryNode" />
               <item name="Code" type="462c0819:PsiDirectoryNode" />
               <item name="UI" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Shared-Power" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Shared-Power" type="462c0819:PsiDirectoryNode" />
+              <item name="Code" type="462c0819:PsiDirectoryNode" />
+              <item name="Utilities" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Shared-Power" type="b2602c69:ProjectViewProjectNode" />
@@ -404,12 +468,12 @@
     <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24777327" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.23643725" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3291815" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.36654803" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.4822064" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39679715" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -472,13 +536,6 @@
         <state showInfoPanel="true" rowLines="3" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Code/Invoice.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="18" lean-forward="true" selection-start-line="18" selection-end-line="18" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Entities/User.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -510,23 +567,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Code/UI/RegisterPage.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="593">
-          <caret line="41" column="21" lean-forward="true" selection-start-line="41" selection-start-column="21" selection-end-line="41" selection-end-column="21" />
-          <folding>
-            <element signature="e#0#59#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/__main__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="27" selection-start-line="27" selection-end-line="27" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Data/tools.csv">
       <provider selected="true" editor-type-id="csv-text-editor">
         <state>
@@ -535,33 +575,6 @@
       </provider>
       <provider editor-type-id="csv-table-editor">
         <state showInfoPanel="true" rowLines="3" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Code/Utilities/ReadFile.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="81" lean-forward="true" selection-start-line="81" selection-end-line="81" />
-          <folding>
-            <element signature="e#0#10#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Entities/Bookings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="19" column="29" selection-start-line="19" selection-start-column="29" selection-end-line="19" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Code/Utilities/WriteFile.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="130">
-          <caret line="23" selection-start-line="23" selection-end-line="23" />
-          <folding>
-            <element signature="e#0#10#0" expanded="true" />
-          </folding>
-        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Code/UI/LoginPage.py">
@@ -585,24 +598,61 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Entities/Tool.py">
+    <entry file="file://$PROJECT_DIR$/Resources/Values/fonts.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Code/UI/RegisterPage.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="599">
+          <caret line="41" column="21" lean-forward="true" selection-start-line="41" selection-start-column="21" selection-end-line="41" selection-end-column="21" />
+          <folding>
+            <element signature="e#0#59#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Code/UI/MyToolPage.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="80">
+          <caret line="88" selection-start-line="88" selection-end-line="88" />
+          <folding>
+            <element signature="e#0#20#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Code/Utilities/WriteFile.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
-          <caret line="16" column="23" lean-forward="true" selection-start-line="16" selection-start-column="23" selection-end-line="16" selection-end-column="23" />
+          <caret line="18" selection-start-line="18" selection-end-line="18" />
+          <folding>
+            <element signature="e#0#10#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Resources/Values/strings.py">
+    <entry file="file://$PROJECT_DIR$/Entities/Tool.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="106" column="52" selection-start-line="106" selection-start-column="52" selection-end-line="106" selection-end-column="52" />
+        <state relative-caret-position="187">
+          <caret line="11" column="24" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="24" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Code/UI/ReturnToolPage.py">
+    <entry file="file://$PROJECT_DIR$/Entities/Bookings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="79">
-          <caret line="32" lean-forward="true" selection-start-line="32" selection-end-line="32" />
+        <state relative-caret-position="228">
+          <caret line="57" column="26" selection-start-line="57" selection-start-column="8" selection-end-line="57" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Code/UI/BookToolPage.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="78">
+          <caret line="18" column="25" selection-start-line="18" selection-start-column="25" selection-end-line="18" selection-end-column="25" />
           <folding>
             <element signature="e#0#20#0" expanded="true" />
           </folding>
@@ -611,8 +661,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Code/UI/SearchToolPage.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
+        <state relative-caret-position="170">
+          <caret line="10" column="34" lean-forward="true" selection-start-line="10" selection-start-column="34" selection-end-line="10" selection-end-column="34" />
+          <folding>
+            <element signature="e#0#20#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/__main__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="163">
+          <caret line="79" column="73" selection-start-line="79" selection-start-column="62" selection-end-line="79" selection-end-column="73" />
           <folding>
             <element signature="e#0#20#0" expanded="true" />
           </folding>
@@ -621,100 +681,100 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Code/ReturnTool.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="18" column="8" lean-forward="true" selection-start-line="18" selection-start-column="8" selection-end-line="18" selection-end-column="8" />
+        <state relative-caret-position="276">
+          <caret line="23" column="72" lean-forward="true" selection-start-line="23" selection-start-column="29" selection-end-line="23" selection-end-column="72" />
           <folding>
             <element signature="e#0#36#0" expanded="true" />
-            <element signature="e#557#616#0" />
-            <element signature="e#656#996#0" />
-            <element signature="e#1039#1438#0" />
-            <element signature="e#1477#2158#0" />
-            <element signature="e#2196#3257#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Code/UI/AddToolPage.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="62">
-          <caret line="76" column="84" selection-start-line="76" selection-start-column="84" selection-end-line="76" selection-end-column="84" />
-          <folding>
-            <element signature="e#0#32#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Code/UI/BookToolPage.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="247" column="18" selection-start-line="247" selection-start-column="18" selection-end-line="247" selection-end-column="18" />
-          <folding>
-            <element signature="e#0#20#0" expanded="true" />
-            <element signature="e#897#2364#0" />
-            <element signature="e#2402#2867#0" />
-            <element signature="e#2903#3161#0" />
-            <element signature="e#3194#10512#0" />
-            <element signature="e#10556#10972#0" />
-            <element signature="e#11015#11341#0" />
-            <element signature="e#11381#11519#0" />
-            <element signature="e#11574#11725#0" />
-            <element signature="e#11766#12057#0" />
-            <element signature="e#12099#12902#0" />
-            <element signature="e#12940#13337#0" />
-            <element signature="e#13371#14497#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Code/AddTool.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="683">
-          <caret line="60" column="16" selection-start-line="60" selection-start-column="16" selection-end-line="60" selection-end-column="16" />
-          <folding>
-            <element signature="e#0#30#0" expanded="true" />
-            <element signature="e#407#496#0" />
-            <element signature="e#531#1126#0" />
+            <element signature="e#662#721#0" />
+            <element signature="e#757#1156#0" />
+            <element signature="e#1199#1598#0" />
+            <element signature="e#1637#2318#0" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Code/Utilities/util.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="178" selection-start-line="178" selection-end-line="178" />
+        <state relative-caret-position="559">
+          <caret line="232" column="35" lean-forward="true" selection-start-line="232" selection-start-column="35" selection-end-line="232" selection-end-column="35" />
           <folding>
             <element signature="e#0#10#0" expanded="true" />
-            <element signature="e#358#1314#0" />
-            <element signature="e#1352#2973#0" />
-            <element signature="e#3012#3224#0" />
-            <element signature="e#3255#3489#0" />
-            <element signature="e#3522#3693#0" />
-            <element signature="e#5183#5291#0" />
-            <element signature="e#4639#4650#0" />
-            <element signature="e#5474#5660#0" />
-            <element signature="e#5691#6251#0" />
-            <element signature="e#6298#7110#0" />
-            <element signature="e#7147#8730#0" />
-            <element signature="e#8784#9524#0" />
-            <element signature="e#9573#9913#0" />
-            <element signature="e#9971#10578#0" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Resources/Values/fonts.py">
+    <entry file="file://$PROJECT_DIR$/Code/UI/ReturnToolPage.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
+        <state relative-caret-position="367">
+          <caret line="61" column="24" selection-start-line="61" selection-start-column="24" selection-end-line="61" selection-end-column="24" />
+          <folding>
+            <element signature="e#0#20#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Code/UI/MyToolPage.py">
+    <entry file="file://$PROJECT_DIR$/Entities/Invoice.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="982">
-          <caret line="104" lean-forward="true" selection-start-line="104" selection-end-line="104" />
+        <state relative-caret-position="204">
+          <caret line="12" column="20" selection-start-line="12" selection-start-column="8" selection-end-line="12" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Code/Utilities/ReadFile.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-20">
+          <caret line="95" lean-forward="true" selection-start-line="95" selection-end-line="95" />
+          <folding>
+            <element signature="e#0#10#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Code/AddTool.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="717">
+          <caret line="50" lean-forward="true" selection-start-line="50" selection-end-line="50" />
+          <folding>
+            <element signature="e#0#30#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Code/UI/AddToolPage.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-370">
+          <caret line="67" column="64" lean-forward="true" selection-start-line="67" selection-start-column="47" selection-end-line="67" selection-end-column="64" />
+          <folding>
+            <element signature="e#0#32#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Resources/Values/strings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2210">
+          <caret line="130" column="25" selection-start-line="130" selection-start-column="25" selection-end-line="130" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Code/UI/InvoicePage.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="191">
+          <caret line="27" column="45" selection-start-line="27" selection-start-column="45" selection-end-line="27" selection-end-column="45" />
           <folding>
             <element signature="e#0#20#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Code/MyInvoice.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1496">
+          <caret line="126" lean-forward="true" selection-start-line="126" selection-end-line="126" />
+          <folding>
+            <element signature="e#0#24#0" expanded="true" />
+            <element signature="e#998#2455#0" />
+            <element signature="e#2651#3057#0" />
           </folding>
         </state>
       </provider>

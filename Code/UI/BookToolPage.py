@@ -5,6 +5,7 @@ import Code.Utilities.util as util
 from Entities.Bookings import Bookings
 import Code.Utilities.WriteFile as wf
 import Code.Utilities.ReadFile as rf
+import uuid
 
 
 class BookToolPage(tk.Frame):
@@ -14,6 +15,8 @@ class BookToolPage(tk.Frame):
     __heigh = dimens.mainWindowHeigh
     __start_date = ""
     __end_date = ""
+
+    # TODO live cost view
 
     def __init__(self, parent, controller):
         """
@@ -327,7 +330,7 @@ class BookToolPage(tk.Frame):
 
         if self.__start_date and self.__end_date:
             print("sT: {}; eT: {}".format(self.startDateVar.get(), self.endDateVar.get()))
-            hiredTool = Bookings(util.generateID(), self.tool.getID(), self.__controller.login, self.tool.getCondition(),
+            hiredTool = Bookings(uuid.uuid4(), self.tool.getID(), self.__controller.login, self.tool.getCondition(),
                                  self.__start_date, self.startDateVar.get(), self.__end_date, self.endDateVar.get(),
                                  strings.toolStatus[0])
 
@@ -335,8 +338,8 @@ class BookToolPage(tk.Frame):
             hiredTool.setDropOffLocation(self.dropOffEntry.get())
 
             if self.verifyHiring():
-                #         obj,     simplePath,     fieldNames,           complex path
-                wf.write(hiredTool, None, strings.fieldNames_booking, strings.filePath_booking)
+                #         obj,     simplePath,     fieldNames,           complex path              path parameter
+                wf.write(hiredTool, None, strings.fieldNames_booking, strings.filePath_booking, hiredTool.getToolID())
                 self.__controller.show_frame(strings.searchToolClass)
             else:
                 print("too late.. item is booked")

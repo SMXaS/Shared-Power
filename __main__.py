@@ -8,6 +8,7 @@ from Code.UI.ReturnToolPage import ReturnToolPage
 from Code.UI.BookToolPage import BookToolPage
 from Code.UI.LoginPage import LoginPage
 from Code.UI.RegisterPage import RegisterPage
+from Code.UI.InvoicePage import InvoicePage
 from Resources.Values import strings, colors, dimens, fonts
 
 # TODO clear entries after usage, reset search tool list
@@ -76,13 +77,18 @@ class mainMenu(tk.Tk):
         searchToolButton.bind("<Button-1>", lambda event: self.show_frame(strings.searchToolClass))
         searchToolButton.pack(side="top", padx=5, pady=2)
 
+        invoiceButton = tk.Label(self.menuFrame, text=strings.menuInvoice, bg=colors.bgColor,
+                                    fg=colors.fgColor, font=fonts.menuButtonFont)
+        invoiceButton.bind("<Button-1>", lambda event: self.show_frame(strings.invoiceClass))
+        invoiceButton.pack(side="top", padx=5, pady=2)
+
         logOutButton = tk.Label(self.menuFrame, text=strings.menuLogOut, bg=colors.bgColor, fg=colors.fgColor,
                                 font=fonts.menuLogOutFont)
         logOutButton.bind("<Button-1>", lambda event: self.show_frame(strings.loginClass))
         logOutButton.pack(side="bottom", padx=5, pady=10)
 
         # adding menu buttons to the list for easier highlighting
-        self.buttonList = (myToolsButton, myBookingsButton, addToolButton, searchToolButton)
+        self.buttonList = (myToolsButton, myBookingsButton, addToolButton, searchToolButton, invoiceButton)
 
         # disabling menu frame in order to populate login/register pages
         self.menuFrame.pack_forget()
@@ -91,7 +97,7 @@ class mainMenu(tk.Tk):
         self.frames = {}
 
         for F in (SearchToolPage, AddToolPage, WelcomePage, MyToolPage, ReturnToolPage, BookToolPage, LoginPage,
-                  RegisterPage):
+                  RegisterPage, InvoicePage):
             self.page_name = F.__name__
             frame = F(parent=container, controller=self)
             self.frames[self.page_name] = frame
@@ -161,6 +167,8 @@ class mainMenu(tk.Tk):
             self.highlightButton(2)
         elif self.page_name is strings.searchToolClass:
             self.highlightButton(3)
+        elif self.page_name is strings.invoiceClass:
+            self.highlightButton(4)
 
     def highlightButton(self, index):
         """

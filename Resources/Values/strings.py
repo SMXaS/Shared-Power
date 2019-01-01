@@ -3,6 +3,7 @@ asterix = "*"
 currency = "£"
 back = "Back"
 dateFormat = "%d/%m/%Y"
+invoiceDateFormat = "%m-%Y"
 welcomeText = "Welcome to Shared Power!!!"
 # --------------
 # Classes
@@ -15,6 +16,8 @@ registerClass = "RegisterPage"
 returnToolClass = "ReturnToolPage"
 searchToolClass = "SearchToolPage"
 welcomeClass = "WelcomePage"
+invoiceClass = "InvoicePage"
+
 # --------------
 # Image Paths
 # --------------
@@ -32,15 +35,16 @@ toolStatus = ["hired", "pending_receive", "returned", "inventory"]
 # Database
 # --------------
 fieldNames_user = ['login', 'first_name', 'last_name', 'user_password', 'email', 'user_adress', 'user_phone_number']
-fieldNames_tool = ['ID', 'owner', 'title', 'description', 'condition', 'priceFullDay', 'priceHalfDay', 'imgPath',
-                   'availability']
+fieldNames_tool = ['ID', 'owner', 'title', 'description', 'condition', 'priceFullDay', 'priceHalfDay', 'riderCharge',
+                   'imgPath', 'availability']
 fieldNames_booking = ['bookingID', 'toolID', 'userName', 'bookInCondition', 'startDate', 'startTerm',
                       'expectedReturnDate', 'expectedTerm', 'status', 'returnDate', 'bookOutCondition',
                       'pickUpLocation', 'dropOffLocation']
+fieldNames_invoice = ['user', 'toolTitle', 'hirePrice', 'riderPrice', 'fine']
 filePath_user = "Data/users.csv"
 filePath_tool = "Data/tools.csv"
 filePath_booking = "Data/Bookings/"
-filePath_invoiceFolder = "Data/Invoices/{}"
+filePath_invoiceFolder = "Data/Invoices/"
 filePath_images = "Data/Images/"
 
 # --------------
@@ -50,6 +54,7 @@ menuMyTools = "My Tools"
 menuMyBookings = "My Bookings"
 menuAddTool = "Add Tool"
 menuSearchTool = "Search Tool"
+menuInvoice = "Invoices"
 menuLogOut = "Log Out"
 # --------------
 # Register Page
@@ -79,6 +84,7 @@ priceHalfDay = "Price per Half Day "
 toolCondition = "Tool condition "
 emptyIMGPath = "..."
 image = "Image"
+dispatchCharge = "Rider's cost "
 
 # --------------
 # Book Tool Page
@@ -118,6 +124,11 @@ search = "Search"
 loginTitle = "Login"
 dontHaveAccount = "Don't have Account?"
 signUp = "Sign up"
+
+# --------------
+# Invoice Page
+# --------------
+totalCost = "Total cost: "
 
 # --------------
 # Error messages
