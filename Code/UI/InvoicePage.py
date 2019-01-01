@@ -35,6 +35,6 @@ class InvoicePage(tk.Frame):
         mScrollBar.config(command=self.invoiceText.yview)
         self.invoiceText.config(yscrollcommand=mScrollBar.set)
 
-        self.totalLabel = tk.Label(frame, text=strings.totalCost, bg=colors.bgColor, fg=colors.fgColor,
+        self.totalLabel = tk.Label(frame, bg=colors.bgColor, fg=colors.fgColor,
                                    font=fonts.buttonFont)
         self.totalLabel.grid(row=2, column=0, padx=5, pady=10, sticky="E")

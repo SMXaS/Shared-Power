@@ -123,4 +123,4 @@ class MyInvoice:
         txtBox.config(state="disabled")
 
         totalPrice = "%.2f" % sum([monthlyFee, hireCost, dispatchCost, fine])
-        totalLabel.config(text="{} {}".format(totalPrice, strings.currency))
+        totalLabel.config(text="{}{} {}".format(strings.totalCost, totalPrice, strings.currency))
