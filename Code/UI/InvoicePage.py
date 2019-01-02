@@ -25,7 +25,7 @@ class InvoicePage(tk.Frame):
 
     def start(self, args):
         MyInvoice(self.controller.login).showInvoice(self.invoiceText, self.totalLabel, self.currentDate)
-        self.getDates()
+        self.__getDates()
 
     def __initUI(self):
         frame = tk.Frame(self, bg=colors.bgColor)
@@ -38,11 +38,11 @@ class InvoicePage(tk.Frame):
 
         self.monthMenu = ttk.Combobox(frame, state="readonly", textvariable= self.monthVar)
         self.monthMenu.grid(row=0, column=0, sticky="W", pady=5)
-        self.monthMenu.bind("<<ComboboxSelected>>", lambda event: self.selectDate())
+        self.monthMenu.bind("<<ComboboxSelected>>", lambda event: self.__selectDate())
 
         self.yearMenu = ttk.Combobox(frame, state="readonly", textvariable= self.yearVar)
         self.yearMenu.grid(row=0, column=1, sticky="W")
-        self.yearMenu.bind("<<ComboboxSelected>>", lambda event: self.selectDate())
+        self.yearMenu.bind("<<ComboboxSelected>>", lambda event: self.__selectDate())
 
         self.invoiceText = tk.Text(frame, heigh=20, width=75)
         self.invoiceText.grid(row=1, column=0, columnspan=5)
@@ -55,18 +55,16 @@ class InvoicePage(tk.Frame):
                                    font=fonts.buttonFont)
         self.totalLabel.grid(row=2, column=4, padx=5, pady=10, sticky="E")
 
-    def selectDate(self):
+    def __selectDate(self):
         """
         Handling date selection and populates invoice based on it
         :return: None
         """
 
         date = "{}-{}".format(self.monthList[self.monthMenu.current()], self.yearList[self.yearMenu.current()])
-        print("selected date:", date)
-        print("month number:", self.monthList[self.monthMenu.current()])
         MyInvoice(self.controller.login).showInvoice(self.invoiceText, self.totalLabel, date)
 
-    def getDates(self):
+    def __getDates(self):
         """
         Gets all dates from Invoice folder, splits it into moth/year and populates it in optionMenu widget
         :return: None
@@ -75,7 +73,6 @@ class InvoicePage(tk.Frame):
         fullMonthNames = []
         dateList = util.getInvoiceDates(self.controller.login)
         for i in range(len(dateList)):
-            print("date:", dateList[i])
             year = dateList[i].split("-")[1]
             month = dateList[i].split("-")[0]
 

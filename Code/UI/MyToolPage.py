@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import ttk
 from Resources.Values import strings, colors, dimens, fonts
 from Code.Utilities import ReadFile as rf
-import Code.Utilities.util as util
+import Code.test_printObj as test
 
 
 class MyToolPage(tk.Frame):
@@ -22,6 +22,7 @@ class MyToolPage(tk.Frame):
 
     def start(self, args):
         self.toolList = rf.getTool(True, "owner", self.controller.login)
+        test.printToolObject(self.toolList)
         self.ThereWillBeYourLogic()
         self.populateData()
 
@@ -86,9 +87,6 @@ class MyToolPage(tk.Frame):
 
     # Rename this function according to what you want to do
     def ThereWillBeYourLogic(self):
-        for i in range(len(self.toolList)):
-            print(self.toolList[i].getTitle())
-
         """
         ###self.toolList### = this is your main variable. It holds a list of objects (your tools)
         

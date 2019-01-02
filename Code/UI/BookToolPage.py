@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import END
+from tkinter import messagebox
 from Resources.Values import strings, colors, dimens, fonts
 import Code.Utilities.util as util
 from Entities.Bookings import Bookings
@@ -270,11 +271,19 @@ class BookToolPage(tk.Frame):
             hiredTool.setDropOffLocation(self.dropOffEntry.get())
 
             if self.verifyHiring():
-                #         obj,     simplePath,     fieldNames,           complex path              path parameter
-                wf.write(hiredTool, None, strings.fieldNames_booking, strings.filePath_booking, hiredTool.getToolID())
-                self.availableEndDate.unbind("<FocusOut>")
-                self.availableDate.unbind("<FocusOut>")
-                self.__controller.show_frame(strings.searchToolClass)
+                # show confirmation window
+
+                message = "{} {}\n{} {}\n{} {}\n{} {}{}\n\n{}".format(strings.toolTitleForInvoice, self.tool.getTitle(),
+                                                                      strings.hireDate, hiredTool.getStartDate(),
+                                                                      strings.returnDate, hiredTool.getExpectedReturnDate(),
+                                                                      strings.totalCost, 50, strings.currency,
+                                                                      strings.confirmBooking)
+                if messagebox.askokcancel("Information", message):
+                    #          obj,     simplePath,     fieldNames,           complex path              path parameter
+                    wf.write(hiredTool, None, strings.fieldNames_booking, strings.filePath_booking, hiredTool.getToolID())
+                    self.availableEndDate.unbind("<FocusOut>")
+                    self.availableDate.unbind("<FocusOut>")
+                    self.__controller.show_frame(strings.searchToolClass)
             else:
                 print("too late.. item is booked")
         else:

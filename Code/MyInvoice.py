@@ -4,6 +4,7 @@ import Code.Utilities.ReadFile as rf
 import Code.Utilities.util as utils
 from Entities.Invoice import Invoice
 from Resources.Values import strings
+import Code.test_printObj as test
 import datetime
 import os
 
@@ -134,6 +135,8 @@ class MyInvoice:
 
         if exist:
             invoiceList = rf.getAllInvoices("user", self.__login, path)
+
+        test.printInvoiceObject(invoiceList)
 
         txtBox.config(state="normal")
 

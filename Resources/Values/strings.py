@@ -103,6 +103,7 @@ halfDay = "Half day"
 arrangeRider = "Arrange rider"
 pickUpLocation = "Pick up location "
 dropOffLocation = "Drop off location "
+confirmBooking = "Do you want to hire this tool?"
 
 # --------------
 # My Tools Page
@@ -116,6 +117,7 @@ tool = "Tool"
 returnItem = "Return item"
 cancelBooking = "Cancel booking"
 cancelErrorMessage = "Sorry, its too late to cancel"
+bookOutConditionLabel = "*Please provide tool condition"
 
 # --------------
 # Tool Info Page
@@ -162,4 +164,5 @@ errorInvalidPhoneNumber = "Invalid phone number"
 errorWrongImageFormat = "Wrong image format"
 errorUnsupportedImageFormat = "Only .png format supported"
 errorIncorrectPriceFormat = "Incorrect Price format"
-
+errorSelectItem = "Please select item first"
+errorToolConditionMissing = "Please describe the tool condition"

@@ -66,3 +66,6 @@ class Bookings:
 
     def setStatus(self, status):
         self.status = status
+
+    def setBookOutCondition(self, bookOutCoondition):
+        self.bookOutCondition = bookOutCoondition

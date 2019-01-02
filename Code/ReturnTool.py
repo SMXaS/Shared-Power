@@ -2,6 +2,7 @@ from Resources.Values import strings
 from Code.MyInvoice import MyInvoice
 import Code.Utilities.util as util
 import Code.Utilities.ReadFile as rf
+import Code.test_printObj as test
 import datetime
 
 
@@ -22,20 +23,49 @@ class ReturnTool:
         self.__tree = tree
         self.__login = login
         self.__bookingList = rf.getAllBookings("userName", self.__login)
+        test.printBookingObjects(self.__bookingList)
+
 
     def __getCurrentDate(self):
         return datetime.datetime.now().strftime(strings.dateFormat)
 
-    def returnItem(self):
-        returnItemObj = self.__bookingList[self.__getBookingIndex()]
-        # toolStatus[1] = "pending_receive"
-        returnItemObj.setStatus(strings.toolStatus[1])
-        returnItemObj.setReturnDate(self.__getCurrentDate())
-        # TODO edit booking db #returnItemObj#
-        print("new status:", returnItemObj.getStatus())
-        MyInvoice(self.__login).generateInvoice(returnItemObj)
+    def returnItem(self, toolCondition):
+        """
+        will return item to the owner. Status will be changed to "pending_receive" and owner will need to
+            confirm this process in order to hire it again
+        :return: None
+        """
+
+        if self.__tree.focus():
+            self.__errorLabel.config(text="")
+            if toolCondition.get():
+                self.__errorLabel.config(text="")
+                returnItemObj = self.__bookingList[self.__getBookingIndex()]
+                # toolStatus[1] = "pending_receive"
+                returnItemObj.setStatus(strings.toolStatus[1])
+                returnItemObj.setReturnDate(self.__getCurrentDate())
+                returnItemObj.setBookOutCondition(toolCondition.get())
+                bookObj_forTest = []
+                bookObj_forTest.append(returnItemObj)
+                print("--------------")
+                print("single book Obj")
+                print("--------------")
+                test.printBookingObjects(bookObj_forTest)
+                # TODO edit booking db #returnItemObj#
+                toolCondition.delete(0, "end")
+                MyInvoice(self.__login).generateInvoice(returnItemObj)
+            else:
+                self.__errorLabel.config(text=strings.errorToolConditionMissing)
+        else:
+            self.__errorLabel.config(text=strings.errorSelectItem)
 
     def __getBookingIndex(self):
+        """
+        gets selected item index
+
+        :return: int(index)
+        """
+
         curItem = self.__tree.focus()
         index = None
         if curItem:
@@ -51,20 +81,26 @@ class ReturnTool:
         return index
 
     def cancelBooking(self):
-        cancelItemObj = self.__bookingList[self.__getBookingIndex()]
-        print("start date:", cancelItemObj.getStartDate())
-        print("end date:", cancelItemObj.getExpectedReturnDate())
-        currentDate = self.__getCurrentDate()
-        print("today", currentDate)
-        dayDiff = util.getDayDifference(currentDate, cancelItemObj.getStartDate())
-        print("day diff:", dayDiff)
-        if dayDiff < 1:
-            print("Sorry, its too late to cancel")
-            self.__errorLabel.config(text=strings.cancelErrorMessage)
-        else:
-            print("Cancel in progress")
-            # TODO remove booking #cancelItemObj#
-            self.__errorLabel.config(text="")
+        """
+        Will cancel
+        :return: None
+        """
+
+        if self.__tree.focus():
+            cancelItemObj = self.__bookingList[self.__getBookingIndex()]
+            print("start date:", cancelItemObj.getStartDate())
+            print("end date:", cancelItemObj.getExpectedReturnDate())
+            currentDate = self.__getCurrentDate()
+            print("today", currentDate)
+            dayDiff = util.getDayDifference(currentDate, cancelItemObj.getStartDate())
+            print("day diff:", dayDiff)
+            if dayDiff < 1:
+                print("Sorry, its too late to cancel")
+                self.__errorLabel.config(text=strings.cancelErrorMessage)
+            else:
+                print("Cancel in progress")
+                # TODO remove booking #cancelItemObj#
+                self.__errorLabel.config(text="")
 
     def populateData(self):
         """
@@ -90,5 +126,6 @@ class ReturnTool:
                 tool = util.convertFromListToObj(toolDict)
                 self.__tree.insert('', 'end', text=tool.getTitle(),
                                    values=(self.__bookingList[i].getStartDate(),
-                                         self.__bookingList[i].getExpectedReturnDate()),
+                                           self.__bookingList[i].getExpectedReturnDate(),
+                                           self.__bookingList[i].getStatus()),
                                    tags=self.__bookingList[i].getBookingID())

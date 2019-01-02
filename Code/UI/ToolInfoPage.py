@@ -104,15 +104,18 @@ class ToolInfoPage(tk.Frame):
         self.priceHalfDayTxt.config(text="{}{}".format(self.tool.getPriceHalfDay(), strings.currency))
         self.dispatchTxt.config(text="{}{}".format(self.tool.getRiderCharge(), strings.currency))
 
-    def __showImage(self):
+    def __showImage(self, frame):
         """
         opens new window and shows image of selected item
         :return: None
         """
 
         imgWindow = tk.Toplevel(self)
+        imgWindow.geometry("+300+50")
+        imgWindow.resizable(False, False)
         imgWindow.wm_title("Image")
         toolIMG = tk.PhotoImage(file="{}.png".format(self.tool.getImagePath()))
         toolImgLabel = tk.Label(imgWindow, image=toolIMG)
         toolImgLabel.image = toolIMG
         toolImgLabel.grid(row=0, column=0)
+

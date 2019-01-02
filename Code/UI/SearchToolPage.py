@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import ttk
 from Resources.Values import strings, colors, dimens, fonts
 from Code.Utilities import util, ReadFile as rf
+import Code.test_printObj as test
 
 
 class SearchToolPage(tk.Frame):
@@ -27,6 +28,7 @@ class SearchToolPage(tk.Frame):
                 self.tree.selection_remove(item)
 
         self.__retrieveData()
+        test.printToolObject(self.__toolList)
 
     def __initUI(self):
         frame = tk.Frame(self, bg=self.__bgColor)

@@ -34,32 +34,40 @@ class ReturnToolPage(tk.Frame):
         frame = tk.Frame(self, bg=self.__bgColor)
         frame.grid(row=0, column=0, sticky="", pady=40)
 
-        self.__tree = ttk.Treeview(frame, columns=(strings.priceDay, strings.priceHalfDay))
+        self.__tree = ttk.Treeview(frame, columns=(strings.priceDay, strings.priceHalfDay, "test"))
 
         mScrollBar = ttk.Scrollbar(frame, orient='vertical', command=self.__tree.yview)
         self.__tree.configure(yscrollcommand=mScrollBar.set)
 
-        self.__errorLabel = tk.Label(frame, bg=colors.bgColor, fg=colors.fgColor)
-        self.__errorLabel.grid(row=0, column=0, sticky="WN")
+        self.__errorLabel = tk.Label(frame, bg=colors.bgColor, fg=colors.errorColor)
+        self.__errorLabel.grid(row=0, column=0, columnspan=2, sticky="WN")
 
         self.__tree.heading('#0', text=strings.tool)
         self.__tree.heading('#1', text=strings.hireDate)
         self.__tree.heading('#2', text=strings.returnDate)
-        self.__tree.column('#1', stretch=tk.YES)
-        self.__tree.column('#2', stretch=tk.YES)
-        self.__tree.column('#0', stretch=tk.YES)
-        self.__tree.grid(row=1, column=0, columnspan=2, pady=20, sticky="N")
+        self.__tree.heading('#3', text="state")
+        self.__tree.column('#1', minwidth=20, width=150, stretch=tk.YES)
+        self.__tree.column('#2', minwidth=20, width=150, stretch=tk.YES)
+        self.__tree.column('#0', minwidth=20, width=150, stretch=tk.YES)
+        self.__tree.column('#3', minwidth=20, width=150, stretch=tk.YES)
+        self.__tree.grid(row=1, column=0, columnspan=4, pady=20, sticky="N")
 
-        mScrollBar.grid(row=1, column=3, pady=20, sticky='WNS')
+        mScrollBar.grid(row=1, column=5, pady=20, sticky='WNS')
+
+        toolConditionLabel = tk.Label(frame, text=strings.bookOutConditionLabel, bg=self.__bgColor, fg=self.__fgColor)
+        toolConditionLabel.grid(row=2, column=0, sticky="E")
+
+        toolConditionEntry = tk.Entry(frame)
+        toolConditionEntry.grid(row=2, column=1, padx=10, sticky="W")
 
         returnButton = tk.Label(frame, text=strings.returnItem, bg=colors.bgColor, fg=colors.fgColor,
                                 font=fonts.buttonFont)
 
-        returnButton.grid(row=2, column=1)
-        returnButton.bind("<Button-1>", lambda event: self.__returnTool.returnItem())
+        returnButton.grid(row=3, column=1, columnspan=2, pady=30)
+        returnButton.bind("<Button-1>", lambda event: self.__returnTool.returnItem(toolConditionEntry))
 
         cancelButton = tk.Label(frame, text=strings.cancelBooking, bg=colors.bgColor, fg=colors.fgColor,
                                 font=fonts.buttonFont)
 
-        cancelButton.grid(row=2, column=0)
+        cancelButton.grid(row=3, column=0, columnspan=2)
         cancelButton.bind("<Button-1>", lambda event: self.__returnTool.cancelBooking())
