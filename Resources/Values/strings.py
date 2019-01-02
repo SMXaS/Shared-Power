@@ -118,6 +118,11 @@ cancelBooking = "Cancel booking"
 cancelErrorMessage = "Sorry, its too late to cancel"
 
 # --------------
+# Tool Info Page
+# --------------
+showImage = "Show image"
+
+# --------------
 # Search Tool Page
 # --------------
 searchToolTitle = "Search..."

@@ -29,7 +29,6 @@ class SearchToolPage(tk.Frame):
         self.__retrieveData()
 
     def __initUI(self):
-
         frame = tk.Frame(self, bg=self.__bgColor)
         frame.grid(row=0, column=0, sticky="", pady=40)
 
