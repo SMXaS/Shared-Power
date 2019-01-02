@@ -43,9 +43,7 @@ class BookToolPage(tk.Frame):
         self.priceHalfDayTxt.config(text="{}{}".format(self.tool.getPriceHalfDay(), strings.currency))
 
         # resetting views
-        self.availableEndDate.bind('<FocusOut>', lambda e: self.availableEndDate.selection_clear(0, END))
-        self.availableDate.bind('<FocusOut>', lambda e:  self.availableDate.selection_clear(0, END))
-
+        self.availableDate.delete(0, tk.END)
         self.availableEndDate.unbind("<FocusOut>")
         self.availableDate.unbind("<FocusOut>")
         self.scrollNextAvailableDate.grid_remove()
@@ -254,6 +252,7 @@ class BookToolPage(tk.Frame):
         :return: None
         """
         bookingList = self.getBookingList()
+
         self.availableDateList = self.getAvailableList(bookingList)
         for i in range(len(self.availableDateList)):
             self.availableDate.insert(END, self.availableDateList[i])
@@ -340,6 +339,8 @@ class BookToolPage(tk.Frame):
             if self.verifyHiring():
                 #         obj,     simplePath,     fieldNames,           complex path              path parameter
                 wf.write(hiredTool, None, strings.fieldNames_booking, strings.filePath_booking, hiredTool.getToolID())
+                self.availableEndDate.unbind("<FocusOut>")
+                self.availableDate.unbind("<FocusOut>")
                 self.__controller.show_frame(strings.searchToolClass)
             else:
                 print("too late.. item is booked")

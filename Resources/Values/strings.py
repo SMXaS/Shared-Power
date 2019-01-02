@@ -2,8 +2,11 @@ appTitle = "Shared Power"
 asterix = "*"
 currency = "£"
 back = "Back"
-dateFormat = "%d/%m/%Y"
-invoiceDateFormat = "%m-%Y"
+dateFormat = "%#d/%#m/%Y"
+simpleDateFormat = "%d/%m/%Y"
+invoiceMonth_YearFormat = "%#m-%Y"
+invoiceYearFormat = "%Y"
+invoiceMonthFormat = "%#m"
 welcomeText = "Welcome to Shared Power!!!"
 # --------------
 # Classes
@@ -17,6 +20,8 @@ returnToolClass = "ReturnToolPage"
 searchToolClass = "SearchToolPage"
 welcomeClass = "WelcomePage"
 invoiceClass = "InvoicePage"
+toolInfoPage = "ToolInfoPage"
+receiveItemPage = "ReceiveItemPage"
 
 # --------------
 # Image Paths
@@ -117,6 +122,7 @@ cancelErrorMessage = "Sorry, its too late to cancel"
 # --------------
 searchToolTitle = "Search..."
 search = "Search"
+toolInfo = "Tool information"
 
 # --------------
 # Login Page
@@ -129,6 +135,10 @@ signUp = "Sign up"
 # Invoice Page
 # --------------
 totalCost = "Total cost: "
+toolTitleForInvoice = "Tool title:"
+toolCost = "Tool cost:"
+dispatchCost = "Dispatch cost:"
+fines = "Fines:"
 
 # --------------
 # Error messages

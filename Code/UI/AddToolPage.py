@@ -71,8 +71,8 @@ class AddToolPage(tk.Frame):
         self.priceFullDayEntry = tk.Entry(frame, width=40)
         self.priceFullDayEntry.grid(row=3, column=1)
 
-        self.priceHalfDay = tk.Entry(frame, width=40)
-        self.priceHalfDay.grid(row=4, column=1)
+        self.priceHalfDayEntry = tk.Entry(frame, width=40)
+        self.priceHalfDayEntry.grid(row=4, column=1)
 
         self.riderChargeEntry = tk.Entry(frame, width=40)
         self.riderChargeEntry.grid(row=5, column=1)
@@ -103,11 +103,21 @@ class AddToolPage(tk.Frame):
         tool.append(description)
         tool.append(self.toolConditionEntry.get())
         tool.append(self.priceFullDayEntry.get())
-        tool.append(self.priceHalfDay.get())
+        tool.append(self.priceHalfDayEntry.get())
         tool.append(self.riderChargeEntry.get())
         tool.append(self.__filename)
 
         if self.__addTool.add(tool):
             pass
-            # TODO  clear entries include error message
+            self.clearEntries()
             # TODO go back to myToolPage
+
+    def clearEntries(self):
+        self.titleEntry.delete(0, "end")
+        self.descriptionEntry.delete(0, "end")
+        self.riderChargeEntry.delete(0, "end")
+        self.imgPath.config(text="")
+        self.toolConditionEntry.delete(0, "end")
+        self.priceFullDayEntry.delete(0, "end")
+        self.priceHalfDayEntry.delete(0, "end")
+        self.titleEntry.focus()

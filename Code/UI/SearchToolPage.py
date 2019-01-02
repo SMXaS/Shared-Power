@@ -5,24 +5,20 @@ from Code.Utilities import util, ReadFile as rf
 
 
 class SearchToolPage(tk.Frame):
-    toolList = []
-    bgColor = colors.bgColor
-    fgColor = colors.fgColor
-    width = dimens.mainWindowWidth
-    heigh = dimens.mainWindowHeigh
+    __toolList = []
+    __bgColor = colors.bgColor
+    __fgColor = colors.fgColor
+    __width = dimens.mainWindowWidth
+    __heigh = dimens.mainWindowHeigh
 
     def __init__(self, parent, controller):
-        """
-        :param master: master
-        :param arg: login
-        """
-        self.login = controller.login
-        self.controller = controller
         tk.Frame.__init__(self, parent)
+        self.__login = controller.login
+        self.__controller = controller
         self.config(bg=colors.bgColor)
         self.columnconfigure(0, weight=1)
 
-        self.initUI()
+        self.__initUI()
 
 
     def start(self, args):
@@ -30,20 +26,20 @@ class SearchToolPage(tk.Frame):
             for item in self.tree.selection():
                 self.tree.selection_remove(item)
 
-        self.retrieveData()
+        self.__retrieveData()
 
-    def initUI(self):
+    def __initUI(self):
 
-        frame = tk.Frame(self, bg=self.bgColor)
+        frame = tk.Frame(self, bg=self.__bgColor)
         frame.grid(row=0, column=0, sticky="", pady=40)
 
         self.searchEntry = tk.Entry(frame, width=80)
         self.searchEntry.grid(row=0, column=1, padx=25, pady=20, sticky="N")
 
-        searchButton = tk.Label(frame, text=strings.search, bg=self.bgColor, fg=self.fgColor,
+        searchButton = tk.Label(frame, text=strings.search, bg=self.__bgColor, fg=self.__fgColor,
                                 font=fonts.buttonFont)
         searchButton.grid(row=0, column=2)
-        searchButton.bind("<Button-1>", lambda event: self.retrieveData())
+        searchButton.bind("<Button-1>", lambda event: self.__retrieveData())
 
         self.tree = ttk.Treeview(frame, columns=(strings.priceDay, strings.priceHalfDay))
 
@@ -60,13 +56,18 @@ class SearchToolPage(tk.Frame):
 
         self.yscrollbar.grid(row=1, column=4, pady=20, sticky='WNS')
 
-        hireIMG = tk.PhotoImage(file=strings.buttonHire)
-        hireButton = tk.Label(frame, image=hireIMG, bg=self.bgColor)
-        hireButton.image = hireIMG
-        hireButton.bind("<Button-1>", lambda event: self.selectItem())
-        hireButton.grid(row=2, column=0, columnspan=3, padx=10, pady=40)
+        toolInfoButton = tk.Label(frame, text=strings.toolInfo, bg=self.__bgColor, fg=self.__fgColor,
+                                  font=fonts.toolInfoFont)
+        toolInfoButton.grid(row=2, column=1, columnspan=2, sticky="E")
+        toolInfoButton.bind("<Button-1>", lambda event: self.__selectItem(False))
 
-    def getItemIDIndex(self):
+        hireIMG = tk.PhotoImage(file=strings.buttonHire)
+        hireButton = tk.Label(frame, image=hireIMG, bg=self.__bgColor)
+        hireButton.image = hireIMG
+        hireButton.bind("<Button-1>", lambda event: self.__selectItem(True))
+        hireButton.grid(row=3, column=0, columnspan=3, padx=10, pady=40)
+
+    def __getItemIDIndex(self):
         """
         :return: int(index of selected item)
         """
@@ -79,13 +80,13 @@ class SearchToolPage(tk.Frame):
             for item in self.tree.selection():
                 itemID = self.tree.item(item, "tag")
 
-            for i in range(len(self.toolList)):
-                if self.toolList[i].getID() in itemID:
+            for i in range(len(self.__toolList)):
+                if self.__toolList[i].getID() in itemID:
                     index = i
                     break
             return index
 
-    def selectItem(self):
+    def __selectItem(self, boolBook):
         """
         Select item and go to BookToolPage
 
@@ -94,17 +95,20 @@ class SearchToolPage(tk.Frame):
 
         curItem = self.tree.focus()
         if curItem:
-            index = self.getItemIDIndex()
-            self.controller.show_frame(strings.bookToolClass, self.toolList[index])
+            index = self.__getItemIDIndex()
+            if boolBook:
+                self.__controller.show_frame(strings.bookToolClass, self.__toolList[index])
+            else:
+                self.__controller.show_frame(strings.toolInfoPage, self.__toolList[index])
 
-    def retrieveData(self):
+    def __retrieveData(self):
         """
         Retrieve all data from DB and populate it in the list
 
         :return: None
         """
 
-        self.toolList.clear()
+        self.__toolList.clear()
 
         if not self.searchEntry.get().lower():
             items = rf.getTool(False, "availability", "yes")
@@ -124,10 +128,10 @@ class SearchToolPage(tk.Frame):
                     items.append(descriptionList[i])
 
         for i in range(len(items)):
-            self.toolList.append(util.convertToObj(items[i]))
-        self.populateData()
+            self.__toolList.append(util.convertToObj(items[i]))
+        self.__populateData()
 
-    def populateData(self):
+    def __populateData(self):
         """
         Populates all data in the list
         :return: None
@@ -135,9 +139,9 @@ class SearchToolPage(tk.Frame):
 
         for i in self.tree.get_children():
             self.tree.delete(i)
-        if self.toolList:
-            for i in range(len(self.toolList)):
-                self.tree.insert('', 'end', text=self.toolList[i].getTitle(),
-                                 values=(self.toolList[i].getPriceFullDay(),
-                                         self.toolList[i].getPriceHalfDay()),
-                                 tag=self.toolList[i].getID())
+        if self.__toolList:
+            for i in range(len(self.__toolList)):
+                self.tree.insert('', 'end', text=self.__toolList[i].getTitle(),
+                                 values=(self.__toolList[i].getPriceFullDay(),
+                                         self.__toolList[i].getPriceHalfDay()),
+                                 tag=self.__toolList[i].getID())

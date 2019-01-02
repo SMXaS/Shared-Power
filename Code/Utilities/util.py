@@ -1,6 +1,6 @@
 import csv
 import re
-import uuid
+import glob
 import imghdr
 import os
 from shutil import copy2
@@ -152,9 +152,6 @@ def verifyIMG(path):
             return True
 
 
-
-
-
 def copyIMG(src, dst,  ID):
     """
     :param src: str (file's source location)
@@ -167,6 +164,14 @@ def copyIMG(src, dst,  ID):
     oldName = getFileName(src)
     newName = "{}{}.{}".format(dst, ID, "png")
     os.rename(dst+oldName, newName)
+
+
+def getInvoiceDates(user):
+    pathList = glob.glob("Data\Invoices\{}\*.csv".format(user))
+    dateList = []
+    for i in range(len(pathList)):
+        dateList.append(os.path.basename(pathList[i]).split(".")[0])
+    return dateList
 
 
 def getFileName(path):
@@ -256,7 +261,7 @@ def getBookingDates(bookings):
 
     firstAvailableDate = datetime.now()
     allDateList = []
-    dateFormat = strings.dateFormat
+    dateFormat = strings.simpleDateFormat
     for i in range(42):
         firstAvailableDate+= timedelta(days=1)
         # check if date is available
@@ -296,7 +301,7 @@ def getNextAvailableDates(startDate, dayList):
     :return: list(str(available days))
     """
 
-    dateFormat = strings.dateFormat
+    dateFormat = strings.simpleDateFormat
     allDateList = []
     date = datetime.strptime(startDate, dateFormat)
     firstNextDate = date
@@ -325,7 +330,7 @@ def getDayDifference(startDate, endDate):
     :return: int(difference)
     """
 
-    dateFormat = strings.dateFormat
+    dateFormat = strings.simpleDateFormat
     date1 = datetime.strptime(startDate, dateFormat)
     date2 = datetime.strptime(endDate, dateFormat)
     diff = date2-date1
@@ -342,7 +347,7 @@ def verifyBooking(startDate, availableDays, diff):
     :return: boolean (True - approved, False - not)
     """
 
-    dateFormat = strings.dateFormat
+    dateFormat = strings.simpleDateFormat
     date = datetime.strptime(startDate, dateFormat)
     allDateList = []
     for i in range(diff):

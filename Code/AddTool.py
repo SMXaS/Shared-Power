@@ -19,10 +19,8 @@ class AddTool:
         :param tool: list(item specifications)
         :return:
         """
-        print("class: AddTool; method: add")
         isCorrect = self.__verifyTool(tool)
         if isCorrect:
-            print("isCorrect")
             ID = uuid.uuid4()
             util.copyIMG(tool[6], strings.filePath_images, ID)
             newPath = "{}{}".format(strings.filePath_images, ID)

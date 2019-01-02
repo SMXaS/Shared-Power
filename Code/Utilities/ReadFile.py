@@ -84,7 +84,6 @@ def getAllBookings(column, arg):
 
     return itemList
 
-
 def getAllInvoices(column, arg, path):
     itemList = []
     with open(path, 'r') as f:

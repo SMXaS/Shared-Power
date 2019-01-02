@@ -9,9 +9,9 @@ from Code.UI.BookToolPage import BookToolPage
 from Code.UI.LoginPage import LoginPage
 from Code.UI.RegisterPage import RegisterPage
 from Code.UI.InvoicePage import InvoicePage
+from Code.UI.ToolInfoPage import ToolInfoPage
+from Code.UI.ReceiveItemPage import ReceiveItemPage
 from Resources.Values import strings, colors, dimens, fonts
-
-# TODO clear entries after usage, reset search tool list
 
 
 class mainMenu(tk.Tk):
@@ -97,7 +97,7 @@ class mainMenu(tk.Tk):
         self.frames = {}
 
         for F in (SearchToolPage, AddToolPage, WelcomePage, MyToolPage, ReturnToolPage, BookToolPage, LoginPage,
-                  RegisterPage, InvoicePage):
+                  RegisterPage, InvoicePage, ToolInfoPage, ReceiveItemPage):
             self.page_name = F.__name__
             frame = F(parent=container, controller=self)
             self.frames[self.page_name] = frame

@@ -9,10 +9,10 @@ import os
 
 
 class MyInvoice:
-    currentMonth = datetime.datetime.now().strftime(strings.invoiceDateFormat)
-    currentMonthPlaceholder = "02-2019"
-    currentDatePlaceholder = "05/02/2019"
-    currentDate = datetime.datetime.now().strftime(strings.dateFormat)
+    __currentMonth = datetime.datetime.now().strftime(strings.invoiceMonth_YearFormat)
+    __currentMonthPlaceholder = "02-2019"
+    __currentDatePlaceholder = "05/02/2019"
+    __currentDate = datetime.datetime.now().strftime(strings.dateFormat)
 
     # TODO hired date/return date?
 
@@ -20,6 +20,13 @@ class MyInvoice:
         self.__login = login
 
     def generateInvoice(self, bookingObj):
+        """
+        generates invoice based on bookings
+
+        :param bookingObj: booking object
+        :return: None
+        """
+
         toolDict = rf.get_tool("ID", bookingObj.getToolID())
         toolObject = utils.convertFromListToObj(toolDict)
         path = "{}{}/".format(strings.filePath_invoiceFolder, self.__login)
@@ -27,9 +34,17 @@ class MyInvoice:
                              self.__calculateRiderPrice(bookingObj, toolObject),
                              self.__calculateFine(bookingObj, toolObject))
 
-        wf.write(invoiceObj, None, strings.fieldNames_invoice, path, self.currentMonth)
+        wf.write(invoiceObj, None, strings.fieldNames_invoice, path, self.__currentMonth)
 
     def __calculateHirePrice(self, bookingObj, toolObj):
+        """
+        Calculates hire price
+
+        :param bookingObj: booking object
+        :param toolObj: tool object
+        :return: float(hire price)
+        """
+
         diff = utils.getDayDifference(bookingObj.getStartDate(), bookingObj.getExpectedReturnDate()) + 1
         startTerm = bookingObj.getStartTerm()
         endTerm = bookingObj.getExpectedTerm()
@@ -62,6 +77,14 @@ class MyInvoice:
         return "%.2f" % price
 
     def __calculateRiderPrice(self, bookingObj, toolObj):
+        """
+        calculates dispatch cost
+
+        :param bookingObj: booking object
+        :param toolObj: tool object
+        :return: float(dispatch cost)
+        """
+
         riderPrice = 0
         if bookingObj.getPickUpLocation():
             riderPrice += float(toolObj.getRiderCharge())
@@ -72,8 +95,14 @@ class MyInvoice:
         return "%.2f" % riderPrice
 
     def __calculateFine(self, bookingObj, toolObj):
+        """
+        calculates fine for late return
+        :param bookingObj: booking object
+        :param toolObj: tool object
+        :return: float(fine)
+        """
 
-        diff = utils.getDayDifference(bookingObj.getExpectedReturnDate(), self.currentDate)
+        diff = utils.getDayDifference(bookingObj.getExpectedReturnDate(), self.__currentDate)
         fullPrice = float(toolObj.getPriceFullDay())
 
         if diff > 0:
@@ -83,8 +112,18 @@ class MyInvoice:
 
         return "%.2f" % fine
 
-    def showInvoice(self, txtBox, totalLabel):
-        path = "{}{}/{}.csv".format(strings.filePath_invoiceFolder, self.__login, self.currentMonth)
+    def showInvoice(self, txtBox, totalLabel, date):
+        """
+        calculates total cost for given month bookings and populates that information (with total amount)
+        on textBox widget
+
+        :param txtBox: textBox widget(holds all information about bookings prices)
+        :param totalLabel: Label widget(holds information about total cost)
+        :param date: selected date
+        :return: None
+        """
+
+        path = "{}{}/{}.csv".format(strings.filePath_invoiceFolder, self.__login, date)
         exist = os.path.isfile(path)
         invoiceList = []
 
@@ -103,18 +142,18 @@ class MyInvoice:
         fileName = utils.getFileName(path)[:-4]
         txtBox.insert(END, fileName + "\n\n")
         for i in range(len(invoiceList)):
-            txtBox.insert(END, "{} {}".format("Tool title:", invoiceList[i].getToolTitle()) + "\n")
-            txtBox.insert(END, "{} {} {}".format("Tool cost:", invoiceList[i].getHirePrice(),
+            txtBox.insert(END, "{} {}".format(strings.toolTitleForInvoice, invoiceList[i].getToolTitle()) + "\n")
+            txtBox.insert(END, "{} {} {}".format(strings.toolCost, invoiceList[i].getHirePrice(),
                                                  strings.currency) + "\n")
             hireCost += float(invoiceList[i].getHirePrice())
 
             if float(invoiceList[i].getRiderPrice()) > 0:
-                txtBox.insert(END, "{} {} {}".format("Dispatch cost:", invoiceList[i].getRiderPrice(),
+                txtBox.insert(END, "{} {} {}".format(strings.dispatchCost, invoiceList[i].getRiderPrice(),
                                                      strings.currency) + "\n")
                 dispatchCost += float(invoiceList[i].getRiderPrice())
 
             if float(invoiceList[i].getFine()) > 0:
-                txtBox.insert(END, "{} {} {}".format("Fines:", invoiceList[i].getFine(),
+                txtBox.insert(END, "{} {} {}".format(strings.fines, invoiceList[i].getFine(),
                                                      strings.currency) + "\n")
                 fine += float(invoiceList[i].getFine())
 
@@ -122,5 +161,7 @@ class MyInvoice:
 
         txtBox.config(state="disabled")
 
-        totalPrice = "%.2f" % sum([monthlyFee, hireCost, dispatchCost, fine])
+        totalPrice = "%.2f" % sum([hireCost, dispatchCost, fine])
+        if float(totalPrice) > 0:
+            totalPrice = float(monthlyFee) + float(totalPrice)
         totalLabel.config(text="{}{} {}".format(strings.totalCost, totalPrice, strings.currency))
