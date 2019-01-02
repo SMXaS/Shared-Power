@@ -10,7 +10,7 @@ from Code.UI.LoginPage import LoginPage
 from Code.UI.RegisterPage import RegisterPage
 from Code.UI.InvoicePage import InvoicePage
 from Code.UI.ToolInfoPage import ToolInfoPage
-from Code.UI.ReceiveItemPage import ReceiveItemPage
+from Code.UI.ReceiveToolPage import ReceiveToolPage
 from Resources.Values import strings, colors, dimens, fonts
 
 
@@ -97,7 +97,7 @@ class mainMenu(tk.Tk):
         self.frames = {}
 
         for F in (SearchToolPage, AddToolPage, WelcomePage, MyToolPage, ReturnToolPage, BookToolPage, LoginPage,
-                  RegisterPage, InvoicePage, ToolInfoPage, ReceiveItemPage):
+                  RegisterPage, InvoicePage, ToolInfoPage, ReceiveToolPage):
             self.page_name = F.__name__
             frame = F(parent=container, controller=self)
             self.frames[self.page_name] = frame

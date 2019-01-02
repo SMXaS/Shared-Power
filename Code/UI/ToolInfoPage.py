@@ -104,7 +104,7 @@ class ToolInfoPage(tk.Frame):
         self.priceHalfDayTxt.config(text="{}{}".format(self.tool.getPriceHalfDay(), strings.currency))
         self.dispatchTxt.config(text="{}{}".format(self.tool.getRiderCharge(), strings.currency))
 
-    def __showImage(self, frame):
+    def __showImage(self):
         """
         opens new window and shows image of selected item
         :return: None

@@ -69,7 +69,7 @@ def get_alltools():
         my_dict = {i[0]:[x for x in i[1:]] for i in zip(*l)}
         return my_dict
 
-def getAllBookings(column, arg):
+def getAllBookings(column, arg, status):
     pathList = glob.glob("Data\Bookings\*.csv")
 
     itemList = []
@@ -79,7 +79,7 @@ def getAllBookings(column, arg):
             my_dict = {i[0]: [x for x in i[1:]] for i in zip(*l)}
             item = [i for i, x in enumerate(my_dict[column]) if arg == x]
             for k in range(len(item)):
-                if my_dict["status"][item[k]] == (strings.toolStatus[0] or strings.toolStatus[1]):
+                if my_dict["status"][item[k]] == strings.toolStatus[status]:
                     itemList.append(util.convertBookingToObject(item[k], pathList[i]))
 
     return itemList

@@ -63,6 +63,9 @@ def verifyRegistration (user):
     user[10] = phone number
     """
 
+    for i in range(len(user)):
+        print("index: {}; value: {}".format(i, user[i]))
+
     # Check if entries contain spaces or empty fields
     for i in range(len(user)):
         if not user[i]:

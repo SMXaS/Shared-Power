@@ -201,7 +201,7 @@ class BookToolPage(tk.Frame):
         :return: list(obj(all bookings for particular item))
         """
 
-        return rf.getAllBookings("toolID", self.tool.getID())
+        return rf.getAllBookings("toolID", self.tool.getID(), 0)
 
     def getAvailableList(self, bookingList):
         """

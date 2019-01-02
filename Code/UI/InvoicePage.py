@@ -72,6 +72,8 @@ class InvoicePage(tk.Frame):
 
         fullMonthNames = []
         dateList = util.getInvoiceDates(self.controller.login)
+        if not dateList:
+            dateList.append(self.currentDate)
         for i in range(len(dateList)):
             year = dateList[i].split("-")[1]
             month = dateList[i].split("-")[0]
@@ -89,4 +91,6 @@ class InvoicePage(tk.Frame):
         self.yearMenu.config(values=self.yearList)
         self.monthMenu.current(0)
         self.yearMenu.current(0)
+
+
 

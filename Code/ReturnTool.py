@@ -22,7 +22,7 @@ class ReturnTool:
         self.__errorLabel = errorLabel
         self.__tree = tree
         self.__login = login
-        self.__bookingList = rf.getAllBookings("userName", self.__login)
+        self.__bookingList = rf.getAllBookings("userName", self.__login, 0)
         test.printBookingObjects(self.__bookingList)
 
 

@@ -66,22 +66,27 @@ class MyToolPage(tk.Frame):
         self.tree.column('#1', stretch=tk.YES)
         self.tree.column('#2', stretch=tk.YES)
         self.tree.column('#0', stretch=tk.YES)
-        self.tree.grid(row=1, column=1, columnspan=2, pady=20, sticky="N")
+        self.tree.grid(row=1, column=0, columnspan=5, pady=20, sticky="N")
 
-        self.yscrollbar.grid(row=1, column=4, pady=20, sticky='WNS')
+        self.yscrollbar.grid(row=1, column=5, pady=20, sticky='WNS')
 
         ####################################################################################################
         #                                           WIDGETS
         ####################################################################################################
 
+        receiveButton = tk.Label(frame, text="receive", bg=self.bgColor, fg=self.fgColor,
+                                 font='Helvetica 10 bold')
+        receiveButton.grid(row=2, column=0)
+        receiveButton.bind("<Button-1>", lambda event: self.controller.show_frame(strings.receiveToolPage))
+
         editButton = tk.Label(frame, text="Edit Tool", bg=self.bgColor, fg=self.fgColor,
                               font='Helvetica 10 bold')
-        editButton.grid(row=2, column=1, padx=1, pady=20, sticky="N")
+        editButton.grid(row=2, column=1, padx=1, sticky="N")
 
         # editButton.bind("<Button-1>", lambda event: self.selectItem())
         deleteButton = tk.Label(frame, text="Delete Tool", bg=self.bgColor, fg=self.fgColor,
                                 font='Helvetica 10 bold')
-        deleteButton.grid(row=2, column=2, padx=0, pady=10, sticky="N")
+        deleteButton.grid(row=2, column=2, padx=0, sticky="N")
 
         # deleteButton.bind("<Button-2>", lambda event: self.selectItem())
 

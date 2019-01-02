@@ -21,7 +21,7 @@ searchToolClass = "SearchToolPage"
 welcomeClass = "WelcomePage"
 invoiceClass = "InvoicePage"
 toolInfoPage = "ToolInfoPage"
-receiveItemPage = "ReceiveItemPage"
+receiveToolPage = "ReceiveToolPage"
 
 # --------------
 # Image Paths
@@ -34,7 +34,7 @@ account = "Resources/Drawable/account.png"
 # --------------
 # Tool
 # --------------
-toolStatus = ["hired", "pending_receive", "returned", "inventory"]
+toolStatus = ["hired", "pending_receive", "inventory"]
 
 # --------------
 # Database
