@@ -21,14 +21,8 @@ class BookToolPage(tk.Frame):
     # TODO error label
 
     def __init__(self, parent, controller):
-        """
-        :param master: master
-        :param tool[0]: login
-        :param tool[1]: obj(tool)
-        """
         tk.Frame.__init__(self, parent)
         self.__controller = controller
-        self.__login = controller.login
         self.config(bg=colors.bgColor)
         self.columnconfigure(0, weight=1)
 

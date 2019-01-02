@@ -1,3 +1,4 @@
 ID,owner,title,description,condition,priceFullDay,priceHalfDay,riderCharge,imgPath,availability
 aac889e8-23c4-4ddf-824c-821bc9756d25,test,shoe,smelly one,used,29.9,19.9,5,Data/Images/aac889e8-23c4-4ddf-824c-821bc9756d25,yes
 27f5c5a9-0c0b-4559-bd24-2a4e50f58c58,test,smoking pot,i'm so high..,used,10,6,8,Data/Images/27f5c5a9-0c0b-4559-bd24-2a4e50f58c58,yes
+4574028e-140e-432a-807a-97849e82661e,eddie,amazon locker,"a lot of spaces, looks like new",used good,280,190,20,Data/Images/4574028e-140e-432a-807a-97849e82661e,yes

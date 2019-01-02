@@ -1,5 +1,5 @@
 appTitle = "Shared Power"
-asterix = "*"
+asterisk = "*"
 currency = "£"
 back = "Back"
 dateFormat = "%#d/%#m/%Y"
@@ -146,6 +146,12 @@ toolTitleForInvoice = "Tool title:"
 toolCost = "Tool cost:"
 dispatchCost = "Dispatch cost:"
 fines = "Fines:"
+
+# --------------
+# Receive Item Page
+# --------------
+receiveItem = "Receive items"
+declareAsDamaged = "Declare as damaged"
 
 # --------------
 # Error messages

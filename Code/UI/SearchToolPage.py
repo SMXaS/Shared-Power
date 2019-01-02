@@ -14,7 +14,6 @@ class SearchToolPage(tk.Frame):
 
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
-        self.__login = controller.login
         self.__controller = controller
         self.config(bg=colors.bgColor)
         self.columnconfigure(0, weight=1)

@@ -43,47 +43,47 @@ class RegisterPage(tk.Frame):
         self.errorLabel = tk.Label(self, text="", bg=self.bgColor, fg=self.errorColor)
         self.errorLabel.grid(row=0, column=0, columnspan=2, padx=10)
 
-        firstNameLabel = tk.Label(self, text="{}{}".format(strings.asterix, strings.firstName),
+        firstNameLabel = tk.Label(self, text="{}{}".format(strings.asterisk, strings.firstName),
                                   bg=self.bgColor, fg=self.fgColor)
         firstNameLabel.grid(row=1, column=0, padx=5, pady=2, sticky="E")
 
-        lastNameLabel = tk.Label(self, text="{}{}".format(strings.asterix, strings.lastName),
+        lastNameLabel = tk.Label(self, text="{}{}".format(strings.asterisk, strings.lastName),
                                  bg=self.bgColor, fg=self.fgColor)
         lastNameLabel.grid(row=2, column=0, padx=5, pady=2, sticky="E")
 
-        userNameLabel = tk.Label(self, text="{}{}".format(strings.asterix, strings.userName),
+        userNameLabel = tk.Label(self, text="{}{}".format(strings.asterisk, strings.userName),
                                  bg=self.bgColor, fg=self.fgColor)
         userNameLabel.grid(row=3, column=0, padx=5, pady=2, sticky="E")
 
-        postCodeLabel = tk.Label(self, text="{}{}".format(strings.asterix, strings.postCode),
+        postCodeLabel = tk.Label(self, text="{}{}".format(strings.asterisk, strings.postCode),
                                  bg=self.bgColor, fg=self.fgColor)
         postCodeLabel.grid(row=4, column=0, padx=5, pady=2, sticky="E")
 
-        streetNameLabel = tk.Label(self, text="{}{}".format(strings.asterix, strings.streetName),
+        streetNameLabel = tk.Label(self, text="{}{}".format(strings.asterisk, strings.streetName),
                                    bg=self.bgColor, fg=self.fgColor)
         streetNameLabel.grid(row=5, column=0, padx=5, pady=2, sticky="E")
 
-        houseNumberLabel = tk.Label(self, text="{}{}".format(strings.asterix, strings.houseNumber),
+        houseNumberLabel = tk.Label(self, text="{}{}".format(strings.asterisk, strings.houseNumber),
                                     bg=self.bgColor, fg=self.fgColor)
         houseNumberLabel.grid(row=6, column=0, padx=5, pady=2, sticky="E")
 
-        emailLabel = tk.Label(self, text="{}{}".format(strings.asterix, strings.email), bg=self.bgColor,
+        emailLabel = tk.Label(self, text="{}{}".format(strings.asterisk, strings.email), bg=self.bgColor,
                               fg=self.fgColor)
         emailLabel.grid(row=7, column=0, padx=5, pady=2, sticky="E")
 
-        emailConfirmLabel = tk.Label(self, text="{}{}".format(strings.asterix, strings.emailConfirmation),
+        emailConfirmLabel = tk.Label(self, text="{}{}".format(strings.asterisk, strings.emailConfirmation),
                                      bg=self.bgColor, fg=self.fgColor)
         emailConfirmLabel.grid(row=8, column=0, padx=5, pady=2, sticky="E")
 
-        passwordLabel = tk.Label(self, text="{}{}".format(strings.asterix, strings.password),
+        passwordLabel = tk.Label(self, text="{}{}".format(strings.asterisk, strings.password),
                                  bg=self.bgColor, fg=self.fgColor)
         passwordLabel.grid(row=9, column=0, padx=5, pady=2, sticky="E")
 
-        passwordConfirmationLabel = tk.Label(self, text="{}{}".format(strings.asterix, strings.passwordConfirmation),
+        passwordConfirmationLabel = tk.Label(self, text="{}{}".format(strings.asterisk, strings.passwordConfirmation),
                                              bg=self.bgColor, fg=self.fgColor)
         passwordConfirmationLabel.grid(row=10, column=0, padx=5, pady=2)
 
-        phoneNumberLabel = tk.Label(self, text="{}{}".format(strings.asterix, strings.phoneNumber),
+        phoneNumberLabel = tk.Label(self, text="{}{}".format(strings.asterisk, strings.phoneNumber),
                                     bg=self.bgColor, fg=self.fgColor)
         phoneNumberLabel.grid(row=11, column=0, padx=5, pady=2, sticky="E")
 

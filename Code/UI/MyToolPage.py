@@ -3,6 +3,7 @@ from tkinter import ttk
 from Resources.Values import strings, colors, dimens, fonts
 from Code.Utilities import ReadFile as rf
 import Code.test_printObj as test
+import Code.Utilities.util as util
 
 
 class MyToolPage(tk.Frame):
@@ -74,8 +75,8 @@ class MyToolPage(tk.Frame):
         #                                           WIDGETS
         ####################################################################################################
 
-        receiveButton = tk.Label(frame, text="receive", bg=self.bgColor, fg=self.fgColor,
-                                 font='Helvetica 10 bold')
+        receiveButton = tk.Label(frame, text=strings.receiveItem, bg=self.bgColor, fg=self.fgColor,
+                                 font=fonts.buttonFont)
         receiveButton.grid(row=2, column=0)
         receiveButton.bind("<Button-1>", lambda event: self.controller.show_frame(strings.receiveToolPage))
 

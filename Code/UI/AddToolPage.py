@@ -35,27 +35,27 @@ class AddToolPage(tk.Frame):
         self.errorLabel = tk.Label(self, bg=self.__bgColor, fg=self.__errorColor)
         self.errorLabel.grid(row=0, column=0, padx=5, pady=2, sticky="WN")
 
-        titleLabel = tk.Label(frame, text="{}{}".format(strings.asterix, strings.toolTitle),
+        titleLabel = tk.Label(frame, text="{}{}".format(strings.asterisk, strings.toolTitle),
                               bg=self.__bgColor, fg=self.__fgColor)
         titleLabel.grid(row=1, column=0, padx=5, pady=2, sticky="E")
 
-        DescriptionLabel = tk.Label(frame, text="{}{}".format(strings.asterix, strings.toolDescription),
+        DescriptionLabel = tk.Label(frame, text="{}{}".format(strings.asterisk, strings.toolDescription),
                                     bg=self.__bgColor, fg=self.__fgColor)
         DescriptionLabel.grid(row=2, column=0, padx=5, pady=2, sticky="EN")
 
-        PriceDayLabel = tk.Label(frame, text="{}{}".format(strings.asterix, strings.priceDay),
+        PriceDayLabel = tk.Label(frame, text="{}{}".format(strings.asterisk, strings.priceDay),
                                  bg=self.__bgColor, fg=self.__fgColor)
         PriceDayLabel.grid(row=3, column=0, padx=5, pady=2, sticky="E")
 
-        PriceHalfDayLabel = tk.Label(frame, text="{}{}".format(strings.asterix, strings.priceHalfDay),
+        PriceHalfDayLabel = tk.Label(frame, text="{}{}".format(strings.asterisk, strings.priceHalfDay),
                                      bg=self.__bgColor, fg=self.__fgColor)
         PriceHalfDayLabel.grid(row=4, column=0, sticky="E")
 
-        riderCharge = tk.Label(frame, text="{}{}".format(strings.asterix, strings.dispatchCharge),
+        riderCharge = tk.Label(frame, text="{}{}".format(strings.asterisk, strings.dispatchCharge),
                                bg=self.__bgColor, fg=self.__fgColor)
         riderCharge.grid(row=5, column=0, sticky="E")
 
-        toolConditionLabel = tk.Label(frame, text="{}{}".format(strings.asterix, strings.toolCondition),
+        toolConditionLabel = tk.Label(frame, text="{}{}".format(strings.asterisk, strings.toolCondition),
                                       bg=self.__bgColor, fg=self.__fgColor)
         toolConditionLabel.grid(row=6, column=0, sticky="E")
 
@@ -80,7 +80,7 @@ class AddToolPage(tk.Frame):
         self.toolConditionEntry = tk.Entry(frame, width=40)
         self.toolConditionEntry.grid(row=6, column=1)
 
-        img_btn = tk.Label(frame, text="{}{}".format(strings.asterix, strings.image),
+        img_btn = tk.Label(frame, text="{}{}".format(strings.asterisk, strings.image),
                            bg=self.__bgColor, fg=self.__fgColor, font=fonts.addImageFont)
         img_btn.grid(row=7, column=0, sticky="E")
         img_btn.bind("<Button-1>", lambda event: self.__setImgPath())
@@ -114,7 +114,7 @@ class AddToolPage(tk.Frame):
 
     def clearEntries(self):
         self.titleEntry.delete(0, "end")
-        self.descriptionEntry.delete(0, "end")
+        self.descriptionEntry.delete("1.0", "end")
         self.riderChargeEntry.delete(0, "end")
         self.imgPath.config(text="")
         self.toolConditionEntry.delete(0, "end")

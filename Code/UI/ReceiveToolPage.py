@@ -1,8 +1,6 @@
 import tkinter as tk
 from tkinter import ttk
-from Resources.Values import strings, colors
-import Code.Utilities.ReadFile as rf
-import Code.test_printObj as test
+from Resources.Values import strings, colors, fonts
 from Code.ReceiveTool import ReceiveTool
 
 
@@ -13,14 +11,14 @@ class ReceiveToolPage(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         self.__controller = controller
-        self.__login = controller.login
         self.config(bg=colors.bgColor)
         self.columnconfigure(0, weight=1)
 
         self.__initUI()
 
     def start(self, args):
-        ReceiveTool(self.__tree, self.__login).populateList()
+        self.__receiveTool = ReceiveTool(self.__tree, self.__errorLabel, self.__controller.login)
+        self.__receiveTool.populateList()
 
     def __initUI(self):
         frame = tk.Frame(self, bg=colors.bgColor)
@@ -45,3 +43,19 @@ class ReceiveToolPage(tk.Frame):
         self.__tree.grid(row=1, column=0, columnspan=4, pady=20, sticky="N")
 
         mScrollBar.grid(row=1, column=5, pady=20, sticky='WNS')
+
+        backIMG = tk.PhotoImage(file=strings.buttonBack)
+        backButton = tk.Label(frame, image=backIMG, bg=colors.bgColor)
+        backButton.image = backIMG
+        backButton.bind("<Button-1>", lambda event: self.__controller.show_frame(strings.myToolClass))
+        backButton.grid(row=2, column=1, padx=10, sticky="W")
+
+        receiveButton = tk.Label(frame, text=strings.receiveItem, bg=colors.bgColor, fg=colors.fgColor,
+                                 font=fonts.buttonFont)
+        receiveButton.grid(row=2, column=2)
+        receiveButton.bind("<Button-1>", lambda event: self.__receiveTool.receiveItem())
+
+        damageButton = tk.Label(frame, text=strings.declareAsDamaged, bg=colors.bgColor, fg=colors.fgColor,
+                                font=fonts.buttonFont)
+        damageButton.grid(row=2, column=3)
+        damageButton.bind("<Button-1>", lambda event: self.__receiveTool.damageItem())

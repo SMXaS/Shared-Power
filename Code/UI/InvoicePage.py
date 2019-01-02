@@ -16,7 +16,6 @@ class InvoicePage(tk.Frame):
     checkedYear = ""
 
     def __init__(self, parent, controller):
-        self.login = controller.login
         self.controller = controller
         tk.Frame.__init__(self, parent)
         self.config(bg=colors.bgColor)
