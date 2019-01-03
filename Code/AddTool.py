@@ -3,12 +3,39 @@ from Code.Utilities import util, WriteFile as wf
 from Resources.Values import strings
 import uuid
 
+"""
+----------------------------------------------------------------------------------------------------------------------
+This class allows user to Add Tool. First it will check if all entries are correct:
+   * entries shouldn't be empty
+   * currency fields shouldn't take strings
+   * image must be .png
+If requirements match - it will build an object and send it to WriteFile class to write it into a Data/tools.csv file
+----------------------------------------------------------------------------------------------------------------------
+
+----------------------------------------------------------------
+***Implementation:
+----------------------------------------------------------------
+    class: 
+        @ 'your assigned name' = AddTool(string, Label widget):
+            * takes str(userName)
+            * takes widget(label for error messages)
+----------------------------------------------------------------
+    methods:
+        @ 'your assigned name'.add(list):
+            * takes list as a parameter where is all entries about the tool
+            - Adds tool to the database
+            * will return boolean value:
+                True - file was added into database
+                False - there was an error and it was highlighted 
+"""
+
 
 class AddTool:
 
     def __init__(self, login, errorLabel):
         """
         :param login: str(user's login)
+        :param errorLabel: widget(for setting up errors)
         """
 
         self.__login = login
@@ -17,7 +44,7 @@ class AddTool:
     def add(self, tool):
         """
         :param tool: list(item specifications)
-        :return:
+        :return: boolean
         """
         isCorrect = self.__verifyTool(tool)
         if isCorrect:
@@ -34,9 +61,8 @@ class AddTool:
 
     def __verifyTool(self, tool):
         """
-
         :param tool: obj(tool)
-        :return True or error code
+        :return boolean
 
         tool[0] = title
         tool[1] = description

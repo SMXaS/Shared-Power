@@ -5,6 +5,32 @@ import Code.Utilities.ReadFile as rf
 import Code.test_printObj as test
 import datetime
 
+"""
+-------------------------------------------------------------------------------------------------
+This class shows a list with all booked items (status = hired) and allows user to return an item
+    or cancel the booking
+-------------------------------------------------------------------------------------------------
+
+---------------------------------------------------------------------
+*** Implementation:
+---------------------------------------------------------------------
+    class:
+        @ 'your assigned name' = ReturnTool(Label, TreeView, string):
+            * takes Label(for error messages)
+            * takes TreeView (for populating the list and getting 
+                information about booking)
+            * takes string (userName)
+---------------------------------------------------------------------
+    methods:
+        @ 'your assigned name'.populateData():
+            populates hired items
+        @ 'your assigned name'.returnItem(string):
+            * takes string(tool condition (from Entry))
+            - marks item as returned (changes booking status into "pending_receive") and refreshes the list
+        @ 'your assigned name'.cancelBooking():
+            - deletes this booking for database       
+"""
+
 
 class ReturnTool:
 
@@ -12,30 +38,13 @@ class ReturnTool:
     __toolObjList = []
 
     def __init__(self, errorLabel, tree, login):
-        """
-
-        :param errorLabel: widget(label)(label which will show any error)
-        :param tree: widget(treeView)
-        :param login: str(user name)
-        """
-
         self.__errorLabel = errorLabel
         self.__tree = tree
         self.__login = login
         self.__bookingList = rf.getAllBookings("userName", self.__login, 0)
         test.printBookingObjects(self.__bookingList)
 
-
-    def __getCurrentDate(self):
-        return datetime.datetime.now().strftime(strings.dateFormat)
-
     def returnItem(self, toolCondition):
-        """
-        will return item to the owner. Status will be changed to "pending_receive" and owner will need to
-            confirm this process in order to hire it again
-        :return: None
-        """
-
         if self.__tree.focus():
             self.__errorLabel.config(text="")
             if toolCondition.get():
@@ -52,6 +61,7 @@ class ReturnTool:
                 print("--------------")
                 test.printBookingObjects(bookObj_forTest)
                 # TODO edit booking db #returnItemObj#
+                # TODO refresh the list
                 toolCondition.delete(0, "end")
                 MyInvoice(self.__login).generateInvoice(returnItemObj)
             else:
@@ -59,39 +69,10 @@ class ReturnTool:
         else:
             self.__errorLabel.config(text=strings.errorSelectItem)
 
-    def __getBookingIndex(self):
-        """
-        gets selected item index
-
-        :return: int(index)
-        """
-
-        curItem = self.__tree.focus()
-        index = None
-        if curItem:
-            itemID = None
-            for item in self.__tree.selection():
-                itemID = self.__tree.item(item, "tag")
-
-            for i in range(len(self.__bookingList)):
-                if self.__bookingList[i].getBookingID() in itemID:
-                    index = i
-                    break
-
-        return index
-
     def cancelBooking(self):
-        """
-        Will cancel
-        :return: None
-        """
-
         if self.__tree.focus():
             cancelItemObj = self.__bookingList[self.__getBookingIndex()]
-            print("start date:", cancelItemObj.getStartDate())
-            print("end date:", cancelItemObj.getExpectedReturnDate())
             currentDate = self.__getCurrentDate()
-            print("today", currentDate)
             dayDiff = util.getDayDifference(currentDate, cancelItemObj.getStartDate())
             print("day diff:", dayDiff)
             if dayDiff < 1:
@@ -129,3 +110,27 @@ class ReturnTool:
                                            self.__bookingList[i].getExpectedReturnDate(),
                                            self.__bookingList[i].getStatus()),
                                    tags=self.__bookingList[i].getBookingID())
+
+    def __getBookingIndex(self):
+        """
+        gets selected item index
+
+        :return: int(index)
+        """
+
+        curItem = self.__tree.focus()
+        index = None
+        if curItem:
+            itemID = None
+            for item in self.__tree.selection():
+                itemID = self.__tree.item(item, "tag")
+
+            for i in range(len(self.__bookingList)):
+                if self.__bookingList[i].getBookingID() in itemID:
+                    index = i
+                    break
+
+        return index
+
+    def __getCurrentDate(self):
+        return datetime.datetime.now().strftime(strings.dateFormat)

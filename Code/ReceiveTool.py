@@ -3,6 +3,31 @@ import Code.test_printObj as test
 import Code.Utilities.util as util
 from Resources.Values import strings
 
+"""
+-------------------------------------------------------------------------------------------------------------------
+This class shows a list with items, which need to be received (status = pending_receive. It allows item owner to 
+    receive items from a customer. It also provides an option to declare item as a damaged which will lead into 
+    all booking cancellation for a particular item
+-------------------------------------------------------------------------------------------------------------------
+
+----------------------------------------------------------------------
+*** Implementation:
+----------------------------------------------------------------------
+    class:
+        @ 'your assigned name' = ReceiveTool(TreeView, Label, string)
+            * Takes TreeView (widget for populating all data)
+            * Takes Label (widget for error messages)
+----------------------------------------------------------------------
+    Methods:
+        @ 'your assigned name'.populateList():
+            - populates returned items
+        @ 'your assigned name'.receiveItem():
+            - marks item as received (changes booking status into "inventory") and refreshes the list
+        @ 'your assigned name.damageItem():
+            - marks item as damaged (changes tool availability into "no") and received (changes booking status into
+                "inventory"), cancels all future bookings and refreshes the list       
+"""
+
 
 class ReceiveTool:
 

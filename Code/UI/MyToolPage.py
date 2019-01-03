@@ -6,6 +6,9 @@ import Code.test_printObj as test
 import Code.Utilities.util as util
 
 
+# TODO Late returns page which will show information about that person who hired tool?
+
+
 class MyToolPage(tk.Frame):
     bgColor = colors.bgColor
     fgColor = colors.fgColor
@@ -65,7 +68,7 @@ class MyToolPage(tk.Frame):
         self.yscrollbar = ttk.Scrollbar(frame, orient='vertical', command=self.tree.yview)
         self.tree.configure(yscrollcommand=self.yscrollbar.set)
 
-        self.tree.heading('#0', text='Title')
+        self.tree.heading('#0', text=strings.toolTitle)
         self.tree.heading('#1', text='Full day price')
         self.tree.heading('#2', text='Half Day Price')
         self.tree.column('#1', stretch=tk.YES)
