@@ -11,6 +11,7 @@ class MyToolPage(tk.Frame):
     fgColor = colors.fgColor
     width = dimens.mainWindowWidth
     heigh = dimens.mainWindowHeigh
+    login = ""
 
     def __init__(self, parent, controller):
 
@@ -24,6 +25,8 @@ class MyToolPage(tk.Frame):
     def start(self, args):
         self.toolList = rf.getTool(True, "owner", self.controller.login)
         test.printToolObject(self.toolList)
+        menuFrame = self.controller.getMenuFrame(self)
+        menuFrame.grid(row=0, column=0, sticky="WN")
         self.ThereWillBeYourLogic()
         self.populateData()
 
@@ -47,8 +50,9 @@ class MyToolPage(tk.Frame):
             self.myLabel.bind("<Button-1>", lambda event: '/your function/' )
 
         """
+
         frame = tk.Frame(self, bg=self.bgColor)
-        frame.grid(row=0, column=0, sticky="", pady=40)
+        frame.grid(row=1, column=0, sticky="", pady=19)
 
         ####################################################################################################
         #                                            DISPLAY
@@ -61,9 +65,9 @@ class MyToolPage(tk.Frame):
         self.yscrollbar = ttk.Scrollbar(frame, orient='vertical', command=self.tree.yview)
         self.tree.configure(yscrollcommand=self.yscrollbar.set)
 
-        self.tree.heading('#0', text='')
-        self.tree.heading('#1', text='Your Booked Tools')
-        self.tree.heading('#2', text='')
+        self.tree.heading('#0', text='Title')
+        self.tree.heading('#1', text='Full day price')
+        self.tree.heading('#2', text='Half Day Price')
         self.tree.column('#1', stretch=tk.YES)
         self.tree.column('#2', stretch=tk.YES)
         self.tree.column('#0', stretch=tk.YES)
@@ -71,25 +75,27 @@ class MyToolPage(tk.Frame):
 
         self.yscrollbar.grid(row=1, column=5, pady=20, sticky='WNS')
 
-        ####################################################################################################
-        #                                           WIDGETS
-        ####################################################################################################
+        self.editButton = tk.Label(frame, text="Edit Tool", bg=colors.bgColor, fg=colors.fgColor,
+                                   font=fonts.subMenuButtonFont)
+        self.editButton.grid(row=2, column=0, padx=4, sticky="N")
 
-        receiveButton = tk.Label(frame, text=strings.receiveItem, bg=self.bgColor, fg=self.fgColor,
-                                 font=fonts.buttonFont)
-        receiveButton.grid(row=2, column=0)
-        receiveButton.bind("<Button-1>", lambda event: self.controller.show_frame(strings.receiveToolPage))
-
-        editButton = tk.Label(frame, text="Edit Tool", bg=self.bgColor, fg=self.fgColor,
-                              font='Helvetica 10 bold')
-        editButton.grid(row=2, column=1, padx=1, sticky="N")
-
-        # editButton.bind("<Button-1>", lambda event: self.selectItem())
-        deleteButton = tk.Label(frame, text="Delete Tool", bg=self.bgColor, fg=self.fgColor,
-                                font='Helvetica 10 bold')
-        deleteButton.grid(row=2, column=2, padx=0, sticky="N")
+        self.editButton.bind("<Button-1>", lambda event: self.smth())
+        self.deleteButton = tk.Label(frame, text="Delete Tool", bg=colors.bgColor, fg=colors.fgColor,
+                                     font=fonts.subMenuButtonFont)
+        self.deleteButton.grid(row=2, column=1, padx=4, sticky="N")
 
         # deleteButton.bind("<Button-2>", lambda event: self.selectItem())
+
+    # TODO rename
+    def smth(self):
+        if self.tree.focus():
+            self.__errorLabel.config(text="")
+            # TODO refresh page
+            print("test")
+        else:
+            self.__errorLabel.config(text="select item first")
+            print("select item first")
+
 
     # Rename this function according to what you want to do
     def ThereWillBeYourLogic(self):
@@ -104,6 +110,7 @@ class MyToolPage(tk.Frame):
                 for more information check documentation on github
         """
 
+
     def populateData(self):
         """
         Populates all data in the list
@@ -116,6 +123,6 @@ class MyToolPage(tk.Frame):
         if self.toolList:
             for i in range(len(self.toolList)):
                 self.tree.insert('', 'end', text=self.toolList[i].getTitle(),
-                                 values=(self.toolList[i].getPriceFullDay(),
-                                         self.toolList[i].getPriceHalfDay()),
+                                 values=("{}{}".format(strings.currency, self.toolList[i].getPriceFullDay()),
+                                         "{}{}".format(strings.currency, self.toolList[i].getPriceHalfDay())),
                                  tags=self.toolList[i].getID())

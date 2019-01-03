@@ -11,6 +11,7 @@ from Code.UI.RegisterPage import RegisterPage
 from Code.UI.InvoicePage import InvoicePage
 from Code.UI.ToolInfoPage import ToolInfoPage
 from Code.UI.ReceiveToolPage import ReceiveToolPage
+from Code.UI.MyProfilePage import MyProfilePage
 from Resources.Values import strings, colors, dimens, fonts
 
 
@@ -56,6 +57,8 @@ class mainMenu(tk.Tk):
         divider = ttk.Separator(self.menuFrame, orient="horizontal")
         divider.pack(side="top", fill="x",padx=10, pady=20)
 
+        """
+
         myToolsButton = tk.Label(self.menuFrame, text=strings.menuMyTools, bg=colors.bgColor, fg=colors.fgColor,
                                  font=fonts.menuButtonFont)
         myToolsButton.bind("<Button-1>", lambda event: self.show_frame(strings.myToolClass))
@@ -71,16 +74,27 @@ class mainMenu(tk.Tk):
         addToolButton.bind("<Button-1>", lambda event: self.show_frame(strings.addToolClass))
         addToolButton.pack(side="top", padx=5, pady=2)
 
+        """
+
+        myProfileButton = tk.Label(self.menuFrame, text=strings.myProfile, bg=colors.bgColor, fg=colors.fgColor,
+                                   font=fonts.menuButtonFont)
+        myProfileButton.bind("<Button-1>", lambda event: self.show_frame(strings.myProfileClass))
+        myProfileButton.pack(side="top", padx=5, pady=2)
+
         searchToolButton = tk.Label(self.menuFrame, text=strings.menuSearchTool, bg=colors.bgColor,
                                     fg=colors.fgColor, font=fonts.menuButtonFont)
 
         searchToolButton.bind("<Button-1>", lambda event: self.show_frame(strings.searchToolClass))
         searchToolButton.pack(side="top", padx=5, pady=2)
 
+        """
+
         invoiceButton = tk.Label(self.menuFrame, text=strings.menuInvoice, bg=colors.bgColor,
                                     fg=colors.fgColor, font=fonts.menuButtonFont)
         invoiceButton.bind("<Button-1>", lambda event: self.show_frame(strings.invoiceClass))
         invoiceButton.pack(side="top", padx=5, pady=2)
+
+        """
 
         logOutButton = tk.Label(self.menuFrame, text=strings.menuLogOut, bg=colors.bgColor, fg=colors.fgColor,
                                 font=fonts.menuLogOutFont)
@@ -88,8 +102,8 @@ class mainMenu(tk.Tk):
         logOutButton.pack(side="bottom", padx=5, pady=10)
 
         # adding menu buttons to the list for easier highlighting
-        self.buttonList = (myToolsButton, myBookingsButton, addToolButton, searchToolButton, invoiceButton)
-
+        #self.buttonList = (myToolsButton, myBookingsButton, addToolButton, searchToolButton, invoiceButton)
+        self.buttonList = (myProfileButton, searchToolButton)
         # disabling menu frame in order to populate login/register pages
         self.menuFrame.pack_forget()
 
@@ -97,7 +111,7 @@ class mainMenu(tk.Tk):
         self.frames = {}
 
         for F in (SearchToolPage, AddToolPage, WelcomePage, MyToolPage, ReturnToolPage, BookToolPage, LoginPage,
-                  RegisterPage, InvoicePage, ToolInfoPage, ReceiveToolPage):
+                  RegisterPage, InvoicePage, ToolInfoPage, ReceiveToolPage, MyProfilePage):
             self.page_name = F.__name__
             frame = F(parent=container, controller=self)
             self.frames[self.page_name] = frame
@@ -159,16 +173,23 @@ class mainMenu(tk.Tk):
         :return: None
         """
 
-        if self.page_name is strings.myToolClass:
+        if self.page_name is strings.myProfileClass:
             self.highlightButton(0)
-        elif self.page_name is strings.returnToolClass:
-            self.highlightButton(1)
-        elif self.page_name is strings.addToolClass:
-            self.highlightButton(2)
         elif self.page_name is strings.searchToolClass:
+            self.highlightButton(1)
+
+        """
+        if self.__page_name is strings.myToolClass:
+            self.highlightButton(0)
+        elif self.__page_name is strings.returnToolClass:
+            self.highlightButton(1)
+        elif self.__page_name is strings.addToolClass:
+            self.highlightButton(2)
+        elif self.__page_name is strings.searchToolClass:
             self.highlightButton(3)
-        elif self.page_name is strings.invoiceClass:
+        elif self.__page_name is strings.invoiceClass:
             self.highlightButton(4)
+        """
 
     def highlightButton(self, index):
         """

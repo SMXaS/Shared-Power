@@ -3,3 +3,4 @@ bookingID,toolID,userName,bookInCondition,startDate,startTerm,expectedReturnDate
 51796d2c-ef95-44b2-aad7-cadf909f1007,aac889e8-23c4-4ddf-824c-821bc9756d25,test,used,11/01/2019,h,12/01/2019,f,hired,,,,
 2cc62ef5-4022-4b73-8e1c-8a51b94efebd,aac889e8-23c4-4ddf-824c-821bc9756d25,test,used,17/01/2019,f,19/01/2019,h,pending_receive,19/01/2019,good,,
 53341ee7-d21b-4900-b546-6e4951c9cfad,aac889e8-23c4-4ddf-824c-821bc9756d25,eddie,used,06/01/2019,h,08/01/2019,f,pending_receive,08/01/2019,good,lu2,lu2
+df7c1218-c819-4f81-b9f8-da397fb5aaa2,aac889e8-23c4-4ddf-824c-821bc9756d25,eddie,used,13/01/2019,f,14/01/2019,f,hired,,,,

@@ -18,11 +18,13 @@ class ReceiveToolPage(tk.Frame):
 
     def start(self, args):
         self.__receiveTool = ReceiveTool(self.__tree, self.__errorLabel, self.__controller.login)
+        menuFrame = self.__controller.getMenuFrame(self)
+        menuFrame.grid(row=0, column=0, sticky="WN")
         self.__receiveTool.populateList()
 
     def __initUI(self):
         frame = tk.Frame(self, bg=colors.bgColor)
-        frame.grid(row=0, column=0, sticky="", pady=40)
+        frame.grid(row=1, column=0, sticky="", pady=19)
 
         self.__tree = ttk.Treeview(frame, columns=(strings.priceDay, strings.priceHalfDay, "test"))
 

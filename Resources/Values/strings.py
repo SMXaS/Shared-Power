@@ -11,6 +11,7 @@ welcomeText = "Welcome to Shared Power!!!"
 # --------------
 # Classes
 # --------------
+myProfileClass = "MyProfilePage"
 myToolClass = "MyToolPage"
 addToolClass = "AddToolPage"
 bookToolClass = "BookToolPage"
@@ -61,6 +62,7 @@ menuAddTool = "Add Tool"
 menuSearchTool = "Search Tool"
 menuInvoice = "Invoices"
 menuLogOut = "Log Out"
+myProfile = "My Profile"
 # --------------
 # Register Page
 # --------------

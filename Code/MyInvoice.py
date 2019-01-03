@@ -146,18 +146,18 @@ class MyInvoice:
         txtBox.insert(END, fileName + "\n\n")
         for i in range(len(invoiceList)):
             txtBox.insert(END, "{} {}".format(strings.toolTitleForInvoice, invoiceList[i].getToolTitle()) + "\n")
-            txtBox.insert(END, "{} {} {}".format(strings.toolCost, invoiceList[i].getHirePrice(),
-                                                 strings.currency) + "\n")
+            txtBox.insert(END, "{} {}{}".format(strings.toolCost, strings.currency,
+                                                 invoiceList[i].getHirePrice()) + "\n")
             hireCost += float(invoiceList[i].getHirePrice())
 
             if float(invoiceList[i].getRiderPrice()) > 0:
-                txtBox.insert(END, "{} {} {}".format(strings.dispatchCost, invoiceList[i].getRiderPrice(),
-                                                     strings.currency) + "\n")
+                txtBox.insert(END, "{} {}{}".format(strings.dispatchCost, strings.currency,
+                                                     invoiceList[i].getRiderPrice()) + "\n")
                 dispatchCost += float(invoiceList[i].getRiderPrice())
 
             if float(invoiceList[i].getFine()) > 0:
-                txtBox.insert(END, "{} {} {}".format(strings.fines, invoiceList[i].getFine(),
-                                                     strings.currency) + "\n")
+                txtBox.insert(END, "{} {}{}".format(strings.fines, strings.currency,
+                                                     invoiceList[i].getFine()) + "\n")
                 fine += float(invoiceList[i].getFine())
 
             txtBox.insert(END, "-------------------------------------------------------\n")
@@ -167,4 +167,4 @@ class MyInvoice:
         totalPrice = "%.2f" % sum([hireCost, dispatchCost, fine])
         if float(totalPrice) > 0:
             totalPrice = float(monthlyFee) + float(totalPrice)
-        totalLabel.config(text="{}{} {}".format(strings.totalCost, totalPrice, strings.currency))
+        totalLabel.config(text="{} {}{}".format(strings.totalCost,  strings.currency, totalPrice))

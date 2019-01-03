@@ -52,6 +52,7 @@ class LoginPage(tk.Frame):
         self.controller.setUser("")
         self.ent_user.delete(0, "end")
         self.ent_pass.delete(0, "end")
+        self.error_label.config(text="")
         self.ent_user.focus()
 
     def log_in(self):
