@@ -17,8 +17,8 @@ def verifyLogin (userName, userPassword):
     """
     Use to check if login is in file
 
-    :param str(userName)
-    :param str(userPassword
+    :param userName: str(userName)
+    :param userPassword: str(userPassword)
     :return True or error code
     """
 
@@ -47,7 +47,7 @@ def verifyRegistration (user):
     Verify registration
     if its True - add user to db
 
-    :param obj(user)
+    :param user: list(user)
     :return True or error code
 
     user[0] = firstName
@@ -72,7 +72,13 @@ def verifyRegistration (user):
             return strings.errorEmptyFields
         elif " " in user[i]:
             if i != 4:
-                return strings.errorSpaces
+                if i == 3:
+                    if " " == user[i]:
+                        return strings.errorSpaces
+                else:
+                    print("i value:", i)
+                    return strings.errorSpaces
+
     exist = os.path.isfile(strings.filePath_user)
     if exist:
         with open(strings.filePath_user, 'r') as f:
@@ -94,7 +100,7 @@ def verifyRegistration (user):
             return strings.errorShortPassword
 
     if not str(user[10]).isdigit():
-        return strings.errorInvalidEmail
+        return strings.errorInvalidPhoneNumber
 
     address = "{} - {}, {}".format(user[3], user[5], user[4])
     newUser = User(user[2], user[0], user[1], user[8], user[6], address, user[10])
