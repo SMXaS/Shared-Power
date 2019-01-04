@@ -1,7 +1,6 @@
 import csv
 import os
 
-
 def write(obj, filePath, fieldNames, complexFilePath="", filePathParam=""):
     """
     This function writes an object into a file
@@ -36,7 +35,7 @@ def edit_tool(toolID=None,new_tool=None):
     if new_tool == []:
         print('no data')
     else:
-        with open("Data/tools.csv", 'r') as f:
+        with open("Data/tools.csv", "r") as f:
             l = list(csv.reader(f))
             my_dict = {i[0]: [x for x in i[1:]] for i in zip(*l)}
             ind = my_dict['ID'].index(toolID)
@@ -50,33 +49,53 @@ def edit_tool(toolID=None,new_tool=None):
             my_dict['imgPath'][ind] = new_tool[6]
             my_dict['availability'][ind] = new_tool[7]
 
-        change_tool(my_dict)
+        val=[]
+        all_keys=[]
+        all_items=[]
+        for i,j in my_dict.items():
+            all_keys.append(i)
+            all_items.append(j)
 
-def change_tool(my_dict):
-    val=[]
-    all_keys=[]
-    all_items=[]
-    for i,j in my_dict.items():
-        all_keys.append(i)
-        all_items.append(j)
+        val = list(zip(all_items[0],all_items[1],all_items[2],all_items[3],all_items[4],all_items[5],all_items[6],all_items[7],all_items[8],all_items[9]))
 
-    val = list(zip(all_items[0],all_items[1],all_items[2],all_items[3],all_items[4],all_items[5],all_items[6],all_items[7],all_items[8],all_items[9]))
+        with open("Data/tools.csv", "w") as f:
+            writer = csv.writer(f, delimiter=',', lineterminator='\n')
+            writer.writerow(all_keys)
+            y=0
+            while y<len(val):
+                writer.writerow(val[y])
+                y=y+1
 
-    with open("Data/tools.csv", 'w') as csv_file:
-        writer = csv.writer(csv_file, delimiter=',', lineterminator='\n')
+def cancel_booking(book_path, bookID):
+    """
+    book_path - book file name as string
+    bookID - bookID as string
+
+    """
+    my_dict = {}
+    with open(book_path, "r") as f:
+        l = list(csv.reader(f))
+        my_dict = {i[0]: [x for x in i[1:]] for i in zip(*l)}
+        ind = my_dict['bookingID'].index(bookID)
+
+        val=[]
+        all_keys=[]
+        all_items=[]
+        for i,j in my_dict.items():
+            all_keys.append(i)
+            all_items.append(j)
+
+        val = list(zip(all_items[0],all_items[1],all_items[2],all_items[3],all_items[4],all_items[5],all_items[6],all_items[7],all_items[8],all_items[9],all_items[10],all_items[11],all_items[12]))
+
+        val.pop(ind)
+
+    with open(book_path, "w") as f:
+        writer = csv.writer(f, delimiter=',', lineterminator='\n')
         writer.writerow(all_keys)
         y=0
         while y<len(val):
             writer.writerow(val[y])
             y=y+1
-
-
-def change_user(my_dict):
-    with open("Data/users.csv", "w") as f:
-        csv_writer = csv.DictWriter(f, my_dict.keys())
-        csv_writer.writeheader()
-        csv_writer.writerow(my_dict)
-
 
 def add_invoice():
     pass
