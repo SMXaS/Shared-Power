@@ -139,6 +139,7 @@ class RegisterPage(tk.Frame):
         """
 
         user = []
+
         user.append(self.firstNameEntry.get())
         user.append(self.lastNameEntry.get())
         user.append(self.userNameEntry.get())

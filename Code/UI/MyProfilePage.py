@@ -127,6 +127,7 @@ class MyProfilePage(tk.Frame):
                 self.__subMenuButtonList[i].config(font=fonts.subMenuButtonPressedFont)
             else:
                 self.__subMenuButtonList[i].config(font=fonts.subMenuButtonFont)
+
     def highlightButton(self, index):
         """
         This function changing fonts for all buttons based on the index
@@ -165,8 +166,6 @@ class MyProfilePage(tk.Frame):
         self.addToolButton.grid(row=0, column=3, padx=4)
         if self.__page_name is not strings.addToolClass:
             self.addToolButton.bind("<Button-1>", lambda event: self.show_frame(strings.addToolClass))
-
-
 
         self.__subMenuButtonList = (self.myToolsButton, self.addToolButton, self.receiveButton)
         return menuFrame

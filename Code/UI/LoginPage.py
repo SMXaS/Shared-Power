@@ -63,7 +63,7 @@ class LoginPage(tk.Frame):
         :return: None
         """
 
-        isCorrect = util.verifyLogin(self.ent_user.get(), self.ent_pass.get())
+        isCorrect = util.verifyLogin(self.ent_user.get().strip(), self.ent_pass.get())
         if isinstance(isCorrect, str):
             self.error_label.config(text=isCorrect)
         else:

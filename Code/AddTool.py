@@ -2,6 +2,9 @@ from Entities.Tool import Tool
 from Code.Utilities import util, WriteFile as wf
 from Resources.Values import strings
 import uuid
+import os
+import shutil
+from shutil import copy2
 
 """
 ----------------------------------------------------------------------------------------------------------------------
@@ -41,18 +44,31 @@ class AddTool:
         self.__login = login
         self.__errorLabel = errorLabel
 
-    def add(self, tool):
+    def add(self, tool, editOrAdd):
         """
         :param tool: list(item specifications)
+        :param editOrAdd: boolean value where True = add Tool and False = edit Tool
         :return: boolean
         """
+
         isCorrect = self.__verifyTool(tool)
         if isCorrect:
-            ID = uuid.uuid4()
-            util.copyIMG(tool[6], strings.filePath_images, ID)
+            if editOrAdd:
+                ID = uuid.uuid4()
+                util.copyIMG(tool[6], strings.filePath_images, ID)
+            else:
+                ID = tool[7]
+                copy2(tool[6], "{}{}_temp.png".format(strings.filePath_images, ID))
+                shutil.move(os.path.join(strings.filePath_images, "{}_temp.png".format(ID)),
+                            os.path.join(strings.filePath_images, ID+".png"))
+
             newPath = "{}{}".format(strings.filePath_images, ID)
             myTool = Tool(ID, self.__login, tool[0], tool[1], tool[2], tool[3], tool[4], tool[5], newPath, "yes")
-            wf.write(myTool, strings.filePath_tool, strings.fieldNames_tool)
+            if editOrAdd:
+                wf.write(myTool, strings.filePath_tool, strings.fieldNames_tool)
+            else:
+                # TODO edit tool
+                print("edit")
             print("Tool has been added")
 
             return True
