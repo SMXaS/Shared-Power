@@ -14,6 +14,8 @@ class AddToolPage(tk.Frame):
     __width = dimens.mainWindowWidth
     __heigh = dimens.mainWindowHeigh
     __filename = ""
+    add_tool = True
+    __toolObject = None
 
     def __init__(self, parent, controller):
 
@@ -25,9 +27,28 @@ class AddToolPage(tk.Frame):
         self.__initUI()
 
     def start(self, args):
+        self.clearEntries()
         self.__addTool = AddTool(self.__controller.login, self.errorLabel)
         menuFrame = self.__controller.getMenuFrame(self)
         menuFrame.grid(row=0, column=0, sticky="WN")
+        if args:
+            self.add_tool = False
+            self.__filename = "{}.png".format(args.getImagePath())
+            self.__toolObject = args
+            self.__editTool()
+        else:
+            self.add_tool = True
+
+        if self.add_tool:
+            addIMG = tk.PhotoImage(file=strings.buttonAdd)
+        else:
+            addIMG = tk.PhotoImage(file=strings.buttonEdit)
+            self.__controller.addToolButton.config(text=strings.editToolTitle)
+
+        addToolButton = tk.Label(self.frame, image=addIMG, bg=self.__bgColor)
+        addToolButton.image = addIMG
+        addToolButton.grid(row=8, column=1, pady=20)
+        addToolButton.bind("<Button-1>", lambda event: self.__add())
 
     def __initUI(self):
 
@@ -87,11 +108,15 @@ class AddToolPage(tk.Frame):
         img_btn.grid(row=7, column=0, sticky="E")
         img_btn.bind("<Button-1>", lambda event: self.__setImgPath())
 
-        addIMG = tk.PhotoImage(file=strings.buttonAdd)
-        addToolButton = tk.Label(self.frame, image=addIMG, bg=self.__bgColor)
-        addToolButton.image=addIMG
-        addToolButton.grid(row=8, column=1)
-        addToolButton.bind("<Button-1>", lambda event: self.__add())
+    def __editTool(self):
+
+        self.titleEntry.insert(0, self.__toolObject.getTitle())
+        self.descriptionEntry.insert("1.0", self.__toolObject.getDescription())
+        self.toolConditionEntry.insert(0, self.__toolObject.getCondition())
+        self.priceFullDayEntry.insert(0, self.__toolObject.getPriceFullDay())
+        self.priceHalfDayEntry.insert(0, self.__toolObject.getPriceHalfDay())
+        self.riderChargeEntry.insert(0, self.__toolObject.getRiderCharge())
+        self.imgPath.config(text=util.getFileName("{}.png".format(self.__toolObject.getImagePath())))
 
     def __setImgPath(self):
         self.__filename = askopenfilename()
@@ -108,9 +133,9 @@ class AddToolPage(tk.Frame):
         tool.append(self.priceHalfDayEntry.get())
         tool.append(self.riderChargeEntry.get())
         tool.append(self.__filename)
-
-        if self.__addTool.add(tool):
-            pass
+        if not self.add_tool:
+            tool.append(self.__toolObject.getID())
+        if self.__addTool.add(tool, self.add_tool):
             self.clearEntries()
             self.__controller.show_frame(strings.myToolClass)
 

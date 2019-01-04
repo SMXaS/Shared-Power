@@ -28,6 +28,7 @@ receiveToolPage = "ReceiveToolPage"
 # Image Paths
 # --------------
 buttonAdd = "Resources/Drawable/btn_add.png"
+buttonEdit = "Resources/Drawable/btn_confirm.png"
 buttonBack = "Resources/Drawable/btn_back.png"
 buttonHire = "Resources/Drawable/btn_hire.png"
 account = "Resources/Drawable/account.png"
@@ -83,7 +84,8 @@ createAccount = "Create account"
 # --------------
 # Add Tool Page
 # --------------
-addToolTitle = "Add tool"
+addToolTitle = "Add Tool"
+editToolTitle = "Edit Tool"
 toolTitle = "Title "
 toolDescription = "Description "
 priceDay = "Price per Day "

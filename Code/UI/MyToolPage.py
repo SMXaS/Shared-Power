@@ -3,7 +3,6 @@ from tkinter import ttk
 from Resources.Values import strings, colors, dimens, fonts
 from Code.Utilities import ReadFile as rf
 import Code.test_printObj as test
-import Code.Utilities.util as util
 
 
 # TODO Late returns page which will show information about that person who hired tool?
@@ -26,8 +25,8 @@ class MyToolPage(tk.Frame):
         self.initUI()
 
     def start(self, args):
-        self.toolList = rf.getTool(True, "owner", self.controller.login)
-        test.printToolObject(self.toolList)
+        self.__toolList = rf.getTool(True, "owner", self.controller.login)
+        test.printToolObject(self.__toolList)
         menuFrame = self.controller.getMenuFrame(self)
         menuFrame.grid(row=0, column=0, sticky="WN")
         self.ThereWillBeYourLogic()
@@ -63,52 +62,71 @@ class MyToolPage(tk.Frame):
         self.__errorLabel = tk.Label(frame, bg=colors.bgColor, fg=colors.fgColor)
         self.__errorLabel.grid(row=0, column=0, sticky="WN")
 
-        self.tree = ttk.Treeview(frame, columns=("Full day price", "Half day price"))
+        self.__tree = ttk.Treeview(frame, columns=("Full day price", "Half day price"))
 
-        self.yscrollbar = ttk.Scrollbar(frame, orient='vertical', command=self.tree.yview)
-        self.tree.configure(yscrollcommand=self.yscrollbar.set)
+        self.yscrollbar = ttk.Scrollbar(frame, orient='vertical', command=self.__tree.yview)
+        self.__tree.configure(yscrollcommand=self.yscrollbar.set)
 
-        self.tree.heading('#0', text=strings.toolTitle)
-        self.tree.heading('#1', text='Full day price')
-        self.tree.heading('#2', text='Half Day Price')
-        self.tree.column('#1', stretch=tk.YES)
-        self.tree.column('#2', stretch=tk.YES)
-        self.tree.column('#0', stretch=tk.YES)
-        self.tree.grid(row=1, column=0, columnspan=5, pady=20, sticky="N")
+        self.__tree.heading('#0', text=strings.toolTitle)
+        self.__tree.heading('#1', text='Full day price')
+        self.__tree.heading('#2', text='Half Day Price')
+        self.__tree.column('#1', stretch=tk.YES)
+        self.__tree.column('#2', stretch=tk.YES)
+        self.__tree.column('#0', stretch=tk.YES)
+        self.__tree.grid(row=1, column=0, columnspan=5, pady=20, sticky="N")
 
         self.yscrollbar.grid(row=1, column=5, pady=20, sticky='WNS')
 
         self.editButton = tk.Label(frame, text="Edit Tool", bg=colors.bgColor, fg=colors.fgColor,
                                    font=fonts.subMenuButtonFont)
         self.editButton.grid(row=2, column=0, padx=4, sticky="N")
+        self.editButton.bind("<Button-1>", lambda event: self.__editTool())
 
-        self.editButton.bind("<Button-1>", lambda event: self.smth())
         self.deleteButton = tk.Label(frame, text="Delete Tool", bg=colors.bgColor, fg=colors.fgColor,
                                      font=fonts.subMenuButtonFont)
         self.deleteButton.grid(row=2, column=1, padx=4, sticky="N")
-
         # deleteButton.bind("<Button-2>", lambda event: self.selectItem())
 
     # TODO rename
-    def smth(self):
-        if self.tree.focus():
+    def __editTool(self):
+        if self.__tree.focus():
             self.__errorLabel.config(text="")
             # TODO refresh page
+            index = self.__getItemIDIndex()
+            self.controller.show_frame(strings.addToolClass, self.__toolList[index])
             print("test")
         else:
             self.__errorLabel.config(text="select item first")
             print("select item first")
 
+    def __getItemIDIndex(self):
+        """
+        :return: int(index of selected item)
+        """
+
+        curItem = self.__tree.focus()
+        if curItem:
+            index = None
+            itemID = None
+
+            for item in self.__tree.selection():
+                itemID = self.__tree.item(item, "tag")
+
+            for i in range(len(self.__toolList)):
+                if self.__toolList[i].getID() in itemID:
+                    index = i
+                    break
+            return index
 
     # Rename this function according to what you want to do
     def ThereWillBeYourLogic(self):
         """
-        ###self.toolList### = this is your main variable. It holds a list of objects (your tools)
+        ###self.__toolList### = this is your main variable. It holds a list of objects (your tools)
         
         get items:
-            for i in range(len(self.toolList)):
-                title = self.toolList[i].getTitle()
-                description = self.toolList[i].getDescription()
+            for i in range(len(self.__toolList)):
+                title = self.__toolList[i].getTitle()
+                description = self.__toolList[i].getDescription()
                 ...
                 for more information check documentation on github
         """
@@ -120,12 +138,12 @@ class MyToolPage(tk.Frame):
         :return: None
         """
 
-        for i in self.tree.get_children():
-            self.tree.delete(i)
+        for i in self.__tree.get_children():
+            self.__tree.delete(i)
 
-        if self.toolList:
-            for i in range(len(self.toolList)):
-                self.tree.insert('', 'end', text=self.toolList[i].getTitle(),
-                                 values=("{}{}".format(strings.currency, self.toolList[i].getPriceFullDay()),
-                                         "{}{}".format(strings.currency, self.toolList[i].getPriceHalfDay())),
-                                 tags=self.toolList[i].getID())
+        if self.__toolList:
+            for i in range(len(self.__toolList)):
+                self.__tree.insert('', 'end', text=self.__toolList[i].getTitle(),
+                                   values=("{}{}".format(strings.currency, self.__toolList[i].getPriceFullDay()),
+                                         "{}{}".format(strings.currency, self.__toolList[i].getPriceHalfDay())),
+                                   tags=self.__toolList[i].getID())

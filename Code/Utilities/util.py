@@ -21,7 +21,7 @@ def verifyLogin (userName, userPassword):
     :param userPassword: str(userPassword)
     :return True or error code
     """
-
+    userName.replace(" ", "")
     exist = os.path.isfile(strings.filePath_user)
     if exist:
         with open(strings.filePath_user, 'r') as f:

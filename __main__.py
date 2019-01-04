@@ -57,25 +57,6 @@ class mainMenu(tk.Tk):
         divider = ttk.Separator(self.menuFrame, orient="horizontal")
         divider.pack(side="top", fill="x",padx=10, pady=20)
 
-        """
-
-        myToolsButton = tk.Label(self.menuFrame, text=strings.menuMyTools, bg=colors.bgColor, fg=colors.fgColor,
-                                 font=fonts.menuButtonFont)
-        myToolsButton.bind("<Button-1>", lambda event: self.show_frame(strings.myToolClass))
-        myToolsButton.pack(side="top", padx=5, pady=2)
-
-        myBookingsButton = tk.Label(self.menuFrame, text=strings.menuMyBookings, bg=colors.bgColor,
-                                    fg=colors.fgColor, font=fonts.menuButtonFont)
-        myBookingsButton.bind("<Button-1>", lambda event: self.show_frame(strings.returnToolClass))
-        myBookingsButton.pack(side="top", padx=5, pady=2)
-
-        addToolButton = tk.Label(self.menuFrame, text=strings.menuAddTool, bg=colors.bgColor, fg=colors.fgColor,
-                                 font=fonts.menuButtonFont)
-        addToolButton.bind("<Button-1>", lambda event: self.show_frame(strings.addToolClass))
-        addToolButton.pack(side="top", padx=5, pady=2)
-
-        """
-
         myProfileButton = tk.Label(self.menuFrame, text=strings.myProfile, bg=colors.bgColor, fg=colors.fgColor,
                                    font=fonts.menuButtonFont)
         myProfileButton.bind("<Button-1>", lambda event: self.show_frame(strings.myProfileClass))
@@ -87,31 +68,22 @@ class mainMenu(tk.Tk):
         searchToolButton.bind("<Button-1>", lambda event: self.show_frame(strings.searchToolClass))
         searchToolButton.pack(side="top", padx=5, pady=2)
 
-        """
-
-        invoiceButton = tk.Label(self.menuFrame, text=strings.menuInvoice, bg=colors.bgColor,
-                                    fg=colors.fgColor, font=fonts.menuButtonFont)
-        invoiceButton.bind("<Button-1>", lambda event: self.show_frame(strings.invoiceClass))
-        invoiceButton.pack(side="top", padx=5, pady=2)
-
-        """
-
         logOutButton = tk.Label(self.menuFrame, text=strings.menuLogOut, bg=colors.bgColor, fg=colors.fgColor,
                                 font=fonts.menuLogOutFont)
         logOutButton.bind("<Button-1>", lambda event: self.show_frame(strings.loginClass))
         logOutButton.pack(side="bottom", padx=5, pady=10)
 
         # adding menu buttons to the list for easier highlighting
-        #self.buttonList = (myToolsButton, myBookingsButton, addToolButton, searchToolButton, invoiceButton)
         self.buttonList = (myProfileButton, searchToolButton)
+
         # disabling menu frame in order to populate login/register pages
         self.menuFrame.pack_forget()
 
         # setting up external classes
         self.frames = {}
 
-        for F in (SearchToolPage, AddToolPage, WelcomePage, MyToolPage, ReturnToolPage, BookToolPage, LoginPage,
-                  RegisterPage, InvoicePage, ToolInfoPage, ReceiveToolPage, MyProfilePage):
+        for F in (SearchToolPage, WelcomePage, MyToolPage, BookToolPage, LoginPage,
+                  RegisterPage, ToolInfoPage, MyProfilePage):
             self.page_name = F.__name__
             frame = F(parent=container, controller=self)
             self.frames[self.page_name] = frame
@@ -175,8 +147,11 @@ class mainMenu(tk.Tk):
 
         if self.page_name is strings.myProfileClass:
             self.highlightButton(0)
-        elif self.page_name is strings.searchToolClass:
+        elif self.page_name is strings.searchToolClass or self.page_name is strings.toolInfoPage \
+                or self.page_name is strings.bookToolClass:
             self.highlightButton(1)
+        else:
+            self.highlightButton(-1)
 
         """
         if self.__page_name is strings.myToolClass:
@@ -197,13 +172,16 @@ class mainMenu(tk.Tk):
         :param index: int(buttonList index)
         :return: None
         """
-
-        # looping through buttonList and looking for match.
-        for i in range(len(self.buttonList)):
-            if index == i:
-                self.buttonList[i].config(font=fonts.menuButtonPressedFont)
-            else:
+        if index < 0:
+            for i in range(len(self.buttonList)):
                 self.buttonList[i].config(font=fonts.menuButtonFont)
+        else:
+            # looping through buttonList and looking for match.
+            for i in range(len(self.buttonList)):
+                if index == i:
+                    self.buttonList[i].config(font=fonts.menuButtonPressedFont)
+                else:
+                    self.buttonList[i].config(font=fonts.menuButtonFont)
 
 
 if __name__ == "__main__":
