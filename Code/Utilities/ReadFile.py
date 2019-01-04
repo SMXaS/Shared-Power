@@ -125,10 +125,6 @@ def search_tools(key,value):
             for x in my_dict:
                 print(my_dict[x][items[y]])
 
-
-
-
-
 # def search_values():
 #     """Search values of specific key
 #     return all(list) from 'login' column
