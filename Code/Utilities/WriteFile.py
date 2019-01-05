@@ -24,30 +24,29 @@ def write(obj, filePath, fieldNames, complexFilePath="", filePathParam=""):
         csv_writer.writerow(obj.__dict__)
 
 
-def edit_tool(toolID=None,new_tool=None):
+def edit_tool(tool):
     """
-    toolID - ID of edited tool as string
-    new_tool - new tool data(same as add tool)+ availability as a list
+    #toolID - ID of edited tool as string
+    #new_tool - new tool data(same as add tool)+ availability as a list
 
     """
     my_dict = {}
-    new_tool = new_tool
-    if new_tool == []:
+    if not tool:
         print('no data')
     else:
         with open("Data/tools.csv", "r") as f:
             l = list(csv.reader(f))
             my_dict = {i[0]: [x for x in i[1:]] for i in zip(*l)}
-            ind = my_dict['ID'].index(toolID)
+            ind = my_dict['ID'].index(tool.getID())
 
-            my_dict['title'][ind] = new_tool[0]
-            my_dict['description'][ind] = new_tool[1]
-            my_dict['condition'][ind] = new_tool[2]
-            my_dict['priceFullDay'][ind] = new_tool[3]
-            my_dict['priceHalfDay'][ind] = new_tool[4]
-            my_dict['riderCharge'][ind] = new_tool[5]
-            my_dict['imgPath'][ind] = new_tool[6]
-            my_dict['availability'][ind] = new_tool[7]
+            my_dict['title'][ind] = tool.getTitle()
+            my_dict['description'][ind] = tool.getDescription()
+            my_dict['condition'][ind] = tool.getCondition()
+            my_dict['priceFullDay'][ind] = tool.getPriceFullDay()
+            my_dict['priceHalfDay'][ind] = tool.getPriceHalfDay()
+            my_dict['riderCharge'][ind] = tool.getRiderCharge()
+            my_dict['imgPath'][ind] = tool.getImagePath()
+            my_dict['availability'][ind] = tool.isAvailable()
 
         val=[]
         all_keys=[]
