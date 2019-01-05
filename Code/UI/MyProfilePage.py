@@ -6,6 +6,7 @@ from Code.UI.InvoicePage import InvoicePage
 from Code.UI.MyToolPage import MyToolPage
 from Code.UI.ReceiveToolPage import ReceiveToolPage
 from Code.UI.AddToolPage import AddToolPage
+from Code.UI.EmptyLayout import EmptyLayout
 
 
 class MyProfilePage(tk.Frame):
@@ -139,7 +140,7 @@ class MyProfilePage(tk.Frame):
 
         self.frames = {}
 
-        for F in (MyToolPage, ReturnToolPage, InvoicePage, ReceiveToolPage, AddToolPage):
+        for F in (MyToolPage, ReturnToolPage, InvoicePage, ReceiveToolPage, AddToolPage, EmptyLayout):
             self.__page_name = F.__name__
             frame = F(parent=container, controller=self)
             self.frames[self.__page_name] = frame
@@ -158,6 +159,7 @@ class MyProfilePage(tk.Frame):
         frame.tkraise()
         self.__page_name = page_name
 
+        print("show frame args:", args)
         # sending arguments and initializing logic
         frame.start(args)
 

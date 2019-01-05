@@ -20,10 +20,14 @@ class ReturnToolPage(tk.Frame):
     def start(self, args):
         self.__returnTool = MyBookings(self.__errorLabel, self.__tree, self.__controller.login)
         self.__controller.addToolButton.config(text=strings.menuAddTool)
-
-        self.__errorLabel.config(text="")
-        self.__showReturn(False)
         self.__returnTool.populateData()
+
+        if self.__returnTool.getCount() > 0:
+            self.__errorLabel.config(text="")
+            self.__showReturn(False)
+        else:
+            self.__controller.show_frame(strings.emptyLayout)
+            self.__controller.highlightButton(1)
 
     def __initUI(self):
 

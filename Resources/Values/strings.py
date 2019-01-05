@@ -23,6 +23,7 @@ welcomeClass = "WelcomePage"
 invoiceClass = "InvoicePage"
 toolInfoPage = "ToolInfoPage"
 receiveToolPage = "ReceiveToolPage"
+emptyLayout = "EmptyLayout"
 
 # --------------
 # Image Paths

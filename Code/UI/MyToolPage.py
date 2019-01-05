@@ -7,7 +7,6 @@ import Code.test_printObj as test
 
 # TODO Late returns page which will show information about that person who hired tool?
 # TODO one more column which will represents item availability?
-# TODO adjust error labels to show correct text if list is empty
 
 
 class MyToolPage(tk.Frame):
@@ -35,6 +34,9 @@ class MyToolPage(tk.Frame):
         self.__controller.addToolButton.config(text=strings.menuAddTool)
         self.__errorLabel.config(text="")
         self.populateData()
+        if not self.__toolList:
+            self.__controller.show_frame(strings.emptyLayout)
+            self.__controller.highlightButton(0)
 
     def initUI(self):
 

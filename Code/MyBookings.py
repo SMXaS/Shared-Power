@@ -98,9 +98,6 @@ class MyBookings:
         self.__toolIDList = []
         self.__bookingList = []
 
-        self.__bookingList = rf.getAllBookings("userName", self.__login, 0)
-        test.printBookingObjects(self.__bookingList)
-
         for i in range(len(self.__bookingList)):
             self.__toolIDList.append(self.__bookingList[i].getToolID())
 
@@ -121,7 +118,10 @@ class MyBookings:
                                    tags=self.__bookingList[i].getBookingID())
 
     def getCount(self):
-        return len(self.__bookingList)
+        if self.__bookingList:
+            return len(self.__bookingList)
+        else:
+            return 0
 
     def __getBookingIndex(self):
         """
