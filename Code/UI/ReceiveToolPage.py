@@ -46,12 +46,6 @@ class ReceiveToolPage(tk.Frame):
 
         mScrollBar.grid(row=1, column=5, pady=20, sticky='WNS')
 
-        backIMG = tk.PhotoImage(file=strings.buttonBack)
-        backButton = tk.Label(frame, image=backIMG, bg=colors.bgColor)
-        backButton.image = backIMG
-        backButton.bind("<Button-1>", lambda event: self.__controller.show_frame(strings.myToolClass))
-        backButton.grid(row=2, column=1, padx=10, sticky="W")
-
         receiveButton = tk.Label(frame, text=strings.receiveItem, bg=colors.bgColor, fg=colors.fgColor,
                                  font=fonts.buttonFont)
         receiveButton.grid(row=2, column=2)

@@ -17,7 +17,6 @@ class BookToolPage(tk.Frame):
     __start_date = ""
     __end_date = ""
 
-    # TODO live cost view
     # TODO error label
 
     def __init__(self, parent, controller):
@@ -82,18 +81,21 @@ class BookToolPage(tk.Frame):
         # Selection widgets
         ###########################################################################
 
+        self.__errorLabel = tk.Label(frame, bg=colors.bgColor, fg=colors.errorColor)
+        self.__errorLabel.grid(row=0, column=0, columnspan=2, sticky="WN")
+
         DateLabel = tk.Label(frame, text=strings.hireDate, bg=self.__bgColor, fg=self.__fgColor)
-        DateLabel.grid(row=0, column=0, padx=5, pady=2, sticky="W")
+        DateLabel.grid(row=1, column=0, padx=5, pady=2, sticky="W")
 
         self.endDateLabel = tk.Label(frame, text=strings.returnDate, bg=self.__bgColor, fg=self.__fgColor)
 
         self.availableDate = tk.Listbox(frame, exportselection=0)
         self.availableDate.bind("<<ListboxSelect>>", lambda event: self.getStartDate())
-        self.availableDate.grid(row=1, column=0, sticky="W")
+        self.availableDate.grid(row=2, column=0, sticky="W")
 
         scrollAvailableDate = tk.Scrollbar(frame, orient="vertical")
         scrollAvailableDate.config(command=self.availableDate.yview)
-        scrollAvailableDate.grid(row=1, column=1, sticky="WNS")
+        scrollAvailableDate.grid(row=2, column=1, sticky="WNS")
 
         self.startDateVar = tk.StringVar()
 
@@ -106,18 +108,14 @@ class BookToolPage(tk.Frame):
 
         self.startDateVar.set("f")
 
-        startFullDateRadio.grid(row=2, column=0, sticky="W")
-        endFullDateRadio.grid(row=2, column=0, sticky="E")
+        startFullDateRadio.grid(row=3, column=0, sticky="W")
+        endFullDateRadio.grid(row=3, column=0, sticky="E")
 
         self.availableEndDate = tk.Listbox(frame, exportselection=0)
         self.availableEndDate.bind("<<ListboxSelect>>", lambda event: self.getEndDate())
 
-        self.endDateLabel.grid(row=0, column=3, padx=5, pady=2, sticky="WNE")
-        self.availableEndDate.grid(row=1, column=3, sticky="WNE")
-
-        self.scrollNextAvailableDate = tk.Scrollbar(frame, orient="vertical")
-        self.scrollNextAvailableDate.config(command=self.availableEndDate.yview)
-        self.scrollNextAvailableDate.grid(row=1, column=4, sticky="WNS")
+        self.endDateLabel.grid(row=1, column=3, padx=5, pady=2, sticky="WNE")
+        self.availableEndDate.grid(row=2, column=3, sticky="WNE")
 
         self.endDateVar = tk.StringVar()
         self.endDateVar.set("f")
@@ -129,8 +127,8 @@ class BookToolPage(tk.Frame):
                                                indicatoron=False, value="h", width=8, borderwidth=0,
                                                bg=colors.bgInactive)
 
-        self.startHalfDateRadio.grid(row=2, column=3, sticky="W")
-        self.endHalfDateRadio.grid(row=2, column=3, sticky="E")
+        self.startHalfDateRadio.grid(row=3, column=3, sticky="W")
+        self.endHalfDateRadio.grid(row=3, column=3, sticky="E")
 
         self.riderValue = tk.IntVar()
         self.riderValue.set(0)
@@ -139,31 +137,31 @@ class BookToolPage(tk.Frame):
                                          bg=self.__bgColor, fg=self.__fgColor, activebackground=self.__bgColor,
                                          activeforeground=self.__fgColor, selectcolor=self.__bgColor,
                                          command=lambda: self.showArrangeRider())
-        self.riderRadio.grid(row=4, column=0, columnspan=2, sticky="WE")
+        self.riderRadio.grid(row=5, column=0, columnspan=2, sticky="WE")
 
         self.pickUpLabel = tk.Label(frame, text=strings.pickUpLocation, bg=self.__bgColor, fg=self.__fgColor)
-        self.pickUpLabel.grid(row=5, column=0)
+        self.pickUpLabel.grid(row=6, column=0)
         self.pickUpEntry = tk.Entry(frame, width=20)
-        self.pickUpEntry.grid(row=5, column=2, columnspan=3, padx=5)
+        self.pickUpEntry.grid(row=6, column=2, columnspan=3, padx=5)
 
         self.dropOffLabel = tk.Label(frame, text=strings.dropOffLocation, bg=self.__bgColor, fg=self.__fgColor)
-        self.dropOffLabel.grid(row=6, column=0)
+        self.dropOffLabel.grid(row=7, column=0)
         self.dropOffEntry = tk.Entry(frame, width=20)
-        self.dropOffEntry.grid(row=6, column=2, columnspan=3, padx=5)
+        self.dropOffEntry.grid(row=7, column=2, columnspan=3, padx=5)
 
 
 
         backIMG = tk.PhotoImage(file=strings.buttonBack)
         backButton = tk.Label(frame, image=backIMG, bg=self.__bgColor)
         backButton.image = backIMG
-        backButton.bind("<Button-1>", lambda event: self.__controller.show_frame(strings.searchToolClass))
-        backButton.grid(row=8, column=0, padx=10, sticky="W")
+        backButton.bind("<Button-1>", lambda event: self.__controller.show_frame(strings.searchToolClass, "args"))
+        backButton.grid(row=9, column=0, padx=10, sticky="W")
 
         hireIMG = tk.PhotoImage(file=strings.buttonHire)
         hireButton = tk.Label(frame, image=hireIMG, bg=self.__bgColor)
         hireButton.image = hireIMG
         hireButton.bind("<Button-1>", lambda event: self.hireTool())
-        hireButton.grid(row=8, column=1, columnspan=4, pady=40, sticky="WE")
+        hireButton.grid(row=9, column=1, columnspan=4, pady=40, sticky="WE")
 
     def showReturnDateList(self):
         """
@@ -256,7 +254,6 @@ class BookToolPage(tk.Frame):
         """
 
         if self.__start_date and self.__end_date:
-            print("sT: {}; eT: {}".format(self.startDateVar.get(), self.endDateVar.get()))
             hiredTool = Bookings(uuid.uuid4(), self.tool.getID(), self.__controller.login, self.tool.getCondition(),
                                  self.__start_date, self.startDateVar.get(), self.__end_date, self.endDateVar.get(),
                                  strings.toolStatus[0])
@@ -267,10 +264,11 @@ class BookToolPage(tk.Frame):
             if self.verifyHiring():
                 # show confirmation window
 
+                totalPrice = util.calculateToolhireCost(hiredTool, self.tool)
                 message = "{} {}\n{} {}\n{} {}\n{} {}{}\n\n{}".format(strings.toolTitleForInvoice, self.tool.getTitle(),
                                                                       strings.hireDate, hiredTool.getStartDate(),
                                                                       strings.returnDate, hiredTool.getExpectedReturnDate(),
-                                                                      strings.totalCost, 50, strings.currency,
+                                                                      strings.totalCost, str(totalPrice), strings.currency,
                                                                       strings.confirmBooking)
                 if messagebox.askokcancel("Information", message):
                     #          obj,     simplePath,     fieldNames,           complex path              path parameter
@@ -282,3 +280,4 @@ class BookToolPage(tk.Frame):
                 print("too late.. item is booked")
         else:
             print("Error")
+

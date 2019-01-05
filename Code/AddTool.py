@@ -50,7 +50,7 @@ class AddTool:
         :param editOrAdd: boolean value where True = add Tool and False = edit Tool
         :return: boolean
         """
-
+        availability = "yes"
         isCorrect = self.__verifyTool(tool)
         if isCorrect:
             if editOrAdd:
@@ -61,9 +61,10 @@ class AddTool:
                 copy2(tool[6], "{}{}_temp.png".format(strings.filePath_images, ID))
                 shutil.move(os.path.join(strings.filePath_images, "{}_temp.png".format(ID)),
                             os.path.join(strings.filePath_images, ID+".png"))
+                availability = "no"
 
             newPath = "{}{}".format(strings.filePath_images, ID)
-            myTool = Tool(ID, self.__login, tool[0], tool[1], tool[2], tool[3], tool[4], tool[5], newPath, "yes")
+            myTool = Tool(ID, self.__login, tool[0], tool[1], tool[2], tool[3], tool[4], tool[5], newPath, availability)
             if editOrAdd:
                 wf.write(myTool, strings.filePath_tool, strings.fieldNames_tool)
             else:

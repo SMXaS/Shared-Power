@@ -20,14 +20,13 @@ class SearchToolPage(tk.Frame):
 
         self.__initUI()
 
-
     def start(self, args):
         if not args:
             for item in self.tree.selection():
                 self.tree.selection_remove(item)
-
-        self.__retrieveData()
-        test.printToolObject(self.__toolList)
+            self.searchEntry.delete(0, "end")
+            self.__retrieveData()
+            test.printToolObject(self.__toolList)
 
     def __initUI(self):
         frame = tk.Frame(self, bg=self.__bgColor)
@@ -142,6 +141,6 @@ class SearchToolPage(tk.Frame):
         if self.__toolList:
             for i in range(len(self.__toolList)):
                 self.tree.insert('', 'end', text=self.__toolList[i].getTitle(),
-                                 values=(self.__toolList[i].getPriceFullDay(),
-                                         self.__toolList[i].getPriceHalfDay()),
+                                 values=("{}{}".format(strings.currency, self.__toolList[i].getPriceFullDay()),
+                                         "{}{}".format(strings.currency, self.__toolList[i].getPriceHalfDay())),
                                  tag=self.__toolList[i].getID())

@@ -272,7 +272,7 @@ def getBookingDates(bookings):
     allDateList = []
     dateFormat = strings.simpleDateFormat
     for i in range(42):
-        firstAvailableDate+= timedelta(days=1)
+        firstAvailableDate += timedelta(days=1)
         # check if date is available
         # if not = pass
         allDateList.append(firstAvailableDate.strftime(dateFormat))
@@ -323,7 +323,6 @@ def getNextAvailableDates(startDate, dayList):
 
     for i in range(len(allDateList)):
         if allDateList[i] in dayList:
-            print(allDateList[i], "is in the list")
             nextDay = allDateList[i]
             finalList.append(nextDay)
 
@@ -370,3 +369,60 @@ def verifyBooking(startDate, availableDays, diff):
             return False
 
     return True
+
+
+def calculateToolhireCost (bookingObj, toolObj):
+    """
+    This method calculates total price of the booking
+
+    :param bookingObj: current booking object
+    :param toolObj: wanted to book tool object
+    :return: float (total booking price)
+    """
+    currentDate = datetime.now().strftime(strings.dateFormat)
+    diff = getDayDifference(bookingObj.getStartDate(), bookingObj.getExpectedReturnDate()) + 1
+    startTerm = bookingObj.getStartTerm()
+    endTerm = bookingObj.getExpectedTerm()
+    toolPriceFullDay = float(toolObj.getPriceFullDay())
+    toolPriceHalfDay = float(toolObj.getPriceHalfDay())
+
+    price = 0.0
+
+    if startTerm == "f":
+        firstDayPrice = toolPriceFullDay
+    else:
+        firstDayPrice = toolPriceHalfDay
+
+    if endTerm == "f":
+        lastDayPrice = toolPriceFullDay
+    else:
+        lastDayPrice = toolPriceHalfDay
+
+    if diff < 2:
+        price = firstDayPrice
+    else:
+        for i in range(diff):
+            if i == 0:
+                price += firstDayPrice
+            elif i == diff - 1:
+                price += lastDayPrice
+            else:
+                price += toolPriceFullDay
+
+    riderPrice = 0
+    if bookingObj.getPickUpLocation():
+        riderPrice += float(toolObj.getRiderCharge())
+
+    if bookingObj.getDropOffLocation():
+        riderPrice += float(toolObj.getRiderCharge())
+
+    diff = getDayDifference(bookingObj.getExpectedReturnDate(), currentDate)
+    fullPrice = float(toolObj.getPriceFullDay())
+
+    if diff > 0:
+        fine = float(fullPrice) * diff
+    else:
+        fine = 0
+
+    totalPrice = "%.2f" % sum([price, riderPrice, fine])
+    return totalPrice

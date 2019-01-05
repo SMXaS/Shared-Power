@@ -6,6 +6,8 @@ import Code.test_printObj as test
 
 
 # TODO Late returns page which will show information about that person who hired tool?
+# TODO one more column which will represents item availability?
+# TODO adjust error labels to show correct text if list is empty
 
 
 class MyToolPage(tk.Frame):
@@ -30,6 +32,7 @@ class MyToolPage(tk.Frame):
         menuFrame = self.controller.getMenuFrame(self)
         menuFrame.grid(row=0, column=0, sticky="WN")
         self.ThereWillBeYourLogic()
+        self.__errorLabel.config(text="")
         self.populateData()
 
     def initUI(self):
@@ -59,8 +62,8 @@ class MyToolPage(tk.Frame):
         ####################################################################################################
         #                                            DISPLAY
         ####################################################################################################
-        self.__errorLabel = tk.Label(frame, bg=colors.bgColor, fg=colors.fgColor)
-        self.__errorLabel.grid(row=0, column=0, sticky="WN")
+        self.__errorLabel = tk.Label(frame, bg=colors.bgColor, fg=colors.errorColor)
+        self.__errorLabel.grid(row=0, column=0, columnspan= 2, sticky="WN")
 
         self.__tree = ttk.Treeview(frame, columns=("Full day price", "Half day price"))
 
@@ -87,11 +90,14 @@ class MyToolPage(tk.Frame):
         self.deleteButton.grid(row=2, column=1, padx=4, sticky="N")
         # deleteButton.bind("<Button-2>", lambda event: self.selectItem())
 
-    # TODO rename
+        self.damage_restoreButton = tk.Label(frame, text="Damage/Restore tool", bg=colors.bgColor, fg=colors.fgColor,
+                                             font=fonts.subMenuButtonFont)
+        self.damage_restoreButton.grid(row=2, column=2, padx=4, sticky="N")
+        # damage_restoreButton.bind("<Button-2>", lambda event: self.selectItem())
+
     def __editTool(self):
         if self.__tree.focus():
             self.__errorLabel.config(text="")
-            # TODO refresh page
             index = self.__getItemIDIndex()
             self.controller.show_frame(strings.addToolClass, self.__toolList[index])
             print("test")

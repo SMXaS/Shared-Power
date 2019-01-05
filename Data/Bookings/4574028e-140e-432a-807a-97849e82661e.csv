@@ -1,2 +1,2 @@
 bookingID,toolID,userName,bookInCondition,startDate,startTerm,expectedReturnDate,expectedTerm,status,returnDate,bookOutCondition,pickUpLocation,dropOffLocation
-f9646553-203a-4376-be32-099a33dc1f44,4574028e-140e-432a-807a-97849e82661e,test,used good,04/01/2019,f,06/01/2019,f,pending_receive,06/01/2019,good,,
+f9646553-203a-4376-be32-099a33dc1f44,4574028e-140e-432a-807a-97849e82661e,test,used good,04/01/2019,f,06/01/2019,f,inventory,06/01/2019,good,,

@@ -103,7 +103,7 @@ class ReceiveTool:
             testlist = [receiveItemObj]
             test.printBookingObjects(testlist)
         else:
-            self.__errorLabel.config(strings.errorSelectItem)
+            self.__errorLabel.config(text=strings.errorSelectItem)
 
     def damageItem(self):
         if self.__tree.focus():
@@ -117,8 +117,7 @@ class ReceiveTool:
             self.receiveItem()
             # TODO cancel all bookings for this item
         else:
-            # TODO error label
-            pass
+            self.__errorLabel.config(text=strings.errorSelectItem)
 
     def __getBookingIndex(self):
         """
