@@ -21,7 +21,9 @@ class ReturnToolPage(tk.Frame):
         self.__returnTool = MyBookings(self.__errorLabel, self.__tree, self.__controller.login)
         self.__controller.addToolButton.config(text=strings.menuAddTool)
         self.__returnTool.populateData()
+        self.isEmpty()
 
+    def isEmpty(self):
         if self.__returnTool.getCount() > 0:
             self.__errorLabel.config(text="")
             self.__showReturn(False)
@@ -95,7 +97,12 @@ class ReturnToolPage(tk.Frame):
         returnToolButton = tk.Label(self.returnFrame, image=returnIMG, bg=self.__bgColor)
         returnToolButton.image = returnIMG
         returnToolButton.grid(row=1, column=1, pady=20)
-        returnToolButton.bind("<Button-1>", lambda event: self.__returnTool.returnItem(toolConditionEntry))
+        returnToolButton.bind("<Button-1>", lambda event: self.returnItem(toolConditionEntry))
+
+    def returnItem(self, condition):
+        self.__returnTool.returnItem(condition)
+        self.__showReturn(False)
+        self.isEmpty()
 
     def __showReturn(self, show):
         if show:
@@ -108,19 +115,3 @@ class ReturnToolPage(tk.Frame):
                     self.__errorLabel.config(text=strings.errorEmptyList)
         else:
             self.returnFrame.grid_remove()
-        """
-        if self.__tree.focus():
-            if show:
-                self.returnFrame.grid()
-            else:
-                self.returnFrame.grid_remove()
-        else:
-            if self.__returnTool.getCount() > 0:
-                self.__errorLabel.config(text=strings.errorSelectItem)
-            else:
-                self.__errorLabel.config(text=strings.errorEmptyList)
-        """
-
-    def showReturnFrame(self, show):
-        pass
-

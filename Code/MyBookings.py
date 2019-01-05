@@ -42,6 +42,8 @@ class MyBookings:
         self.__errorLabel = errorLabel
         self.__tree = tree
         self.__login = login
+        self.__bookingList = []
+        print("MyBookings login:", login)
 
     def returnItem(self, toolCondition):
         if self.__tree.focus():
@@ -98,6 +100,7 @@ class MyBookings:
         self.__toolIDList = []
         self.__bookingList = []
 
+        self.__bookingList = rf.getAllBookings("userName", self.__login, 0)
         for i in range(len(self.__bookingList)):
             self.__toolIDList.append(self.__bookingList[i].getToolID())
 
@@ -118,6 +121,7 @@ class MyBookings:
                                    tags=self.__bookingList[i].getBookingID())
 
     def getCount(self):
+        print("count:", len(self.__bookingList))
         if self.__bookingList:
             return len(self.__bookingList)
         else:

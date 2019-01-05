@@ -7,6 +7,7 @@ import Code.test_printObj as test
 
 # TODO Late returns page which will show information about that person who hired tool?
 # TODO one more column which will represents item availability?
+# TODO confirm window for declaring item as damaged
 
 
 class MyToolPage(tk.Frame):
