@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
 from Resources.Values import strings, colors, fonts
-from Code.ReturnTool import ReturnTool
+from Code.MyBookings import ReturnTool
 
 
 class ReturnToolPage(tk.Frame):

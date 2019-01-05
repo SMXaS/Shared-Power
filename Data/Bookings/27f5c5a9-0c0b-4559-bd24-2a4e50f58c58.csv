@@ -1,5 +1,5 @@
 bookingID,toolID,userName,bookInCondition,startDate,startTerm,expectedReturnDate,expectedTerm,status,returnDate,bookOutCondition,pickUpLocation,dropOffLocation
-70df3552-9a78-4375-bea4-c39b7b54ecf8,27f5c5a9-0c0b-4559-bd24-2a4e50f58c58,test,used,05/01/2019,f,06/01/2019,f,pending_receive,06/01/2019,good,f,f
-c31f63fb-e3fd-4d73-8464-2cd723628f42,27f5c5a9-0c0b-4559-bd24-2a4e50f58c58,test,used,07/01/2019,h,08/01/2019,f,hired,,,,
-3818dbed-fd51-41a8-a54e-b34f49c6f4c0,27f5c5a9-0c0b-4559-bd24-2a4e50f58c58,test,used,12/01/2019,f,12/01/2019,f,pending_receive,12/01/2019,good,somewhere,
-69b53fdc-3b47-4029-8e9c-fa3334f07e70,27f5c5a9-0c0b-4559-bd24-2a4e50f58c58,test,used,03/01/2019,f,05/01/2019,f,hired,,,,
+70df3552-9a78-4375-bea4-c39b7b54ecf8,27f5c5a9-0c0b-4559-bd24-2a4e50f58c58,test,used,05/01/2019,f,06/01/2019,f,inventory,06/01/2019,good,f,f
+c31f63fb-e3fd-4d73-8464-2cd723628f42,27f5c5a9-0c0b-4559-bd24-2a4e50f58c58,test,used,07/01/2019,h,08/01/2019,f,inventory,5/1/2019,good,,
+3818dbed-fd51-41a8-a54e-b34f49c6f4c0,27f5c5a9-0c0b-4559-bd24-2a4e50f58c58,test,used,12/01/2019,f,12/01/2019,f,inventory,12/01/2019,good,somewhere,
+69b53fdc-3b47-4029-8e9c-fa3334f07e70,27f5c5a9-0c0b-4559-bd24-2a4e50f58c58,test,used,03/01/2019,f,05/01/2019,f,inventory,5/1/2019,ww,,

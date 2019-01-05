@@ -67,7 +67,7 @@ class AddTool:
             if editOrAdd:
                 wf.write(myTool, strings.filePath_tool, strings.fieldNames_tool)
             else:
-                # TODO edit tool
+                wf.editTool(myTool)
                 print("edit")
             print("Tool has been added")
 

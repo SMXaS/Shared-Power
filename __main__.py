@@ -4,7 +4,7 @@ from Code.UI.SearchToolPage import SearchToolPage
 from Code.UI.AddToolPage import AddToolPage
 from Code.UI.WelcomePage import WelcomePage
 from Code.UI.MyToolPage import MyToolPage
-from Code.UI.ReturnToolPage import ReturnToolPage
+from Code.UI.MyBookingsPage import ReturnToolPage
 from Code.UI.BookToolPage import BookToolPage
 from Code.UI.LoginPage import LoginPage
 from Code.UI.RegisterPage import RegisterPage

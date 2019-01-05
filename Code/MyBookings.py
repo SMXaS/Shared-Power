@@ -2,6 +2,7 @@ from Resources.Values import strings
 from Code.MyInvoice import MyInvoice
 import Code.Utilities.util as util
 import Code.Utilities.ReadFile as rf
+import Code.Utilities.WriteFile as wf
 import Code.test_printObj as test
 import datetime
 
@@ -41,8 +42,6 @@ class ReturnTool:
         self.__errorLabel = errorLabel
         self.__tree = tree
         self.__login = login
-        self.__bookingList = rf.getAllBookings("userName", self.__login, 0)
-        test.printBookingObjects(self.__bookingList)
 
     def returnItem(self, toolCondition):
         if self.__tree.focus():
@@ -60,8 +59,8 @@ class ReturnTool:
                 print("single book Obj")
                 print("--------------")
                 test.printBookingObjects(bookObj_forTest)
-                # TODO edit booking db #returnItemObj#
-                # TODO refresh the list
+                wf.editBooking(returnItemObj)
+                self.populateData()
                 toolCondition.delete(0, "end")
                 MyInvoice(self.__login).generateInvoice(returnItemObj)
             else:
@@ -80,7 +79,8 @@ class ReturnTool:
                 self.__errorLabel.config(text=strings.cancelErrorMessage)
             else:
                 print("Cancel in progress")
-                # TODO remove booking #cancelItemObj#
+                wf.cancelBooking(cancelItemObj)
+                self.populateData()
                 self.__errorLabel.config(text="")
 
     def populateData(self):
@@ -91,6 +91,10 @@ class ReturnTool:
 
         self.__toolObjList = []
         self.__toolIDList = []
+        self.__bookingList = []
+
+        self.__bookingList = rf.getAllBookings("userName", self.__login, 0)
+        test.printBookingObjects(self.__bookingList)
 
         for i in range(len(self.__bookingList)):
             self.__toolIDList.append(self.__bookingList[i].getToolID())

@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
 from Resources.Values import strings, colors, fonts
-from Code.UI.ReturnToolPage import ReturnToolPage
+from Code.UI.MyBookingsPage import ReturnToolPage
 from Code.UI.InvoicePage import InvoicePage
 from Code.UI.MyToolPage import MyToolPage
 from Code.UI.ReceiveToolPage import ReceiveToolPage

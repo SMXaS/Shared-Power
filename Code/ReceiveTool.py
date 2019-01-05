@@ -2,6 +2,7 @@ import Code.Utilities.ReadFile as rf
 import Code.test_printObj as test
 import Code.Utilities.util as util
 from Resources.Values import strings
+import Code.Utilities.WriteFile as wf
 
 """
 -------------------------------------------------------------------------------------------------------------------
@@ -42,8 +43,13 @@ class ReceiveTool:
         self.__tree = tree
         self.__errorLabel = errorLabel
         self.__login = login
-        toolList = rf.getTool(True, "owner", self.__login)
+
+    def populateList(self):
+        toolObjList = []
         toolIDList = []
+        self.__bookingList = []
+
+        toolList = rf.getTool(True, "owner", self.__login)
 
         #############################
         test.printToolObject(toolList)
@@ -64,22 +70,21 @@ class ReceiveTool:
         test.printBookingObjects(self.__bookingList)
         ############################################
 
-    def populateList(self):
-        self.__toolObjList = []
-        self.__toolIDList = []
-
         for i in range(len(self.__bookingList)):
-            self.__toolIDList.append(self.__bookingList[i].getToolID())
+            toolIDList.append(self.__bookingList[i].getToolID())
 
-        for i in range(len(self.__toolIDList)):
-            tool = rf.get_tool("ID", self.__toolIDList[i])
-            self.__toolObjList.append(util.convertFromListToObj(tool))
+        """
+        for i in range(len(toolIDList)):
+            tool = rf.get_tool("ID", toolIDList[i])
+            toolObjList.append(util.convertFromListToObj(tool))
+        """
 
         for i in self.__tree.get_children():
             self.__tree.delete(i)
+
         if self.__bookingList:
             for i in range(len(self.__bookingList)):
-                toolDict = rf.get_tool("ID", self.__toolIDList[i])
+                toolDict = rf.get_tool("ID", toolIDList[i])
                 tool = util.convertFromListToObj(toolDict)
                 self.__tree.insert('', 'end', text=tool.getTitle(),
                                    values=(self.__bookingList[i].getStartDate(),
@@ -92,14 +97,13 @@ class ReceiveTool:
             receiveItemObj = self.__bookingList[self.__getBookingIndex()]
             print(receiveItemObj.getStartDate())
             receiveItemObj.setStatus(strings.toolStatus[2])
-            # TODO edit this object in DB
-            # TODO refresh list
+            wf.editBooking(receiveItemObj)
+            self.populateList()
             # test list
             testlist = [receiveItemObj]
             test.printBookingObjects(testlist)
         else:
-            # TODO error label
-            pass
+            self.__errorLabel.config(strings.errorSelectItem)
 
     def damageItem(self):
         if self.__tree.focus():
@@ -109,8 +113,8 @@ class ReceiveTool:
             tool = rf.getTool(True, "ID", toolID)
             tool[0].setAvailability("no")
             test.printToolObject(tool)
-            # TODO edit this object in DB
-            # TODO refresh list
+            wf.editTool(tool[0])
+            self.receiveItem()
             # TODO cancel all bookings for this item
         else:
             # TODO error label
