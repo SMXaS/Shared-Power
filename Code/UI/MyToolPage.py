@@ -21,17 +21,18 @@ class MyToolPage(tk.Frame):
 
         tk.Frame.__init__(self, parent)
         self.config(bg=colors.bgColor)
-        self.controller = controller
+        self.__controller = controller
         self.columnconfigure(0, weight=1)
 
         self.initUI()
 
     def start(self, args):
-        self.__toolList = rf.getTool(True, "owner", self.controller.login)
+        self.__toolList = rf.getTool(True, "owner", self.__controller.login)
         test.printToolObject(self.__toolList)
-        menuFrame = self.controller.getMenuFrame(self)
+        menuFrame = self.__controller.getMenuFrame(self)
         menuFrame.grid(row=0, column=0, sticky="WN")
         self.ThereWillBeYourLogic()
+        self.__controller.addToolButton.config(text=strings.menuAddTool)
         self.__errorLabel.config(text="")
         self.populateData()
 
@@ -103,7 +104,7 @@ class MyToolPage(tk.Frame):
         if self.__tree.focus():
             self.__errorLabel.config(text="")
             index = self.__getItemIDIndex()
-            self.controller.show_frame(strings.addToolClass, self.__toolList[index])
+            self.__controller.show_frame(strings.addToolClass, self.__toolList[index])
             print("btn_search")
         else:
             self.__errorLabel.config(text="select item first")

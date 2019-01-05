@@ -16,14 +16,16 @@ class InvoicePage(tk.Frame):
     checkedYear = ""
 
     def __init__(self, parent, controller):
-        self.controller = controller
         tk.Frame.__init__(self, parent)
+        self.__controller = controller
         self.config(bg=colors.bgColor)
         self.columnconfigure(0, weight=1)
+
         self.__initUI()
 
     def start(self, args):
-        MyInvoice(self.controller.login).showInvoice(self.invoiceText, self.totalLabel, self.currentDate)
+        MyInvoice(self.__controller.login).showInvoice(self.invoiceText, self.totalLabel, self.currentDate)
+        self.__controller.addToolButton.config(text=strings.menuAddTool)
         self.__getDates()
 
     def __initUI(self):
@@ -61,7 +63,7 @@ class InvoicePage(tk.Frame):
         """
 
         date = "{}-{}".format(self.monthList[self.monthMenu.current()], self.yearList[self.yearMenu.current()])
-        MyInvoice(self.controller.login).showInvoice(self.invoiceText, self.totalLabel, date)
+        MyInvoice(self.__controller.login).showInvoice(self.invoiceText, self.totalLabel, date)
 
     def __getDates(self):
         """
@@ -70,7 +72,7 @@ class InvoicePage(tk.Frame):
         """
 
         fullMonthNames = []
-        dateList = util.getInvoiceDates(self.controller.login)
+        dateList = util.getInvoiceDates(self.__controller.login)
         if not dateList:
             dateList.append(self.currentDate)
         for i in range(len(dateList)):

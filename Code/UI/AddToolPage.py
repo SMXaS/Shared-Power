@@ -29,8 +29,6 @@ class AddToolPage(tk.Frame):
     def start(self, args):
         self.clearEntries()
         self.__addTool = AddTool(self.__controller.login, self.errorLabel)
-        menuFrame = self.__controller.getMenuFrame(self)
-        menuFrame.grid(row=0, column=0, sticky="WN")
         if args:
             self.add_tool = False
             self.__filename = "{}.png".format(args.getImagePath())
@@ -53,7 +51,7 @@ class AddToolPage(tk.Frame):
     def __initUI(self):
 
         self.frame = tk.Frame(self, bg=self.__bgColor)
-        self.frame.grid(row=1, column=0, pady=30)
+        self.frame.grid(row=0, column=0, pady=51)
 
         self.errorLabel = tk.Label(self.frame, bg=self.__bgColor, fg=self.__errorColor)
         self.errorLabel.grid(row=0, column=0, padx=5, pady=2, sticky="WN")

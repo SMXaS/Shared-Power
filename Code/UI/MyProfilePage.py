@@ -43,6 +43,7 @@ class MyProfilePage(tk.Frame):
 
         myToolsFrame = tk.Frame(menuFrame, bg=colors.menuBgColor)
         myToolsFrame.grid(row=0, column=0, sticky="NW")
+        myToolsFrame.columnconfigure(0, minsize=100)
 
         toolIMG = tk.PhotoImage(file=strings.tool_img)
         tool = tk.Label(myToolsFrame, image=toolIMG, bg=colors.menuBgColor)
@@ -66,6 +67,7 @@ class MyProfilePage(tk.Frame):
 
         myBookingsFrame = tk.Frame(menuFrame, bg=colors.menuBgColor)
         myBookingsFrame.grid(row=0, column=2, sticky="NW")
+        myBookingsFrame.columnconfigure(0, minsize=100)
 
         bookingIMG = tk.PhotoImage(file=strings.bookings_img)
         booking = tk.Label(myBookingsFrame, image=bookingIMG, bg=colors.menuBgColor)
@@ -89,6 +91,7 @@ class MyProfilePage(tk.Frame):
 
         myInvoiceFrame = tk.Frame(menuFrame, bg=colors.menuBgColor)
         myInvoiceFrame.grid(row=0, column=4, sticky="NW")
+        myInvoiceFrame.columnconfigure(0, minsize=100)
 
         invoiceIMG = tk.PhotoImage(file=strings.invoice_img)
         invoice = tk.Label(myInvoiceFrame, image=invoiceIMG, bg=colors.menuBgColor)
@@ -106,14 +109,33 @@ class MyProfilePage(tk.Frame):
         menuBorderx2 = ttk.Separator(menuFrame, orient="vertical")
         menuBorderx2.grid(row=0, column=5, pady=2, sticky="NS")
 
+        #######################################################
+        # addTool Frame
+        #######################################################
+
+        addToolFrame = tk.Frame(menuFrame, bg=colors.menuBgColor)
+        addToolFrame.grid(row=0, column=6, sticky="NW")
+        addToolFrame.columnconfigure(0, minsize=100)
+
+        addIMG = tk.PhotoImage(file=strings.add_img)
+        add = tk.Label(addToolFrame, image=addIMG, bg=colors.menuBgColor)
+        add.image = addIMG
+        add.grid(row=0, column=0, padx=5, pady=8, sticky="WENS")
+
+        self.addToolButton = tk.Label(addToolFrame, text=strings.menuAddTool, bg=colors.menuBgColor, fg=colors.fgColor,
+                                      font=fonts.menuButtonFont)
+        self.addToolButton.grid(row=1, column=0, padx=10, pady=2, sticky="NWE")
+
+        if self.__page_name is not strings.addToolClass:
+            add.bind("<Button-1>", lambda event: self.show_frame(strings.addToolClass))
+            addToolFrame.bind("<Button-1>", lambda event: self.show_frame(strings.addToolClass))
+
         # menuBorderGround = ttk.Separator(menuFrame, orient="horizontal")
         # menuBorderGround.grid(row=1, column=0, columnspan=6, padx=2, sticky="WE")
 
-       # viewLabel = tk.Label(container, text="btn_search View Label")
-        #viewLabel.grid(row=0, column=0, sticky="N")
-        self.buttonList = (myToolsButton, myBookinsButton, myInvoicesButton)
-        self.labelList = (tool, booking, invoice)
-        self.frameList = (myToolsFrame, myBookingsFrame, myInvoiceFrame)
+        self.buttonList = (myToolsButton, myBookinsButton, myInvoicesButton, self.addToolButton)
+        self.labelList = (tool, booking, invoice, add)
+        self.frameList = (myToolsFrame, myBookingsFrame, myInvoiceFrame, addToolFrame)
 
         self.frames = {}
 
@@ -157,9 +179,9 @@ class MyProfilePage(tk.Frame):
         elif self.__page_name is strings.invoiceClass:
             self.highlightButton(2)
         elif self.__page_name is strings.addToolClass:
-            self.highlightSubButton(1)
+            self.highlightButton(3)
         elif self.__page_name is strings.receiveToolPage:
-            self.highlightSubButton(2)
+            self.highlightSubButton(1)
 
     def highlightSubButton(self, index):
         """
@@ -185,38 +207,33 @@ class MyProfilePage(tk.Frame):
         # looping through buttonList and looking for match.
         for i in range(len(self.buttonList)):
             if index == i:
-                self.buttonList[i].config(bg=colors.bgColor)
+                self.buttonList[i].config(bg=colors.bgColor, font=fonts.subMenuButtonPressedFont)
                 self.labelList[i].config(bg=colors.bgColor)
                 self.frameList[i].config(bg=colors.bgColor)
             else:
-                self.buttonList[i].config(bg=colors.menuBgColor)
+                self.buttonList[i].config(bg=colors.menuBgColor, font=fonts.subMenuButtonFont)
                 self.labelList[i].config(bg=colors.menuBgColor)
                 self.frameList[i].config(bg=colors.menuBgColor)
 
     def getMenuFrame(self, frame):
         menuFrame = tk.Frame(frame, bg=colors.bgColor)
-
+        menuFrame.columnconfigure(0, minsize=80)
+        menuFrame.columnconfigure(2, minsize=80)
 
         self.myToolsButton = tk.Label(menuFrame, text=strings.menuMyTools, bg=colors.bgColor, fg=colors.fgColor,
-                                 font=fonts.subMenuButtonFont)
+                                      font=fonts.subMenuButtonFont)
         self.myToolsButton.grid(row=0, column=0, padx=4)
         if self.__page_name is not strings.myToolClass:
             self.myToolsButton.bind("<Button-1>", lambda event: self.show_frame(strings.myToolClass))
 
+        menuBorderx = ttk.Separator(menuFrame, orient="vertical")
+        menuBorderx.grid(row=0, column=1, pady=2, sticky="NS")
+
         self.receiveButton = tk.Label(menuFrame, text=strings.receiveItem, bg=colors.bgColor, fg=colors.fgColor,
                                       font=fonts.subMenuButtonFont)
-        self.receiveButton.grid(row=0, column=1, padx=4)
+        self.receiveButton.grid(row=0, column=2, padx=10)
         if self.__page_name is not strings.receiveToolPage:
             self.receiveButton.bind("<Button-1>", lambda event: self.show_frame(strings.receiveToolPage))
 
-        menuBorderx = ttk.Separator(menuFrame, orient="vertical")
-        menuBorderx.grid(row=0, column=2, pady=2, sticky="NS")
-
-        self.addToolButton = tk.Label(menuFrame, text=strings.menuAddTool, bg=colors.bgColor, fg=colors.fgColor,
-                                      font=fonts.subMenuButtonFont)
-        self.addToolButton.grid(row=0, column=3, padx=4)
-        if self.__page_name is not strings.addToolClass:
-            self.addToolButton.bind("<Button-1>", lambda event: self.show_frame(strings.addToolClass))
-
-        self.__subMenuButtonList = (self.myToolsButton, self.addToolButton, self.receiveButton)
+        self.__subMenuButtonList = (self.myToolsButton, self.receiveButton)
         return menuFrame

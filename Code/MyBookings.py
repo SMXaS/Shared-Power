@@ -82,6 +82,11 @@ class MyBookings:
                 wf.cancelBooking(cancelItemObj)
                 self.populateData()
                 self.__errorLabel.config(text="")
+        else:
+            if self.getCount() > 0:
+                self.__errorLabel.config(text=strings.errorSelectItem)
+            else:
+                self.__errorLabel.config(text=strings.errorEmptyList)
 
     def populateData(self):
         """
@@ -114,6 +119,9 @@ class MyBookings:
                                            self.__bookingList[i].getExpectedReturnDate(),
                                            self.__bookingList[i].getStatus()),
                                    tags=self.__bookingList[i].getBookingID())
+
+    def getCount(self):
+        return len(self.__bookingList)
 
     def __getBookingIndex(self):
         """

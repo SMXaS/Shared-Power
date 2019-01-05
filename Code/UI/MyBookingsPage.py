@@ -19,6 +19,10 @@ class ReturnToolPage(tk.Frame):
 
     def start(self, args):
         self.__returnTool = MyBookings(self.__errorLabel, self.__tree, self.__controller.login)
+        self.__controller.addToolButton.config(text=strings.menuAddTool)
+
+        self.__errorLabel.config(text="")
+        self.__showReturn(False)
         self.__returnTool.populateData()
 
     def __initUI(self):
@@ -31,10 +35,27 @@ class ReturnToolPage(tk.Frame):
             self.returnTool.populateData()   --     will populate all required data in your treeView
         """
 
-        frame = tk.Frame(self, bg=self.__bgColor)
-        frame.grid(row=0, column=0, sticky="", pady=40)
+        menuFrame = tk.Frame(self, bg=self.__bgColor)
+        menuFrame.grid(row=0, column=0, sticky="WN")
 
-        frame.rowconfigure(3, minsize=30)
+        showReturnFrame = tk.Label(menuFrame, text=strings.returnItem, bg=colors.bgColor, fg=colors.fgColor,
+                                   font=fonts.subMenuButtonFont)
+        showReturnFrame.grid(row=0, column=0, padx=5)
+        showReturnFrame.bind("<Button-1>", lambda event: self.__showReturn(True))
+
+        menuBorderx = ttk.Separator(menuFrame, orient="vertical")
+        menuBorderx.grid(row=0, column=1, pady=2, sticky="NS")
+
+        cancelButton = tk.Label(menuFrame, text=strings.cancelBooking, bg=colors.bgColor, fg=colors.fgColor,
+                                font=fonts.subMenuButtonFont)
+        cancelButton.grid(row=0, column=2, padx=5)
+        cancelButton.bind("<Button-1>", lambda event: self.__returnTool.cancelBooking())
+
+        frame = tk.Frame(self, bg=self.__bgColor)
+        frame.grid(row=1, column=0, sticky="", pady=19)
+
+        frame.rowconfigure(2, minsize=30)
+        frame.rowconfigure(4, weight=1)
 
         self.__tree = ttk.Treeview(frame, columns=(strings.priceDay, strings.priceHalfDay, "btn_search"))
 
@@ -56,23 +77,46 @@ class ReturnToolPage(tk.Frame):
 
         mScrollBar.grid(row=1, column=5, pady=20, sticky='WNS')
 
-        toolConditionLabel = tk.Label(frame, text=strings.bookOutConditionLabel, bg=self.__bgColor, fg=self.__fgColor)
-        toolConditionLabel.grid(row=2, column=0, sticky="E")
+        self.returnFrame = tk.Frame(frame, bg=colors.bgColor)
+        self.returnFrame.grid(row=3, column=0, sticky="E")
 
-        toolConditionEntry = tk.Entry(frame)
-        toolConditionEntry.grid(row=2, column=1, padx=10, sticky="W")
+        toolConditionLabel = tk.Label(self.returnFrame, text=strings.bookOutConditionLabel, bg=self.__bgColor,
+                                      fg=self.__fgColor)
+        toolConditionLabel.grid(row=0, column=0, sticky="WE")
 
-        buttonBorder = ttk.Separator(frame, orient="horizontal")
-        buttonBorder.grid(row=4, column=0, columnspan=6, padx=2, sticky="WE")
+        toolConditionEntry = tk.Entry(self.returnFrame)
+        toolConditionEntry.grid(row=0, column=1, padx=10, sticky="WW")
 
-        returnButton = tk.Label(frame, text=strings.returnItem, bg=colors.bgColor, fg=colors.fgColor,
-                                font=fonts.buttonFont)
+        returnIMG = tk.PhotoImage(file=strings.buttonEdit)
+        returnToolButton = tk.Label(self.returnFrame, image=returnIMG, bg=self.__bgColor)
+        returnToolButton.image = returnIMG
+        returnToolButton.grid(row=1, column=1, pady=20)
+        returnToolButton.bind("<Button-1>", lambda event: self.__returnTool.returnItem(toolConditionEntry))
 
-        returnButton.grid(row=5, column=1, columnspan=2, pady=30)
-        returnButton.bind("<Button-1>", lambda event: self.__returnTool.returnItem(toolConditionEntry))
+    def __showReturn(self, show):
+        if show:
+            if self.__tree.focus():
+                self.returnFrame.grid()
+            else:
+                if self.__returnTool.getCount() > 0:
+                    self.__errorLabel.config(text=strings.errorSelectItem)
+                else:
+                    self.__errorLabel.config(text=strings.errorEmptyList)
+        else:
+            self.returnFrame.grid_remove()
+        """
+        if self.__tree.focus():
+            if show:
+                self.returnFrame.grid()
+            else:
+                self.returnFrame.grid_remove()
+        else:
+            if self.__returnTool.getCount() > 0:
+                self.__errorLabel.config(text=strings.errorSelectItem)
+            else:
+                self.__errorLabel.config(text=strings.errorEmptyList)
+        """
 
-        cancelButton = tk.Label(frame, text=strings.cancelBooking, bg=colors.bgColor, fg=colors.fgColor,
-                                font=fonts.buttonFont)
+    def showReturnFrame(self, show):
+        pass
 
-        cancelButton.grid(row=5, column=0, columnspan=2)
-        cancelButton.bind("<Button-1>", lambda event: self.__returnTool.cancelBooking())

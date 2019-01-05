@@ -36,6 +36,7 @@ search_img = "Resources/Drawable/search.png"
 tool_img = "Resources/Drawable/menu.png"
 bookings_img = "Resources/Drawable/bookings_img.png"
 invoice_img = "Resources/Drawable/invoice_img.png"
+add_img = "Resources/Drawable/add_img.png"
 
 # --------------
 # Tool
@@ -181,3 +182,4 @@ errorIncorrectPriceFormat = "Incorrect Price format"
 errorSelectItem = "Please select item first"
 errorToolConditionMissing = "Please describe the tool condition"
 errorAlreadyBooked = "Sorry, but this item has been booked already.."
+errorEmptyList = "Your list is empty"
