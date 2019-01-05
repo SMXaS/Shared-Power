@@ -32,7 +32,6 @@ This class shows a list with items, which need to be received (status = pending_
 
 class ReceiveTool:
 
-    # TODO suggest to cancel if current date < hire date
     def __init__(self, tree, errorLabel, login):
         """
         :param tree: widget(treeView)
@@ -99,7 +98,7 @@ class ReceiveTool:
             receiveItemObj.setStatus(strings.toolStatus[2])
             wf.editBooking(receiveItemObj)
             self.populateList()
-            # test list
+            # btn_search list
             testlist = [receiveItemObj]
             test.printBookingObjects(testlist)
         else:

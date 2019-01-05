@@ -29,33 +29,78 @@ class MyProfilePage(tk.Frame):
 
     def __initUI(self):
 
-        menuFrame = tk.Frame(self, bg=colors.bgColor)
+        menuFrame = tk.Frame(self, bg=colors.menuBgColor)
         menuFrame.grid(row=0, column=0, sticky="WEN")
 
         container = tk.Frame(self, bg=colors.bgColor)
-        container.grid(row=1, column=0, pady=10, sticky="WES")
+        container.grid(row=2, column=0, pady=10, sticky="WES")
         container.grid_rowconfigure(0, weight=1)
         container.grid_columnconfigure(0, weight=1)
 
-        myToolsButton = tk.Label(menuFrame, text=strings.menuMyTools, bg=colors.bgColor, fg=colors.fgColor,
+        #######################################################
+        # MyTool Frame
+        #######################################################
+
+        myToolsFrame = tk.Frame(menuFrame, bg=colors.menuBgColor)
+        myToolsFrame.grid(row=0, column=0, sticky="NW")
+
+        toolIMG = tk.PhotoImage(file=strings.tool_img)
+        tool = tk.Label(myToolsFrame, image=toolIMG, bg=colors.menuBgColor)
+        tool.image = toolIMG
+        tool.grid(row=0, column=0, padx=5, pady=2, sticky="WENS")
+
+        myToolsButton = tk.Label(myToolsFrame, text=strings.menuMyTools, bg=colors.menuBgColor, fg=colors.fgColor,
                                  font=fonts.menuButtonFont)
-        myToolsButton.grid(row=0, column=0, padx=10, pady=10, sticky="NW")
+        myToolsButton.grid(row=1, column=0, padx=10, pady=2, sticky="WES")
+
+        myToolsFrame.bind("<Button-1>", lambda event: self.show_frame(strings.myToolClass))
+        tool.bind("<Button-1>", lambda event: self.show_frame(strings.myToolClass))
         myToolsButton.bind("<Button-1>", lambda event: self.show_frame(strings.myToolClass))
 
         menuBorderx1 = ttk.Separator(menuFrame, orient="vertical")
         menuBorderx1.grid(row=0, column=1, pady=2, sticky="NS")
 
-        myBookinsButton = tk.Label(menuFrame, text=strings.menuMyBookings, bg=colors.bgColor, fg=colors.fgColor,
-                                   font=fonts.menuButtonFont)
-        myBookinsButton.grid(row=0, column=2, padx=10, pady=10, sticky="NW")
+        #######################################################
+        # MyBookings Frame
+        #######################################################
+
+        myBookingsFrame = tk.Frame(menuFrame, bg=colors.menuBgColor)
+        myBookingsFrame.grid(row=0, column=2, sticky="NW")
+
+        bookingIMG = tk.PhotoImage(file=strings.bookings_img)
+        booking = tk.Label(myBookingsFrame, image=bookingIMG, bg=colors.menuBgColor)
+        booking.image = bookingIMG
+        booking.grid(row=0, column=0, padx=5, pady=8, sticky="WENS")
+
+        myBookinsButton = tk.Label(myBookingsFrame, text=strings.menuMyBookings, bg=colors.menuBgColor,
+                                   fg=colors.fgColor, font=fonts.menuButtonFont)
+        myBookinsButton.grid(row=1, column=0, padx=10, pady=2, sticky="WES")
+
+        myBookingsFrame.bind("<Button-1>", lambda event: self.show_frame(strings.returnToolClass))
+        booking.bind("<Button-1>", lambda event: self.show_frame(strings.returnToolClass))
         myBookinsButton.bind("<Button-1>", lambda event: self.show_frame(strings.returnToolClass))
 
         menuBorderx2 = ttk.Separator(menuFrame, orient="vertical")
         menuBorderx2.grid(row=0, column=3, pady=2, sticky="NS")
 
-        myInvoicesButton = tk.Label(menuFrame, text=strings.menuInvoice, bg=colors.bgColor, fg=colors.fgColor,
+        #######################################################
+        # myInvoice Frame
+        #######################################################
+
+        myInvoiceFrame = tk.Frame(menuFrame, bg=colors.menuBgColor)
+        myInvoiceFrame.grid(row=0, column=4, sticky="NW")
+
+        invoiceIMG = tk.PhotoImage(file=strings.invoice_img)
+        invoice = tk.Label(myInvoiceFrame, image=invoiceIMG, bg=colors.menuBgColor)
+        invoice.image = invoiceIMG
+        invoice.grid(row=0, column=0, padx=5, pady=8, sticky="WENS")
+
+        myInvoicesButton = tk.Label(myInvoiceFrame, text=strings.menuInvoice, bg=colors.menuBgColor, fg=colors.fgColor,
                                     font=fonts.menuButtonFont)
-        myInvoicesButton.grid(row=0, column=4, padx=10, pady=10, sticky="NW")
+        myInvoicesButton.grid(row=1, column=0, padx=10, pady=2, sticky="NWE")
+
+        myInvoiceFrame.bind("<Button-1>", lambda event: self.show_frame(strings.invoiceClass))
+        invoice.bind("<Button-1>", lambda event: self.show_frame(strings.invoiceClass))
         myInvoicesButton.bind("<Button-1>", lambda event: self.show_frame(strings.invoiceClass))
 
         menuBorderx2 = ttk.Separator(menuFrame, orient="vertical")
@@ -64,9 +109,11 @@ class MyProfilePage(tk.Frame):
         # menuBorderGround = ttk.Separator(menuFrame, orient="horizontal")
         # menuBorderGround.grid(row=1, column=0, columnspan=6, padx=2, sticky="WE")
 
-       # viewLabel = tk.Label(container, text="test View Label")
+       # viewLabel = tk.Label(container, text="btn_search View Label")
         #viewLabel.grid(row=0, column=0, sticky="N")
         self.buttonList = (myToolsButton, myBookinsButton, myInvoicesButton)
+        self.labelList = (tool, booking, invoice)
+        self.frameList = (myToolsFrame, myBookingsFrame, myInvoiceFrame)
 
         self.frames = {}
 
@@ -138,9 +185,13 @@ class MyProfilePage(tk.Frame):
         # looping through buttonList and looking for match.
         for i in range(len(self.buttonList)):
             if index == i:
-                self.buttonList[i].config(font=fonts.menuButtonPressedFont)
+                self.buttonList[i].config(bg=colors.bgColor)
+                self.labelList[i].config(bg=colors.bgColor)
+                self.frameList[i].config(bg=colors.bgColor)
             else:
-                self.buttonList[i].config(font=fonts.menuButtonFont)
+                self.buttonList[i].config(bg=colors.menuBgColor)
+                self.labelList[i].config(bg=colors.menuBgColor)
+                self.frameList[i].config(bg=colors.menuBgColor)
 
     def getMenuFrame(self, frame):
         menuFrame = tk.Frame(frame, bg=colors.bgColor)

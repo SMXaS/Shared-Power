@@ -32,6 +32,10 @@ buttonEdit = "Resources/Drawable/btn_confirm.png"
 buttonBack = "Resources/Drawable/btn_back.png"
 buttonHire = "Resources/Drawable/btn_hire.png"
 account = "Resources/Drawable/account.png"
+search_img = "Resources/Drawable/search.png"
+tool_img = "Resources/Drawable/menu.png"
+bookings_img = "Resources/Drawable/bookings_img.png"
+invoice_img = "Resources/Drawable/invoice_img.png"
 
 # --------------
 # Tool
@@ -132,7 +136,7 @@ showImage = "Show image"
 # Search Tool Page
 # --------------
 searchToolTitle = "Search..."
-search = "Search"
+btn_search = "Search"
 toolInfo = "Tool information"
 
 # --------------
@@ -176,3 +180,4 @@ errorUnsupportedImageFormat = "Only .png format supported"
 errorIncorrectPriceFormat = "Incorrect Price format"
 errorSelectItem = "Please select item first"
 errorToolConditionMissing = "Please describe the tool condition"
+errorAlreadyBooked = "Sorry, but this item has been booked already.."

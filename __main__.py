@@ -1,16 +1,12 @@
 import tkinter as tk
 from tkinter import ttk
 from Code.UI.SearchToolPage import SearchToolPage
-from Code.UI.AddToolPage import AddToolPage
 from Code.UI.WelcomePage import WelcomePage
 from Code.UI.MyToolPage import MyToolPage
-from Code.UI.MyBookingsPage import ReturnToolPage
 from Code.UI.BookToolPage import BookToolPage
 from Code.UI.LoginPage import LoginPage
 from Code.UI.RegisterPage import RegisterPage
-from Code.UI.InvoicePage import InvoicePage
 from Code.UI.ToolInfoPage import ToolInfoPage
-from Code.UI.ReceiveToolPage import ReceiveToolPage
 from Code.UI.MyProfilePage import MyProfilePage
 from Resources.Values import strings, colors, dimens, fonts
 
@@ -24,7 +20,7 @@ class mainMenu(tk.Tk):
         tk.Tk.__init__(self, *args, **kwargs)
 
         self.geometry("{}x{}+%d+%d".format(dimens.mainWindowWidth, dimens.mainWindowHeigh) %
-                      ((self.winfo_screenwidth() / 2) - 350, (self.winfo_screenheight() / 2) - 250))
+                      ((self.winfo_screenwidth() / 2) - 350, (self.winfo_screenheight() / 2) - 300))
         self.resizable(False, False)
         self.title(strings.appTitle)
 
@@ -34,7 +30,7 @@ class mainMenu(tk.Tk):
         mainFrame = tk.Frame(self)
         mainFrame.pack(side="top", fill="both", expand=True)
 
-        self.menuFrame = tk.Frame(mainFrame, bg=colors.bgColor, width=100)
+        self.menuFrame = tk.Frame(mainFrame, bg=colors.menuBgColor, width=100)
         self.menuFrame.pack(side="left", fill="y")
         menuBorder = ttk.Separator(self.menuFrame, orient="vertical")
         menuBorder.pack(side="right", fill="y")
@@ -47,34 +43,57 @@ class mainMenu(tk.Tk):
 
         # Menu frame widgets
         userIMG = tk.PhotoImage(file=strings.account)
-        user = tk.Label(self.menuFrame, image=userIMG, bg=colors.bgColor)
+        user = tk.Label(self.menuFrame, image=userIMG, bg=colors.menuBgColor)
         user.image = userIMG
         user.pack(side="top", padx=50, pady=10)
 
-        self.userName = tk.Label(self.menuFrame, bg=colors.bgColor, fg=colors.fgColor)
+        self.userName = tk.Label(self.menuFrame, bg=colors.menuBgColor, fg=colors.fgColor)
         self.userName.pack(side="top", padx=5, pady=2)
 
         divider = ttk.Separator(self.menuFrame, orient="horizontal")
-        divider.pack(side="top", fill="x",padx=10, pady=20)
+        divider.pack(side="top", fill="x", padx=10, pady=10)
 
-        myProfileButton = tk.Label(self.menuFrame, text=strings.myProfile, bg=colors.bgColor, fg=colors.fgColor,
-                                   font=fonts.menuButtonFont)
+        myProfileFrame = tk.Frame(self.menuFrame, bg=colors.menuBgColor)
+        myProfileFrame.pack(side="top", fill="x", pady=10)
+
+        toolIMG = tk.PhotoImage(file=strings.tool_img)
+        tool = tk.Label(myProfileFrame, image=toolIMG, bg=colors.menuBgColor)
+        tool.image = toolIMG
+        tool.pack(side="top", padx=5, pady=2)
+
+        myProfileButton = tk.Label(myProfileFrame, text=strings.myProfile, bg=colors.menuBgColor,
+                                   fg=colors.fgColor, font=fonts.menuButtonFont)
+        myProfileButton.pack(side="top", padx=5, pady=5)
+
+        myProfileFrame.bind("<Button-1>", lambda event: self.show_frame(strings.myProfileClass))
         myProfileButton.bind("<Button-1>", lambda event: self.show_frame(strings.myProfileClass))
-        myProfileButton.pack(side="top", padx=5, pady=2)
+        tool.bind("<Button-1>", lambda event: self.show_frame(strings.myProfileClass))
 
-        searchToolButton = tk.Label(self.menuFrame, text=strings.menuSearchTool, bg=colors.bgColor,
+        searchToolFrame = tk.Frame(self.menuFrame, bg=colors.menuBgColor)
+        searchToolFrame.pack(side="top", fill="x")
+
+        searchIMG = tk.PhotoImage(file=strings.search_img)
+        search = tk.Label(searchToolFrame, image=searchIMG, bg=colors.menuBgColor)
+        search.image = searchIMG
+        search.pack(side="top", padx=5, pady=2)
+
+        searchToolButton = tk.Label(searchToolFrame, text=strings.menuSearchTool, bg=colors.menuBgColor,
                                     fg=colors.fgColor, font=fonts.menuButtonFont)
+        searchToolButton.pack(side="top", padx=5, pady=5)
 
+        searchToolFrame.bind("<Button-1>", lambda event: self.show_frame(strings.searchToolClass))
+        search.bind("<Button-1>", lambda event: self.show_frame(strings.searchToolClass))
         searchToolButton.bind("<Button-1>", lambda event: self.show_frame(strings.searchToolClass))
-        searchToolButton.pack(side="top", padx=5, pady=2)
 
-        logOutButton = tk.Label(self.menuFrame, text=strings.menuLogOut, bg=colors.bgColor, fg=colors.fgColor,
+        logOutButton = tk.Label(self.menuFrame, text=strings.menuLogOut, bg=colors.menuBgColor, fg=colors.fgColor,
                                 font=fonts.menuLogOutFont)
         logOutButton.bind("<Button-1>", lambda event: self.show_frame(strings.loginClass))
         logOutButton.pack(side="bottom", padx=5, pady=10)
 
         # adding menu buttons to the list for easier highlighting
         self.buttonList = (myProfileButton, searchToolButton)
+        self.labelList = (tool, search)
+        self.frameList = (myProfileFrame, searchToolFrame)
 
         # disabling menu frame in order to populate login/register pages
         self.menuFrame.pack_forget()
@@ -127,7 +146,7 @@ class mainMenu(tk.Tk):
 
         # setting up window size
         self.geometry("{}x{}+%d+%d".format(dimens.mainWindowWidth, dimens.mainWindowHeigh) %
-                                          ((self.winfo_screenwidth() / 2) - 350, (self.winfo_screenheight() / 2) - 250))
+                                          ((self.winfo_screenwidth() / 2) - 350, (self.winfo_screenheight() / 2) - 300))
 
     def setUser(self, user):
         """
@@ -174,14 +193,20 @@ class mainMenu(tk.Tk):
         """
         if index < 0:
             for i in range(len(self.buttonList)):
-                self.buttonList[i].config(font=fonts.menuButtonFont)
+                self.buttonList[i].config(bg=colors.menuBgColor)
+                self.labelList[i].config(bg=colors.menuBgColor)
+                self.frameList[i].config(bg=colors.menuBgColor)
         else:
             # looping through buttonList and looking for match.
             for i in range(len(self.buttonList)):
                 if index == i:
-                    self.buttonList[i].config(font=fonts.menuButtonPressedFont)
+                    self.buttonList[i].config(bg=colors.bgColor)
+                    self.labelList[i].config(bg=colors.bgColor)
+                    self.frameList[i].config(bg=colors.bgColor)
                 else:
-                    self.buttonList[i].config(font=fonts.menuButtonFont)
+                    self.labelList[i].config(bg=colors.menuBgColor)
+                    self.frameList[i].config(bg=colors.menuBgColor)
+                    self.buttonList[i].config(bg=colors.menuBgColor)
 
 
 if __name__ == "__main__":

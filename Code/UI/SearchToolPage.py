@@ -35,7 +35,7 @@ class SearchToolPage(tk.Frame):
         self.searchEntry = tk.Entry(frame, width=80)
         self.searchEntry.grid(row=0, column=1, padx=25, pady=20, sticky="N")
 
-        searchButton = tk.Label(frame, text=strings.search, bg=self.__bgColor, fg=self.__fgColor,
+        searchButton = tk.Label(frame, text=strings.btn_search, bg=self.__bgColor, fg=self.__fgColor,
                                 font=fonts.buttonFont)
         searchButton.grid(row=0, column=2)
         searchButton.bind("<Button-1>", lambda event: self.__retrieveData())

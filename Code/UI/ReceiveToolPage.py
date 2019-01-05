@@ -25,8 +25,9 @@ class ReceiveToolPage(tk.Frame):
     def __initUI(self):
         frame = tk.Frame(self, bg=colors.bgColor)
         frame.grid(row=1, column=0, sticky="", pady=19)
+        frame.rowconfigure(2, minsize=51)
 
-        self.__tree = ttk.Treeview(frame, columns=(strings.priceDay, strings.priceHalfDay, "test"))
+        self.__tree = ttk.Treeview(frame, columns=(strings.priceDay, strings.priceHalfDay, "btn_search"))
 
         mScrollBar = ttk.Scrollbar(frame, orient='vertical', command=self.__tree.yview)
         self.__tree.configure(yscrollcommand=mScrollBar.set)
@@ -46,12 +47,15 @@ class ReceiveToolPage(tk.Frame):
 
         mScrollBar.grid(row=1, column=5, pady=20, sticky='WNS')
 
+        buttonBorder = ttk.Separator(frame, orient="horizontal")
+        buttonBorder.grid(row=3, column=0, columnspan=6, padx=2, sticky="WE")
+
         receiveButton = tk.Label(frame, text=strings.receiveItem, bg=colors.bgColor, fg=colors.fgColor,
                                  font=fonts.buttonFont)
-        receiveButton.grid(row=2, column=2)
+        receiveButton.grid(row=4, column=2)
         receiveButton.bind("<Button-1>", lambda event: self.__receiveTool.receiveItem())
 
         damageButton = tk.Label(frame, text=strings.declareAsDamaged, bg=colors.bgColor, fg=colors.fgColor,
                                 font=fonts.buttonFont)
-        damageButton.grid(row=2, column=3)
+        damageButton.grid(row=4, column=3)
         damageButton.bind("<Button-1>", lambda event: self.__receiveTool.damageItem())

@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
 from Resources.Values import strings, colors, fonts
-from Code.MyBookings import ReturnTool
+from Code.MyBookings import MyBookings
 
 
 class ReturnToolPage(tk.Frame):
@@ -18,7 +18,7 @@ class ReturnToolPage(tk.Frame):
         self.__initUI()
 
     def start(self, args):
-        self.__returnTool = ReturnTool(self.__errorLabel, self.__tree, self.__controller.login)
+        self.__returnTool = MyBookings(self.__errorLabel, self.__tree, self.__controller.login)
         self.__returnTool.populateData()
 
     def __initUI(self):
@@ -34,7 +34,9 @@ class ReturnToolPage(tk.Frame):
         frame = tk.Frame(self, bg=self.__bgColor)
         frame.grid(row=0, column=0, sticky="", pady=40)
 
-        self.__tree = ttk.Treeview(frame, columns=(strings.priceDay, strings.priceHalfDay, "test"))
+        frame.rowconfigure(3, minsize=30)
+
+        self.__tree = ttk.Treeview(frame, columns=(strings.priceDay, strings.priceHalfDay, "btn_search"))
 
         mScrollBar = ttk.Scrollbar(frame, orient='vertical', command=self.__tree.yview)
         self.__tree.configure(yscrollcommand=mScrollBar.set)
@@ -60,14 +62,17 @@ class ReturnToolPage(tk.Frame):
         toolConditionEntry = tk.Entry(frame)
         toolConditionEntry.grid(row=2, column=1, padx=10, sticky="W")
 
+        buttonBorder = ttk.Separator(frame, orient="horizontal")
+        buttonBorder.grid(row=4, column=0, columnspan=6, padx=2, sticky="WE")
+
         returnButton = tk.Label(frame, text=strings.returnItem, bg=colors.bgColor, fg=colors.fgColor,
                                 font=fonts.buttonFont)
 
-        returnButton.grid(row=3, column=1, columnspan=2, pady=30)
+        returnButton.grid(row=5, column=1, columnspan=2, pady=30)
         returnButton.bind("<Button-1>", lambda event: self.__returnTool.returnItem(toolConditionEntry))
 
         cancelButton = tk.Label(frame, text=strings.cancelBooking, bg=colors.bgColor, fg=colors.fgColor,
                                 font=fonts.buttonFont)
 
-        cancelButton.grid(row=3, column=0, columnspan=2)
+        cancelButton.grid(row=5, column=0, columnspan=2)
         cancelButton.bind("<Button-1>", lambda event: self.__returnTool.cancelBooking())

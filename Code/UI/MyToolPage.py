@@ -58,6 +58,7 @@ class MyToolPage(tk.Frame):
 
         frame = tk.Frame(self, bg=self.bgColor)
         frame.grid(row=1, column=0, sticky="", pady=19)
+        frame.rowconfigure(2, minsize=51)
 
         ####################################################################################################
         #                                            DISPLAY
@@ -80,19 +81,22 @@ class MyToolPage(tk.Frame):
 
         self.yscrollbar.grid(row=1, column=5, pady=20, sticky='WNS')
 
+        buttonBorder = ttk.Separator(frame, orient="horizontal")
+        buttonBorder.grid(row=3, column=0, columnspan=6, padx=2, sticky="WE")
+
         self.editButton = tk.Label(frame, text="Edit Tool", bg=colors.bgColor, fg=colors.fgColor,
-                                   font=fonts.subMenuButtonFont)
-        self.editButton.grid(row=2, column=0, padx=4, sticky="N")
+                                   font=fonts.buttonFont)
+        self.editButton.grid(row=4, column=0, padx=4, sticky="N")
         self.editButton.bind("<Button-1>", lambda event: self.__editTool())
 
         self.deleteButton = tk.Label(frame, text="Delete Tool", bg=colors.bgColor, fg=colors.fgColor,
-                                     font=fonts.subMenuButtonFont)
-        self.deleteButton.grid(row=2, column=1, padx=4, sticky="N")
+                                     font=fonts.buttonFont)
+        self.deleteButton.grid(row=4, column=1, padx=4, sticky="N")
         # deleteButton.bind("<Button-2>", lambda event: self.selectItem())
 
         self.damage_restoreButton = tk.Label(frame, text="Damage/Restore tool", bg=colors.bgColor, fg=colors.fgColor,
-                                             font=fonts.subMenuButtonFont)
-        self.damage_restoreButton.grid(row=2, column=2, padx=4, sticky="N")
+                                             font=fonts.buttonFont)
+        self.damage_restoreButton.grid(row=4, column=2, padx=4, sticky="N")
         # damage_restoreButton.bind("<Button-2>", lambda event: self.selectItem())
 
     def __editTool(self):
@@ -100,7 +104,7 @@ class MyToolPage(tk.Frame):
             self.__errorLabel.config(text="")
             index = self.__getItemIDIndex()
             self.controller.show_frame(strings.addToolClass, self.__toolList[index])
-            print("test")
+            print("btn_search")
         else:
             self.__errorLabel.config(text="select item first")
             print("select item first")

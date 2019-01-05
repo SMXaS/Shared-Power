@@ -1,4 +1,5 @@
 bgColor = "#0D47A1"
 fgColor = "white"
+menuBgColor = "#135CA0"
 errorColor = "#FA8072"
 bgInactive = "grey"

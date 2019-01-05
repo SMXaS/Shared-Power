@@ -33,7 +33,7 @@ This class shows a list with all booked items (status = hired) and allows user t
 """
 
 
-class ReturnTool:
+class MyBookings:
 
     __toolIDList = []
     __toolObjList = []
