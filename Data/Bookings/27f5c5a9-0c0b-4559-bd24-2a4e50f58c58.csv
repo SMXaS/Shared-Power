@@ -1,0 +1,2 @@
+bookingID,toolID,userName,bookInCondition,startDate,startTerm,expectedReturnDate,expectedTerm,status,returnDate,bookOutCondition,pickUpLocation,dropOffLocation
+855e15f1-6abe-4763-aeb2-e9c5e539730c,27f5c5a9-0c0b-4559-bd24-2a4e50f58c58,test,used,11/01/2019,f,13/01/2019,f,inventory,6/1/2019,ede,,

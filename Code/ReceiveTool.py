@@ -104,6 +104,12 @@ class ReceiveTool:
         else:
             self.__errorLabel.config(text=strings.errorSelectItem)
 
+    def getCount(self):
+        if self.__bookingList:
+            return len(self.__bookingList)
+        else:
+            return 0
+
     def damageItem(self):
         if self.__tree.focus():
             damageBookingObj = self.__bookingList[self.__getBookingIndex()]

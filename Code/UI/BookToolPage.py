@@ -148,8 +148,6 @@ class BookToolPage(tk.Frame):
         self.__dropOffEntry = tk.Entry(frame, width=20)
         self.__dropOffEntry.grid(row=7, column=2, columnspan=3, padx=5)
 
-
-
         backIMG = tk.PhotoImage(file=strings.buttonBack)
         backButton = tk.Label(frame, image=backIMG, bg=self.__bgColor)
         backButton.image = backIMG
@@ -279,4 +277,3 @@ class BookToolPage(tk.Frame):
                 self.__errorLabel.config(text=strings.errorAlreadyBooked)
         else:
             print("Error")
-

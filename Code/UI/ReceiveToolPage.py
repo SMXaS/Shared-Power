@@ -20,6 +20,7 @@ class ReceiveToolPage(tk.Frame):
         self.__receiveTool = ReceiveTool(self.__tree, self.__errorLabel, self.__controller.login)
         menuFrame = self.__controller.getMenuFrame(self)
         menuFrame.grid(row=0, column=0, sticky="WN")
+        self.__errorLabel.config(text="")
         self.__receiveTool.populateList()
 
     def __initUI(self):

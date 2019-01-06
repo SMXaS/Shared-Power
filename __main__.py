@@ -21,7 +21,8 @@ class mainMenu(tk.Tk):
 
         self.geometry("{}x{}+%d+%d".format(dimens.mainWindowWidth, dimens.mainWindowHeigh) %
                       ((self.winfo_screenwidth() / 2) - 350, (self.winfo_screenheight() / 2) - 300))
-        self.resizable(False, False)
+        # self.resizable(False, False)
+
         self.title(strings.appTitle)
 
         #############################
@@ -147,6 +148,9 @@ class mainMenu(tk.Tk):
         # setting up window size
         self.geometry("{}x{}+%d+%d".format(dimens.mainWindowWidth, dimens.mainWindowHeigh) %
                                           ((self.winfo_screenwidth() / 2) - 350, (self.winfo_screenheight() / 2) - 300))
+        self.minsize(dimens.mainWindowWidth, dimens.mainWindowHeigh)
+        self.maxsize(self.winfo_screenwidth(), self.winfo_screenheight())
+        self.resizable(True, True)
 
     def setUser(self, user):
         """

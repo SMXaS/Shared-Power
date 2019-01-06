@@ -49,6 +49,9 @@ class LoginPage(tk.Frame):
     def start(self, args):
         self.controller.geometry("{}x{}+%d+%d".format(dimens.loginWindowWidth, dimens.loginWindowHeigh) %
                                  ((self.winfo_screenwidth() / 2) - 100, (self.winfo_screenheight() / 2) - 50))
+        self.controller.maxsize(dimens.loginWindowWidth, dimens.loginWindowHeigh)
+        self.controller.minsize(dimens.loginWindowWidth, dimens.loginWindowHeigh)
+        self.controller.resizable(False, False)
         self.controller.setUser("")
         self.ent_user.delete(0, "end")
         self.ent_pass.delete(0, "end")

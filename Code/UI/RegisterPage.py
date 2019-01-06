@@ -22,7 +22,9 @@ class RegisterPage(tk.Frame):
     def start(self, args):
         self.controller.geometry("{}x{}+%d+%d".format(dimens.registerWindowWidth, dimens.registerWindowHeigh) %
                                  ((self.winfo_screenwidth() / 2) - 100, (self.winfo_screenheight() / 2) - 150))
-
+        self.controller.maxsize(dimens.registerWindowWidth, dimens.registerWindowHeigh)
+        self.controller.minsize(dimens.registerWindowWidth, dimens.registerWindowHeigh)
+        self.controller.resizable(False, False)
         # resetting views
         self.firstNameEntry.delete(0, "end")
         self.lastNameEntry.delete(0, "end")
