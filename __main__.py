@@ -146,8 +146,8 @@ class mainMenu(tk.Tk):
         self.menuFrame.pack(side="left", fill="y")
 
         # setting up window size
-        self.geometry("{}x{}+%d+%d".format(int(self.winfo_screenwidth()*0.8), int(self.winfo_screenheight()*0.65)) %
-                                          ((self.winfo_screenwidth() / 2) - 550, (self.winfo_screenheight() / 2) - 300))
+        self.geometry("{}x{}+%d+%d".format(int(self.winfo_screenwidth()*0.8), int(self.winfo_screenheight()*0.8)) %
+                                          ((self.winfo_screenwidth() / 2) - int(self.winfo_screenwidth()*0.4), (self.winfo_screenheight() / 2) - int(self.winfo_screenheight()*0.4)))
         self.minsize(dimens.mainWindowWidth, dimens.mainWindowHeigh)
         self.maxsize(self.winfo_screenwidth(), self.winfo_screenheight())
         self.resizable(True, True)
