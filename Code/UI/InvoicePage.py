@@ -8,6 +8,7 @@ import Code.Utilities.util as util
 
 class InvoicePage(tk.Frame):
     currentDate = datetime.datetime.now().strftime(strings.invoiceMonth_YearFormat)
+    #currentDate = "02-2019"
     currentMonth = datetime.datetime.now().strftime(strings.invoiceMonthFormat)
     currentYear = datetime.datetime.now().strftime(strings.invoiceYearFormat)
     yearList = []
@@ -33,6 +34,7 @@ class InvoicePage(tk.Frame):
         frame.grid(row=0, column=0, pady=40)
         tempYearList = ["2019"]
         tempMonthList = ["01", "02", "03", "04", "05", "06"]
+        index = 0
 
         self.yearVar = tk.StringVar(self)
         self.monthVar = tk.StringVar(self)
@@ -75,6 +77,9 @@ class InvoicePage(tk.Frame):
         dateList = util.getInvoiceDates(self.__controller.login)
         if not dateList:
             dateList.append(self.currentDate)
+        else:
+            if self.currentDate not in dateList:
+                dateList.append(self.currentDate)
         for i in range(len(dateList)):
             year = dateList[i].split("-")[1]
             month = dateList[i].split("-")[0]
@@ -88,9 +93,18 @@ class InvoicePage(tk.Frame):
             if monthName not in fullMonthNames:
                 fullMonthNames.append(monthName)
 
+        index = 0
+
+        for i in range(len(dateList)):
+            print("index: {}; dateList: {};".format(i, dateList[i]))
+            if self.currentDate == dateList[i]:
+                index = i
+
+        print("index:", index)
+
         self.monthMenu.config(values=fullMonthNames)
         self.yearMenu.config(values=self.yearList)
-        self.monthMenu.current(0)
+        self.monthMenu.current(index)
         self.yearMenu.current(0)
 
 

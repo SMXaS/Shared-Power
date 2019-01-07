@@ -2,18 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9476d951-1298-4a38-b52b-5632fdff5d7f" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/UI/BookToolPage.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/UI/BookToolPage.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/UI/MyProfilePage.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/UI/MyProfilePage.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/UI/MyToolPage.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/UI/MyToolPage.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/Utilities/util.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/Utilities/util.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/Bookings/27f5c5a9-0c0b-4559-bd24-2a4e50f58c58.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Data/Bookings/27f5c5a9-0c0b-4559-bd24-2a4e50f58c58.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/Invoices/test/1-2019.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Data/Invoices/test/1-2019.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/tools.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Data/tools.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/users.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Data/users.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Entities/Bookings.py" beforeDir="false" afterPath="$PROJECT_DIR$/Entities/Bookings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Resources/Values/strings.py" beforeDir="false" afterPath="$PROJECT_DIR$/Resources/Values/strings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/__main__.py" beforeDir="false" afterPath="$PROJECT_DIR$/__main__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/MyInvoice.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/MyInvoice.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/UI/InvoicePage.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/UI/InvoicePage.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -50,21 +40,21 @@
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="csv" value="16" />
-          <entry key="py" value="618" />
+          <entry key="py" value="620" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="CSV" value="15" />
           <entry key="PLAIN_TEXT" value="1" />
-          <entry key="Python" value="618" />
+          <entry key="Python" value="620" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="csv" value="7" />
           <entry key="dummy" value="530" />
-          <entry key="py" value="72168" />
+          <entry key="py" value="72449" />
           <entry key="txt" value="15" />
         </counts>
       </usages-collector>
@@ -72,7 +62,7 @@
         <counts>
           <entry key="CSV" value="7" />
           <entry key="PLAIN_TEXT" value="545" />
-          <entry key="Python" value="72168" />
+          <entry key="Python" value="72449" />
         </counts>
       </usages-collector>
     </session>
@@ -109,61 +99,28 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/__main__.py">
+        <entry file="file://$PROJECT_DIR$/Code/MyInvoice.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="294">
-              <caret line="149" column="78" selection-start-line="149" selection-start-column="78" selection-end-line="149" selection-end-column="78" />
-              <folding>
-                <element signature="e#0#20#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Code/UI/MyBookingsPage.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="514">
-              <caret line="104" column="22" selection-start-line="104" selection-start-column="22" selection-end-line="104" selection-end-column="22" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Code/UI/BookToolPage.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-3388">
-              <caret line="52" selection-start-line="52" selection-end-line="52" />
-              <folding>
-                <element signature="e#0#20#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="395">
+              <caret line="37" column="6" lean-forward="true" selection-start-line="37" selection-start-column="6" selection-end-line="37" selection-end-column="30" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Code/UI/InvoicePage.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="327">
+              <caret line="103" column="36" selection-start-line="103" selection-start-column="36" selection-end-line="103" selection-end-column="36" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Code/Utilities/util.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="211">
-              <caret line="77" column="42" lean-forward="true" selection-start-line="77" selection-start-column="23" selection-end-line="77" selection-end-column="42" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Code/UI/LoginPage.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="157">
-              <caret line="63" column="35" selection-start-line="63" selection-start-column="35" selection-end-line="63" selection-end-column="35" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Code/UI/RegisterPage.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1795">
-              <caret line="25" column="86" selection-start-line="25" selection-start-column="86" selection-end-line="25" selection-end-column="86" />
+            <state relative-caret-position="344">
+              <caret line="195" column="7" lean-forward="true" selection-start-line="195" selection-start-column="7" selection-end-line="195" selection-end-column="7" />
             </state>
           </provider>
         </entry>
@@ -186,6 +143,8 @@
       <find>endDateLabe</find>
       <find>availableEndDate</find>
       <find>title</find>
+      <find>getInvoi</find>
+      <find>monthMenu</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -221,7 +180,6 @@
         <option value="$PROJECT_DIR$/Code/UI/ReceiveItemPage.py" />
         <option value="$PROJECT_DIR$/Code/ReceiveItem.py" />
         <option value="$PROJECT_DIR$/HireTool.py" />
-        <option value="$PROJECT_DIR$/Code/MyInvoice.py" />
         <option value="$PROJECT_DIR$/Code/ReturnTool.py" />
         <option value="$PROJECT_DIR$/Code/AddTool.py" />
         <option value="$PROJECT_DIR$/Code/Utilities/WriteFile.py" />
@@ -230,7 +188,6 @@
         <option value="$PROJECT_DIR$/Resources/Values/colors.py" />
         <option value="$PROJECT_DIR$/Resources/Values/dimens.py" />
         <option value="$PROJECT_DIR$/Resources/Values/fonts.py" />
-        <option value="$PROJECT_DIR$/Code/UI/InvoicePage.py" />
         <option value="$PROJECT_DIR$/Code/UI/AddToolPage.py" />
         <option value="$PROJECT_DIR$/Code/MyBookings.py" />
         <option value="$PROJECT_DIR$/Code/UI/MyBookingsPage.py" />
@@ -246,6 +203,8 @@
         <option value="$PROJECT_DIR$/Code/UI/BookToolPage.py" />
         <option value="$PROJECT_DIR$/__main__.py" />
         <option value="$PROJECT_DIR$/Code/Utilities/util.py" />
+        <option value="$PROJECT_DIR$/Code/MyInvoice.py" />
+        <option value="$PROJECT_DIR$/Code/UI/InvoicePage.py" />
       </list>
     </option>
   </component>
@@ -650,13 +609,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Code/MyInvoice.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1513">
-          <caret line="97" column="30" lean-forward="true" selection-start-line="97" selection-start-column="21" selection-end-line="97" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Code/UI/SearchToolPage.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="243">
@@ -682,13 +634,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
           <caret line="69" column="17" lean-forward="true" selection-start-line="69" selection-start-column="17" selection-end-line="69" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Code/UI/InvoicePage.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="22" selection-start-line="22" selection-end-line="22" />
         </state>
       </provider>
     </entry>
@@ -789,16 +734,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/__main__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="294">
-          <caret line="149" column="78" selection-start-line="149" selection-start-column="78" selection-end-line="149" selection-end-column="78" />
-          <folding>
-            <element signature="e#0#20#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Code/UI/MyBookingsPage.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="514">
@@ -830,10 +765,34 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/__main__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-715">
+          <caret line="149" column="78" selection-start-line="149" selection-start-column="78" selection-end-line="149" selection-end-column="78" />
+          <folding>
+            <element signature="e#0#20#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Code/Utilities/util.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="211">
-          <caret line="77" column="42" lean-forward="true" selection-start-line="77" selection-start-column="23" selection-end-line="77" selection-end-column="42" />
+        <state relative-caret-position="344">
+          <caret line="195" column="7" lean-forward="true" selection-start-line="195" selection-start-column="7" selection-end-line="195" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Code/MyInvoice.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="395">
+          <caret line="37" column="6" lean-forward="true" selection-start-line="37" selection-start-column="6" selection-end-line="37" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Code/UI/InvoicePage.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="327">
+          <caret line="103" column="36" selection-start-line="103" selection-start-column="36" selection-end-line="103" selection-end-column="36" />
         </state>
       </provider>
     </entry>

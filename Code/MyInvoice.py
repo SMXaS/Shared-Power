@@ -35,8 +35,8 @@ This class generates and show invoice based on user's returned items (status = p
 
 class MyInvoice:
     __currentMonth = datetime.datetime.now().strftime(strings.invoiceMonth_YearFormat)
-    __currentMonthPlaceholder = "02-2019"
-    __currentDatePlaceholder = "05/02/2019"
+    #__currentMonth = "02-2019"
+    #__currentDate = "05/02/2019"
     __currentDate = datetime.datetime.now().strftime(strings.dateFormat)
 
     # TODO hired date/return date?
