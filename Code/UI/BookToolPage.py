@@ -1,19 +1,13 @@
 import tkinter as tk
-from tkinter import END
 from tkinter import messagebox
 from Resources.Values import strings, colors
-import Code.Utilities.util as util
-from Entities.Bookings import Bookings
-import Code.Utilities.WriteFile as wf
-import Code.Utilities.ReadFile as rf
-import uuid
+from Code.BookTool import BookTool
 
 
 class BookToolPage(tk.Frame):
     __bgColor = colors.bgColor
     __fgColor = colors.fgColor
-    __start_date = ""
-    __end_date = ""
+
 
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
@@ -22,40 +16,29 @@ class BookToolPage(tk.Frame):
         self.columnconfigure(0, weight=1)
 
         self.__initUI()
+        self.showArrangeRider()
 
     def start(self, args):
         self.tool = args
 
         # resetting views
         self.__errorLabel.config(text="")
-        self.__availableDate.delete(0, tk.END)
-        self.__availableEndDate.delete(0, tk.END)
-        self.__availableEndDate.unbind("<FocusOut>")
-        self.__availableDate.unbind("<FocusOut>")
+        self.__availableDateBox.delete(0, tk.END)
+        self.__availableEndDateBox.delete(0, tk.END)
+        self.__availableEndDateBox.unbind("<FocusOut>")
+        self.__availableDateBox.unbind("<FocusOut>")
         self.__riderValue.set(0)
         self.__endDateVar.set("f")
         self.__startDateVar.set("f")
         self.__pickUpEntry.delete(0, "end")
         self.__dropOffEntry.delete(0, "end")
-        self.showArrangeRider()
 
-        self.populateStartList()
+        #self.populateStartList()
+        self.bookTool = BookTool(self.__availableDateBox, self.__availableEndDateBox, self.tool)
+        self.bookTool.populateStartList()
 
 
-    def getStartDate(self):
-        """
-        Getting start booking date.
-        based on selection from start date (bookings) list will generate end date list
 
-        :return: None
-        """
-
-        index = int(self.__availableDate.curselection()[0])
-        self.__start_date = self.__availableDate.get(index)
-        self.nextDays = util.getNextAvailableDates(self.__start_date, self.availableDateList)
-
-        self.showReturnDateList()
-        self.populateEndList()
 
     def getEndDate(self):
         """
@@ -63,8 +46,7 @@ class BookToolPage(tk.Frame):
         :return: None
         """
 
-        index = int(self.__availableEndDate.curselection()[0])
-        self.__end_date = self.__availableEndDate.get(index)
+        self.bookTool.getEndDate()
         self.showArrangeRider()
 
     def __initUI(self):
@@ -86,12 +68,12 @@ class BookToolPage(tk.Frame):
 
         self.endDateLabel = tk.Label(frame, text=strings.returnDate, bg=self.__bgColor, fg=self.__fgColor)
 
-        self.__availableDate = tk.Listbox(frame, exportselection=0)
-        self.__availableDate.bind("<<ListboxSelect>>", lambda event: self.getStartDate())
-        self.__availableDate.grid(row=2, column=0, sticky="W")
+        self.__availableDateBox = tk.Listbox(frame, exportselection=0)
+        self.__availableDateBox.bind("<<ListboxSelect>>", lambda event: self.showReturnDateList())
+        self.__availableDateBox.grid(row=2, column=0, sticky="W")
 
         scrollAvailableDate = tk.Scrollbar(frame, orient="vertical")
-        scrollAvailableDate.config(command=self.__availableDate.yview)
+        scrollAvailableDate.config(command=self.__availableDateBox.yview)
         scrollAvailableDate.grid(row=2, column=1, sticky="WNS")
 
         self.__startDateVar = tk.StringVar()
@@ -108,11 +90,11 @@ class BookToolPage(tk.Frame):
         startFullDateRadio.grid(row=3, column=0, sticky="W")
         endFullDateRadio.grid(row=3, column=0, sticky="E")
 
-        self.__availableEndDate = tk.Listbox(frame, exportselection=0)
-        self.__availableEndDate.bind("<<ListboxSelect>>", lambda event: self.getEndDate())
+        self.__availableEndDateBox = tk.Listbox(frame, exportselection=0)
+        self.__availableEndDateBox.bind("<<ListboxSelect>>", lambda event: self.getEndDate())
 
         self.endDateLabel.grid(row=1, column=3, padx=5, pady=2, sticky="WNE")
-        self.__availableEndDate.grid(row=2, column=3, sticky="WNE")
+        self.__availableEndDateBox.grid(row=2, column=3, sticky="WNE")
 
         self.__endDateVar = tk.StringVar()
         self.__endDateVar.set("f")
@@ -146,6 +128,8 @@ class BookToolPage(tk.Frame):
         self.__dropOffEntry = tk.Entry(frame, width=20)
         self.__dropOffEntry.grid(row=7, column=2, columnspan=3, padx=5)
 
+
+
         backIMG = tk.PhotoImage(file=strings.buttonBack)
         backButton = tk.Label(frame, image=backIMG, bg=self.__bgColor)
         backButton.image = backIMG
@@ -163,51 +147,16 @@ class BookToolPage(tk.Frame):
         Makes Return Date list visible
         :return:
         """
+        self.bookTool.getStartDate()
 
-        if len(self.nextDays)>1:
+        if len(self.bookTool.getNextDays())>1:
             self.startHalfDateRadio.grid()
             self.endHalfDateRadio.grid()
         else:
             self.startHalfDateRadio.grid_remove()
             self.endHalfDateRadio.grid_remove()
 
-    def populateStartList(self):
-        """
-        Fills Start booking list with available dates
-        :return: None
-        """
 
-        bookingList = self.getBookingList()
-
-        self.availableDateList = self.getAvailableList(bookingList)
-        for i in range(len(self.availableDateList)):
-            self.__availableDate.insert(END, self.availableDateList[i])
-
-    def getBookingList(self):
-        """
-        :return: list(obj(all bookings for particular item))
-        """
-
-        return rf.getAllBookings("toolID", self.tool.getID(), 0)
-
-    def getAvailableList(self, bookingList):
-        """
-        :param bookingList: list(obj(bookings))
-        :return: list(available dates)
-        """
-
-        return util.getBookingDates(bookingList)
-
-    def populateEndList(self):
-        """
-          Fills Return booking list with available dates
-          :return: None
-          """
-
-        self.__availableEndDate.delete(0, tk.END)
-        for i in range(len(self.nextDays)):
-            print(self.nextDays[i])
-            self.__availableEndDate.insert(END, self.nextDays[i])
 
     def showArrangeRider(self):
         """
@@ -226,20 +175,6 @@ class BookToolPage(tk.Frame):
             self.__pickUpEntry.config(bg=colors.bgInactive, state="disabled")
             self.__dropOffEntry.config(bg=colors.bgInactive, state="disabled")
 
-    def verifyHiring(self):
-        """
-        Verifies booking
-        :return: boolean (True - approved, False - not)
-        """
-
-        booking = self.getBookingList()
-        availabeList = self.getAvailableList(booking)
-        dayDiff = util.getDayDifference(self.__start_date, self.__end_date)
-        if util.verifyBooking(self.__start_date, availabeList, dayDiff):
-            return True
-        else:
-            return False
-
     def hireTool(self):
         """
         Verify booking. If True:
@@ -247,31 +182,19 @@ class BookToolPage(tk.Frame):
             Will return to SearchToolPage
         :return: None
         """
+        myReturn = self.bookTool.hireTool(self.__controller.login, self.__startDateVar.get(), self.__endDateVar.get(), self.__pickUpEntry.get(), self.__dropOffEntry.get())
 
-        if self.__start_date and self.__end_date:
-            hiredTool = Bookings(uuid.uuid4(), self.tool.getID(), self.__controller.login, self.tool.getCondition(),
-                                 self.__start_date, self.__startDateVar.get(), self.__end_date, self.__endDateVar.get(),
-                                 strings.toolStatus[0])
 
-            hiredTool.setPickUpLocation(self.__pickUpEntry.get())
-            hiredTool.setDropOffLocation(self.__dropOffEntry.get())
+        if myReturn:
 
-            if self.verifyHiring():
-                # show confirmation window
-
-                totalPrice = util.calculateToolhireCost(hiredTool, self.tool)
-                message = "{} {}\n{} {}\n{} {}\n{} {}{}\n\n{}".format(strings.toolTitleForInvoice, self.tool.getTitle(),
-                                                                      strings.hireDate, hiredTool.getStartDate(),
-                                                                      strings.returnDate, hiredTool.getExpectedReturnDate(),
-                                                                      strings.totalCost, str(totalPrice), strings.currency,
-                                                                      strings.confirmBooking)
-                if messagebox.askokcancel("Information", message):
-                    #          obj,     simplePath,     fieldNames,           complex path              path parameter
-                    wf.write(hiredTool, None, strings.fieldNames_booking, strings.filePath_booking, hiredTool.getToolID())
-                    self.__availableEndDate.unbind("<FocusOut>")
-                    self.__availableDate.unbind("<FocusOut>")
-                    self.__controller.show_frame(strings.searchToolClass)
-            else:
-                self.__errorLabel.config(text=strings.errorAlreadyBooked)
+            if messagebox.askokcancel("Information", self.bookTool.getMessage()):
+                self.bookTool.wfwrite()
+                self.__availableEndDateBox.unbind("<FocusOut>")
+                self.__availableDateBox.unbind("<FocusOut>")
+                self.__controller.show_frame(strings.searchToolClass)
         else:
-            print("Error")
+            self.__errorLabel.config(text=strings.errorAlreadyBooked)
+
+
+
+
