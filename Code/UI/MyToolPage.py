@@ -85,13 +85,19 @@ class MyToolPage(tk.Frame):
 
         self.yscrollbar.grid(row=1, column=5, pady=20, sticky='WNS')
 
-        buttonBorder = ttk.Separator(frame, orient="horizontal")
-        buttonBorder.grid(row=3, column=0, columnspan=6, padx=2, sticky="WE")
+        #buttonBorder = ttk.Separator(frame, orient="horizontal")
+        #buttonBorder.grid(row=3, column=0, columnspan=6, padx=2, sticky="WE")
 
-        self.editButton = tk.Label(frame, text="Edit Tool", bg=colors.bgColor, fg=colors.fgColor,
-                                   font=fonts.buttonFont)
-        self.editButton.grid(row=4, column=0, padx=4, sticky="N")
-        self.editButton.bind("<Button-1>", lambda event: self.__editTool())
+        editIMG = tk.PhotoImage(file=strings.buttonEditTool)
+        edit = tk.Label(frame, image=editIMG, bg=colors.bgColor)
+        edit.image = editIMG
+        edit.grid(row=4, column=0, padx=4, sticky="N")
+        edit.bind("<Button-1>", lambda event: self.__editTool())
+
+        #self.editButton = tk.Label(frame, text="Edit Tool", bg=colors.bgColor, fg=colors.fgColor,
+        #                           font=fonts.buttonFont)
+        #self.editButton.grid(row=4, column=0, padx=4, sticky="N")
+        #self.editButton.bind("<Button-1>", lambda event: self.__editTool())
 
         self.deleteButton = tk.Label(frame, text="Delete Tool", bg=colors.bgColor, fg=colors.fgColor,
                                      font=fonts.buttonFont)

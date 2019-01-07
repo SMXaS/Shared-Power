@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import END
 from tkinter import messagebox
-from Resources.Values import strings, colors, dimens, fonts
+from Resources.Values import strings, colors
 import Code.Utilities.util as util
 from Entities.Bookings import Bookings
 import Code.Utilities.WriteFile as wf
@@ -12,8 +12,6 @@ import uuid
 class BookToolPage(tk.Frame):
     __bgColor = colors.bgColor
     __fgColor = colors.fgColor
-    __width = dimens.mainWindowWidth
-    __heigh = dimens.mainWindowHeigh
     __start_date = ""
     __end_date = ""
 
@@ -43,6 +41,7 @@ class BookToolPage(tk.Frame):
 
         self.populateStartList()
 
+
     def getStartDate(self):
         """
         Getting start booking date.
@@ -53,7 +52,6 @@ class BookToolPage(tk.Frame):
 
         index = int(self.__availableDate.curselection()[0])
         self.__start_date = self.__availableDate.get(index)
-        print(self.__start_date)
         self.nextDays = util.getNextAvailableDates(self.__start_date, self.availableDateList)
 
         self.showReturnDateList()

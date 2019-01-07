@@ -29,6 +29,7 @@ emptyLayout = "EmptyLayout"
 # Image Paths
 # --------------
 buttonAdd = "Resources/Drawable/btn_add.png"
+buttonEditTool = "Resources/Drawable/btn_edit.png"
 buttonEdit = "Resources/Drawable/btn_confirm.png"
 buttonBack = "Resources/Drawable/btn_back.png"
 buttonHire = "Resources/Drawable/btn_hire.png"

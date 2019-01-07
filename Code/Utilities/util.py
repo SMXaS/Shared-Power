@@ -71,13 +71,18 @@ def verifyRegistration (user):
         if not user[i]:
             return strings.errorEmptyFields
         elif " " in user[i]:
-            if i != 4:
-                if i == 3:
-                    if " " == user[i]:
-                        return strings.errorSpaces
-                else:
-                    print("i value:", i)
+            print("i value:", i)
+            if i == 3:
+                if " " == user[i]:
+                    print("all empty")
                     return strings.errorSpaces
+            else:
+                print("else")
+                if i != 4:
+                    if i == 5:
+                        continue
+                    else:
+                        return strings.errorSpaces
 
     exist = os.path.isfile(strings.filePath_user)
     if exist:

@@ -130,6 +130,7 @@ class MyProfilePage(tk.Frame):
         if self.__page_name is not strings.addToolClass:
             add.bind("<Button-1>", lambda event: self.show_frame(strings.addToolClass))
             addToolFrame.bind("<Button-1>", lambda event: self.show_frame(strings.addToolClass))
+            self.addToolButton.bind("<Button-1>", lambda event: self.show_frame(strings.addToolClass))
 
         # menuBorderGround = ttk.Separator(menuFrame, orient="horizontal")
         # menuBorderGround.grid(row=1, column=0, columnspan=6, padx=2, sticky="WE")

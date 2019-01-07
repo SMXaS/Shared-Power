@@ -19,8 +19,8 @@ class mainMenu(tk.Tk):
     def __init__(self, *args, **kwargs):
         tk.Tk.__init__(self, *args, **kwargs)
 
-        self.geometry("{}x{}+%d+%d".format(dimens.mainWindowWidth, dimens.mainWindowHeigh) %
-                      ((self.winfo_screenwidth() / 2) - 350, (self.winfo_screenheight() / 2) - 300))
+        #self.geometry("{}x{}+%d+%d".format(dimens.mainWindowWidth, dimens.mainWindowHeigh) %
+        #              ((self.winfo_screenwidth() / 2) - 350, (self.winfo_screenheight() / 2) - 300))
         # self.resizable(False, False)
 
         self.title(strings.appTitle)
@@ -146,8 +146,8 @@ class mainMenu(tk.Tk):
         self.menuFrame.pack(side="left", fill="y")
 
         # setting up window size
-        self.geometry("{}x{}+%d+%d".format(dimens.mainWindowWidth, dimens.mainWindowHeigh) %
-                                          ((self.winfo_screenwidth() / 2) - 350, (self.winfo_screenheight() / 2) - 300))
+        self.geometry("{}x{}+%d+%d".format(int(self.winfo_screenwidth()*0.8), int(self.winfo_screenheight()*0.65)) %
+                                          ((self.winfo_screenwidth() / 2) - 550, (self.winfo_screenheight() / 2) - 300))
         self.minsize(dimens.mainWindowWidth, dimens.mainWindowHeigh)
         self.maxsize(self.winfo_screenwidth(), self.winfo_screenheight())
         self.resizable(True, True)
@@ -191,7 +191,7 @@ class mainMenu(tk.Tk):
 
     def highlightButton(self, index):
         """
-        This function changing fonts for all buttons based on the index
+        This function changes colors for all menu items based on the index
         :param index: int(buttonList index)
         :return: None
         """
