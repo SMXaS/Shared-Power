@@ -38,9 +38,9 @@ class AddToolPage(tk.Frame):
             self.add_tool = True
 
         if self.add_tool:
-            addIMG = tk.PhotoImage(file=strings.buttonAdd)
+            addIMG = tk.PhotoImage(file=strings.btn_add)
         else:
-            addIMG = tk.PhotoImage(file=strings.buttonEdit)
+            addIMG = tk.PhotoImage(file=strings.btn_confirm)
             self.__controller.addToolButton.config(text=strings.editToolTitle)
 
         addToolButton = tk.Label(self.frame, image=addIMG, bg=self.__bgColor)

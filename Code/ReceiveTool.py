@@ -102,7 +102,10 @@ class ReceiveTool:
             testlist = [receiveItemObj]
             test.printBookingObjects(testlist)
         else:
-            self.__errorLabel.config(text=strings.errorSelectItem)
+            if self.getCount() > 0:
+                self.__errorLabel.config(text=strings.errorSelectItem)
+            else:
+                self.__errorLabel.config(text=strings.errorEmptyList)
 
     def getCount(self):
         if self.__bookingList:
@@ -122,7 +125,10 @@ class ReceiveTool:
             self.receiveItem()
             # TODO cancel all bookings for this item
         else:
-            self.__errorLabel.config(text=strings.errorSelectItem)
+            if self.getCount() > 0:
+                self.__errorLabel.config(text=strings.errorSelectItem)
+            else:
+                self.__errorLabel.config(text=strings.errorEmptyList)
 
     def __getBookingIndex(self):
         """

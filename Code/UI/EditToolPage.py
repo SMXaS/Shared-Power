@@ -81,7 +81,7 @@ class EditToolPage(tk.Frame):
         showImg.grid(row=7, column=0, columnspan=6, padx=5, pady=5, sticky="WE")
         showImg.bind("<Button-1>", lambda event: self.__showImage())
 
-        backIMG = tk.PhotoImage(file=strings.buttonBack)
+        backIMG = tk.PhotoImage(file=strings.btn_back)
         backButton = tk.Label(frame, image=backIMG, bg=self.__bgColor)
         backButton.image = backIMG
         backButton.bind("<Button-1>", lambda event: self.__controller.show_frame(strings.searchToolClass))

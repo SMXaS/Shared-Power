@@ -8,7 +8,6 @@ class BookToolPage(tk.Frame):
     __bgColor = colors.bgColor
     __fgColor = colors.fgColor
 
-
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         self.__controller = controller
@@ -33,12 +32,8 @@ class BookToolPage(tk.Frame):
         self.__pickUpEntry.delete(0, "end")
         self.__dropOffEntry.delete(0, "end")
 
-        #self.populateStartList()
         self.bookTool = BookTool(self.__availableDateBox, self.__availableEndDateBox, self.tool)
         self.bookTool.populateStartList()
-
-
-
 
     def getEndDate(self):
         """
@@ -130,7 +125,7 @@ class BookToolPage(tk.Frame):
 
 
 
-        backIMG = tk.PhotoImage(file=strings.buttonBack)
+        backIMG = tk.PhotoImage(file=strings.btn_back)
         backButton = tk.Label(frame, image=backIMG, bg=self.__bgColor)
         backButton.image = backIMG
         backButton.bind("<Button-1>", lambda event: self.__controller.show_frame(strings.searchToolClass, "args"))
@@ -155,8 +150,6 @@ class BookToolPage(tk.Frame):
         else:
             self.startHalfDateRadio.grid_remove()
             self.endHalfDateRadio.grid_remove()
-
-
 
     def showArrangeRider(self):
         """

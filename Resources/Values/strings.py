@@ -28,10 +28,14 @@ emptyLayout = "EmptyLayout"
 # --------------
 # Image Paths
 # --------------
-buttonAdd = "Resources/Drawable/btn_add.png"
+btn_add = "Resources/Drawable/btn_add.png"
 buttonEditTool = "Resources/Drawable/btn_edit.png"
-buttonEdit = "Resources/Drawable/btn_confirm.png"
-buttonBack = "Resources/Drawable/btn_back.png"
+btn_confirm = "Resources/Drawable/btn_confirm.png"
+btn_delete = "Resources/Drawable/btn_delete.png"
+btn_return = "Resources/Drawable/btn_return.png"
+btn_cancel = "Resources/Drawable/btn_cancel.png"
+btn_change_availability = "Resources/Drawable/btn_change_availability.png"
+btn_back = "Resources/Drawable/btn_back.png"
 buttonHire = "Resources/Drawable/btn_hire.png"
 account = "Resources/Drawable/account.png"
 search_img = "Resources/Drawable/search.png"
@@ -120,6 +124,15 @@ confirmBooking = "Do you want to hire this tool?"
 # My Tools Page
 # --------------
 myToolTitle = "My Tools"
+availability = "Availability"
+fullDayPrice = "Full day price"
+halfDayPrice = "Half day price"
+changeAvailabilityConfirm = "Do you really want to change availability of this item?"
+
+# --------------
+# My Bookings Page
+# --------------
+cancelItemConfirm = "Do you really want to cancel this booking?"
 
 # --------------
 # Return Tool Page

@@ -1,6 +1,6 @@
 import tkinter as tk
-from tkinter import ttk
-from Resources.Values import strings, colors, fonts
+from tkinter import ttk, messagebox
+from Resources.Values import strings, colors
 from Code.MyBookings import MyBookings
 
 
@@ -21,9 +21,9 @@ class ReturnToolPage(tk.Frame):
         self.__returnTool = MyBookings(self.__errorLabel, self.__tree, self.__controller.login)
         self.__controller.addToolButton.config(text=strings.menuAddTool)
         self.__returnTool.populateData()
-        self.isEmpty()
+        self.__isEmpty()
 
-    def isEmpty(self):
+    def __isEmpty(self):
         if self.__returnTool.getCount() > 0:
             self.__errorLabel.config(text="")
             self.__showReturn(False)
@@ -41,26 +41,11 @@ class ReturnToolPage(tk.Frame):
             self.returnTool.populateData()   --     will populate all required data in your treeView
         """
 
-        menuFrame = tk.Frame(self, bg=self.__bgColor)
-        menuFrame.grid(row=0, column=0, sticky="WN")
-
-        showReturnFrame = tk.Label(menuFrame, text=strings.returnItem, bg=colors.bgColor, fg=colors.fgColor,
-                                   font=fonts.subMenuButtonFont)
-        showReturnFrame.grid(row=0, column=0, padx=5)
-        showReturnFrame.bind("<Button-1>", lambda event: self.__showReturn(True))
-
-        menuBorderx = ttk.Separator(menuFrame, orient="vertical")
-        menuBorderx.grid(row=0, column=1, pady=2, sticky="NS")
-
-        cancelButton = tk.Label(menuFrame, text=strings.cancelBooking, bg=colors.bgColor, fg=colors.fgColor,
-                                font=fonts.subMenuButtonFont)
-        cancelButton.grid(row=0, column=2, padx=5)
-        cancelButton.bind("<Button-1>", lambda event: self.__returnTool.cancelBooking())
-
         frame = tk.Frame(self, bg=self.__bgColor)
-        frame.grid(row=1, column=0, sticky="", pady=19)
+        frame.grid(row=0, column=0, sticky="", pady=40)
 
-        frame.rowconfigure(2, minsize=30)
+        frame.rowconfigure(2, minsize=10)
+        frame.rowconfigure(3, weight=1)
         frame.rowconfigure(4, weight=1)
 
         self.__tree = ttk.Treeview(frame, columns=(strings.priceDay, strings.priceHalfDay, "btn_search"))
@@ -83,8 +68,27 @@ class ReturnToolPage(tk.Frame):
 
         mScrollBar.grid(row=1, column=5, pady=20, sticky='WNS')
 
+        # --------------------------------------------------------------
+
+        menuFrame = tk.Frame(frame, bg=self.__bgColor)
+        menuFrame.grid(row=3, column=0, columnspan=5, pady=10, sticky="WE")
+
+        returnIMG = tk.PhotoImage(file=strings.btn_return)
+        returnButton = tk.Label(menuFrame, image=returnIMG, bg=self.__bgColor)
+        returnButton.image = returnIMG
+        returnButton.grid(row=0, column=0, padx=5, sticky="WE")
+        returnButton.bind("<Button-1>", lambda event: self.__showReturn(True))
+
+        cancelIMG = tk.PhotoImage(file=strings.btn_cancel)
+        cancelButton = tk.Label(menuFrame, image=cancelIMG, bg=self.__bgColor)
+        cancelButton.image = cancelIMG
+        cancelButton.grid(row=0, column=1, padx=5, sticky="WE")
+        cancelButton.bind("<Button-1>", lambda event: self.__cancelItem())
+
+        # --------------------------------------------------------------
+
         self.returnFrame = tk.Frame(frame, bg=colors.bgColor)
-        self.returnFrame.grid(row=3, column=0, sticky="E")
+        self.returnFrame.grid(row=4, column=0, sticky="E")
 
         toolConditionLabel = tk.Label(self.returnFrame, text=strings.bookOutConditionLabel, bg=self.__bgColor,
                                       fg=self.__fgColor)
@@ -93,16 +97,20 @@ class ReturnToolPage(tk.Frame):
         toolConditionEntry = tk.Entry(self.returnFrame)
         toolConditionEntry.grid(row=0, column=1, padx=10, sticky="WW")
 
-        returnIMG = tk.PhotoImage(file=strings.buttonEdit)
-        returnToolButton = tk.Label(self.returnFrame, image=returnIMG, bg=self.__bgColor)
-        returnToolButton.image = returnIMG
-        returnToolButton.grid(row=1, column=1, pady=20)
-        returnToolButton.bind("<Button-1>", lambda event: self.returnItem(toolConditionEntry))
+        confirmIMG = tk.PhotoImage(file=strings.btn_confirm)
+        confirmButton = tk.Label(self.returnFrame, image=confirmIMG, bg=self.__bgColor)
+        confirmButton.image = confirmIMG
+        confirmButton.grid(row=1, column=1, pady=20)
+        confirmButton.bind("<Button-1>", lambda event: self.__returnItem(toolConditionEntry))
 
-    def returnItem(self, condition):
+    def __cancelItem(self):
+        if messagebox.askokcancel("Confirmation", strings.cancelItemConfirm):
+            self.__returnTool.cancelBooking()
+
+    def __returnItem(self, condition):
         self.__returnTool.returnItem(condition)
         self.__showReturn(False)
-        self.isEmpty()
+        self.__isEmpty()
 
     def __showReturn(self, show):
         if show:

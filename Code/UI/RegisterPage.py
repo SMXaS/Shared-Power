@@ -122,7 +122,7 @@ class RegisterPage(tk.Frame):
         self.phoneNumberEntry = tk.Entry(self)
         self.phoneNumberEntry.grid(row=11, column=1)
 
-        backIMG = tk.PhotoImage(file=strings.buttonBack)
+        backIMG = tk.PhotoImage(file=strings.btn_back)
         backButton = tk.Label(self, image=backIMG, bg=self.bgColor)
         backButton.image = backIMG
         backButton.grid(row=12, column=0, pady=10)

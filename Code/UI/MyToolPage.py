@@ -1,169 +1,1 @@
-import tkinter as tk
-from tkinter import ttk
-from Resources.Values import strings, colors, dimens, fonts
-from Code.Utilities import ReadFile as rf
-import Code.test_printObj as test
-
-
-# TODO Late returns page which will show information about that person who hired tool?
-# TODO one more column which will represents item availability?
-# TODO confirm window for declaring item as damaged
-
-
-class MyToolPage(tk.Frame):
-    bgColor = colors.bgColor
-    fgColor = colors.fgColor
-    width = dimens.mainWindowWidth
-    heigh = dimens.mainWindowHeigh
-    login = ""
-
-    def __init__(self, parent, controller):
-
-        tk.Frame.__init__(self, parent)
-        self.config(bg=colors.bgColor)
-        self.__controller = controller
-        self.columnconfigure(0, weight=1)
-
-        self.initUI()
-
-    def start(self, args):
-        self.__toolList = rf.getTool(True, "owner", self.__controller.login)
-        test.printToolObject(self.__toolList)
-        menuFrame = self.__controller.getMenuFrame(self)
-        menuFrame.grid(row=0, column=0, sticky="WN")
-        self.ThereWillBeYourLogic()
-        self.__controller.addToolButton.config(text=strings.menuAddTool)
-        self.__errorLabel.config(text="")
-        self.populateData()
-        if not self.__toolList:
-            self.__controller.show_frame(strings.emptyLayout)
-            self.__controller.highlightButton(0)
-
-    def initUI(self):
-
-        """
-        Store all your widgets here
-        i.e.:
-            self.myLabel = tk.Label(self, text="my first label")
-            self.myLabel.grid(row=1, column=0)
-
-            self.myButton = tk.Button(self, text="my first button")
-            self.myButton.grid(row=1, column=1)
-
-
-        add functionality to your buttons:
-            when you define a button, add this text:
-                ###  command=lambda: 'your function' ### (check how backButton is made)
-
-        add functionality to your labels:
-            self.myLabel.bind("<Button-1>", lambda event: '/your function/' )
-
-        """
-
-        frame = tk.Frame(self, bg=self.bgColor)
-        frame.grid(row=1, column=0, sticky="", pady=19)
-        frame.rowconfigure(2, minsize=51)
-
-        ####################################################################################################
-        #                                            DISPLAY
-        ####################################################################################################
-        self.__errorLabel = tk.Label(frame, bg=colors.bgColor, fg=colors.errorColor)
-        self.__errorLabel.grid(row=0, column=0, columnspan= 2, sticky="WN")
-
-        self.__tree = ttk.Treeview(frame, columns=("Full day price", "Half day price"))
-
-        self.yscrollbar = ttk.Scrollbar(frame, orient='vertical', command=self.__tree.yview)
-        self.__tree.configure(yscrollcommand=self.yscrollbar.set)
-
-        self.__tree.heading('#0', text=strings.toolTitle)
-        self.__tree.heading('#1', text='Full day price')
-        self.__tree.heading('#2', text='Half Day Price')
-        self.__tree.column('#1', stretch=tk.YES)
-        self.__tree.column('#2', stretch=tk.YES)
-        self.__tree.column('#0', stretch=tk.YES)
-        self.__tree.grid(row=1, column=0, columnspan=5, pady=20, sticky="N")
-
-        self.yscrollbar.grid(row=1, column=5, pady=20, sticky='WNS')
-
-        #buttonBorder = ttk.Separator(frame, orient="horizontal")
-        #buttonBorder.grid(row=3, column=0, columnspan=6, padx=2, sticky="WE")
-
-        editIMG = tk.PhotoImage(file=strings.buttonEditTool)
-        edit = tk.Label(frame, image=editIMG, bg=colors.bgColor)
-        edit.image = editIMG
-        edit.grid(row=4, column=0, padx=4, sticky="N")
-        edit.bind("<Button-1>", lambda event: self.__editTool())
-
-        #self.editButton = tk.Label(frame, text="Edit Tool", bg=colors.bgColor, fg=colors.fgColor,
-        #                           font=fonts.buttonFont)
-        #self.editButton.grid(row=4, column=0, padx=4, sticky="N")
-        #self.editButton.bind("<Button-1>", lambda event: self.__editTool())
-
-        self.deleteButton = tk.Label(frame, text="Delete Tool", bg=colors.bgColor, fg=colors.fgColor,
-                                     font=fonts.buttonFont)
-        self.deleteButton.grid(row=4, column=1, padx=4, sticky="N")
-        # deleteButton.bind("<Button-2>", lambda event: self.selectItem())
-
-        self.damage_restoreButton = tk.Label(frame, text="Damage/Restore tool", bg=colors.bgColor, fg=colors.fgColor,
-                                             font=fonts.buttonFont)
-        self.damage_restoreButton.grid(row=4, column=2, padx=4, sticky="N")
-        # damage_restoreButton.bind("<Button-2>", lambda event: self.selectItem())
-
-    def __editTool(self):
-        if self.__tree.focus():
-            self.__errorLabel.config(text="")
-            index = self.__getItemIDIndex()
-            self.__controller.show_frame(strings.addToolClass, self.__toolList[index])
-            print("btn_search")
-        else:
-            self.__errorLabel.config(text="select item first")
-            print("select item first")
-
-    def __getItemIDIndex(self):
-        """
-        :return: int(index of selected item)
-        """
-
-        curItem = self.__tree.focus()
-        if curItem:
-            index = None
-            itemID = None
-
-            for item in self.__tree.selection():
-                itemID = self.__tree.item(item, "tag")
-
-            for i in range(len(self.__toolList)):
-                if self.__toolList[i].getID() in itemID:
-                    index = i
-                    break
-            return index
-
-    # Rename this function according to what you want to do
-    def ThereWillBeYourLogic(self):
-        """
-        ###self.__toolList### = this is your main variable. It holds a list of objects (your tools)
-        
-        get items:
-            for i in range(len(self.__toolList)):
-                title = self.__toolList[i].getTitle()
-                description = self.__toolList[i].getDescription()
-                ...
-                for more information check documentation on github
-        """
-
-
-    def populateData(self):
-        """
-        Populates all data in the list
-        :return: None
-        """
-
-        for i in self.__tree.get_children():
-            self.__tree.delete(i)
-
-        if self.__toolList:
-            for i in range(len(self.__toolList)):
-                self.__tree.insert('', 'end', text=self.__toolList[i].getTitle(),
-                                   values=("{}{}".format(strings.currency, self.__toolList[i].getPriceFullDay()),
-                                         "{}{}".format(strings.currency, self.__toolList[i].getPriceHalfDay())),
-                                   tags=self.__toolList[i].getID())
+import tkinter as tkfrom tkinter import ttk, messageboxfrom Resources.Values import strings, colors, dimensfrom Code.Utilities import ReadFile as rffrom Code.Utilities import WriteFile as wfimport Code.test_printObj as test# TODO Late returns page which will show information about that person who hired tool?class MyToolPage(tk.Frame):    bgColor = colors.bgColor    fgColor = colors.fgColor    width = dimens.mainWindowWidth    heigh = dimens.mainWindowHeigh    login = ""    def __init__(self, parent, controller):        tk.Frame.__init__(self, parent)        self.config(bg=colors.bgColor)        self.__controller = controller        self.columnconfigure(0, weight=1)        self.initUI()    def start(self, args):        self.__toolList = rf.getTool(True, "owner", self.__controller.login)        test.printToolObject(self.__toolList)        menuFrame = self.__controller.getMenuFrame(self)        menuFrame.grid(row=0, column=0, sticky="WN")        self.__controller.addToolButton.config(text=strings.menuAddTool)        self.__errorLabel.config(text="")        self.populateData()        if not self.__toolList:            self.__controller.show_frame(strings.emptyLayout)            self.__controller.highlightButton(0)    def initUI(self):        frame = tk.Frame(self, bg=self.bgColor)        frame.grid(row=1, column=0, sticky="", pady=19)        frame.rowconfigure(2, minsize=51)        ####################################################################################################        #                                            DISPLAY        ####################################################################################################        self.__errorLabel = tk.Label(frame, bg=colors.bgColor, fg=colors.errorColor)        self.__errorLabel.grid(row=0, column=0, columnspan=2, sticky="WN")        self.__tree = ttk.Treeview(frame, columns=(strings.fullDayPrice, strings.halfDayPrice, strings.availability))        self.yscrollbar = ttk.Scrollbar(frame, orient='vertical', command=self.__tree.yview)        self.__tree.configure(yscrollcommand=self.yscrollbar.set)        self.__tree.heading('#0', text=strings.toolTitle)        self.__tree.heading('#1', text=strings.fullDayPrice)        self.__tree.heading('#2', text=strings.halfDayPrice)        self.__tree.heading('#3', text=strings.availability)        self.__tree.column('#1', minwidth=20, width=150, stretch=tk.YES)        self.__tree.column('#2', minwidth=20, width=150, stretch=tk.YES)        self.__tree.column('#3', minwidth=20, width=150, stretch=tk.YES)        self.__tree.column('#0', minwidth=20, width=150, stretch=tk.YES)        self.__tree.grid(row=1, column=0, columnspan=5, pady=20, sticky="N")        self.yscrollbar.grid(row=1, column=5, pady=20, sticky='WNS')        editIMG = tk.PhotoImage(file=strings.buttonEditTool)        edit = tk.Label(frame, image=editIMG, bg=colors.bgColor)        edit.image = editIMG        edit.grid(row=3, column=0, padx=4, sticky="N")        edit.bind("<Button-1>", lambda event: self.__editTool())        deleteIMG = tk.PhotoImage(file=strings.btn_delete)        delete = tk.Label(frame, image=deleteIMG, bg=colors.bgColor)        delete.image = deleteIMG        delete.grid(row=3, column=1, padx=4, sticky="N")        #delete.bind("<Button-1>", lambda event: ---)        changeIMG = tk.PhotoImage(file=strings.btn_change_availability)        change = tk.Label(frame, image=changeIMG, bg=colors.bgColor)        change.image = changeIMG        change.grid(row=3, column=2, padx=4, sticky="N")        change.bind("<Button-1>", lambda event: self.__changeAvailability())    def __editTool(self):        if self.__tree.focus():            self.__errorLabel.config(text="")            index = self.__getItemIDIndex()            self.__controller.show_frame(strings.addToolClass, self.__toolList[index])            print("btn_search")        else:            self.__errorLabel.config(text=strings.errorSelectItem)            print("select item first")    def __getItemIDIndex(self):        """        :return: int(index of selected item)        """        curItem = self.__tree.focus()        if curItem:            index = None            itemID = None            for item in self.__tree.selection():                itemID = self.__tree.item(item, "tag")            for i in range(len(self.__toolList)):                if self.__toolList[i].getID() in itemID:                    index = i                    break            return index    def __getAvailability(self, index):        if self.__toolList[index].isAvailable() == "yes":            return "Available"        else:            return "Not available"    def __changeAvailability(self):        if self.__tree.focus():            if messagebox.askokcancel("Confirmation", strings.changeAvailabilityConfirm):                index = self.__getItemIDIndex()                tool = self.__toolList[index]                if tool.isAvailable() == "yes":                    tool.setAvailability("no")                else:                    tool.setAvailability("yes")                wf.editTool(tool)                self.populateData()        else:            self.__errorLabel.config(text=strings.errorSelectItem)    def populateData(self):        """        Populates all data in the list        :return: None        """        for i in self.__tree.get_children():            self.__tree.delete(i)        if self.__toolList:            for i in range(len(self.__toolList)):                self.__tree.insert('', 'end', text=self.__toolList[i].getTitle(),                                   values=("{}{}".format(strings.currency, self.__toolList[i].getPriceFullDay()),                                           "{}{}".format(strings.currency, self.__toolList[i].getPriceHalfDay()),                                           self.__getAvailability(i)),                                   tags=self.__toolList[i].getID())
