@@ -14,31 +14,30 @@ This Class Makes the Booking For the user
 *** Implementation:
 ---------------------------------------------------------------------
     class:
-        @ 'your assigned name' = BookTool(availableDateBox, availableEndDateBox, tool):
-            * gets the start date for the tool from the listbox
-            * gets the end date for the tool from the listbox
-            * gets the object information of the tool that is being booked
+        @ 'your assigned name' = BookTool(listBox, listBox, Object):
+            * takes ListBox (startDate)
+            * takes ListBox (endDate)
+            * takes Object (Selected Tool)
 ---------------------------------------------------------------------
     methods:
         @ 'your assigned name'.getNextDays():
-            - returns the available end Dates to UI
+            - returns list with available end dates
         @ 'your assigned name'.getStartDate():
-            - gets the Start Date 
+            - gets the string for the Start Date
             - based on Start Date will generate End Dates and populates the listbox
         @ 'your assigned name'.populateStartList():
-            -Fills the Start booking list with available Dates
+            -Calls __getAvailableList()
+            -populates available Dates List
         @ 'your assigned name'.getEndDate():
             -Gets the end Date of the booking from the User
         @ 'your assigned name'.getMessage():
-            -returns the message to the UI
-                -contains booked tool info
-                -contains the tool price for the selected dates
-        @ 'your assigned name'.hireTool(login, startTerm, endTerm, pickUpEntry, dropOffEntry):
-                -gets username of the User who is booking the tool
-                -gets the start date of the booking
-                -gets the end date of the booking
-                -gets the entry from arrange driver pickup location
-                -gets the entry from arrange driver dropoff location
+            -returns the message list to the UI
+        @ 'your assigned name'.hireTool(string, string, string, string, string):
+            *takes string (username)
+            *takes string (startDate)
+            *takes string (endDate)
+            *takes string (PickupLocation)
+            *takes string (DropoffLocation)
             -Check if Start Date and End Date are picked if True:
                                                                   - Creates booking Object
                                                                   - Calls VerifyHiring()
