@@ -5,6 +5,8 @@
       <change beforePath="$PROJECT_DIR$/.idea/Shared-Power.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Shared-Power.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/BookTool.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/BookTool.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/UI/BookToolPage.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/UI/BookToolPage.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Data/Bookings/4574028e-140e-432a-807a-97849e82661e.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Data/Bookings/4574028e-140e-432a-807a-97849e82661e.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Data/Invoices/test/1-2019.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Data/Invoices/test/1-2019.csv" afterDir="false" />
     </list>
@@ -18,23 +20,57 @@
     <session id="1032535298">
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="py" value="31" />
+          <entry key="py" value="33" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Python" value="31" />
+          <entry key="Python" value="33" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.lifecycle.project">
         <counts>
           <entry key="project.closed" value="1" />
+          <entry key="project.open.time.0" value="1" />
+          <entry key="project.opened" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="py" value="38" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="Python" value="38" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+    <leaf>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Code/BookTool.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="368">
+              <caret line="132" column="17" lean-forward="true" selection-start-line="132" selection-start-column="17" selection-end-line="132" selection-end-column="17" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Code/UI/BookToolPage.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="208">
+              <caret line="187" column="20" selection-start-line="187" selection-start-column="20" selection-end-line="187" selection-end-column="20" />
+              <folding>
+                <element signature="e#0#20#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -108,12 +144,12 @@
         <option value="$PROJECT_DIR$/Code/UI/MyProfilePage.py" />
         <option value="$PROJECT_DIR$/Resources/Values/strings.py" />
         <option value="$PROJECT_DIR$/Code/UI/MyToolPage.py" />
-        <option value="$PROJECT_DIR$/Code/BookTool.py" />
-        <option value="$PROJECT_DIR$/Code/UI/BookToolPage.py" />
         <option value="$PROJECT_DIR$/__main__.py" />
         <option value="$PROJECT_DIR$/Code/Utilities/util.py" />
         <option value="$PROJECT_DIR$/Code/UI/InvoicePage.py" />
         <option value="$PROJECT_DIR$/Code/MyInvoice.py" />
+        <option value="$PROJECT_DIR$/Code/BookTool.py" />
+        <option value="$PROJECT_DIR$/Code/UI/BookToolPage.py" />
       </list>
     </option>
   </component>
@@ -128,6 +164,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -172,7 +209,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -363,13 +399,14 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19352227" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.19595142" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3291815" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.30427048" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.30427048" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39679715" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -406,6 +443,9 @@
       <window_info anchor="right" id="R Packages" order="4" weight="0.32955465" />
     </layout-to-restore>
   </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="working with UI" />
     <option name="LAST_COMMIT_MESSAGE" value="working with UI" />
@@ -440,9 +480,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="288">
           <caret line="46" column="50" selection-start-line="46" selection-start-column="50" selection-end-line="46" selection-end-column="50" />
-          <folding>
-            <element signature="e#0#36#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -450,16 +487,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1203">
           <caret line="53" column="48" selection-start-line="53" selection-start-column="48" selection-end-line="53" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Code/UI/BookToolPage.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2118">
-          <caret line="52" selection-start-line="52" selection-end-line="52" />
-          <folding>
-            <element signature="e#0#20#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -500,9 +527,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1594">
           <caret line="123" column="64" selection-start-line="120" selection-start-column="8" selection-end-line="123" selection-end-column="64" />
-          <folding>
-            <element signature="e#0#20#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -569,11 +593,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Code/BookTool.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1996" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Code/MyBookings.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1322">
@@ -592,9 +611,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2040">
           <caret line="120" column="11" lean-forward="true" selection-start-line="120" selection-start-column="11" selection-end-line="120" selection-end-column="11" />
-          <folding>
-            <element signature="e#0#20#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -602,9 +618,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-200">
           <caret line="110" column="20" selection-start-line="110" selection-start-column="20" selection-end-line="110" selection-end-column="20" />
-          <folding>
-            <element signature="e#0#36#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -659,6 +672,23 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-2240">
           <caret line="31" column="14" selection-start-line="31" selection-start-column="14" selection-end-line="31" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Code/BookTool.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="368">
+          <caret line="132" column="17" lean-forward="true" selection-start-line="132" selection-start-column="17" selection-end-line="132" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Code/UI/BookToolPage.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="208">
+          <caret line="187" column="20" selection-start-line="187" selection-start-column="20" selection-end-line="187" selection-end-column="20" />
+          <folding>
+            <element signature="e#0#20#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

@@ -123,12 +123,11 @@ class BookTool:
                 # show confirmation window
                 totalPrice = util.calculateToolhireCost(self.hiredTool, self.tool)
                 self.message = "{} {}\n{} {}\n{} {}\n{} {}{}\n\n{}".format(strings.toolTitleForInvoice, self.tool.getTitle(),
-                                                                      strings.hireDate, self.hiredTool.getStartDate(),
-                                                                      strings.returnDate,
-                                                                      self.hiredTool.getExpectedReturnDate(),
-                                                                      strings.totalCost, str(totalPrice),
-                                                                      strings.currency,
-                                                                      strings.confirmBooking)
+                                                                           strings.hireDate, self.hiredTool.getStartDate(),
+                                                                           strings.returnDate,
+                                                                           self.hiredTool.getExpectedReturnDate(),
+                                                                           strings.totalCost, strings.currency,
+                                                                           str(totalPrice), strings.confirmBooking)
 
                 return 1
             else:
