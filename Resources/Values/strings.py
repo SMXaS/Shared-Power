@@ -170,6 +170,7 @@ toolTitleForInvoice = "Tool title:"
 toolCost = "Tool cost:"
 dispatchCost = "Dispatch cost:"
 fines = "Fines:"
+flatCharge = "Flat charge:"
 
 # --------------
 # Receive Item Page

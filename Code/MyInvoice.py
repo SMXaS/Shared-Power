@@ -93,11 +93,13 @@ class MyInvoice:
 
             txtBox.insert(END, "-------------------------------------------------------\n")
 
-        txtBox.config(state="disabled")
-
         totalPrice = "%.2f" % sum([hireCost, dispatchCost, fine])
         if float(totalPrice) > 0:
             totalPrice = float(monthlyFee) + float(totalPrice)
+            txtBox.insert(END, "{}{} {}{}".format("\n", strings.flatCharge, strings.currency, "5"))
+            
+        txtBox.config(state="disabled")
+
         totalLabel.config(text="{} {}{}".format(strings.totalCost, strings.currency, totalPrice))
 
     def __calculateHirePrice(self, bookingObj, toolObj):
