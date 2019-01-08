@@ -97,7 +97,7 @@ class MyInvoice:
         if float(totalPrice) > 0:
             totalPrice = float(monthlyFee) + float(totalPrice)
             txtBox.insert(END, "{}{} {}{}".format("\n", strings.flatCharge, strings.currency, "5"))
-            
+
         txtBox.config(state="disabled")
 
         totalLabel.config(text="{} {}{}".format(strings.totalCost, strings.currency, totalPrice))

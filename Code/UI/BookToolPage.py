@@ -107,11 +107,21 @@ class BookToolPage(tk.Frame):
         self.__riderValue = tk.IntVar()
         self.__riderValue.set(0)
 
+        self.riderCheckButton = tk.Checkbutton(frame, text=strings.arrangeRider, variable=self.__riderValue,
+                                               bg=self.__bgColor, fg=self.__fgColor, activebackground=self.__bgColor,
+                                               activeforeground=self.__fgColor, selectcolor=self.__bgColor,
+                                               command=lambda: self.showArrangeRider())
+        self.riderCheckButton.grid(row=5, column=0, columnspan=2, sticky="WE")
+
+        """
+
         self.riderRadio = tk.Radiobutton(frame, text=strings.arrangeRider, variable=self.__riderValue, value=1,
                                          bg=self.__bgColor, fg=self.__fgColor, activebackground=self.__bgColor,
                                          activeforeground=self.__fgColor, selectcolor=self.__bgColor,
                                          command=lambda: self.showArrangeRider())
         self.riderRadio.grid(row=5, column=0, columnspan=2, sticky="WE")
+
+        """
 
         self.pickUpLabel = tk.Label(frame, text=strings.pickUpLocation, bg=self.__bgColor, fg=self.__fgColor)
         self.pickUpLabel.grid(row=6, column=0)
@@ -122,8 +132,6 @@ class BookToolPage(tk.Frame):
         self.dropOffLabel.grid(row=7, column=0)
         self.__dropOffEntry = tk.Entry(frame, width=20)
         self.__dropOffEntry.grid(row=7, column=2, columnspan=3, padx=5)
-
-
 
         backIMG = tk.PhotoImage(file=strings.btn_back)
         backButton = tk.Label(frame, image=backIMG, bg=self.__bgColor)
@@ -144,7 +152,7 @@ class BookToolPage(tk.Frame):
         """
         self.bookTool.getStartDate()
 
-        if len(self.bookTool.getNextDays())>1:
+        if len(self.bookTool.getNextDays()) > 1:
             self.startHalfDateRadio.grid()
             self.endHalfDateRadio.grid()
         else:
@@ -165,6 +173,8 @@ class BookToolPage(tk.Frame):
         else:
             self.pickUpLabel.config(fg=colors.bgInactive)
             self.dropOffLabel.config(fg=colors.bgInactive)
+            self.__pickUpEntry.delete(0, "end")
+            self.__dropOffEntry.delete(0, "end")
             self.__pickUpEntry.config(bg=colors.bgInactive, state="disabled")
             self.__dropOffEntry.config(bg=colors.bgInactive, state="disabled")
 
