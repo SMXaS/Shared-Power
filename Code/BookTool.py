@@ -15,26 +15,37 @@ This Class Makes the Booking For the user
 ---------------------------------------------------------------------
     class:
         @ 'your assigned name' = BookTool(availableDateBox, availableEndDateBox, tool):
-            * takes the start date for the tool
-            * takes the end date for the tool
-            * takes the info of the tool
+            * gets the start date for the tool from the listbox
+            * gets the end date for the tool from the listbox
+            * gets the object information of the tool that is being booked
 ---------------------------------------------------------------------
     methods:
         @ 'your assigned name'.getNextDays():
-            - sends back the available end Dates to UI
+            - returns the available end Dates to UI
         @ 'your assigned name'.getStartDate():
             - gets the Start Date 
-            - based on Start Date will generate End Dates and populates the List
+            - based on Start Date will generate End Dates and populates the listbox
         @ 'your assigned name'.populateStartList():
             -Fills the Start booking list with available Dates
         @ 'your assigned name'.getEndDate():
             -Gets the end Date of the booking from the User
         @ 'your assigned name'.getMessage():
-            -sends back the message to the UI
+            -returns the message to the UI
+                -contains booked tool info
+                -contains the tool price for the selected dates
         @ 'your assigned name'.hireTool(login, startTerm, endTerm, pickUpEntry, dropOffEntry):
-            -verifies booking if everything is ok
+                -gets username of the User who is booking the tool
+                -gets the start date of the booking
+                -gets the end date of the booking
+                -gets the entry from arrange driver pickup location
+                -gets the entry from arrange driver dropoff location
+            -Check if Start Date and End Date are picked if True:
+                                                                    - Creates booking Object
+                                                                    - Calls VerifyHiring()
+                                                        if False:
+                                                                    - Returns "Error" 
         @ 'your assigned name'.vfWrite():
-            -creates a booking Object and passes to writefile
+            - passes the booking object to WriteFile
 """
 
 class BookTool:
