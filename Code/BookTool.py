@@ -40,10 +40,10 @@ This Class Makes the Booking For the user
                 -gets the entry from arrange driver pickup location
                 -gets the entry from arrange driver dropoff location
             -Check if Start Date and End Date are picked if True:
-                                                                    - Creates booking Object
-                                                                    - Calls VerifyHiring()
+                                                                  - Creates booking Object
+                                                                  - Calls VerifyHiring()
                                                         if False:
-                                                                    - Returns "Error" 
+                                                                  - Returns "Error" 
         @ 'your assigned name'.vfWrite():
             - passes the booking object to WriteFile
 """
