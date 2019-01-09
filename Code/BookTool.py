@@ -29,7 +29,7 @@ This Class Makes the Booking For the user
             -Calls __getAvailableList()
             -populates available Dates List
         @ 'your assigned name'.getEndDate():
-            -Gets the end Date of the booking from the User
+            -Gets the end Date of the booking from the User *
         @ 'your assigned name'.getMessage():
             -returns the message list to the UI
         @ 'your assigned name'.hireTool(string, string, string, string, string):
