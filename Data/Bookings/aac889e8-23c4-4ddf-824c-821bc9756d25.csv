@@ -1,2 +1,5 @@
 bookingID,toolID,userName,bookInCondition,startDate,startTerm,expectedReturnDate,expectedTerm,status,returnDate,bookOutCondition,pickUpLocation,dropOffLocation
 0a549441-fad7-4617-901d-e3bb4f910f6e,aac889e8-23c4-4ddf-824c-821bc9756d25,test,used,13/01/2019,f,14/01/2019,f,inventory,6/1/2019,e,,
+8d76bb95-7c79-4bb4-9a18-f484e25d77a0,aac889e8-23c4-4ddf-824c-821bc9756d25,test,used,09/01/2019,f,09/01/2019,f,inventory,9/1/2019,ss,,
+a6444d07-d69e-4d8d-a924-a90a9afa162f,aac889e8-23c4-4ddf-824c-821bc9756d25,test,used,12/01/2019,f,12/01/2019,f,hired,,,,
+58e28b71-c25b-464b-925a-0a640dffde81,aac889e8-23c4-4ddf-824c-821bc9756d25,test,used,18/01/2019,f,19/01/2019,f,pending_receive,9/1/2019,test,,

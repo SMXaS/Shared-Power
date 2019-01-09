@@ -48,25 +48,22 @@ class MyBookings:
     def returnItem(self, toolCondition):
         if self.__tree.focus():
             self.__errorLabel.config(text="")
-            if toolCondition.get():
-                self.__errorLabel.config(text="")
-                returnItemObj = self.__bookingList[self.__getBookingIndex()]
-                # toolStatus[1] = "pending_receive"
-                returnItemObj.setStatus(strings.toolStatus[1])
-                returnItemObj.setReturnDate(self.__getCurrentDate())
-                returnItemObj.setBookOutCondition(toolCondition.get())
-                bookObj_forTest = []
-                bookObj_forTest.append(returnItemObj)
-                print("--------------")
-                print("single book Obj")
-                print("--------------")
-                test.printBookingObjects(bookObj_forTest)
-                wf.editBooking(returnItemObj)
-                self.populateData()
-                toolCondition.delete(0, "end")
-                MyInvoice(self.__login).generateInvoice(returnItemObj)
-            else:
-                self.__errorLabel.config(text=strings.errorToolConditionMissing)
+            self.__errorLabel.config(text="")
+            returnItemObj = self.__bookingList[self.__getBookingIndex()]
+            # toolStatus[1] = "pending_receive"
+            returnItemObj.setStatus(strings.toolStatus[1])
+            returnItemObj.setReturnDate(self.__getCurrentDate())
+            returnItemObj.setBookOutCondition(toolCondition.get())
+            bookObj_forTest = []
+            bookObj_forTest.append(returnItemObj)
+            print("--------------")
+            print("single book Obj")
+            print("--------------")
+            test.printBookingObjects(bookObj_forTest)
+            wf.editBooking(returnItemObj)
+            self.populateData()
+            toolCondition.delete(0, "end")
+            MyInvoice(self.__login).generateInvoice(returnItemObj)
         else:
             self.__errorLabel.config(text=strings.errorSelectItem)
 

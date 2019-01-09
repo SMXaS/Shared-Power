@@ -18,13 +18,13 @@ class ReturnToolPage(tk.Frame):
         self.__initUI()
 
     def start(self, args):
-        self.__returnTool = MyBookings(self.__errorLabel, self.__tree, self.__controller.login)
+        self.__myBookings = MyBookings(self.__errorLabel, self.__tree, self.__controller.login)
         self.__controller.addToolButton.config(text=strings.menuAddTool)
-        self.__returnTool.populateData()
+        self.__myBookings.populateData()
         self.__isEmpty()
 
     def __isEmpty(self):
-        if self.__returnTool.getCount() > 0:
+        if self.__myBookings.getCount() > 0:
             self.__errorLabel.config(text="")
             self.__showReturn(False)
         else:
@@ -105,19 +105,23 @@ class ReturnToolPage(tk.Frame):
 
     def __cancelItem(self):
         if messagebox.askokcancel("Confirmation", strings.cancelItemConfirm):
-            self.__returnTool.cancelBooking()
+            self.__myBookings.cancelBooking()
 
     def __returnItem(self, condition):
-        self.__returnTool.returnItem(condition)
-        self.__showReturn(False)
-        self.__isEmpty()
+        if condition.get():
+            self.__myBookings.returnItem(condition)
+            self.__showReturn(False)
+            self.__isEmpty()
+        else:
+            self.__errorLabel.config(text=strings.errorToolConditionMissing)
 
     def __showReturn(self, show):
         if show:
+            self.__errorLabel.config(text="")
             if self.__tree.focus():
                 self.returnFrame.grid()
             else:
-                if self.__returnTool.getCount() > 0:
+                if self.__myBookings.getCount() > 0:
                     self.__errorLabel.config(text=strings.errorSelectItem)
                 else:
                     self.__errorLabel.config(text=strings.errorEmptyList)

@@ -55,9 +55,9 @@ class MyProfilePage(tk.Frame):
                                  font=fonts.menuButtonFont)
         myToolsButton.grid(row=1, column=0, padx=10, pady=2, sticky="WES")
 
-        myToolsFrame.bind("<Button-1>", lambda event: self.show_frame(strings.myToolClass))
-        tool.bind("<Button-1>", lambda event: self.show_frame(strings.myToolClass))
-        myToolsButton.bind("<Button-1>", lambda event: self.show_frame(strings.myToolClass))
+        myToolsFrame.bind("<Button-1>", lambda event: self.__verifyFrame(strings.myToolClass))
+        tool.bind("<Button-1>", lambda event: self.__verifyFrame(strings.myToolClass))
+        myToolsButton.bind("<Button-1>", lambda event: self.__verifyFrame(strings.myToolClass))
 
         menuBorderx1 = ttk.Separator(menuFrame, orient="vertical")
         menuBorderx1.grid(row=0, column=1, pady=2, sticky="NS")
@@ -79,9 +79,9 @@ class MyProfilePage(tk.Frame):
                                    fg=colors.fgColor, font=fonts.menuButtonFont)
         myBookinsButton.grid(row=1, column=0, padx=10, pady=2, sticky="WES")
 
-        myBookingsFrame.bind("<Button-1>", lambda event: self.show_frame(strings.returnToolClass))
-        booking.bind("<Button-1>", lambda event: self.show_frame(strings.returnToolClass))
-        myBookinsButton.bind("<Button-1>", lambda event: self.show_frame(strings.returnToolClass))
+        myBookingsFrame.bind("<Button-1>", lambda event: self.__verifyFrame(strings.returnToolClass))
+        booking.bind("<Button-1>", lambda event: self.__verifyFrame(strings.returnToolClass))
+        myBookinsButton.bind("<Button-1>", lambda event: self.__verifyFrame(strings.returnToolClass))
 
         menuBorderx2 = ttk.Separator(menuFrame, orient="vertical")
         menuBorderx2.grid(row=0, column=3, pady=2, sticky="NS")
@@ -103,9 +103,9 @@ class MyProfilePage(tk.Frame):
                                     font=fonts.menuButtonFont)
         myInvoicesButton.grid(row=1, column=0, padx=10, pady=2, sticky="NWE")
 
-        myInvoiceFrame.bind("<Button-1>", lambda event: self.show_frame(strings.invoiceClass))
-        invoice.bind("<Button-1>", lambda event: self.show_frame(strings.invoiceClass))
-        myInvoicesButton.bind("<Button-1>", lambda event: self.show_frame(strings.invoiceClass))
+        myInvoiceFrame.bind("<Button-1>", lambda event: self.__verifyFrame(strings.invoiceClass))
+        invoice.bind("<Button-1>", lambda event: self.__verifyFrame(strings.invoiceClass))
+        myInvoicesButton.bind("<Button-1>", lambda event: self.__verifyFrame(strings.invoiceClass))
 
         menuBorderx2 = ttk.Separator(menuFrame, orient="vertical")
         menuBorderx2.grid(row=0, column=5, pady=2, sticky="NS")
@@ -127,10 +127,10 @@ class MyProfilePage(tk.Frame):
                                       font=fonts.menuButtonFont)
         self.addToolButton.grid(row=1, column=0, padx=10, pady=2, sticky="NWE")
 
-        if self.__page_name is not strings.addToolClass:
-            add.bind("<Button-1>", lambda event: self.show_frame(strings.addToolClass))
-            addToolFrame.bind("<Button-1>", lambda event: self.show_frame(strings.addToolClass))
-            self.addToolButton.bind("<Button-1>", lambda event: self.show_frame(strings.addToolClass))
+        if self.__page_name != strings.addToolClass:
+            add.bind("<Button-1>", lambda event: self.__verifyFrame(strings.addToolClass))
+            addToolFrame.bind("<Button-1>", lambda event: self.__verifyFrame(strings.addToolClass))
+            self.addToolButton.bind("<Button-1>", lambda event: self.__verifyFrame(strings.addToolClass))
 
         # menuBorderGround = ttk.Separator(menuFrame, orient="horizontal")
         # menuBorderGround.grid(row=1, column=0, columnspan=6, padx=2, sticky="WE")
@@ -146,6 +146,17 @@ class MyProfilePage(tk.Frame):
             frame = F(parent=container, controller=self)
             self.frames[self.__page_name] = frame
             frame.grid(row=0, column=0, sticky="nsew")
+
+    def __verifyFrame(self, destinationPage, args=[]):
+        """
+        This method checks if active frame is the same as destination frame
+        :param destinationPage: str(Class name)
+        :param args: list (optional - what you want to send to destination Page)
+        :return: None
+        """
+
+        if self.__page_name != destinationPage:
+            self.show_frame(destinationPage, args)
 
     def show_frame(self, page_name, args=[]):
         """
