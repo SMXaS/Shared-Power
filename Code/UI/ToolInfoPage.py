@@ -81,15 +81,25 @@ class ToolInfoPage(tk.Frame):
         backIMG = tk.PhotoImage(file=strings.btn_back)
         backButton = tk.Label(frame, image=backIMG, bg=self.__bgColor)
         backButton.image = backIMG
-        backButton.bind("<Button-1>", lambda event: self.__controller.show_frame(strings.searchToolClass, "args"))
+        backButton.bind("<Button-1>", lambda event: self.__back())
         backButton.grid(row=8, column=0, padx=10, sticky="W")
 
         hireIMG = tk.PhotoImage(file=strings.buttonHire)
         hireButton = tk.Label(frame, image=hireIMG, bg=self.__bgColor)
         hireButton.image = hireIMG
-        hireButton.bind("<Button-1>", lambda event: self.__controller.show_frame(strings.bookToolClass, self.tool))
+        hireButton.bind("<Button-1>", lambda event: self.__hire())
         hireButton.grid(row=8, column=1, columnspan=5, padx=10, pady=50, sticky="E")
 
+    def __back(self):
+        if ( self.imgWindow is not None) and  self.imgWindow.winfo_exists():
+             self.imgWindow.destroy()
+        self.__controller.show_frame(strings.searchToolClass, "args")
+        
+    def __hire(self):
+        if ( self.imgWindow is not None) and  self.imgWindow.winfo_exists():
+             self.imgWindow.destroy()
+        self.__controller.show_frame(strings.bookToolClass, self.tool)
+        
     def __populateInfo(self):
         """
         populating information about the tool
@@ -110,12 +120,12 @@ class ToolInfoPage(tk.Frame):
         :return: None
         """
 
-        imgWindow = tk.Toplevel(self)
-        imgWindow.geometry("+300+50")
-        imgWindow.resizable(False, False)
-        imgWindow.wm_title("Image")
+        self.imgWindow = tk.Toplevel(self)
+        self.imgWindow.geometry("+300+50")
+        self.imgWindow.resizable(False, False)
+        self.imgWindow.wm_title("Image")
         toolIMG = tk.PhotoImage(file="{}.png".format(self.tool.getImagePath()))
-        toolImgLabel = tk.Label(imgWindow, image=toolIMG)
+        toolImgLabel = tk.Label(self.imgWindow, image=toolIMG)
         toolImgLabel.image = toolIMG
         toolImgLabel.grid(row=0, column=0)
 
