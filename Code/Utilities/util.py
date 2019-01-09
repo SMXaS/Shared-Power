@@ -6,10 +6,9 @@ import os
 from shutil import copy2
 from datetime import datetime, timedelta
 from Code.Utilities import WriteFile as wf
+from Code.Utilities import ReadFile as rf
 from Entities.User import User
 from Entities.Tool import Tool
-from Entities.Bookings import Bookings
-from Entities.Invoice import Invoice
 import Resources.Values.strings as strings
 
 
@@ -211,58 +210,33 @@ def convertFromListToObj(list):
     return Tool(list[0], list[1], list[2], list[3], list[4], list[5], list[6], list[7], list[8], list[9])
 
 
-def convertToObj(index):
-    """
-    Converts dict(tool) to obj(tool)
-
-    :param index (in db)
-    :return obj(tool)
-    """
-
-    with open(strings.filePath_tool, 'r') as f:
-        l = list(csv.reader(f))
-        dict = {i[0]: [x for x in i[1:]] for i in zip(*l)}
-        tool = Tool(dict["ID"][index], dict["owner"][index], dict["title"][index],
-                    dict["description"][index], dict["condition"][index],
-                    dict["priceFullDay"][index], dict["priceHalfDay"][index],
-                    dict["riderCharge"][index], dict["imgPath"][index], dict["availability"][index])
-    return tool
 
 
-def convertBookingToObject(index, path):
-    """
-        Converts dict(booking) to obj(booking)
-
-        :param index (in db)
-        :return obj(booking)
-        """
-
-    with open(path, 'r') as f:
-        l = list(csv.reader(f))
-        myDict = {i[0]: [x for x in i[1:]] for i in zip(*l)}
-        booking = Bookings(myDict["bookingID"][index], myDict["toolID"][index], myDict["userName"][index],
-                           myDict["bookInCondition"][index],
-                           myDict["startDate"][index], myDict["startTerm"][index],
-                           myDict["expectedReturnDate"][index], myDict["expectedTerm"][index], myDict["status"][index],
-                           myDict["returnDate"][index], myDict["bookOutCondition"][index],
-                           myDict["pickUpLocation"][index], myDict["dropOffLocation"][index])
-    return booking
+def cancelUpcomingBookings(toolID):
+    bookingList = getBookingListForTool(toolID)
+    if bookingList:
+        for i in range(len(bookingList)):
+            wf.cancelBooking(bookingList[i])
 
 
-def convertInvoiceToObj(index, path):
-    """
-        Converts dict(invoice) to obj(invoice)
+def getBookingListForTool (toolID):
+    dateFormat = strings.simpleDateFormat
+    bookingListHired = rf.getAllBookings("toolID", toolID, 0)
+    upcomingBookings = []
 
-        :param index (in db)
-        :return obj(invoice)
-        """
+    if bookingListHired:
+        for i in range(len(bookingListHired)):
+            diff = getDayDifference(datetime.now().strftime(dateFormat), bookingListHired[i].getStartDate())
+            if diff > 0:
+                upcomingBookings.append(bookingListHired[i])
 
-    with open(path, 'r') as f:
-        l = list(csv.reader(f))
-        myDict = {i[0]: [x for x in i[1:]] for i in zip(*l)}
-        invoice = Invoice(myDict["user"][index], myDict["toolTitle"][index], myDict["hirePrice"][index],
-                           myDict["riderPrice"][index], myDict["fine"][index])
-    return invoice
+    for i in range(len(upcomingBookings)):
+        print("upcoming bookings")
+        print("startDate:", upcomingBookings[i].getStartDate())
+        print("user:", upcomingBookings[i].getUserName())
+        print("-----------")
+
+    return upcomingBookings
 
 
 def getBookingDates(bookings):
@@ -311,7 +285,6 @@ def getNextAvailableDates(startDate, dayList):
     will check available days based on startDate
 
     :param startDate: str(start booking date)
-    :param obj(bookings)
     :return: list(str(available days))
     """
 

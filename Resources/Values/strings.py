@@ -62,6 +62,7 @@ fieldNames_invoice = ['user', 'toolTitle', 'hirePrice', 'riderPrice', 'fine']
 filePath_user = "Data/users.csv"
 filePath_tool = "Data/tools.csv"
 filePath_booking = "Data/Bookings/"
+filePath_allBookings = "Data\Bookings\*.csv"
 filePath_invoiceFolder = "Data/Invoices/"
 filePath_images = "Data/Images/"
 

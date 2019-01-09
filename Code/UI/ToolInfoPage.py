@@ -91,13 +91,19 @@ class ToolInfoPage(tk.Frame):
         hireButton.grid(row=8, column=1, columnspan=5, padx=10, pady=50, sticky="E")
 
     def __back(self):
-        if ( self.imgWindow is not None) and  self.imgWindow.winfo_exists():
-             self.imgWindow.destroy()
+        try:
+            if (self.imgWindow is not None) and self.imgWindow.winfo_exists():
+                self.imgWindow.destroy()
+        except AttributeError:
+            pass
         self.__controller.show_frame(strings.searchToolClass, "args")
         
     def __hire(self):
-        if ( self.imgWindow is not None) and  self.imgWindow.winfo_exists():
-             self.imgWindow.destroy()
+        try:
+            if (self.imgWindow is not None) and self.imgWindow.winfo_exists():
+                self.imgWindow.destroy()
+        except AttributeError:
+            pass
         self.__controller.show_frame(strings.bookToolClass, self.tool)
         
     def __populateInfo(self):

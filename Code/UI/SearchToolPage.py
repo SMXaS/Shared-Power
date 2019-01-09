@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
 from Resources.Values import strings, colors, dimens, fonts
-from Code.Utilities import util, ReadFile as rf
+from Code.Utilities import converters, ReadFile as rf
 import Code.test_printObj as test
 
 
@@ -127,7 +127,7 @@ class SearchToolPage(tk.Frame):
                     items.append(descriptionList[i])
 
         for i in range(len(items)):
-            self.__toolList.append(util.convertToObj(items[i]))
+            self.__toolList.append(converters.convertToObj(items[i]))
         self.__populateData()
 
     def __populateData(self):
