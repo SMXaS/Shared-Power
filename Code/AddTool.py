@@ -98,7 +98,7 @@ class AddTool:
                 if " " in tool[i]:
                     return strings.errorIncorrectPriceFormat
 
-        if not (tool[3].isdigit() or tool[4].isdigit() or tool[5].isdigit()):
+        if not (tool[3].isdigit() and tool[4].isdigit() and tool[5].isdigit()):
             self.__errorLabel.config(text=strings.errorIncorrectPriceFormat)
             return False
 
