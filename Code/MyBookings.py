@@ -50,8 +50,10 @@ class MyBookings:
             self.__errorLabel.config(text="")
             self.__errorLabel.config(text="")
             returnItemObj = self.__bookingList[self.__getBookingIndex()]
-            diff = util.getDayDifference(self.__getCurrentDate(), returnItemObj.getExpectedReturnDate())
-            if diff < 0:
+            diff = util.getDayDifference(self.__getCurrentDate(), returnItemObj.getStartDate())
+            print("diff at return:", diff)
+
+            if diff <= 0:
                 # toolStatus[1] = "pending_receive"
                 returnItemObj.setStatus(strings.toolStatus[1])
                 returnItemObj.setReturnDate(self.__getCurrentDate())

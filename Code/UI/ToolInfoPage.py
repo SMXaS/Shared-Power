@@ -42,8 +42,13 @@ class ToolInfoPage(tk.Frame):
                                     font=fonts.menuButtonFont)
         descriptionLabel.grid(row=2, column=0, padx=5, pady=5, sticky="E")
 
-        self.descriptionTxt = tk.Label(frame, bg=self.__bgColor, fg=self.__fgColor, wraplength=200, justify="left")
+        self.descriptionTxt = tk.Text(frame, bg=self.__bgColor, fg=self.__fgColor, heigh=7, width=60)
         self.descriptionTxt.grid(row=2, column=4, padx=5, columnspan=4, sticky="W")
+
+        mScrollBar = tk.Scrollbar(frame)
+        mScrollBar.grid(row=2, column=8, sticky="NS")
+        mScrollBar.config(command=self.descriptionTxt.yview)
+        self.descriptionTxt.config(yscrollcommand=mScrollBar.set)
 
         conditionLabel = tk.Label(frame, text=strings.toolCondition, bg=self.__bgColor, fg=self.__fgColor,
                                   font=fonts.menuButtonFont)
@@ -114,7 +119,8 @@ class ToolInfoPage(tk.Frame):
 
         self.ownerTxt.config(text=self.tool.getOwner())
         self.titleTxt.config(text=self.tool.getTitle())
-        self.descriptionTxt.config(text=self.tool.getDescription())
+        self.descriptionTxt.insert("end", self.tool.getDescription())
+        self.descriptionTxt.config(state="disabled")
         self.conditionTxt.config(text=self.tool.getCondition())
         self.priceFullDayTxt.config(text="{}{}".format(strings.currency, self.tool.getPriceFullDay()))
         self.priceHalfDayTxt.config(text="{}{}".format(strings.currency, self.tool.getPriceHalfDay()))

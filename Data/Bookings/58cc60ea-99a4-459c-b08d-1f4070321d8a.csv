@@ -1,0 +1,2 @@
+bookingID,toolID,userName,bookInCondition,startDate,startTerm,expectedReturnDate,expectedTerm,status,returnDate,bookOutCondition,pickUpLocation,dropOffLocation
+ec5ec3e2-de18-4e9c-bc6d-12591f0d116f,58cc60ea-99a4-459c-b08d-1f4070321d8a,user,new,10/01/2019,f,10/01/2019,f,pending_receive,10/1/2019,good,,

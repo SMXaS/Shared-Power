@@ -106,6 +106,7 @@ class ReturnToolPage(tk.Frame):
     def __cancelItem(self):
         if messagebox.askokcancel("Confirmation", strings.cancelItemConfirm):
             self.__myBookings.cancelBooking()
+            self.__isEmpty()
 
     def __returnItem(self, condition):
         if condition.get():

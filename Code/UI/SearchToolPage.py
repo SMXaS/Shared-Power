@@ -126,9 +126,10 @@ class SearchToolPage(tk.Frame):
                 if not descriptionList[i] in items:
                     items.append(descriptionList[i])
 
-        for i in range(len(items)):
-            self.__toolList.append(converters.convertToObj(items[i]))
-        self.__populateData()
+        if items:
+            for i in range(len(items)):
+                self.__toolList.append(converters.convertToObj(items[i]))
+            self.__populateData()
 
     def __populateData(self):
         """

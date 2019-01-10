@@ -99,7 +99,7 @@ def editBooking(bookingObj):
         with open(path, "w") as f:
             writer = csv.writer(f, delimiter=',', lineterminator='\n')
             writer.writerow(all_keys)
-            y=0
+            y = 0
             while y < len(val):
                 writer.writerow(val[y])
                 y = y+1

@@ -19,10 +19,6 @@ class mainMenu(tk.Tk):
     def __init__(self, *args, **kwargs):
         tk.Tk.__init__(self, *args, **kwargs)
 
-        #self.geometry("{}x{}+%d+%d".format(dimens.mainWindowWidth, dimens.mainWindowHeigh) %
-        #              ((self.winfo_screenwidth() / 2) - 350, (self.winfo_screenheight() / 2) - 300))
-        # self.resizable(False, False)
-
         self.title(strings.appTitle)
 
         #############################

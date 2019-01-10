@@ -1,4 +1,87 @@
 ID,owner,title,description,condition,priceFullDay,priceHalfDay,riderCharge,imgPath,availability
-aac889e8-23c4-4ddf-824c-821bc9756d25,test,shoe ,smelly one,used,189,2,5,Data/Images/aac889e8-23c4-4ddf-824c-821bc9756d25,yes
-27f5c5a9-0c0b-4559-bd24-2a4e50f58c58,test,smoking pot,i'm so high..,used,10,6,8,Data/Images/27f5c5a9-0c0b-4559-bd24-2a4e50f58c58,yes
-4574028e-140e-432a-807a-97849e82661e,eddie,amazon locker,"a lot of spaces, looks like new",used good,280,190,20,Data/Images/4574028e-140e-432a-807a-97849e82661e,yes
+58cc60ea-99a4-459c-b08d-1f4070321d8a,user,Mitre Saw,"Compound mitre saw supplied with a multifunction TCT blade that can easily cut through wood, aluminium, plastic and steel, even if nails are still embedded in the material. The multipurpose blade cuts cleanly and leaves no burrs on steel. Easy to assemble and use, as the laser cutting guide helps get the highest possible accuracy. The supplied clamp also keeps the workpiece in place
+
+    2000W
+    Max. Cross Cut: 300 x 80mm
+    24-Tooth Multifunction TCT Blade
+    Workpiece Clamp
+    Trench Cutting Facility
+    Dust Ejection Facility
+    Die-Cast Aluminium Base
+    Spindle Lock
+    Motor Brake
+    Soft Start
+",new,99,59,5,Data/Images/58cc60ea-99a4-459c-b08d-1f4070321d8a,yes
+ab600d11-69b9-401c-910f-abbd53e25b40,user,Combi Drill & Impact Driver Twin Pack," Versatile twin pack comprises a combi drill and impact driver. Both tools feature all-metal gearboxes and bright white LED work lights. The combi drill features 15-position adjustable torque settings with screwdriving, drill driving and hammer settings for a wide range of applications. The impact driver features a compact and lightweight design, ideal for use in confined spaces. Heat dispersion offered by the aluminium front housing increases motor life and the drop-in keyless hex driver allows for quick, one-handed fitment. Supplied with multi-voltage charger and TSTAK Kitbox.
+
+    1 x 18V Combi Drill 42Nm
+    1 x 18V Impact Driver 155Nm
+    2 x 18V 1.5Ah Li-Ion Batteries
+    1 x 70min Charger
+    1 x TSTAK Kit Box
+",new,40,20,4,Data/Images/ab600d11-69b9-401c-910f-abbd53e25b40,yes
+9fd2f186-712e-4a31-9de8-ee2be6e972e3,user,Angle Grinder - Bare," Powerful grinder with 7000rpm motor and high torque for heavy duty cutting and grinding applications. Includes low profile gear case. Compatible with DeWalt XR Li-ion batteries.
+
+    Adjustable Guard
+    2-Position Side Handle
+    All-Metal Gearbox
+    Spindle Lock
+    Fan-Cooled Motor
+    Lock-Off Switch
+    Does Not Include Battery or Charge",good,40,30,2,Data/Images/9fd2f186-712e-4a31-9de8-ee2be6e972e3,yes
+7fdb1414-7e9f-434e-9bf6-138bd6df2c7f,user,Angle Grinder - Bare,"Powerful grinder with 7000rpm motor and high torque for heavy duty cutting and grinding applications. Includes low profile gear case. Compatible with DeWalt XR Li-ion batteries.
+
+    Adjustable Guard
+    2-Position Side Handle
+    All-Metal Gearbox
+    Spindle Lock
+    Fan-Cooled Motor
+    Lock-Off Switch
+    Does Not Include Battery or Charger
+",good,30,25,4,Data/Images/7fdb1414-7e9f-434e-9bf6-138bd6df2c7f,yes
+db1d9a89-d753-44ad-8587-a1673827dba5,test,angle grinder,"Powerful grinder with 7000rpm motor and high torque for heavy duty cutting and grinding applications. Includes low profile gear case. Compatible with DeWalt XR Li-ion batteries.
+
+    Adjustable Guard
+    2-Position Side Handle
+    All-Metal Gearbox
+    Spindle Lock
+    Fan-Cooled Motor
+    Lock-Off Switch
+    Does Not Include Battery or Charger
+",used,20,10,0,Data/Images/db1d9a89-d753-44ad-8587-a1673827dba5,yes
+ab9a2cb6-2a07-476b-882a-45a3807b1762,test,Angle Grinder 230-240V,"Professional quality angle grinder with ergonomic design and soft grip. 3-position, anti-vibration auxiliary handle and rotating rear handle offer great versatility. Suitable for grinding and cutting. Supplied with quick-change safety guard, grinding and cutting discs and carry case.
+
+    2350W
+    Adjustable Guard
+    3-Position Side Handle
+    All-Metal Gearing
+    Fan-Cooled Motor
+    Lock-Off Switch
+    Dust-Sealed Bearings
+    Spindle Lock
+    Replaceable Carbon Brushes
+    Soft Start
+",new,15,10,5,Data/Images/ab9a2cb6-2a07-476b-882a-45a3807b1762,yes
+3e761d9e-76d9-4989-ad3e-d0b7e4117222,test,Corded Nailer / Stapler 240V,"Heavy duty tool for fastening timber or lesser density materials. Easy jam clearance and contact safety switch. Supplied with 100 nails and 300 staples.
+
+    Fires 18ga 25 / 22mm Nails / Staples
+    Fires up to 20/min
+    Sequential Trigger Action
+    Non-Marking Nose
+    Quick-Release Nose for Jam Clearance
+    Adjustable Impact
+    Soft-Grip Handle
+",new,50,35,4,Data/Images/3e761d9e-76d9-4989-ad3e-d0b7e4117222,yes
+e2b2ae29-fe27-4d0b-851b-977783b5fd86,amazon,Corded nailer,"Framing nailer complete with 2.1Ah Li-ion battery and charger. Features a fuel and battery level indicator for efficient use on first fix timber-to-timber applications. Operational in temperatures as low as -15°C. Supplied with ergonomic, non-slip handle, heavy duty carry case and safety specs.
+
+    1 x 2.1Ah Li-Ion Battery
+    90min Charge Time
+    Fires 3.1mm 51-90mm Nails
+    Fires up to 120/min
+    Sequential Trigger Action
+    Depth Adjustment
+    Without Nose Piece
+    LED Indicator
+    Magazine Window
+    Quick-Charge Battery with Fuel & Battery Gauge
+",new,45,35,2,Data/Images/e2b2ae29-fe27-4d0b-851b-977783b5fd86,yes
