@@ -5,22 +5,8 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Code/MyBookings.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/MyBookings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Code/UI/MyBookingsPage.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/UI/MyBookingsPage.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/UI/MyToolPage.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/UI/MyToolPage.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/UI/SearchToolPage.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/UI/SearchToolPage.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/UI/ToolInfoPage.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/UI/ToolInfoPage.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/Utilities/WriteFile.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/Utilities/WriteFile.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/Bookings/27f5c5a9-0c0b-4559-bd24-2a4e50f58c58.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/Bookings/4574028e-140e-432a-807a-97849e82661e.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/Bookings/aac889e8-23c4-4ddf-824c-821bc9756d25.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/Images/4574028e-140e-432a-807a-97849e82661e.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/Images/aac889e8-23c4-4ddf-824c-821bc9756d25.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/Invoices/eddie/1-2019.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/Invoices/post/1-2019.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/Invoices/test/1-2019.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/Invoices/test/4-2019.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/tools.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Data/tools.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/users.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Data/users.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/__main__.py" beforeDir="false" afterPath="$PROJECT_DIR$/__main__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Resources/Drawable/btn_feedback.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Resources/Values/strings.py" beforeDir="false" afterPath="$PROJECT_DIR$/Resources/Values/strings.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -33,7 +19,7 @@
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="md" value="1" />
-          <entry key="py" value="86" />
+          <entry key="py" value="89" />
           <entry key="py___jb_tmp___" value="1" />
         </counts>
       </usages-collector>
@@ -41,62 +27,64 @@
         <counts>
           <entry key="Markdown" value="1" />
           <entry key="PLAIN_TEXT" value="1" />
-          <entry key="Python" value="86" />
+          <entry key="Python" value="89" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="3" />
+          <entry key="project.closed" value="4" />
           <entry key="project.open.time.22" value="1" />
           <entry key="project.open.time.3" value="2" />
-          <entry key="project.opened" value="3" />
+          <entry key="project.open.time.34" value="1" />
+          <entry key="project.opened" value="4" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="dummy" value="18" />
-          <entry key="py" value="5491" />
+          <entry key="py" value="5943" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="PLAIN_TEXT" value="18" />
-          <entry key="Python" value="5491" />
+          <entry key="Python" value="5943" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Code/MyBookings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="177">
-              <caret line="55" column="22" selection-start-line="55" selection-start-column="22" selection-end-line="55" selection-end-column="22" />
+            <state relative-caret-position="345">
+              <caret line="70" column="27" selection-start-line="70" selection-start-column="27" selection-end-line="70" selection-end-column="27" />
+              <folding>
+                <element signature="e#0#44#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Code/UI/SearchToolPage.py">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Code/UI/MyBookingsPage.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="174">
-              <caret line="133" column="29" selection-start-line="133" selection-start-column="29" selection-end-line="133" selection-end-column="29" />
+            <state relative-caret-position="1363">
+              <caret line="119" column="88" selection-start-line="119" selection-start-column="88" selection-end-line="119" selection-end-column="88" />
               <folding>
                 <element signature="e#0#20#0" expanded="true" />
+                <element signature="e#4962#5391#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Code/Utilities/ReadFile.py">
+        <entry file="file://$PROJECT_DIR$/Resources/Values/strings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1129">
-              <caret line="128" selection-start-line="128" selection-end-line="128" />
-              <folding>
-                <element signature="e#0#10#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="439">
+              <caret line="50" column="34" selection-start-line="50" selection-start-column="34" selection-end-line="50" selection-end-column="34" />
             </state>
           </provider>
         </entry>
@@ -175,14 +163,14 @@
         <option value="$PROJECT_DIR$/Code/Utilities/ReadFile.py" />
         <option value="$PROJECT_DIR$/Code/UI/MyProfilePage.py" />
         <option value="$PROJECT_DIR$/Code/UI/FeedbackPage.py" />
-        <option value="$PROJECT_DIR$/Resources/Values/strings.py" />
         <option value="$PROJECT_DIR$/__main__.py" />
         <option value="$PROJECT_DIR$/Code/UI/MyToolPage.py" />
         <option value="$PROJECT_DIR$/Code/UI/SearchToolPage.py" />
         <option value="$PROJECT_DIR$/Code/Utilities/WriteFile.py" />
-        <option value="$PROJECT_DIR$/Code/UI/MyBookingsPage.py" />
         <option value="$PROJECT_DIR$/Code/UI/ToolInfoPage.py" />
         <option value="$PROJECT_DIR$/Code/MyBookings.py" />
+        <option value="$PROJECT_DIR$/Resources/Values/strings.py" />
+        <option value="$PROJECT_DIR$/Code/UI/MyBookingsPage.py" />
       </list>
     </option>
   </component>
@@ -434,7 +422,7 @@
     <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.20323886" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.20647773" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -586,9 +574,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
           <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
-          <folding>
-            <element signature="e#0#20#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -628,30 +613,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Code/UI/FeedbackPage.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="21" selection-start-line="14" selection-start-column="21" selection-end-line="14" selection-end-column="21" />
-          <folding>
-            <element signature="e#0#20#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Resources/Values/strings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="578">
-          <caret line="44" column="42" selection-start-line="44" selection-start-column="42" selection-end-line="44" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/Code/UI/FeedbackPage.py" />
     <entry file="file://$PROJECT_DIR$/__main__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
           <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
-          <folding>
-            <element signature="e#0#20#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -659,9 +625,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="281">
           <caret line="175" selection-start-line="175" selection-end-line="175" />
-          <folding>
-            <element signature="e#0#20#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -669,9 +632,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="298">
           <caret line="31" column="12" selection-start-line="31" selection-start-column="12" selection-end-line="31" selection-end-column="12" />
-          <folding>
-            <element signature="e#0#20#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -696,27 +656,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Code/BookTool.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-853">
-          <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Code/Utilities/WriteFile.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="239">
           <caret line="76" column="17" lean-forward="true" selection-start-line="76" selection-start-column="17" selection-end-line="76" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Code/UI/SearchToolPage.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="174">
-          <caret line="133" column="29" selection-start-line="133" selection-start-column="29" selection-end-line="133" selection-end-column="29" />
-          <folding>
-            <element signature="e#0#20#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -727,23 +670,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Code/UI/MyBookingsPage.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="142">
-          <caret line="108" column="28" selection-start-line="108" selection-start-column="28" selection-end-line="108" selection-end-column="28" />
-          <folding>
-            <element signature="e#0#20#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Code/Utilities/util.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1036">
           <caret line="244" selection-start-line="244" selection-end-line="244" />
-          <folding>
-            <element signature="e#0#10#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -754,9 +684,19 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Code/UI/SearchToolPage.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2193">
+          <caret line="133" column="29" selection-start-line="133" selection-start-column="29" selection-end-line="133" selection-end-column="29" />
+          <folding>
+            <element signature="e#0#20#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Code/Utilities/ReadFile.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1129">
+        <state relative-caret-position="2108">
           <caret line="128" selection-start-line="128" selection-end-line="128" />
           <folding>
             <element signature="e#0#10#0" expanded="true" />
@@ -764,10 +704,38 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Code/BookTool.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-842">
+          <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Code/MyBookings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="177">
-          <caret line="55" column="22" selection-start-line="55" selection-start-column="22" selection-end-line="55" selection-end-column="22" />
+        <state relative-caret-position="345">
+          <caret line="70" column="27" selection-start-line="70" selection-start-column="27" selection-end-line="70" selection-end-column="27" />
+          <folding>
+            <element signature="e#0#44#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Resources/Values/strings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="439">
+          <caret line="50" column="34" selection-start-line="50" selection-start-column="34" selection-end-line="50" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Code/UI/MyBookingsPage.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1363">
+          <caret line="119" column="88" selection-start-line="119" selection-start-column="88" selection-end-line="119" selection-end-column="88" />
+          <folding>
+            <element signature="e#0#20#0" expanded="true" />
+            <element signature="e#4962#5391#0" />
+          </folding>
         </state>
       </provider>
     </entry>

@@ -33,14 +33,6 @@ class ReturnToolPage(tk.Frame):
 
     def __initUI(self):
 
-        """
-        ReturnToolPage UI.
-        main functions which you can call:
-            self.returnTool.cancelBooking()  --     will cancel booking based on your selection
-            self.returnTool.returnItem()     --     will return an item based on your selection
-            self.returnTool.populateData()   --     will populate all required data in your treeView
-        """
-
         frame = tk.Frame(self, bg=self.__bgColor)
         frame.grid(row=0, column=0, sticky="", pady=40)
 
@@ -104,15 +96,19 @@ class ReturnToolPage(tk.Frame):
         confirmButton.bind("<Button-1>", lambda event: self.__returnItem(toolConditionEntry))
 
     def __cancelItem(self):
-        if messagebox.askokcancel("Confirmation", strings.cancelItemConfirm):
+        if messagebox.askokcancel(strings.confirmDialogTitle, strings.cancelItemConfirm):
             self.__myBookings.cancelBooking()
             self.__isEmpty()
 
     def __returnItem(self, condition):
         if condition.get():
-            self.__myBookings.returnItem(condition)
+            isReturn = self.__myBookings.returnItem(condition)
             self.__showReturn(False)
             self.__isEmpty()
+            if isReturn:
+                messagebox.showinfo(strings.infoDialogTitle, strings.returnDialogMessage)
+            else:
+                messagebox.showinfo(strings.infoDialogTitle, strings.cancelDialogMessage)
         else:
             self.__errorLabel.config(text=strings.errorToolConditionMissing)
 

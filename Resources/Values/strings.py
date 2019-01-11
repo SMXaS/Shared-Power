@@ -45,6 +45,14 @@ invoice_img = "Resources/Drawable/invoice_img.png"
 add_img = "Resources/Drawable/add_img.png"
 
 # --------------
+# Dialogs
+# --------------
+infoDialogTitle = "Info"
+confirmDialogTitle = "Confirmation"
+cancelDialogMessage = "Your booking has been canceled"
+returnDialogMessage = "Item has been returned"
+
+# --------------
 # Tool
 # --------------
 toolStatus = ["hired", "pending_receive", "inventory"]

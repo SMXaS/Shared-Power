@@ -68,8 +68,10 @@ class MyBookings:
                 self.populateData()
                 toolCondition.delete(0, "end")
                 MyInvoice(self.__login).generateInvoice(returnItemObj)
+                return True
             else:
                 self.cancelBooking()
+                return False
         else:
             self.__errorLabel.config(text=strings.errorSelectItem)
 
