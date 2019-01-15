@@ -109,6 +109,8 @@ class ReturnToolPage(tk.Frame):
                 messagebox.showinfo(strings.infoDialogTitle, strings.returnDialogMessage)
             else:
                 messagebox.showinfo(strings.infoDialogTitle, strings.cancelDialogMessage)
+
+            condition.delete(0, "end")
         else:
             self.__errorLabel.config(text=strings.errorToolConditionMissing)
 
