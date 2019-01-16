@@ -95,6 +95,23 @@ def getAllInvoices(column, arg, path):
 
     return itemList
 
+def isOngoingBooking(tool):
+    path = "{}{}.csv".format(strings.filePath_booking, tool.getID())
+
+    if os.path.isfile(path) == True:
+        with open(path, "r") as f:
+            l = list(csv.reader(f))
+            my_dict = {i[0]: [x for x in i[1:]] for i in zip(*l)}
+            start = my_dict.get('startDate')
+            end = [i for i, x in enumerate(my_dict['returnDate']) if x == None]
+            if len(start) > len(end):
+                return 'yes'
+            else:
+                return 'no'
+    else:
+        return 'no'
+
+
 """
 
 def search_tools(key,value):
