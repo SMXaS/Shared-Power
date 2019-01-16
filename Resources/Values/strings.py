@@ -137,7 +137,7 @@ availability = "Availability"
 fullDayPrice = "Full day price"
 halfDayPrice = "Half day price"
 changeAvailabilityConfirm = "Do you really want to change availability of this item?"
-
+deleteItemConfirm = "Do you really want to delete that item?"
 # --------------
 # My Bookings Page
 # --------------
@@ -208,3 +208,4 @@ errorSelectItem = "Please select item first"
 errorToolConditionMissing = "Please describe the tool condition"
 errorAlreadyBooked = "Sorry, but this item has been booked already.."
 errorEmptyList = "Your list is empty"
+errorAvailable = "Item need to bo not available before deleting"

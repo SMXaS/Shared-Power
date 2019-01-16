@@ -27,11 +27,6 @@ def write(obj, filePath, fieldNames, complexFilePath="", filePathParam=""):
 
 
 def editTool(tool):
-    """
-    #toolID - ID of edited tool as string
-    #new_tool - new tool data(same as add tool)+ availability as a list
-
-    """
 
     if not tool:
         print('no data')
@@ -66,6 +61,39 @@ def editTool(tool):
             while y < len(val):
                 writer.writerow(val[y])
                 y = y+1
+def deleteTool(tool):
+    """
+    Before delete need to check if there is no booking for that item
+    """
+
+    with open(strings.filePath_tool, "r") as f:
+        l = list(csv.reader(f))
+        my_dict = {i[0]: [x for x in i[1:]] for i in zip(*l)}
+        ind = my_dict['ID'].index(tool.getID())
+
+        all_keys = []
+        all_items = []
+        for i, j in my_dict.items():
+            all_keys.append(i)
+            all_items.append(j)
+
+        val = list(zip(all_items[0], all_items[1], all_items[2], all_items[3], all_items[4], all_items[5], all_items[6],
+                       all_items[7], all_items[8], all_items[9]))
+
+        val.pop(ind)
+
+        # Delete image
+        path = "{}{}.png".format(strings.filePath_images, tool.getID())
+        os.remove(path)
+
+    with open(strings.filePath_tool, "w") as f:
+        writer = csv.writer(f, delimiter=',', lineterminator='\n')
+        writer.writerow(all_keys)
+        y = 0
+        while y < len(val):
+            writer.writerow(val[y])
+            y = y+1
+    pass
 
 def editBooking(bookingObj):
     """
