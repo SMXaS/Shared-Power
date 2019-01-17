@@ -16,6 +16,7 @@ class AddToolPage(tk.Frame):
     __filename = ""
     add_tool = True
     __toolObject = None
+    __availability = ""
 
     def __init__(self, parent, controller):
 
@@ -115,6 +116,7 @@ class AddToolPage(tk.Frame):
         self.priceHalfDayEntry.insert(0, self.__toolObject.getPriceHalfDay())
         self.riderChargeEntry.insert(0, self.__toolObject.getRiderCharge())
         self.imgPath.config(text=util.getFileName("{}.png".format(self.__toolObject.getImagePath())))
+        self.__availability = self.__toolObject.isAvailable()
 
     def __setImgPath(self):
         self.__filename = askopenfilename()
@@ -133,6 +135,7 @@ class AddToolPage(tk.Frame):
         tool.append(self.__filename)
         if not self.add_tool:
             tool.append(self.__toolObject.getID())
+            tool.append(self.__availability)
         if self.__addTool.add(tool, self.add_tool):
             self.clearEntries()
             self.__controller.show_frame(strings.myToolClass)

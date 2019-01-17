@@ -49,7 +49,7 @@ add_img = "Resources/Drawable/add_img.png"
 # --------------
 infoDialogTitle = "Info"
 confirmDialogTitle = "Confirmation"
-cancelDialogMessage = "Your booking has been canceled"
+cancelDialogMessage = "Your booking has been cancelled"
 returnDialogMessage = "Item has been returned"
 
 # --------------

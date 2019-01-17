@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9476d951-1298-4a38-b52b-5632fdff5d7f" name="Default Changelist" comment="" />
+    <list default="true" id="9476d951-1298-4a38-b52b-5632fdff5d7f" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/Data/Bookings/7fdb1414-7e9f-434e-9bf6-138bd6df2c7f.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Data/Bookings/7fdb1414-7e9f-434e-9bf6-138bd6df2c7f.csv" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,8 +27,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Code/UI/MyBookingsPage.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="112">
-              <caret line="38" column="39" selection-start-line="38" selection-start-column="39" selection-end-line="38" selection-end-column="39" />
+            <state relative-caret-position="504">
+              <caret line="56" column="72" lean-forward="true" selection-start-line="56" selection-start-column="72" selection-end-line="56" selection-end-column="72" />
               <folding>
                 <element signature="e#0#20#0" expanded="true" />
               </folding>
@@ -58,6 +60,7 @@
       <find>price</find>
       <find>MyToolP</find>
       <find>rec</find>
+      <find>cancele</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -122,7 +125,7 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="531" />
+    <option name="x" value="464" />
     <option name="width" value="1401" />
     <option name="height" value="1002" />
   </component>
@@ -136,58 +139,8 @@
         <subPane>
           <expand>
             <path>
-              <item name="Shared-Power" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Shared-Power" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Shared-Power" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Shared-Power" type="462c0819:PsiDirectoryNode" />
-              <item name="Code" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Shared-Power" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Shared-Power" type="462c0819:PsiDirectoryNode" />
-              <item name="Code" type="462c0819:PsiDirectoryNode" />
-              <item name="UI" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Shared-Power" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Shared-Power" type="462c0819:PsiDirectoryNode" />
-              <item name="Code" type="462c0819:PsiDirectoryNode" />
-              <item name="Utilities" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Shared-Power" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Shared-Power" type="462c0819:PsiDirectoryNode" />
-              <item name="Data" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Shared-Power" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Shared-Power" type="462c0819:PsiDirectoryNode" />
-              <item name="Data" type="462c0819:PsiDirectoryNode" />
-              <item name="Bookings" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Shared-Power" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Shared-Power" type="462c0819:PsiDirectoryNode" />
-              <item name="Data" type="462c0819:PsiDirectoryNode" />
-              <item name="Images" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Shared-Power" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Shared-Power" type="462c0819:PsiDirectoryNode" />
-              <item name="Entities" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Shared-Power" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Shared-Power" type="462c0819:PsiDirectoryNode" />
-              <item name="Resources" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Shared-Power" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Shared-Power" type="462c0819:PsiDirectoryNode" />
-              <item name="Resources" type="462c0819:PsiDirectoryNode" />
-              <item name="Values" type="462c0819:PsiDirectoryNode" />
+              <item name="some-stuff5" type="b2602c69:ProjectViewProjectNode" />
+              <item name="some-stuff5" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -395,14 +348,15 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="54" y="-8" width="1874" height="1096" extended-state="6" />
+    <frame x="261" y="1" width="1401" height="1002" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.21995589" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.30594277" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3291815" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3024911" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3210587" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39679715" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -684,22 +638,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Data/tools.csv">
       <provider editor-type-id="text-editor" />
-      <provider editor-type-id="csv-table-editor">
-        <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
-      </provider>
-      <provider selected="true" editor-type-id="csv-text-editor">
-        <state relative-caret-position="765">
-          <caret line="45" column="21" selection-start-line="45" selection-start-column="21" selection-end-line="45" selection-end-column="21" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Data/users.csv">
       <provider editor-type-id="text-editor" />
-      <provider selected="true" editor-type-id="csv-text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" selection-start-line="4" selection-end-line="4" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Code/ReceiveTool.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -717,8 +658,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Code/UI/MyBookingsPage.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="112">
-          <caret line="38" column="39" selection-start-line="38" selection-start-column="39" selection-end-line="38" selection-end-column="39" />
+        <state relative-caret-position="504">
+          <caret line="56" column="72" lean-forward="true" selection-start-line="56" selection-start-column="72" selection-end-line="56" selection-end-column="72" />
           <folding>
             <element signature="e#0#20#0" expanded="true" />
           </folding>
