@@ -18,7 +18,7 @@ def getTool(returnObj, column, value):
         with open(strings.filePath_tool, 'r') as f:
             l = list(csv.reader(f))
             my_dict = {i[0]: [x for x in i[1:]] for i in zip(*l)}
-            item = [i for i, x in enumerate(my_dict[column]) if value in x.lower()]
+            item = [i for i, x in enumerate(my_dict[column]) if value.lower() in x.lower()]
 
         if returnObj:
             itemList = []
