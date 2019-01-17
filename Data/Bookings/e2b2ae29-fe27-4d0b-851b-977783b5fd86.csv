@@ -1,2 +1,0 @@
-bookingID,toolID,userName,bookInCondition,startDate,startTerm,expectedReturnDate,expectedTerm,status,returnDate,bookOutCondition,pickUpLocation,dropOffLocation
-d8a16787-4778-478c-be8d-68996ffa1b90,e2b2ae29-fe27-4d0b-851b-977783b5fd86,user,new,12/01/2019,f,14/01/2019,f,pending_receive,15/1/2019,www,town center,
