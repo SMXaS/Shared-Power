@@ -50,6 +50,7 @@ class AddTool:
         :param editOrAdd: boolean value where True = add Tool and False = edit Tool
         :return: boolean
         """
+
         availability = "yes"
         isCorrect = self.__verifyTool(tool)
         if isCorrect:
